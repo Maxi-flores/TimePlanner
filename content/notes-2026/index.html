@@ -1,0 +1,1515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2026 – Monthly Roadmap Planner</title>
+  <style>
+    /* ─── Reset & Base ─────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:        #0f172a;
+      --surface:   #1e293b;
+      --surface2:  #273449;
+      --border:    #334155;
+      --accent:    #6366f1;
+      --accent2:   #818cf8;
+      --success:   #22c55e;
+      --warn:      #f59e0b;
+      --danger:    #ef4444;
+      --text:      #e2e8f0;
+      --text-muted:#94a3b8;
+      --radius:    8px;
+      --font:      'Segoe UI', system-ui, sans-serif;
+    }
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* ─── Layout ────────────────────────────────────────── */
+    header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    header h1 { font-size: 1.25rem; font-weight: 700; letter-spacing: .03em; }
+    header h1 span { color: var(--accent2); }
+    .tabs {
+      display: flex;
+      gap: 4px;
+    }
+    .tab-btn {
+      background: none;
+      border: 1px solid transparent;
+      color: var(--text-muted);
+      cursor: pointer;
+      padding: 6px 14px;
+      border-radius: var(--radius);
+      font-size: .85rem;
+      font-weight: 500;
+      transition: all .15s;
+    }
+    .tab-btn:hover { color: var(--text); background: var(--surface2); }
+    .tab-btn.active {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+    main { padding: 24px; max-width: 1300px; margin: 0 auto; }
+    .view { display: none; }
+    .view.active { display: block; }
+
+    /* ─── Shared helpers ────────────────────────────────── */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 16px;
+      border-radius: var(--radius);
+      border: none;
+      cursor: pointer;
+      font-size: .85rem;
+      font-weight: 500;
+      transition: opacity .15s;
+    }
+    .btn:hover { opacity: .85; }
+    .btn-primary  { background: var(--accent);  color: #fff; }
+    .btn-success  { background: var(--success);  color: #fff; }
+    .btn-danger   { background: var(--danger);   color: #fff; }
+    .btn-ghost    { background: var(--surface2); color: var(--text); }
+    input, select, textarea {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      color: var(--text);
+      border-radius: var(--radius);
+      padding: 7px 10px;
+      font-size: .85rem;
+      font-family: var(--font);
+      width: 100%;
+    }
+    input:focus, select:focus, textarea:focus {
+      outline: 2px solid var(--accent);
+      outline-offset: 1px;
+    }
+    label { font-size: .8rem; color: var(--text-muted); display: block; margin-bottom: 4px; }
+    .form-row { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 12px; }
+    .form-row > * { flex: 1; min-width: 140px; }
+    .section-title {
+      font-size: .7rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+    .badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: .7rem;
+      font-weight: 600;
+    }
+    .badge-accent  { background: #312e81; color: var(--accent2); }
+    .badge-success { background: #14532d; color: #4ade80; }
+    .badge-warn    { background: #78350f; color: #fcd34d; }
+    .badge-danger  { background: #7f1d1d; color: #fca5a5; }
+
+    /* ─── CALENDAR ──────────────────────────────────────── */
+    .cal-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+    .cal-nav .month-label { font-size: 1.2rem; font-weight: 700; }
+    .cal-nav .btns { display: flex; gap: 8px; }
+    .cal-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 6px;
+    }
+    .cal-day-name {
+      text-align: center;
+      font-size: .72rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      padding: 4px 0;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+    }
+    .cal-cell {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      min-height: 88px;
+      padding: 6px;
+      cursor: pointer;
+      transition: border-color .15s;
+      overflow: hidden;
+    }
+    .cal-cell:hover { border-color: var(--accent); }
+    .cal-cell.today { border-color: var(--accent); }
+    .cal-cell.other-month { opacity: .3; pointer-events: none; }
+    .cal-cell.selected { border-color: var(--accent2); box-shadow: 0 0 0 2px var(--accent2); }
+    .cal-cell .day-num {
+      font-size: .78rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+    .cal-cell.today .day-num { color: var(--accent2); }
+    .cal-event-pill {
+      display: block;
+      font-size: .65rem;
+      border-radius: 3px;
+      padding: 1px 5px;
+      margin-bottom: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .cal-event-pill.work    { background: #312e81; color: #c7d2fe; }
+    .cal-event-pill.personal{ background: #14532d; color: #86efac; }
+    .cal-event-pill.goal    { background: #78350f; color: #fcd34d; }
+    .cal-event-pill.health  { background: #1e3a5f; color: #7dd3fc; }
+    .cal-event-pill.travel  { background: #3b0764; color: #e879f9; }
+
+    /* ─── DAY DETAIL PANEL ──────────────────────────────── */
+    .day-panel {
+      display: none;
+      position: fixed;
+      right: 0; top: 0; bottom: 0;
+      width: 360px;
+      background: var(--surface);
+      border-left: 1px solid var(--border);
+      z-index: 200;
+      display: flex;
+      flex-direction: column;
+      transform: translateX(100%);
+      transition: transform .2s ease;
+    }
+    .day-panel.open { transform: translateX(0); }
+    .day-panel-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .day-panel-header h3 { font-size: 1rem; font-weight: 700; }
+    .day-panel-body { flex: 1; overflow-y: auto; padding: 16px 20px; }
+    .day-panel-footer { padding: 12px 20px; border-top: 1px solid var(--border); }
+    .event-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 10px;
+      border-radius: var(--radius);
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      margin-bottom: 8px;
+    }
+    .event-item-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      margin-top: 4px;
+      flex-shrink: 0;
+    }
+    .event-item-content { flex: 1; }
+    .event-item-title { font-size: .85rem; font-weight: 600; }
+    .event-item-meta  { font-size: .72rem; color: var(--text-muted); margin-top: 2px; }
+    .event-item-delete {
+      background: none; border: none; color: var(--text-muted);
+      cursor: pointer; font-size: 1rem; padding: 0 4px;
+    }
+    .event-item-delete:hover { color: var(--danger); }
+    .time-block-list { margin-top: 12px; }
+    .time-slot {
+      display: flex;
+      gap: 8px;
+      padding: 5px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: .8rem;
+    }
+    .time-slot .ts-time { color: var(--text-muted); min-width: 50px; }
+
+    /* ─── ROADMAP ────────────────────────────────────────── */
+    .roadmap-container { display: flex; gap: 20px; flex-wrap: wrap; }
+    .roadmap-lane {
+      flex: 1;
+      min-width: 260px;
+    }
+    .roadmap-lane-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+    .lane-title { font-size: .85rem; font-weight: 700; }
+    .milestone-card {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--accent);
+      border-radius: var(--radius);
+      padding: 12px 14px;
+      margin-bottom: 10px;
+      cursor: grab;
+      position: relative;
+    }
+    .milestone-card.done {
+      border-left-color: var(--success);
+      opacity: .7;
+    }
+    .milestone-card.in-progress { border-left-color: var(--warn); }
+    .milestone-card .ms-title { font-size: .88rem; font-weight: 600; }
+    .milestone-card .ms-date  { font-size: .72rem; color: var(--text-muted); margin-top: 3px; }
+    .milestone-card .ms-notes { font-size: .78rem; color: var(--text-muted); margin-top: 6px; }
+    .milestone-card .ms-actions {
+      position: absolute; top: 8px; right: 8px;
+      display: none; gap: 4px;
+    }
+    .milestone-card:hover .ms-actions { display: flex; }
+    .ms-btn {
+      background: var(--surface); border: 1px solid var(--border);
+      color: var(--text-muted); cursor: pointer;
+      border-radius: 4px; padding: 2px 6px; font-size: .7rem;
+    }
+    .ms-btn:hover { color: var(--text); }
+
+    /* ─── DAILY SCHEDULE ─────────────────────────────────── */
+    .schedule-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+    .schedule-grid {
+      display: grid;
+      grid-template-columns: 64px 1fr;
+      gap: 0;
+    }
+    .sched-hour-label {
+      text-align: right;
+      padding: 0 10px 0 0;
+      font-size: .72rem;
+      color: var(--text-muted);
+      line-height: 44px;
+      border-right: 1px solid var(--border);
+    }
+    .sched-slot {
+      border-bottom: 1px solid var(--border);
+      min-height: 44px;
+      padding: 4px 8px;
+      cursor: pointer;
+      transition: background .1s;
+      position: relative;
+    }
+    .sched-slot:hover { background: var(--surface2); }
+    .sched-slot-block {
+      border-radius: 4px;
+      padding: 4px 8px;
+      font-size: .75rem;
+      font-weight: 500;
+      position: relative;
+    }
+    .sched-slot-block .block-delete {
+      position: absolute; top: 2px; right: 4px;
+      background: none; border: none; color: rgba(255,255,255,.5);
+      cursor: pointer; font-size: .75rem;
+    }
+    .sched-slot-block .block-delete:hover { color: #fff; }
+
+    /* ─── GOALS ──────────────────────────────────────────── */
+    .goals-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+    }
+    .goal-card {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px;
+    }
+    .goal-card .goal-title {
+      font-size: .95rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .goal-card .goal-desc {
+      font-size: .8rem;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+    .progress-bar {
+      height: 6px;
+      background: var(--border);
+      border-radius: 999px;
+      overflow: hidden;
+      margin-bottom: 6px;
+    }
+    .progress-bar-fill {
+      height: 100%;
+      background: var(--accent);
+      border-radius: 999px;
+      transition: width .3s;
+    }
+    .progress-label { font-size: .72rem; color: var(--text-muted); }
+    .task-list { margin-top: 10px; }
+    .task-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 5px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: .82rem;
+    }
+    .task-item:last-child { border-bottom: none; }
+    .task-item input[type="checkbox"] {
+      width: auto;
+      accent-color: var(--accent);
+      cursor: pointer;
+    }
+    .task-item.done span { text-decoration: line-through; color: var(--text-muted); }
+    .task-delete { background: none; border: none; color: var(--text-muted); cursor: pointer; margin-left: auto; }
+    .task-delete:hover { color: var(--danger); }
+
+    /* ─── CALCULATOR ─────────────────────────────────────── */
+    .calc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    @media (max-width: 700px) { .calc-grid { grid-template-columns: 1fr; } }
+    .calc-result {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px;
+      margin-top: 12px;
+    }
+    .calc-result-value {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--accent2);
+    }
+    .calc-result-label {
+      font-size: .78rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+    .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 6px 0;
+      font-size: .83rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .stat-row:last-child { border-bottom: none; }
+    .stat-row .val { font-weight: 600; color: var(--accent2); }
+
+    /* ─── Overlay ────────────────────────────────────────── */
+    .overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.5);
+      z-index: 190;
+    }
+    .overlay.open { display: block; }
+
+    /* ─── Modal ──────────────────────────────────────────── */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 24px;
+      z-index: 300;
+      width: min(480px, 94vw);
+    }
+    .modal.open { display: block; }
+    .modal h3 { font-size: 1rem; font-weight: 700; margin-bottom: 16px; }
+    .modal-footer { display: flex; gap: 8px; justify-content: flex-end; margin-top: 16px; }
+
+    /* ─── Print ──────────────────────────────────────────── */
+    @media print {
+      header, .tabs, .btn, .day-panel, .overlay { display: none !important; }
+      main { padding: 0; max-width: 100%; }
+      .view { display: block !important; }
+      body { background: #fff; color: #000; }
+      .card, .goal-card, .milestone-card { background: #fff; border-color: #ccc; }
+    }
+
+    /* ─── Responsive ─────────────────────────────────────── */
+    @media (max-width: 640px) {
+      main { padding: 12px; }
+      .cal-cell { min-height: 56px; }
+      .roadmap-container { flex-direction: column; }
+      .day-panel { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>2026 <span>Roadmap Planner</span></h1>
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab('calendar', this)">📅 Calendar</button>
+    <button class="tab-btn" onclick="switchTab('schedule', this)">🕐 Daily Schedule</button>
+    <button class="tab-btn" onclick="switchTab('roadmap', this)">🗺 Roadmap</button>
+    <button class="tab-btn" onclick="switchTab('goals', this)">🎯 Goals</button>
+    <button class="tab-btn" onclick="switchTab('calculator', this)">🧮 Calculator</button>
+  </div>
+</header>
+
+<main>
+
+  <!-- ══════════════ CALENDAR VIEW ══════════════ -->
+  <div id="view-calendar" class="view active">
+    <div class="card">
+      <div class="cal-nav">
+        <div class="btns">
+          <button class="btn btn-ghost" onclick="calNav(-1)">‹ Prev</button>
+          <button class="btn btn-ghost" onclick="calNav(0)">Today</button>
+          <button class="btn btn-ghost" onclick="calNav(1)">Next ›</button>
+        </div>
+        <div class="month-label" id="cal-month-label"></div>
+        <button class="btn btn-primary" onclick="openAddEventModal()">+ Event</button>
+      </div>
+      <div class="cal-grid" id="cal-grid"></div>
+    </div>
+
+    <!-- Category legend -->
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;font-size:.75rem;">
+      <span><span class="cal-event-pill work" style="display:inline-block;padding:2px 8px;">Work</span></span>
+      <span><span class="cal-event-pill personal" style="display:inline-block;padding:2px 8px;">Personal</span></span>
+      <span><span class="cal-event-pill goal" style="display:inline-block;padding:2px 8px;">Goal</span></span>
+      <span><span class="cal-event-pill health" style="display:inline-block;padding:2px 8px;">Health</span></span>
+      <span><span class="cal-event-pill travel" style="display:inline-block;padding:2px 8px;">Travel</span></span>
+    </div>
+  </div>
+
+  <!-- ══════════════ DAILY SCHEDULE VIEW ══════════════ -->
+  <div id="view-schedule" class="view">
+    <div class="schedule-header">
+      <h2 style="font-size:1.1rem;font-weight:700;">Daily Time Blocks</h2>
+      <input type="date" id="sched-date" style="width:160px;" onchange="renderSchedule()" />
+      <button class="btn btn-ghost" onclick="schedNav(-1)">‹</button>
+      <button class="btn btn-ghost" onclick="schedNav(0)">Today</button>
+      <button class="btn btn-ghost" onclick="schedNav(1)">›</button>
+      <button class="btn btn-primary" onclick="openAddBlockModal()">+ Block</button>
+    </div>
+    <div class="card" style="padding:0;overflow:hidden;">
+      <div class="schedule-grid" id="schedule-grid"></div>
+    </div>
+  </div>
+
+  <!-- ══════════════ ROADMAP VIEW ══════════════ -->
+  <div id="view-roadmap" class="view">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:10px;">
+      <h2 style="font-size:1.1rem;font-weight:700;">🗺 Roadmap &amp; Milestones</h2>
+      <button class="btn btn-primary" onclick="openAddMilestoneModal()">+ Milestone</button>
+    </div>
+    <div class="roadmap-container" id="roadmap-container"></div>
+  </div>
+
+  <!-- ══════════════ GOALS VIEW ══════════════ -->
+  <div id="view-goals" class="view">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:10px;">
+      <h2 style="font-size:1.1rem;font-weight:700;">🎯 Monthly Goals</h2>
+      <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+        <select id="goal-month-filter" style="width:160px;" onchange="renderGoals()">
+          <option value="">All months</option>
+        </select>
+        <button class="btn btn-primary" onclick="openAddGoalModal()">+ Goal</button>
+      </div>
+    </div>
+    <div class="goals-grid" id="goals-grid"></div>
+  </div>
+
+  <!-- ══════════════ CALCULATOR VIEW ══════════════ -->
+  <div id="view-calculator" class="view">
+    <h2 style="font-size:1.1rem;font-weight:700;margin-bottom:20px;">🧮 Time &amp; Progress Calculator</h2>
+    <div class="calc-grid">
+
+      <!-- Duration Calculator -->
+      <div class="card">
+        <p class="section-title">Duration Calculator</p>
+        <div class="form-row">
+          <div>
+            <label>Start Time</label>
+            <input type="time" id="calc-start" value="09:00" oninput="calcDuration()" />
+          </div>
+          <div>
+            <label>End Time</label>
+            <input type="time" id="calc-end" value="17:30" oninput="calcDuration()" />
+          </div>
+        </div>
+        <div>
+          <label>Break (minutes)</label>
+          <input type="number" id="calc-break" value="60" min="0" oninput="calcDuration()" />
+        </div>
+        <div class="calc-result" id="calc-duration-result"></div>
+      </div>
+
+      <!-- Weekly Hours -->
+      <div class="card">
+        <p class="section-title">Weekly Hours Tracker</p>
+        <div id="week-days-inputs"></div>
+        <div class="calc-result" id="calc-weekly-result"></div>
+      </div>
+
+      <!-- Date Difference -->
+      <div class="card">
+        <p class="section-title">Days Between Dates</p>
+        <div class="form-row">
+          <div>
+            <label>From</label>
+            <input type="date" id="calc-date-from" oninput="calcDateDiff()" />
+          </div>
+          <div>
+            <label>To</label>
+            <input type="date" id="calc-date-to" oninput="calcDateDiff()" />
+          </div>
+        </div>
+        <div class="calc-result" id="calc-date-result"></div>
+      </div>
+
+      <!-- Month Summary -->
+      <div class="card">
+        <p class="section-title">Month Summary</p>
+        <div>
+          <label>Select Month</label>
+          <input type="month" id="calc-month" oninput="calcMonthSummary()" />
+        </div>
+        <div class="calc-result" id="calc-month-result"></div>
+      </div>
+
+    </div>
+  </div>
+
+</main>
+
+<!-- ─── Day Detail Side Panel ────────────────────────── -->
+<div class="overlay" id="overlay" onclick="closeDayPanel()"></div>
+<div class="day-panel" id="day-panel">
+  <div class="day-panel-header">
+    <h3 id="day-panel-title">–</h3>
+    <button class="btn btn-ghost" style="padding:4px 10px;" onclick="closeDayPanel()">✕</button>
+  </div>
+  <div class="day-panel-body" id="day-panel-body"></div>
+  <div class="day-panel-footer">
+    <button class="btn btn-primary" style="width:100%;" id="day-panel-add-btn">+ Add Event</button>
+  </div>
+</div>
+
+<!-- ─── Modals ────────────────────────────────────────── -->
+
+<!-- Add Event Modal -->
+<div class="modal" id="modal-event">
+  <h3>Add Event</h3>
+  <div class="form-row">
+    <div>
+      <label>Date</label>
+      <input type="date" id="ev-date" />
+    </div>
+    <div>
+      <label>Category</label>
+      <select id="ev-cat">
+        <option value="work">Work</option>
+        <option value="personal">Personal</option>
+        <option value="goal">Goal</option>
+        <option value="health">Health</option>
+        <option value="travel">Travel</option>
+      </select>
+    </div>
+  </div>
+  <div style="margin-bottom:10px;">
+    <label>Title</label>
+    <input type="text" id="ev-title" placeholder="Event title…" />
+  </div>
+  <div class="form-row">
+    <div>
+      <label>Start Time (optional)</label>
+      <input type="time" id="ev-start" />
+    </div>
+    <div>
+      <label>End Time (optional)</label>
+      <input type="time" id="ev-end" />
+    </div>
+  </div>
+  <div style="margin-bottom:10px;">
+    <label>Notes</label>
+    <textarea id="ev-notes" rows="2" placeholder="Optional notes…"></textarea>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-ghost" onclick="closeModal('modal-event')">Cancel</button>
+    <button class="btn btn-primary" onclick="saveEvent()">Save Event</button>
+  </div>
+</div>
+
+<!-- Add Time Block Modal -->
+<div class="modal" id="modal-block">
+  <h3>Add Time Block</h3>
+  <div style="margin-bottom:10px;">
+    <label>Activity</label>
+    <input type="text" id="blk-title" placeholder="e.g. Deep Work, Exercise…" />
+  </div>
+  <div class="form-row">
+    <div>
+      <label>Start</label>
+      <input type="time" id="blk-start" value="09:00" />
+    </div>
+    <div>
+      <label>End</label>
+      <input type="time" id="blk-end" value="10:00" />
+    </div>
+  </div>
+  <div style="margin-bottom:10px;">
+    <label>Color</label>
+    <select id="blk-color">
+      <option value="#312e81">Indigo (Work)</option>
+      <option value="#14532d">Green (Health)</option>
+      <option value="#78350f">Amber (Learning)</option>
+      <option value="#1e3a5f">Blue (Personal)</option>
+      <option value="#3b0764">Purple (Creative)</option>
+      <option value="#1c1917">Gray (Break)</option>
+    </select>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-ghost" onclick="closeModal('modal-block')">Cancel</button>
+    <button class="btn btn-primary" onclick="saveBlock()">Save Block</button>
+  </div>
+</div>
+
+<!-- Add Milestone Modal -->
+<div class="modal" id="modal-milestone">
+  <h3>Add Milestone</h3>
+  <div style="margin-bottom:10px;">
+    <label>Title</label>
+    <input type="text" id="ms-title" placeholder="Milestone title…" />
+  </div>
+  <div class="form-row">
+    <div>
+      <label>Target Date</label>
+      <input type="date" id="ms-date" />
+    </div>
+    <div>
+      <label>Status</label>
+      <select id="ms-status">
+        <option value="todo">To Do</option>
+        <option value="in-progress">In Progress</option>
+        <option value="done">Done</option>
+      </select>
+    </div>
+  </div>
+  <div class="form-row">
+    <div>
+      <label>Category / Lane</label>
+      <input type="text" id="ms-lane" placeholder="e.g. Training, Finance…" />
+    </div>
+    <div>
+      <label>Priority</label>
+      <select id="ms-priority">
+        <option value="high">High</option>
+        <option value="medium">Medium</option>
+        <option value="low">Low</option>
+      </select>
+    </div>
+  </div>
+  <div style="margin-bottom:10px;">
+    <label>Notes</label>
+    <textarea id="ms-notes" rows="2" placeholder="Notes…"></textarea>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-ghost" onclick="closeModal('modal-milestone')">Cancel</button>
+    <button class="btn btn-primary" onclick="saveMilestone()">Save Milestone</button>
+  </div>
+</div>
+
+<!-- Add Goal Modal -->
+<div class="modal" id="modal-goal">
+  <h3>Add Goal</h3>
+  <div style="margin-bottom:10px;">
+    <label>Goal Title</label>
+    <input type="text" id="goal-title" placeholder="Goal…" />
+  </div>
+  <div class="form-row">
+    <div>
+      <label>Month</label>
+      <input type="month" id="goal-month" />
+    </div>
+    <div>
+      <label>Category</label>
+      <select id="goal-cat">
+        <option value="work">Work</option>
+        <option value="personal">Personal</option>
+        <option value="health">Health</option>
+        <option value="travel">Travel</option>
+        <option value="learning">Learning</option>
+        <option value="finance">Finance</option>
+      </select>
+    </div>
+  </div>
+  <div style="margin-bottom:10px;">
+    <label>Description</label>
+    <textarea id="goal-desc" rows="2" placeholder="Describe your goal…"></textarea>
+  </div>
+  <div style="margin-bottom:10px;">
+    <label>Tasks (one per line)</label>
+    <textarea id="goal-tasks" rows="4" placeholder="Task 1&#10;Task 2&#10;Task 3"></textarea>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-ghost" onclick="closeModal('modal-goal')">Cancel</button>
+    <button class="btn btn-primary" onclick="saveGoal()">Save Goal</button>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════
+//  STATE  (persisted to localStorage)
+// ═══════════════════════════════════════════════════════
+const KEY = '2026-planner-v1';
+
+function loadState() {
+  try {
+    const raw = localStorage.getItem(KEY);
+    return raw ? JSON.parse(raw) : defaultState();
+  } catch { return defaultState(); }
+}
+
+function defaultState() {
+  return { events: [], blocks: {}, milestones: [], goals: [] };
+}
+
+function saveState() {
+  localStorage.setItem(KEY, JSON.stringify(state));
+}
+
+let state = loadState();
+
+// ═══════════════════════════════════════════════════════
+//  TAB SWITCHING
+// ═══════════════════════════════════════════════════════
+function switchTab(name, btn) {
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('view-' + name).classList.add('active');
+  btn.classList.add('active');
+  if (name === 'calendar')   renderCalendar();
+  if (name === 'schedule')   renderSchedule();
+  if (name === 'roadmap')    renderRoadmap();
+  if (name === 'goals')      renderGoals();
+  if (name === 'calculator') initCalculator();
+}
+
+// ═══════════════════════════════════════════════════════
+//  CALENDAR
+// ═══════════════════════════════════════════════════════
+const today = new Date();
+let calYear  = today.getFullYear();
+let calMonth = today.getMonth();  // 0-based
+
+function calNav(dir) {
+  if (dir === 0) { calYear = today.getFullYear(); calMonth = today.getMonth(); }
+  else { calMonth += dir; if (calMonth > 11) { calMonth = 0; calYear++; } else if (calMonth < 0) { calMonth = 11; calYear--; } }
+  renderCalendar();
+}
+
+function renderCalendar() {
+  const MONTHS = ['January','February','March','April','May','June',
+                  'July','August','September','October','November','December'];
+  const DAYS   = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+
+  document.getElementById('cal-month-label').textContent =
+    `${MONTHS[calMonth]} ${calYear}`;
+
+  const grid = document.getElementById('cal-grid');
+  grid.innerHTML = '';
+
+  // Day name headers
+  DAYS.forEach(d => {
+    const el = document.createElement('div');
+    el.className = 'cal-day-name';
+    el.textContent = d;
+    grid.appendChild(el);
+  });
+
+  const firstDay = new Date(calYear, calMonth, 1).getDay();
+  const daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
+  const daysInPrev  = new Date(calYear, calMonth, 0).getDate();
+
+  // Prev month filler
+  for (let i = firstDay - 1; i >= 0; i--) {
+    const cell = document.createElement('div');
+    cell.className = 'cal-cell other-month';
+    cell.innerHTML = `<div class="day-num">${daysInPrev - i}</div>`;
+    grid.appendChild(cell);
+  }
+
+  // Current month
+  for (let d = 1; d <= daysInMonth; d++) {
+    const cell = document.createElement('div');
+    const dateStr = isoDate(calYear, calMonth + 1, d);
+    const isToday = (d === today.getDate() && calMonth === today.getMonth() && calYear === today.getFullYear());
+    cell.className = 'cal-cell' + (isToday ? ' today' : '');
+    cell.dataset.date = dateStr;
+
+    cell.innerHTML = `<div class="day-num">${d}</div>`;
+
+    const dayEvents = state.events.filter(e => e.date === dateStr).slice(0, 4);
+    dayEvents.forEach(e => {
+      const pill = document.createElement('span');
+      pill.className = `cal-event-pill ${e.category}`;
+      pill.textContent = e.title;
+      cell.appendChild(pill);
+    });
+
+    cell.onclick = () => openDayPanel(dateStr);
+    grid.appendChild(cell);
+  }
+
+  // Next month filler
+  const total = firstDay + daysInMonth;
+  const cellsInLastWeek = total % 7;
+  const remaining = cellsInLastWeek === 0 ? 0 : 7 - cellsInLastWeek;
+  for (let d = 1; d <= remaining; d++) {
+    const cell = document.createElement('div');
+    cell.className = 'cal-cell other-month';
+    cell.innerHTML = `<div class="day-num">${d}</div>`;
+    grid.appendChild(cell);
+  }
+}
+
+function isoDate(y, m, d) {
+  return `${y}-${String(m).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+}
+
+// ─── Day Panel ───────────────────────────────────────
+let currentPanelDate = null;
+
+function openDayPanel(dateStr) {
+  currentPanelDate = dateStr;
+  const panel = document.getElementById('day-panel');
+  const overlay = document.getElementById('overlay');
+  const d = new Date(dateStr + 'T00:00:00');
+  document.getElementById('day-panel-title').textContent =
+    d.toLocaleDateString('en-US', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
+  renderDayPanel();
+  panel.classList.add('open');
+  overlay.classList.add('open');
+
+  document.getElementById('day-panel-add-btn').onclick = () => {
+    closeModal('modal-event'); // ensure clean
+    document.getElementById('ev-date').value = dateStr;
+    openModal('modal-event');
+  };
+}
+
+function renderDayPanel() {
+  const body = document.getElementById('day-panel-body');
+  const events = state.events.filter(e => e.date === currentPanelDate);
+  body.innerHTML = '';
+
+  if (events.length === 0) {
+    body.innerHTML = '<p style="color:var(--text-muted);font-size:.82rem;">No events for this day.</p>';
+  }
+
+  events.forEach(ev => {
+    const CAT_COLORS = { work:'#6366f1', personal:'#22c55e', goal:'#f59e0b', health:'#38bdf8', travel:'#e879f9' };
+    const item = document.createElement('div');
+    item.className = 'event-item';
+    item.innerHTML = `
+      <div class="event-item-dot" style="background:${CAT_COLORS[ev.category] || '#888'}"></div>
+      <div class="event-item-content">
+        <div class="event-item-title">${ev.title}</div>
+        <div class="event-item-meta">
+          ${ev.start ? ev.start + (ev.end ? ' – ' + ev.end : '') + ' · ' : ''}
+          <span class="badge badge-accent">${ev.category}</span>
+        </div>
+        ${ev.notes ? `<div style="font-size:.75rem;color:var(--text-muted);margin-top:4px;">${ev.notes}</div>` : ''}
+      </div>
+      <button class="event-item-delete" onclick="deleteEvent('${ev.id}')">✕</button>
+    `;
+    body.appendChild(item);
+  });
+
+  // Time blocks for this date
+  const blocks = (state.blocks[currentPanelDate] || []);
+  if (blocks.length > 0) {
+    const sec = document.createElement('div');
+    sec.style.marginTop = '16px';
+    sec.innerHTML = '<p class="section-title">Time Blocks</p>';
+    blocks.forEach(b => {
+      const row = document.createElement('div');
+      row.className = 'time-slot';
+      row.innerHTML = `<span class="ts-time">${b.start}–${b.end}</span><span>${b.title}</span>`;
+      sec.appendChild(row);
+    });
+    body.appendChild(sec);
+  }
+}
+
+function closeDayPanel() {
+  document.getElementById('day-panel').classList.remove('open');
+  document.getElementById('overlay').classList.remove('open');
+  currentPanelDate = null;
+}
+
+// ═══════════════════════════════════════════════════════
+//  EVENTS (CRUD)
+// ═══════════════════════════════════════════════════════
+let modalContext = null; // 'calendar' | 'day-panel'
+
+function openAddEventModal() {
+  const d = new Date();
+  document.getElementById('ev-date').value = isoDate(d.getFullYear(), d.getMonth()+1, d.getDate());
+  document.getElementById('ev-title').value = '';
+  document.getElementById('ev-notes').value = '';
+  document.getElementById('ev-start').value = '';
+  document.getElementById('ev-end').value = '';
+  openModal('modal-event');
+}
+
+function saveEvent() {
+  const title = document.getElementById('ev-title').value.trim();
+  if (!title) { alert('Please enter a title.'); return; }
+  const ev = {
+    id: uid(),
+    date: document.getElementById('ev-date').value,
+    title,
+    category: document.getElementById('ev-cat').value,
+    start: document.getElementById('ev-start').value,
+    end:   document.getElementById('ev-end').value,
+    notes: document.getElementById('ev-notes').value.trim(),
+  };
+  state.events.push(ev);
+  saveState();
+  closeModal('modal-event');
+  renderCalendar();
+  if (currentPanelDate === ev.date) renderDayPanel();
+}
+
+function deleteEvent(id) {
+  state.events = state.events.filter(e => e.id !== id);
+  saveState();
+  renderCalendar();
+  if (currentPanelDate) renderDayPanel();
+}
+
+// ═══════════════════════════════════════════════════════
+//  SCHEDULE / TIME BLOCKS
+// ═══════════════════════════════════════════════════════
+function initScheduleDate() {
+  const inp = document.getElementById('sched-date');
+  if (!inp.value) {
+    const d = new Date();
+    inp.value = isoDate(d.getFullYear(), d.getMonth()+1, d.getDate());
+  }
+}
+
+function schedNav(dir) {
+  const inp = document.getElementById('sched-date');
+  const d = new Date(inp.value + 'T00:00:00');
+  if (dir === 0) {
+    const n = new Date();
+    inp.value = isoDate(n.getFullYear(), n.getMonth()+1, n.getDate());
+  } else {
+    d.setDate(d.getDate() + dir);
+    inp.value = isoDate(d.getFullYear(), d.getMonth()+1, d.getDate());
+  }
+  renderSchedule();
+}
+
+function renderSchedule() {
+  initScheduleDate();
+  const dateStr = document.getElementById('sched-date').value;
+  const blocks = state.blocks[dateStr] || [];
+  const grid = document.getElementById('schedule-grid');
+  grid.innerHTML = '';
+
+  for (let h = 5; h < 24; h++) {
+    const label = document.createElement('div');
+    label.className = 'sched-hour-label';
+    label.textContent = `${String(h).padStart(2,'0')}:00`;
+    grid.appendChild(label);
+
+    const slot = document.createElement('div');
+    slot.className = 'sched-slot';
+    slot.dataset.hour = h;
+
+    // Fill blocks that start in this hour
+    const hourBlocks = blocks.filter(b => {
+      const startH = parseInt(b.start.split(':')[0], 10);
+      return startH === h;
+    });
+    hourBlocks.forEach(b => {
+      const el = document.createElement('div');
+      el.className = 'sched-slot-block';
+      el.style.background = b.color;
+      el.style.color = '#fff';
+      el.innerHTML = `${b.start}–${b.end} · ${b.title}
+        <button class="block-delete" onclick="deleteBlock('${dateStr}','${b.id}')">✕</button>`;
+      slot.appendChild(el);
+    });
+
+    // Click empty slot → pre-fill time
+    slot.addEventListener('click', (e) => {
+      if (e.target.classList.contains('block-delete')) return;
+      document.getElementById('blk-start').value = `${String(h).padStart(2,'0')}:00`;
+      document.getElementById('blk-end').value   = `${String(h+1).padStart(2,'0')}:00`;
+      openAddBlockModal();
+    });
+
+    grid.appendChild(slot);
+  }
+}
+
+function openAddBlockModal() {
+  document.getElementById('blk-title').value = '';
+  openModal('modal-block');
+}
+
+function saveBlock() {
+  const title = document.getElementById('blk-title').value.trim();
+  if (!title) { alert('Please enter an activity.'); return; }
+  const dateStr = document.getElementById('sched-date').value;
+  if (!state.blocks[dateStr]) state.blocks[dateStr] = [];
+  state.blocks[dateStr].push({
+    id: uid(),
+    title,
+    start: document.getElementById('blk-start').value,
+    end:   document.getElementById('blk-end').value,
+    color: document.getElementById('blk-color').value,
+  });
+  saveState();
+  closeModal('modal-block');
+  renderSchedule();
+}
+
+function deleteBlock(dateStr, id) {
+  if (!state.blocks[dateStr]) return;
+  state.blocks[dateStr] = state.blocks[dateStr].filter(b => b.id !== id);
+  saveState();
+  renderSchedule();
+}
+
+// ═══════════════════════════════════════════════════════
+//  ROADMAP / MILESTONES
+// ═══════════════════════════════════════════════════════
+function renderRoadmap() {
+  const container = document.getElementById('roadmap-container');
+  container.innerHTML = '';
+
+  // Group by lane
+  const lanes = {};
+  state.milestones.forEach(ms => {
+    const lane = ms.lane || 'General';
+    if (!lanes[lane]) lanes[lane] = [];
+    lanes[lane].push(ms);
+  });
+
+  if (state.milestones.length === 0) {
+    container.innerHTML = `<p style="color:var(--text-muted);font-size:.85rem;">No milestones yet. Click "+ Milestone" to add one.</p>`;
+    return;
+  }
+
+  // Sort each lane by date
+  Object.entries(lanes).forEach(([laneName, milestones]) => {
+    milestones.sort((a, b) => (a.date || '') < (b.date || '') ? -1 : 1);
+
+    const laneEl = document.createElement('div');
+    laneEl.className = 'roadmap-lane';
+
+    laneEl.innerHTML = `
+      <div class="roadmap-lane-header">
+        <div class="lane-title">${laneName}</div>
+        <span class="badge badge-accent">${milestones.length}</span>
+      </div>`;
+
+    milestones.forEach(ms => {
+      const card = document.createElement('div');
+      card.className = `milestone-card ${ms.status === 'done' ? 'done' : ms.status === 'in-progress' ? 'in-progress' : ''}`;
+
+      const priorityBadge = {
+        high:   `<span class="badge badge-danger">High</span>`,
+        medium: `<span class="badge badge-warn">Medium</span>`,
+        low:    `<span class="badge badge-success">Low</span>`,
+      }[ms.priority] || '';
+
+      card.innerHTML = `
+        <div class="ms-actions">
+          <button class="ms-btn" onclick="toggleMilestoneStatus('${ms.id}')">
+            ${ms.status === 'done' ? '↩ Undo' : ms.status === 'in-progress' ? '✓ Done' : '▶ Start'}
+          </button>
+          <button class="ms-btn" onclick="deleteMilestone('${ms.id}')" style="color:var(--danger);">✕</button>
+        </div>
+        <div class="ms-title">${ms.title} ${priorityBadge}</div>
+        <div class="ms-date">${ms.date ? '📅 ' + formatDate(ms.date) : ''}  ${statusLabel(ms.status)}</div>
+        ${ms.notes ? `<div class="ms-notes">${ms.notes}</div>` : ''}`;
+      laneEl.appendChild(card);
+    });
+
+    container.appendChild(laneEl);
+  });
+}
+
+function statusLabel(s) {
+  return s === 'done' ? '<span class="badge badge-success">Done</span>'
+       : s === 'in-progress' ? '<span class="badge badge-warn">In Progress</span>'
+       : '<span class="badge badge-accent">To Do</span>';
+}
+
+function openAddMilestoneModal() {
+  document.getElementById('ms-title').value = '';
+  document.getElementById('ms-notes').value = '';
+  document.getElementById('ms-lane').value  = '';
+  openModal('modal-milestone');
+}
+
+function saveMilestone() {
+  const title = document.getElementById('ms-title').value.trim();
+  if (!title) { alert('Please enter a title.'); return; }
+  state.milestones.push({
+    id: uid(),
+    title,
+    date:     document.getElementById('ms-date').value,
+    status:   document.getElementById('ms-status').value,
+    lane:     document.getElementById('ms-lane').value.trim() || 'General',
+    priority: document.getElementById('ms-priority').value,
+    notes:    document.getElementById('ms-notes').value.trim(),
+  });
+  saveState();
+  closeModal('modal-milestone');
+  renderRoadmap();
+}
+
+function toggleMilestoneStatus(id) {
+  const ms = state.milestones.find(m => m.id === id);
+  if (!ms) return;
+  ms.status = ms.status === 'todo' ? 'in-progress' : ms.status === 'in-progress' ? 'done' : 'todo';
+  saveState();
+  renderRoadmap();
+}
+
+function deleteMilestone(id) {
+  state.milestones = state.milestones.filter(m => m.id !== id);
+  saveState();
+  renderRoadmap();
+}
+
+// ═══════════════════════════════════════════════════════
+//  GOALS
+// ═══════════════════════════════════════════════════════
+function renderGoals() {
+  const filter = document.getElementById('goal-month-filter').value;
+  const grid   = document.getElementById('goals-grid');
+  grid.innerHTML = '';
+
+  const goals = filter
+    ? state.goals.filter(g => g.month === filter)
+    : state.goals;
+
+  if (goals.length === 0) {
+    grid.innerHTML = `<p style="color:var(--text-muted);font-size:.85rem;">No goals yet. Click "+ Goal" to add one.</p>`;
+    return;
+  }
+
+  goals.forEach(goal => {
+    const total    = goal.tasks.length;
+    const done     = goal.tasks.filter(t => t.done).length;
+    const pct      = total ? Math.round((done / total) * 100) : 0;
+
+    const card = document.createElement('div');
+    card.className = 'goal-card';
+
+    const CAT_COLORS = { work:'#6366f1', personal:'#22c55e', health:'#38bdf8', travel:'#e879f9', learning:'#f59e0b', finance:'#fb7185' };
+    const color = CAT_COLORS[goal.category] || '#888';
+
+    card.innerHTML = `
+      <div class="goal-title">
+        <span style="border-left:3px solid ${color};padding-left:8px;">${goal.title}</span>
+        <button class="task-delete" onclick="deleteGoal('${goal.id}')">✕</button>
+      </div>
+      ${goal.month ? `<div style="font-size:.72rem;color:var(--text-muted);margin-bottom:6px;">📅 ${goal.month}</div>` : ''}
+      ${goal.desc  ? `<div class="goal-desc">${goal.desc}</div>` : ''}
+      <div class="progress-bar"><div class="progress-bar-fill" style="width:${pct}%;background:${color};"></div></div>
+      <div class="progress-label">${done}/${total} tasks · ${pct}%</div>
+      <div class="task-list" id="tasks-${goal.id}"></div>
+      <div style="display:flex;gap:6px;margin-top:10px;">
+        <input type="text" placeholder="New task…" id="new-task-${goal.id}" style="flex:1;font-size:.78rem;" onkeydown="if(event.key==='Enter')addTask('${goal.id}')" />
+        <button class="btn btn-primary" style="padding:5px 10px;font-size:.75rem;" onclick="addTask('${goal.id}')">+</button>
+      </div>`;
+
+    grid.appendChild(card);
+    renderTaskList(goal);
+  });
+
+  // Populate month filter options
+  const monthSel = document.getElementById('goal-month-filter');
+  const existing = new Set([...monthSel.options].map(o => o.value));
+  state.goals.forEach(g => {
+    if (g.month && !existing.has(g.month)) {
+      const opt = document.createElement('option');
+      opt.value = g.month;
+      opt.textContent = g.month;
+      monthSel.appendChild(opt);
+      existing.add(g.month);
+    }
+  });
+}
+
+function renderTaskList(goal) {
+  const container = document.getElementById('tasks-' + goal.id);
+  if (!container) return;
+  container.innerHTML = '';
+  goal.tasks.forEach(task => {
+    const item = document.createElement('div');
+    item.className = 'task-item' + (task.done ? ' done' : '');
+    item.innerHTML = `
+      <input type="checkbox" ${task.done ? 'checked' : ''} onchange="toggleTask('${goal.id}','${task.id}',this.checked)" />
+      <span>${task.text}</span>
+      <button class="task-delete" onclick="deleteTask('${goal.id}','${task.id}')">✕</button>`;
+    container.appendChild(item);
+  });
+}
+
+function openAddGoalModal() {
+  document.getElementById('goal-title').value = '';
+  document.getElementById('goal-desc').value  = '';
+  document.getElementById('goal-tasks').value = '';
+  const d = new Date();
+  document.getElementById('goal-month').value = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`;
+  openModal('modal-goal');
+}
+
+function saveGoal() {
+  const title = document.getElementById('goal-title').value.trim();
+  if (!title) { alert('Please enter a goal title.'); return; }
+  const rawTasks = document.getElementById('goal-tasks').value.split('\n').filter(t => t.trim());
+  state.goals.push({
+    id:       uid(),
+    title,
+    month:    document.getElementById('goal-month').value,
+    category: document.getElementById('goal-cat').value,
+    desc:     document.getElementById('goal-desc').value.trim(),
+    tasks:    rawTasks.map(t => ({ id: uid(), text: t.trim(), done: false })),
+  });
+  saveState();
+  closeModal('modal-goal');
+  renderGoals();
+}
+
+function deleteGoal(id) {
+  state.goals = state.goals.filter(g => g.id !== id);
+  saveState();
+  renderGoals();
+}
+
+function toggleTask(goalId, taskId, checked) {
+  const goal = state.goals.find(g => g.id === goalId);
+  if (!goal) return;
+  const task = goal.tasks.find(t => t.id === taskId);
+  if (task) task.done = checked;
+  saveState();
+  renderGoals();
+}
+
+function addTask(goalId) {
+  const inp = document.getElementById('new-task-' + goalId);
+  const text = inp.value.trim();
+  if (!text) return;
+  const goal = state.goals.find(g => g.id === goalId);
+  if (!goal) return;
+  goal.tasks.push({ id: uid(), text, done: false });
+  saveState();
+  renderGoals();
+}
+
+function deleteTask(goalId, taskId) {
+  const goal = state.goals.find(g => g.id === goalId);
+  if (!goal) return;
+  goal.tasks = goal.tasks.filter(t => t.id !== taskId);
+  saveState();
+  renderGoals();
+}
+
+// ═══════════════════════════════════════════════════════
+//  CALCULATOR
+// ═══════════════════════════════════════════════════════
+function initCalculator() {
+  // Init date fields with today
+  const d = new Date();
+  const todayStr = isoDate(d.getFullYear(), d.getMonth()+1, d.getDate());
+  document.getElementById('calc-date-from').value = todayStr;
+  document.getElementById('calc-date-to').value   = todayStr;
+  document.getElementById('calc-month').value     = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`;
+
+  // Weekly hours inputs
+  const DAYS = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+  const weekContainer = document.getElementById('week-days-inputs');
+  if (!weekContainer.children.length) {
+    DAYS.forEach((day, i) => {
+      const row = document.createElement('div');
+      row.style.cssText = 'display:flex;align-items:center;gap:10px;margin-bottom:6px;';
+      row.innerHTML = `
+        <span style="font-size:.78rem;min-width:80px;color:var(--text-muted);">${day}</span>
+        <input type="number" id="week-h-${i}" value="${i < 5 ? 8 : 0}" min="0" max="24" step=".5"
+               style="width:70px;" oninput="calcWeekly()" />
+        <span style="font-size:.72rem;color:var(--text-muted);">hrs</span>`;
+      weekContainer.appendChild(row);
+    });
+  }
+
+  calcDuration();
+  calcWeekly();
+  calcDateDiff();
+  calcMonthSummary();
+}
+
+function calcDuration() {
+  const start = document.getElementById('calc-start').value;
+  const end   = document.getElementById('calc-end').value;
+  const brk   = parseFloat(document.getElementById('calc-break').value) || 0;
+  const el    = document.getElementById('calc-duration-result');
+
+  if (!start || !end) { el.innerHTML = '–'; return; }
+  const [sh, sm] = start.split(':').map(Number);
+  const [eh, em] = end.split(':').map(Number);
+  let mins = (eh * 60 + em) - (sh * 60 + sm);
+  if (mins < 0) mins += 24 * 60;
+  const net = Math.max(0, mins - brk);
+  el.innerHTML = `
+    <div class="calc-result-value">${Math.floor(net/60)}h ${net%60}m</div>
+    <div class="calc-result-label">Net working time (${Math.floor(mins/60)}h ${mins%60}m total − ${brk} min break)</div>`;
+}
+
+function calcWeekly() {
+  let total = 0;
+  for (let i = 0; i < 7; i++) {
+    const v = parseFloat(document.getElementById('week-h-' + i)?.value) || 0;
+    total += v;
+  }
+  const el = document.getElementById('calc-weekly-result');
+  let weekdayTotal = 0;
+  for (let i = 0; i < 5; i++) {
+    weekdayTotal += parseFloat(document.getElementById('week-h-' + i)?.value) || 0;
+  }
+  const avgWeekday = weekdayTotal / 5;
+  el.innerHTML = `
+    <div class="stat-row"><span>Total hours/week</span><span class="val">${total.toFixed(1)} h</span></div>
+    <div class="stat-row"><span>Average/day (Mon–Fri)</span><span class="val">${avgWeekday.toFixed(1)} h</span></div>
+    <div class="stat-row"><span>Approx. hours/month</span><span class="val">${(total * 4.33).toFixed(0)} h</span></div>
+    <div class="stat-row"><span>Approx. hours/year</span><span class="val">${(total * 52).toFixed(0)} h</span></div>`;
+}
+
+function calcDateDiff() {
+  const from = document.getElementById('calc-date-from').value;
+  const to   = document.getElementById('calc-date-to').value;
+  const el   = document.getElementById('calc-date-result');
+  if (!from || !to) { el.innerHTML = '–'; return; }
+  const a = new Date(from), b = new Date(to);
+  const diff = Math.round((b - a) / (1000 * 60 * 60 * 24));
+  const weeks = Math.floor(Math.abs(diff) / 7);
+  const months = Math.round(Math.abs(diff) / 30.44);
+  el.innerHTML = `
+    <div class="calc-result-value">${Math.abs(diff)} days</div>
+    <div class="calc-result-label">${diff < 0 ? '(past) ' : ''}≈ ${weeks} weeks · ≈ ${months} months</div>`;
+}
+
+function calcMonthSummary() {
+  const month = document.getElementById('calc-month').value;
+  const el    = document.getElementById('calc-month-result');
+  if (!month) { el.innerHTML = '–'; return; }
+  const [y, m] = month.split('-').map(Number);
+  const daysInMonth   = new Date(y, m, 0).getDate();
+  const firstWeekday  = new Date(y, m - 1, 1).getDay(); // 0=Sun
+  const weekdays      = [...Array(daysInMonth)].filter((_,i) => {
+    const dow = (firstWeekday + i) % 7;
+    return dow > 0 && dow < 6;
+  }).length;
+  const weekendDays   = daysInMonth - weekdays;
+  const workingHours  = weekdays * 8;
+
+  const eventsInMonth = state.events.filter(e => e.date.startsWith(month)).length;
+  const goalsInMonth  = state.goals.filter(g => g.month === month).length;
+  const msInMonth     = state.milestones.filter(ms => ms.date && ms.date.startsWith(month)).length;
+
+  el.innerHTML = `
+    <div class="stat-row"><span>Calendar days</span><span class="val">${daysInMonth}</span></div>
+    <div class="stat-row"><span>Weekdays (Mon–Fri)</span><span class="val">${weekdays}</span></div>
+    <div class="stat-row"><span>Weekend days</span><span class="val">${weekendDays}</span></div>
+    <div class="stat-row"><span>Est. working hours (8h/day)</span><span class="val">${workingHours}</span></div>
+    <div class="stat-row"><span>Events this month</span><span class="val">${eventsInMonth}</span></div>
+    <div class="stat-row"><span>Goals this month</span><span class="val">${goalsInMonth}</span></div>
+    <div class="stat-row"><span>Milestones this month</span><span class="val">${msInMonth}</span></div>`;
+}
+
+// ═══════════════════════════════════════════════════════
+//  MODAL HELPERS
+// ═══════════════════════════════════════════════════════
+const modalOverlay = document.createElement('div');
+modalOverlay.style.cssText = 'display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:290;';
+document.body.appendChild(modalOverlay);
+
+function openModal(id) {
+  document.getElementById(id).classList.add('open');
+  modalOverlay.style.display = 'block';
+}
+
+function closeModal(id) {
+  document.getElementById(id).classList.remove('open');
+  modalOverlay.style.display = 'none';
+}
+
+modalOverlay.onclick = () => {
+  document.querySelectorAll('.modal.open').forEach(m => m.classList.remove('open'));
+  modalOverlay.style.display = 'none';
+};
+
+// ═══════════════════════════════════════════════════════
+//  UTILITIES
+// ═══════════════════════════════════════════════════════
+function uid() {
+  if (typeof crypto !== 'undefined' && crypto.randomUUID) {
+    return crypto.randomUUID();
+  }
+  return Date.now().toString(36) + Math.random().toString(36).slice(2, 9);
+}
+
+function formatDate(dateStr) {
+  if (!dateStr) return '';
+  const d = new Date(dateStr + 'T00:00:00');
+  return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+}
+
+// ═══════════════════════════════════════════════════════
+//  INIT
+// ═══════════════════════════════════════════════════════
+(function init() {
+  initScheduleDate();
+  renderCalendar();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,169 @@
+You are a senior TypeScript + monorepo + Vercel deployment expert.
+
+I have a monorepo using internal packages like:
+- @sapient/shared-types
+- @sapient/bms-sync
+- @sapient/semantic-core
+
+Folder structure:
+- /packages/*
+- root tsconfig.json
+- using pnpm locally (works locally)
+
+Deployment: Vercel
+
+Build error:
+TypeScript cannot resolve internal packages:
+"Cannot find module '@sapient/...'"
+Also:
+"Cannot find name 'process'"
+
+Important context:
+- Vercel is using npm instead of pnpm
+- I see warnings about pnpm configs (shamefully-hoist)
+
+What I need:
+1. Diagnose why Vercel cannot resolve workspace packages
+2. Provide exact steps to:
+   - Make Vercel use pnpm correctly
+   - Ensure workspace packages are built and linked
+3. Fix TypeScript resolution for monorepo packages
+4. Provide exact file changes for:
+   - package.json (root)
+   - pnpm-workspace.yaml
+   - tsconfig.json
+5. Include commands I should run locally before deploy
+
+Be precise and assume this is a production deployment.
+
+===
+
+cd /home/runner/work/Sapient/Sapient
+corepack enable
+corepack prepare pnpm@9.15.4 --activate
+rm -f package-lock.json
+pnpm install
+pnpm -r --filter "./packages/*" run typecheck
+pnpm --filter @sapient/web... build
+pnpm run test
+
+---
+
+}
+You are a senior monorepo + pnpm + Vercel expert.
+
+I have a pnpm monorepo with:
+- pnpm-workspace.yaml
+- packages/* internal packages (@sapient/*)
+- builds correctly locally with pnpm
+
+Problem:
+Vercel is using npm instead of pnpm, causing:
+- workspace packages not installed
+- TypeScript cannot resolve internal modules
+
+Build logs show:
+- "npm warn Unknown project config shamefully-hoist"
+- "added 1 package"
+
+Tasks:
+1. Force Vercel to use pnpm correctly
+2. Ensure workspace packages are installed and built
+3. Provide exact required setup:
+   - root package.json
+   - pnpm-workspace.yaml
+   - Vercel settings
+4. Add proper monorepo build pipeline (pnpm -r build)
+5. Ensure TypeScript resolution works in production
+
+Give exact file contents and commands. No theory
+
+===
+
+corepack enable
+corepack prepare pnpm@9.15.4 --activate
+pnpm install                          # BV BV generates pnpm-lock.yaml
+git add pnpm-lock.yaml
+git commit -m "chore: add pnpm-lock.yaml for Vercel"
+git push
+BV
+
+---
+
+Here’s your final, polished, copy-paste Claude prompt that includes everything (your pipeline, Vercel setup, and the root directory correction):
+
+⸻
+
+:::writing{variant=“standard” id=“61827”}
+You are a senior DevOps + pnpm monorepo + Next.js (App Router) expert.
+
+I have a pnpm monorepo deployed on Vercel. Locally everything works, but Vercel builds fail due to workspace resolution and package manager issues.
+
+Context:
+
+* Monorepo structure:
+    * /packages/* (internal packages like @sapient/*)
+    * /apps/web (Next.js app, App Router)
+* Using pnpm (v9.15.4)
+* Workspace packages are required by the web app
+* Vercel previously defaulted to npm, causing:
+    * “Cannot find module ‘@sapient/…’”
+    * “npm warn Unknown project config shamefully-hoist”
+
+Setup already applied:
+
+corepack enable
+corepack prepare pnpm@9.15.4 –activate
+pnpm install –frozen-lockfile
+
+Build pipeline (must be preserved):
+
+pnpm install –frozen-lockfile
+pnpm -r –filter “./packages/*” run build
+pnpm –filter @sapient/web build
+
+This ensures all internal packages are built before the Next.js app.
+
+Important constraint:
+
+* Vercel Root Directory should be the repository root (./), NOT apps/web, to ensure workspace linking works correctly.
+
+Your tasks:
+
+1. Ensure Vercel DEFINITIVELY uses pnpm instead of npm
+2. Provide EXACT configuration for:
+    * root package.json (must include “packageManager”: “pnpm@9.15.4”)
+    * pnpm-workspace.yaml (must include both packages/* and apps/*)
+    * vercel.json (minimal and correct)
+    * Next.js config (transpilePackages for all @sapient/* deps)
+3. Ensure workspace packages:
+    * are properly linked
+    * are built in the correct order using pnpm filters
+4. Fix TypeScript module resolution for @sapient/*
+5. Provide final working scripts section for root package.json using the pipeline above
+6. Specify exact Vercel dashboard settings:
+    * Root Directory
+    * Install Command
+    * Build Command
+    * Output Directory
+
+Constraints:
+
+* No generic advice
+* No explanations unless necessary
+* Output exact file contents and commands only
+* Assume production deployment
+
+Goal:
+
+A fully working Vercel deployment where:
+
+* pnpm is used (not npm)
+* workspace packages build first
+* Next.js builds successfully
+* no module resolution errors occur
+    :::
+
+⸻
+
+This version removes ambiguity and forces Claude to give you a complete, production-ready config, not partial suggestions

@@ -1,0 +1,128 @@
+Step 1 — Add GitHub Secrets
+Go to: GitHub repo → Settings → Secrets and variables → Actions → New repository secret
+
+Add all 5 secrets listed above. To get their values:
+
+VERCEL_TOKEN: Vercel Dashboard → Account Settings → Tokens → Create
+VERCEL_ORG_ID: Run vercel whoami --json or find in Vercel → Settings → General → "Your ID" (Team/Personal)
+VERCEL_PROJECT_ID_TRT/POWERSTARTER/POWERFRAME: Each Vercel project → Settings → General → "Project ID"
+Step 2 — Add Firebase Keys to Vercel (for each of the 3 projects)
+In each Vercel project → Settings → Environment Variables, add:
+
+Key	Scope
+NEXT_PUBLIC_FIREBASE_API_KEY	All (Production, Preview, Development)
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN	All
+NEXT_PUBLIC_FIREBASE_PROJECT_ID	All
+NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET	All
+NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID	All
+NEXT_PUBLIC_FIREBASE_APP_ID	All
+FIREBASE_ADMIN_SA_JSON	Production + Preview only (server-side, never client)
+The workflow uses vercel pull to sync Vercel env vars into the build — so you only need to set 
+them in Vercel, not duplicate them in GitHub secrets.
+
+Step 3 — Re-run the Vercel Deploy workflow
+After adding all secrets, either:
+
+Push a new commit to the copilot/init-monorepo-foundation-nextjs branch, or
+Go to Actions → Vercel Deploy → Re-run all jobs
+This will trigger a fresh run that will pass through CI → lint → typecheck → deploy all 3 apps.
+
+TL;DR: The code is 100% ready. The action_required failure means the GitHub Secrets
+(VERCEL_TOKEN, VERCEL_ORG_ID, the 3 project IDs) haven't been added yet, and the Firebase keys 
+need to be entered in Vercel's dashboard. Once both are done, 
+re-run the workflow and everything will deploy cleanly.
+
+
+
+
+VERCEL_TOKEN	vcp_6Mu2P5JcRpTQ3qZcN5B9q4N4yeb6zcVQFMYpEURYnYY2XrSQS10jmfmf
+VERCEL_ORG_ID	Your account/team ID rbFukrbuI8FpuyieRpY9ooCR
+VERCEL_PROJECT_ID_TRT	Project ID from Vercel trt project - prj_BkSr4mypRnyYgPtodMVJ03ohysIM
+VERCEL_PROJECT_ID_POWERSTARTER	Project ID from Vercel powerstarter project - prj_HoLlhguGHycLupv4dW1CjH6rRGZF
+VERCEL_PROJECT_ID_POWERFRAME Project ID from Vercel powerframe project BMS - prj_9s5bzMMVX0TA4WNXLFNovyb4YTdD
+
+===
+
+This is frustrating, but the log shows a specific type of failure. The "Error: Unexpected error. Please try again later.
+()" coming directly from the Vercel CLI during the Building... phase is a Vercel platform/infrastructure error, not a code or configuration error on your end.
+Because your build succeeded (it reached the "Building" stage and uploaded 819KB), but the Vercel backend "dropped the ball," here is exactly what to do:
+
+1. Immediate Fix: The "Force" Re-run
+Since this is a transient API error, the most effective fix is often just a fresh trigger.
+Action: Go to the GitHub Actions tab, select the failed run, and click "Re-run failed jobs."
+Why: This bypasses the specific Vercel instance that hit the "Unexpected error."
+
+2. Verify "Root Directory" for Powerframe
+In your previous message, you mentioned setting the root directory to ./.
+Check: Is the powerframe code actually in the root of the repo, or is it inside apps/powerframe?
+Action: If it's in a subfolder, the Root Directory in Vercel Settings must match that path (e.g., apps/powerframe).
+If it's set to ./ but the code is in a subfolder,
+Vercel tries to build the whole monorepo as one app, which often causes these timeout/API errors.
+
+3. Check Vercel Usage/Limits
+Sometimes "Unexpected error" is a masked "Rate Limit" or "Build Minute" error.
+Action: Log into your Vercel Dashboard and check the Activity or Usage tab. Ensure you haven't hit a concurrency limit for your plan 
+(especially if 3 builds try to start at the exact same millisecond).
+Summary of Actions
+Re-run the failed GitHub Action immediately.
+Double-check that the Root Directory for the Powerframe project in Vercel matches its actual folder path in your monorepo.
+Ensure the Framework Preset is still set to Next.js.
+Is the Powerframe code located in the root of your repository, or is it inside an apps/ folder?
+
+===
+
+The logs and your new image indicate that while you've upgraded your plan, the pipelines are still failing because 
+of unresolved configuration mismatches and a Vercel API timeout.
+Even with a better plan, Vercel will fail if it's looking for files in the wrong place. Here is the final checklist to get these green:
+
+1. The "Root Directory" must match your Monorepo
+In your previous turn, you mentioned setting the Root Directory to ./. This is likely the primary cause of the failure for all three.
+Problem: In a pnpm monorepo, the app code is usually in apps/powerframe, apps/trt, etc. If you set the Root Directory to ./, Vercel looks for 
+a package.json in the very top folder and tries to build the entire repo as one single app, which crashes.
+The Fix: Go to Vercel Settings 
+ General for each project:
+Powerframe: Set Root Directory to apps/powerframe (or wherever its package.json lives).
+TRT: Set Root Directory to apps/trt.
+Powerstarter: Set Root Directory to apps/powerstarter.
+
+2. Resolve the "Unexpected Error" (Vercel side)
+The error Error: Unexpected error. Please try again later. () in your logs is a known Vercel CLI issue often caused by conflicting build settings.
+The Fix: In the Vercel Dashboard for all three projects, ensure:
+Framework Preset: Is explicitly set to Next.js.
+Build Command: Is EMPTY (let Vercel auto-detect next build).
+Output Directory: Is EMPTY (let Vercel auto-detect .next).
+
+3. Ignore the Node.js 20 Warnings
+The yellow warnings about Node.js 20 are not causing the failure. They are just notifications that GitHub will update its runners in 2026.
+You can ignore these for now; focus entirely on the red "Exit Code 1" errors.
+Summary of Action:
+Change the Root Directory for each project in Vercel from ./ to their specific folder paths (e.g., apps/powerframe). This is the most common reason
+for a monorepo "rebuild" to fail.
+Can you confirm if your app code is inside an apps/ folder or if it's sitting directly in the root of the repository?
+
+
+***** TheRocketTree-Web for PowerStarter-Web?
+
+===
+
+"I am setting up a pnpm monorepo with the following architecture:
+apps/powerframe-bms (Vite)
+apps/the-rocket-tree-app (Next.js)
+apps/power-starter-web (Next.js)
+packages/ui (Shared UI library)
+packages/utils (Shared logic)
+My pnpm-workspace.yaml uses the apps/* and packages/* patterns. Please:
+Configure the package.json for packages/ui and packages/utils to export their content
+using modern exports fields.
+Add these internal packages as dependencies to the package.json of all three apps
+using the workspace:* syntax.
+Provide a turbo.json for the root that handles the build pipeline for both Vite (dist) and Next.js (.next) outputs.
+Ensure apps/powerframe-bms/vite.config.ts is configured to resolve these workspace packages.
+Create a root tsconfig.json with paths so that VS Code correctly recognizes imports across the monorepo."
+
+===
+GitHub Pull Request integrated with Vercel, you already have a powerful CI/CD (Continuous Integration/Continuous Deployment) pipeline started. 
+===
+
+Lets get in businuess and rebuild powerstarter repo competely in order to achieve the exact desired outcome for trt web/app integration pipeline and powerframe bms
+

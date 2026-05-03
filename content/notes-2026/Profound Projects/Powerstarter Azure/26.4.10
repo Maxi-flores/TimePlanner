@@ -1,0 +1,42 @@
+Yes, you can absolutely deploy this on Azure. Moving from a local setup to Azure changes the "instances" 
+from physical hardware to cloud services, but the logic remains the same. 
+
+
+To keep it as a "self-made" project (avoiding expensive enterprise managed services), you should use 
+a container-first approach. 
+
+
+1. The Deployment Architecture
+For a custom budget mapper, you have two main paths on Azure:
+Option A: Azure Container Apps (Recommended)
+This is best for a "standalone brain" because it handles the scaling and networking for you. You can run 
+Ollama and ChromaDB as separate containers within the same "Environment".
+Ollama Container: Deploy the official ollama/ollama image. You can even use Serverless GPUs (like the NVIDIA 
+T4 or A100) on a consumption basis so you only pay when the "brain" is thinking.
+ChromaDB Container: Use the chromadb/chroma image. To make the memory "permanent," you must mount an Azure File 
+Share to the container so your user profiles don't disappear when the container restarts.
+Option B: Azure Virtual Machine (Maximum Control)
+If you want it to feel like your local machine but in the cloud, provision an N-Series VM (which comes with NVIDIA
+GPUs). You can SSH into it, install Docker, and run your exact local code. 
+
+
+2. Implementation Steps on Azure
+Storage: Create an Azure Storage Account and a File Share to hold your ChromaDB vector data and Ollama model files.
+Container Registry: Push your custom Python "Router" code to an Azure Container Registry (ACR).
+Deployment: Use Azure Container Apps to deploy three containers:
+Router API: Your Python code (FastAPI/LangGraph).
+Ollama: The inference engine.
+ChromaDB: The memory store. 
+
+
+3. Alternative: Hybrid "Brain"
+If you find hosting a local LLM on Azure too complex or expensive, you can swap the "brain" for Azure OpenAI 
+while keeping the Router and ChromaDB self-made. 
+
+
+Router: Your custom logic on Azure Container Apps.
+Memory: ChromaDB (self-hosted) or Azure Cosmos DB with Vector Search.
+Brain: Azure OpenAI API (GPT-4o). 
+Microsoft Developer Blogs
+Microsoft Developer Blogs
+Would you like the Azure CLI commands to deploy a basic version of the Ollama container to Azure Container Apps?

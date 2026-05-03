@@ -1,0 +1,82 @@
+Yes, your Mucho3D server (Ollama/MCP) can function as a remote host that connects directly to your local Blender instance. This allows you to offload heavy AI computations to a powerful hosted machine while seeing the 3D results generated in real-time on your own computer. 
+YouTube
+YouTube
+ +1
+Connection Architecture
+The connection between your remote Mucho3D server and local Blender typically works in one of two ways: 
+The AI Client as the Bridge: Your AI interface (like the Claude Desktop App or Cursor) acts as the middleman. It connects to the Remote Ollama/MCP server via the internet and then sends commands to your Local Blender over a local network port (default is often 9876). 
+GitHub
+GitHub
+ +3
+Direct Server-to-Blender: The remote server connects directly to your local IP. This usually requires a "tunnel" (like Cloudflare Tunnels or ngrok) to bypass your home router's firewall and give your local Blender a reachable address. 
+Reddit
+Reddit
+How to Set It Up
+Configure the Server: On your Mucho3D machine, set the environment variable OLLAMA_HOST=0.0.0.0 to allow it to listen for connections from outside its own local network. 
+YouTube
+YouTube
+ +1
+Establish a Secure Tunnel: Use a service like Tailscale or Cloudflare to create a secure path between the two machines. This provides a stable IP or URL that doesn't change. 
+Reddit
+Reddit
+Point Blender to the Host:
+Open your Blender MCP Add-on preferences.
+Change the Ollama URL from http://localhost:11434 to your remote server's address (e.g., http://your-server-ip:11434). 
+GitHub
+GitHub
+ +2
+Start the Listener: In Blender, press N to open the sidebar, go to the BlenderMCP tab, and click Connect/Start Server. 
+GitHub
+GitHub
+ +2
+Benefits of This Setup
+Offloaded GPU Load: Blender can use 100% of your local GPU for viewport rendering, while the remote Mucho3D server handles the AI text-to-3D generation. 
+YouTube
+YouTube
+Consistent Environment: You can keep your complex Ollama models and MCP configurations on one stable server and access them from any laptop or computer running Blender. 
+YouTube
+YouTube
+ +1
+Would you like the specific terminal commands to set the environment variables on your server?
+
+===
+
+Could i use tailscale or vercel instead of ngrok?
+Yes, you can use Tailscale instead of ngrok, and it is actually the preferred method for most users because it is more secure and creates a permanent private connection. Vercel, however, is not a direct replacement for ngrok in this workflow and serves a completely different purpose. 
+Medium
+Medium
+ +3
+Tailscale: The "Private Tunnel" (Recommended)
+Tailscale creates a secure "Mesh VPN" between your devices. Once installed on both your remote Mucho3D server and your local Blender machine, they act as if they are on the same Wi-Fi. 
+Medium
+Medium
+ +1
+Persistent IP: Unlike ngrok, which often gives you a new URL every time it restarts, Tailscale gives your server a stable IP address (e.g., 100.x.y.z) that never changes. 
+DEV Community
+DEV Community
+Security: Your Ollama/MCP traffic is encrypted and only accessible to your own devices. You don't have to open any ports to the public internet. 
+Medium
+Medium
+Blender Setup: In your Blender MCP Add-on settings, you simply enter your server's Tailscale IP: http://100.x.y.z:11434. 
+DEV Community
+DEV Community
+Vercel: The "Web Host" (Not a Tunnel)
+Vercel is a platform for hosting websites and serverless functions. It cannot create a tunnel to your local machine like ngrok or Tailscale. 
+Medium
+Medium
+ +1
+Why it won't work for your goal: Vercel is "serverless," meaning it only runs code for a few seconds when a page is loaded. It cannot maintain the permanent, heavy connection required to run a local Ollama model or control Blender in real-time. 
+Northflank
+Northflank
+ +1
+The common confusion: You might see tutorials for Vercel MCP support, but this is for developers building AI apps on the web, not for linking your own private 3D server to your desktop Blender. 
+Vercel
+Vercel
+ +1
+Summary Comparison
+Feature 	ngrok	Tailscale	Vercel
+Best For	Quick public testing	Permanent private link	Hosting a website/app
+URL Type	Public (randomized)	Private (static)	Public (your-app.vercel.app)
+Security	High (if authenticated)	Highest (VPN-based)	Standard (Web security)
+Effort	Single command	Install & Login	Requires code deployment
+Would you like a step-by-step on how to authorize your server's IP address within Tailscale for your Blender connection?

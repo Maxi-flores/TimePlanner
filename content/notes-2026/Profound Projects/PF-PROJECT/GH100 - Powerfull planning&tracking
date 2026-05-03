@@ -1,0 +1,35 @@
+Yes, items can populate your planning board automatically without any manual 
+input by using the built-in Auto-add to project workflow. 
+
+Instead of opening your project and manually clicking to add tasks, GitHub 
+continuously scans designated repositories and injects them onto the board 
+based on rules you define. 
+
+⚡ How it Works (No Manual Input)
+You create a funnel using filters. The second a developer creates an issue
+or pull request that matches that specific funnel, it instantly lands on
+your planning board. 
+
+Popular Automated Triggers
+By Label: Automatically add everything tagged as bug or epic.
+By Status: Automatically add all newly opened pull requests so the team 
+can see incoming code reviews.
+By Assignee: Automatically add any issue that gets assigned to a specific person. 
+
+🛠️ How to Set Up Auto-Add Workflows
+You can configure your project's automated inflows in a few clicks: 
+
+Open your project on GitHub and click the three dots (...) in the top right.
+Click on ⚙️ Workflows.
+Under the Default workflows list, click on Auto-add to project.
+Click Edit in the top right corner.
+Select the repository you want to pull issues/PRs from.
+Set your filter criteria (e.g., typing is:issue label:sprint-1 or simply 
+leaving it open to pull all new issues).
+Click Save and turn on workflow. 
+
+💡 Pro-Tip: You can duplicate this specific workflow multiple times if you 
+need to pull in automated items from several different repositories at once! 
+
+Would you like some assistance writing a specific filter query for your 
+automated rules, or do you have another question about managing the board?

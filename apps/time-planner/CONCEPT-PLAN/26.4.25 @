@@ -1,0 +1,72 @@
+time-planner UI/UX 
+
+#1 - Main repo Profound Projects
+#2 - 2026 notes - Obsidian
+#3 - 
+
+
+===
+
+Lets make a brief prompt for this concept repo and snapshot 3D engine to port connection >
+We need a high quality rendered ui/ux time planner * existing repo* and visual transparant 
+glossy dashboard based on top of 3D model by randomized filter or upload through our Mucho3D 
+repo in the MCP tokenless generative 3D blender builer. So it will blend existing new concept
+models and load a rendered version in the background, if possible through next.js framework? 
+
+#No new MCP build repo > use Mucho3D existing MCP connection on this, through Tailscale/Vercel.
+#We maybe need a new seperation/connection layer within our planner repo branche @2026- and vercel 
+deployment > But we use imput from within all the folders within the main repo, so we can make 
+planning history by date and project. So all these noteis will be used for all our obsidian data notes. 
+
+>>>
+
+Copilot said: Build a **Next.js time-planner UI/UX** that renders
+Build a Next.js time-planner UI/UX that renders as a transparent / glossy “glassmorphism” dashboard 
+over a high-quality 3D background. The 3D background is generated/loaded via the existing Mucho3D repo 
+MCP connection (tokenless generative Blender builder), using either randomized filters (seeded) or user
+upload, then composited behind the planner UI. Deploy on Vercel, with the Mucho3D connectivity running 
+through the existing Tailscale/Vercel setup—no new MCP repo. Add a separation/connection layer inside
+the planner repo (new branch @2026-) to orchestrate: model request → render snapshot → serve asset/URL
+→ cache by date+project → load into UI. Planner data is sourced from folders in the main repo, producing 
+planning history by date and project, and exporting/syncing notes compatible with Obsidian (markdown + 
+frontmatter), so every planning entry becomes searchable historical context.
+
+If you want, tell me the exact GitHub repo (owner/name) for the planner and Mucho3D, and I’ll rewrite 
+this as a tighter “one-shot” PR-ready prompt (scope, components, API routes, storage/caching, and deployment
+
+===
+
+Yes, it is possible to link notes from a repository directly to your Obsidian vault. Because an Obsidian
+vault is essentially just a folder on your computer, there are several ways to integrate your repo notes 
+depending on whether you want to sync them or just link to them. 
+
+1. The Sync Method (Best for Editing)
+The most common way is to turn your repository folder into an Obsidian vault or move your vault inside the
+repository. This allows you to edit notes in Obsidian and have those changes trackable via Git. 
+
+Obsidian Git Plugin: Install the Obsidian Git community plugin. This plugin lets you automatically pull,
+commit, and push your notes to a remote repository (like GitHub or GitLab) directly from the Obsidian
+interface. 
+
+Setup:
+Initialize your vault folder as a Git repository (or clone an existing one into your vault).
+Use the plugin to set an auto-backup interval (e.g., every 5 minutes) to ensure your notes are always synced. 
+
+2. The External Linking Method (Best for Reference)
+If you don't want the notes to live inside your vault, you can link to them as external files using 
+standard Markdown syntax.
+Standard Link: Use the file:/// protocol followed by the absolute path to your note:
+[Project Note](<file:///C:/path/to/your/repo/note.md>).
+Plugins for External Files: You can use specialized plugins like External File Linker or External File
+Embed and Link. These allow you to embed or link files from outside your vault more easily, often supporting
+relative paths so the links don't break if you move the vault. 
+
+ +3
+3. Symbolic Links (Advanced)
+On macOS or Linux, you can create a "symlink" (symbolic link) from a folder in your repository to a folder
+inside your Obsidian vault. Obsidian will treat the symlinked folder as if it were natively part of the vault,
+allowing you to view and edit those repository notes without moving them. 
+Pro Tip: If you choose to sync your entire vault with Git, make sure to add .obsidian/ to your .gitignore
+file if you don't want your workspace settings (like open tabs) to sync across all devices. 
+
+Would you like a guide on configuring the .gitignore file for an Obsidian-Git setup?

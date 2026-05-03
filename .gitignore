@@ -1,0 +1,6 @@
+.git.backup-*
+node_modules
+.vercel
+dist
+build
+.env*

@@ -1,0 +1,117 @@
+2. Local Growth with Claude CLI
+To develop each repo separately while maintaining the monorepo structure, use Claude CLI (claude) with localized context files.
+
+Isolated Context: Place a CLAUDE.md file in each sub-directory (e.g., apps/powerstarter/CLAUDE.md).
+Root CLAUDE.md: Define monorepo build commands (e.g., pnpm build).
+App-specific CLAUDE.md: Define local test commands and architectural patterns for just that app.
+
+The "Claude Workflow":
+cd apps/powerstarter && claude: Start a session focused only on the portfolio logic.
+Use /plan to map out the API handler without touching the Unity code.
+Run /commit within the sub-directory. Claude CLI will intelligently draft a commit message based on local changes.
+Global Integration: Periodically run claude from the root directory to perform cross-repo audits or update the shared Prisma schema.
+
+3. Seamless Monorepo Architecture
+To make the repos "talk" to each other without friction, follow these structural rules:
+Component	Responsibility	Shared Link
+packages/db	Holds schema.prisma and exports a Singleton Prisma Client.	All apps import from @repo/db.
+packages/ui	Shared design tokens (colors, icons) based on RootPlanner states.	Used by Powerstarter web.
+apps/powerstarter	Hosts the API Handlers that Unity also calls.	Acts as the central gateway.
+
+Procedural Implementation Steps
+Initialize the Shared DB
+In packages/db, define your schema with provider = "prisma-client-js" and a custom output path so all apps can find the generated types easily.
+Build the Sync API
+Create a route in Next.js that accepts POST requests from the RootPlanner. Use a Zod schema (shared in packages/validation) to ensure the BMS data is valid before it hits the database.
+Unity Integration
+Configure Unity to call the powerstarter API endpoints using UnityWebRequest. Since the logic is shared in the monorepo, you can export your TypeScript types as a JSON reference for Unity's C# classes to match.
+
+Would you like the specific terminal commands to set up this packages/db singleton so your apps can start sharing the Prisma client immediately?
+
+===
+
+https://kornelius.dev
+
+=== 
+
+https://github.com/Xiashangning/BigSurface/issues/143#issue-4244439121
+
+===
+
+what do i need to run all the repo's inside the android emulator and tweak it to my unity game setup, until reaching beta version and 
+get google store developer access and publish to the android store?
+
+To move from your current monorepo setup to a published Android app using your PC as the "Command Center," you need to bridge your BMS/Powerstarter logic with the Unity Android pipeline.
+1. Running the Monorepo & Emulator Together
+Since you are using your PC, you can host the entire backend and the emulator on one machine.
+Host the Backend: Run your pnpm dev or Coolify locally on your PC. Your BMS and Powerstarter will be live at localhost:3001.
+The Emulator "Bridge": Install Android Studio and create a "Virtual Device".
+Networking Tip: Inside the Android emulator, localhost refers to the emulator itself. To talk to your PC's monorepo, use the special IP 10.0.2.2 (e.g., http://10.0.2).
+Build the APK: In Unity, go to File > Build Settings, switch the platform to Android, and click Build and Run. Unity will push the app directly into your running emulator. 
+
+2. Tweaking for Unity-Android Beta
+Before reaching Beta, you must satisfy Google’s technical requirements in Unity's Player Settings: 
+YouTube
+YouTube
+Scripting Backend: Change from Mono to IL2CPP.
+Architecture: Enable ARM64 (Google Play no longer accepts 32-bit only apps).
+Keystore: Create a new Keystore (found under Publishing Settings). This is your digital signature—never lose this file, or you cannot update your app. 
+
+3. Publishing to the Google Play Store
+Once your app is ready for Beta, follow these steps to get into the store:
+Developer Account: Register at the Google Play Console.
+Cost: A one-time $25 USD fee. No annual renewals.
+New Requirement (2024): You must verify that you have access to a physical Android device for testing to complete account verification.
+App Format: Export your game as an Android App Bundle (.aab) instead of an APK for the final store upload.
+Beta/Internal Testing: Start with an Internal Testing release in the Play Console. You can invite up to 100 testers using their email addresses to download the app before it goes public.
+Store Listing: You will need to provide a Privacy Policy URL (you can host this on your Powerstarter portal), high-res icons, and screenshots. 
+
+Summary of Costs & Tools
+Component 	Requirement	Cost
+PC Host	Windows/Linux (16GB RAM recommended)	$0 (Existing)
+Developer Fee	Google Play Console Account	$25 (One-time)
+IDE/Engine	Unity + Android Studio	$0 (Free/Personal)
+Server/Host	Coolify or Local Node.js	$0 (Self-hosted)
+Pro-Tip: Use the Unity Play Games Plugin if you want to link your BMS Achievements directly to the Google Play Games achievement system. 
+
+Should I help you write the Unity C# script that connects to the 10.0.2.2 address to start testing your first achievement in the emulator?
+
+===
+
+(It is intented to make the unity game run on the BMS Backend/RootJournal feed on the web browser aswell)
+
+>>>
+
+This is the ultimate "Integration Level" strategy: One Engine, Two Frontends. By running the Unity game directly inside the Powerstarter (BMS) web browser, you create a seamless, real-time connection between your technical metrics and the 3D world.
+To achieve this, you will use Unity WebGL alongside your Android build.
+
+1. The Architecture: "The Hosted 3D Feed"
+Since the BMS (RootPlanner) is the host, it will serve the Unity WebGL files as part of the Powerstarter website.
+Android Build: For the "Hand Terminal" experience and Google Play.
+WebGL Build: For the "RootJournal" web feed.
+
+2. How to "Plug" Unity into the Web Browser Feed
+Use this prompt to have Copilot/Claude bridge the gap:
+Task: 
+
+"Configure the Unity WebGL integration for the Powerstarter monorepo.
+Requirements:
+Unity-to-JS Bridge: Create a JSLib plugin in Unity that allows the game to "listen" to the BMS SSE Stream from the browser.
+BmsPost Component Update: Modify the BmsPost.tsx in apps/powerstarter to include a UnityContainer component. This component should load the WebGL instance when an achievement is viewed.
+Live Sync: When the RootPlanner triggers an achievement, the Web UI must send a message to Unity (using unityInstance.SendMessage()) to trigger a specific 3D animation or "Turning Point" effect.
+Hosting: Configure the BMS host to serve the Unity build folder from apps/powerstarter/public/unity-build."
+
+3. Benefits of the Browser-Integrated Game:
+Instant Verification: You don't need to wait for an Android compile. You change code in the monorepo, refresh the browser, and see the 3D game reacting to the BMS data immediately.
+Unified Logic: Both your Achievement Cards and your 3D Game use the exact same AchievementID coming from @trt/logic.
+"Scannable" Proof: Anyone visiting your portfolio URL can see the live 3D game running and interacting with the RootJournal.
+
+4. Technical Hurdles to Watch Out For:
+Memory Management: WebGL in a browser is more memory-sensitive than an Android app. You’ll need to optimize your Unity assets for the web.
+CORS: Ensure your BMS host allows the Unity WebGL build to make requests to the /api/bms/push endpoints.
+Your Final "Startup Flagship" Flow:
+BMS Hardware → Sends data.
+RootPlanner (PC/Coolify) → Processes achievement logic.
+Powerstarter (Web) → Updates the Insta-feed.
+Unity (Embedded in Browser) → Detects the update and plays the 3D achievement animation.
+Should we generate the "Unity-to-JavaScript" bridge code to let your web browser tell the game when a milestone has been reached?

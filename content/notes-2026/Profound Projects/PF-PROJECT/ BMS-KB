@@ -1,0 +1,62 @@
+Profound BMS KB
+The ProfoundProjects architecture integrates a static JavaScript time planner with Obsidian through local
+storage, data structures, and markdown exports for tasks, goals, and events [1]. It uses a client-side conversion 
+pipeline to transform planner data
+into structured Markdown with YAML metadata, enabling visualization within the Obsidian Projects plugin [1].
+To bridge the planner's JavaScript logic and markdown data, use the prompt provided in the response to configure 
+Obsidian Copilot for schema mapping and synchronization, or for more details on implementing the system, review 
+the documentation in
+Obsidian Copilot.
+
+===
+
+In order to make this work should we have it as a monorepo in order to intercombine two repo's and have 1 main repo
+that will be deployed, while second is doing the notes an synchronisation engine between github project (for our main
+time management) and obsidian as data note output rendering?
+
+>>>
+
+Using a Monorepo is the most architecturally sound approach for this setup. It allows you to maintain the "Time Planner"
+(the logic/UI) and the "2026 Vault" (the data) as a single unit of truth while deploying them to different targets
+(Vercel for the UI, Obsidian for the notes).
+Here is how you should structure it and why:
+1. The Monorepo Structure
+You can use Git Submodules or simply move the folders into a single root repository.
+text
+/ProfoundProjects-Suite (Main Repo)
+├── /time-planner-app       # The cloned JS/HTML logic (deployed to Vercel)
+│   ├── index.html
+│   └── script.js
+├── /obsidian-2026-vault    # Your notes and output (Obsidian data)
+│   ├── Events/
+│   ├── Goals/
+│   └── .obsidian/          # Plugin settings & Projects config
+└── /sync-engine            # (Optional) Node/Python scripts for automation
+Use o código com cuidado.
+2. Why this solves your problem:
+Unified Deployment: You can deploy the /time-planner-app folder to Vercel/GitHub Pages while the /obsidian-2026-vault 
+remains a data directory.
+Path Consistency: The "Export System" in your architecture needs to know where to save files. In a monorepo, the script 
+can use relative paths (e.g., ../obsidian-2026-vault/Daily/) to find where to write the markdown notes.
+Atomic Commits: When you update a feature in the Time Planner that changes the metadata schema (YAML), you can commit 
+the code change and the updated notes in the same Git commit.
+3. The Synchronization Engine Logic
+Since your architecture is currently "Client-side only" (LocalStorage), the monorepo acts as the bridge:
+Input: You use the browser UI to plan your time.
+Processing: You trigger the Export Flow defined in your architecture.
+Output: Instead of downloading a ZIP and manually moving it, a monorepo allows you to eventually use a small Node.js 
+script (or a Github Action) to write the JSON data directly into the obsidian-2026-vault folder.
+4. Integration with GitHub Projects
+By using a monorepo, you can use GitHub Actions as your "Sync Engine":
+GitHub Project → Obsidian: An Action can trigger when a GitHub Project card moves, creating/updating a .md file in 
+your obsidian-2026-vault folder automatically.
+Obsidian → GitHub Project: When you push your notes from Obsidian (using the Git plugin), a GitHub Action can parse
+the YAML and update your GitHub Project board.
+Recommendation
+Yes, move to a monorepo.
+Create a new repo called ProfoundProjects-Suite.
+Add your Time Planner code into a web-app folder.
+Add your 2026 notes into a vault folder.
+Point your Obsidian Projects plugin to the vault subfolder.
+Should I provide a GitHub Action workflow script that can automate the sync between 
+your GitHub Project boards and your Obsidian folder?

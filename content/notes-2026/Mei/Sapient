@@ -1,0 +1,48 @@
+write as prompt for our obsidian fault named Sapient KB (knowledgebase).
+And hosted on www.Sapient.lighting. We need it to be easy and beautyfully 
+smart > It has to be a star universe environment, and get the fundance first
+for lottie svg transitioning. It has to be crystal clear. We have to use claude 
+styling and figma AI and and/or higgsfield.ai to compelte the best results possible.
+To achieve a "Star Universe" environment with Lottie transitions and Claude-level
+clarity, you need a high-level system prompt. This prompt is designed for an AI
+(like Claude) to generate the CSS/Code architecture for your Sapient KB.
+🌌 The Sapient KB Master Prompt
+"Act as a Senior UI/UX Engineer and Creative Technologist. Design the web 
+architecture for Sapient KB, an Obsidian-based knowledge base hosted at www.
+sapient.lighting.
+The Vision:
+
+Aesthetic: A 'Star Universe' environment. The background should be a deep,
+interactive space canvas with subtle parallax starfields and nebula glows.
+Logic: 'Beautifully Smart.' Use the minimalist, high-contrast clarity of 
+Claude’s UI combined with the fluid, organic motion found in Higgsfield.ai.
+The 'Fundance': Prioritize motion first. Use Lottie SVG animations for page
+transitions and hover states to create a 'liquid-to-starfield' feel.
+Functional Requirements:
+Crystal Clear Typography: Use a high-end sans-serif (Inter or Geist) with 
+perfect kerning and white space.
+IP Location Module: Integrate a glassmorphic header widget that displays 
+the user's current city/IP status in a glowing 'stardust' font.
+WhatsApp Meeting Portal: A floating action button (FAB) that triggers a 
+Lottie animation of a pulsing star before opening the WhatsApp link.
+Credit QR Vault: A secure, neon-bordered section for credit account QR 
+details, utilizing Figma-style rounded aesthetics.
+Technical Stack Guidance:
+Use Quartz 4.0 (TypeScript) as the base for the Obsidian integration.
+Implement Tailwind CSS for the 'Claude' styling (clean borders, 
+subtle shadows).
+Inject Three.js or Canvas for the interactive star universe background.
+Optimize all Lottie JSON files for high-speed loading.
+Output: Provide the custom.scss for the starfield theme and the Component.
+tsx code for the IP and WhatsApp integrations."
+🛠️ Execution Strategy for Sapient.lighting
+Lottie SVG: Go to LottieFiles and search for "Constellation" or "Pulse.
+" Use these for your "Fundance" (the transition between clicking a note
+and the note appearing).
+Claude Styling: Stick to a palette of #000000 (deep space), #FFFFFF (text),
+and a single accent color like #00F0FF (Sapient Cyan).
+Higgsfield Integration: Use Higgsfield to generate a 5-second cinematic space v
+ideo loop. Set this as your background-video layer behind your Obsidian text.
+Figma AI: Import your vault's graph view into Figma to design the "Credit QR" 
+card layout, then export the SVG code directly into your Quartz components.
+Would you like me to generate the specific CSS code for that 'Star Universe' background now?

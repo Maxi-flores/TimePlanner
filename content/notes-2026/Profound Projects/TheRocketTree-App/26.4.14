@@ -1,0 +1,239 @@
+Governance > Decisions > Architecture > Orchastrate 
+Prompt commit for next builds into Rootjournal 
+Manage every build on remote > Vibeyard > Commit and keep task log 
+Design tokens > JSON (create a new package: packages/tokens) > mapping to project 
+Connector endpoint > platform refinement> Standardized formats (like W3C) 
+by adding a new output configuration to Style Dictionary > You can easily add more platforms (iOS, Android)  
+The "Adapter" Pattern (in packages/logic) - Define Interfaces in logic and inject the Implementation from the apps/.Example: logic defines AuthStore, but powerstarter (Web) passes it a Browser-storage implementation, while a future Mobile App passes it a Secure-Store implementation.  
+Dependency Injection for Services - a way to "plug" services into your UI components. A React component in packages/ui shouldn't know how to call the API; it should just use a hook.  
+Edge-Compatible Contracts (packages/contracts) - Ensure your contracts (Zod schemas) are strictly separated from your db (Prisma models). This allows your Frontend to validate data before it even hits the heavy Database layer, saving execution time and cost 
+Automated "Internal" Versioning - As the repo grows, apps/trt might need logic version 1.0, while powerstarter is ready for 2.0. The Need: Managing manual version bumps in package.json across 10 packages is a nightmare. The Fix: Add Changesets. It automates the versioning and changelog generation for your internal packages, ensuring turbo always knows exactly what changed and what to rebuild. 
+ 
+[Repo branches for whole platform setup]  
+Current Profound-Projects with Claude CLI: 
+(Mono) 
+repo 
+TheRocketTree 
+Unity  
+3D Engineering – Game interface and design by architecture. /  
+Houdini + Unity  
+ 
+ 
+Website 
+Run game on TheRocketTree.io 
+React + vite + tailwind  
+
+
+App 
+Run game on IOS/Android platform configurated 
+Xcode + Android Studio 
+ 
+Powerframe 
+CRM 
+Run CRM as extension on web project/business portfolio 
+TRT/CRM.dev 
+ 
+ 
+BMS 
+Run BMS as internal game monitor/project feed for portfolio 
+TRT/BMS.dev 
+ 
+ 
+Website 
+Resemble as showcase for web/app extension.dev 
+React + vite + tailwind  
+ 
+Powerstarter 
+App 
+Run feed on IOS/Android platform configurated 
+Xcode + Android Studio  
+ 
+ 
+Website 
+Home + portal extension to TRT.io 
+Azure Static Web Apps (PS PF) 
+ 
+ 
+User Hub 
+User/game generated feed (business/project portfolio) 
+Xcode + Android Studio  
+ 
+Azure 
+Azure AI 
+Azure powered by Data & AI > Cost & budget sync system 
+Azure AI Search (RAG) $75/pm  
+ 
+(Mono) 
+repo 
+ConceptShop 
+Viewer (3D STL) 
+Product on catalogue display 
+STL Loader  + Next.js 
+ 
+ 
+Website 
+Run product on API routed E-commerce 
+React + vite + tailwind  
+ 
+ 
+App 
+AI-Managed Organization (AMO) / Microsoft App functions 
+Azure Static Web Apps 
+ 
+Powerframe 
+CRM/BMS 
+Run CRM/BMS as private/multi-tenant store-monitor 
+Microsoft Power App 
+Cost Management Query API 
+ 
+ 
+Website 
+AWS/Firebase 
+React + vite + tailwind  
+ 
+BI/DI  
+App 
+Run stock on Amazon  
+
+AWS+ Pixel  
+
+
+ 
+2x Website 
+Home + portal 
+React + vite + tailwind 
+ 
+(Mono) 
+
+repo 
+WOMmedia/ 
+KVK
+
+Viewer (3D STL) 
+Product on catalogue display 
+STL Loader  + Next.js  
+ 
+ 
+Website 
+Certified business & docs page 
+React + vite + tailwind  
+ 
+ 
+App 
+AI-Managed Organization (AMO) / Microsoft App functions 
+Azure Portal + Budgets 
+ 
+Powerframe 
+CRM 
+Run CRM as extension on web project/business portfolio 
+Microsoft Power App 
+ 
+ 
+BMS 
+Run BMS as internal integrated budget mapper 
+Cost Management Query API 
+ 
+ 
+Website 
+Resemble as showcase for web/app extension 
+React + vite + tailwind   
+ 
+M3D/F3D 
+App 
+Run feed on IOS/Android platform configurated 
+Xcode + Android Studio 
+ 
+ 
+2x Website 
+home + portal 
+React + vite + tailwind 
+ 
+ 
+Tool (concept) 
+360 RIM" / ROS 2 > 6K / 8K = 2027 
+(30K ipv 500K) 
+ 
+Azure 
+Azure portfolio 
+Azure powered LLM > Cost-fetching function 
+Microsoft Azure + IoT hub 
+ROS Driver + ROS 2  
+
+Microsoft > AZ-204 
+
+[Generic Data & 3D Models] 
+Unity:  
+ 
+TheRocketTree 
+Unity  
+Game prompts must meet Zod 
+Houdini fx nodes 
+ 
+ 
+ 
+Prisma scheme functions, for running game trigger-actions engine. 
+Unity 
+ 
+ 
+ 
+Platform – Game hosting and interface infrastructure/user data.  
+Azure Cosmos DB 
+ 
+ConceptShop 
+Powerframe 
+STL 2 cloud data bank 
+AI 
+ 
+ 
+STL Loader  
+Gimmick or product render tool (Luma.AI) 
+Tree.js 
+ 
+ 
+Website 
+Resemble as showcase for web/app platform.dev 
+Next.js 
+ 
+Mucho3D 
+App 
+Run scanned feed on IOS/Android real-time configurated 
+Microsoft Azure + IoT hub 
+ 
+ 
+Website 
+Pointcloud 2 cloud data bank 
+Azure IoT Hub + ROS Driver 
+ 
+ 
+Website 
+Project generated feed/Data bank Microsoft > AZ-204  
+
+Azure 
+Azure portfolio 
+Azure secure 'connectors' connectivity  
+Microsoft > AZ-204  
+ 
+
+Recommended UI/UX Tooling : 
+Penpot export tool - Locofy.ai: Can help convert Penpot designs directly into React code, including token integration.   
+Penpot design tool – for Style Dictionary or Amazon Theo to transform those JSON files into platform-specific outputs:  
+Figma design tool - Tokens Studio for FigmaAllows designers to push/pull tokens from GitHub to Figma.Style DictionaryConverts your JSON tokens into CSS, JS, and iOS/Android formats. 
+Example - Would you like to see a sample style-dictionary.config.js that demonstrates how to generate both CSS for React and USS for Unity from a single Penpot JSON?  
+Shared "Design Tokens" (in packages/ui) For a perfect cycle between a Vite web app and a potential mobile/desktop shell: The Need: Hardcoded Tailwind classes or CSS will break on non-web platforms. The Fix: Export a theme.ts (JSON-like) from ui containing colors, spacing, and typography. Use these tokens to generate your CSS for Web and your Objects for Native/Unity. 
+Incorporating a Design Token Dictionary is the final step to "closing the loop" 
+
+ 
+The "Perfect Cycle" Workflow 
+Design Side: Designers manage variables in Figma. 
+The Bridge: Use a plugin like Tokens Studio or Figma's native Variables API to sync these values directly to your packages/tokens folder via a GitHub PR. 
+Automated Build: When the JSON changes, Turbo triggers a build of packages/tokens. 
+Propagation: packages/ui and all your apps/ immediately inherit the new branding or spacing changes upon the next deploy. 
+  
+ 
+ 
+tokens.css / tokens.scss for the Web apps. 
+tokens.ts for your React components.  
+tokens.json for Unity/Native apps. 
+ 
+ 
+Would you like to see a sample tokens.json structure that maps to your current logic and ui packages? 

@@ -1,0 +1,71 @@
+You are working inside a pnpm + turborepo monorepo.
+
+Goal:
+Add a SIMPLE governance system across the entire repository without overengineering.
+
+Requirements:
+
+1. At the root of the repo:
+Create a file:
+docs/DECISIONS.md
+
+Content:
+
+# Decisions Log
+
+This file tracks important architectural and structural decisions.
+
+Process:
+- When making a system-level change, add a short entry here
+- Keep entries concise and human-readable
+- Do NOT overcomplicate with ADR formats
+
+Template:
+
+---
+
+## [XXX] <Short Title>
+Date: <YYYY-MM-DD>
+
+Reason:
+<Why this decision is needed>
+
+Decision:
+<What was decided>
+
+Impact:
+- <affected package/app>
+- <affected package/app>
+
+---
+
+2. For EACH workspace (all apps/* and packages/*):
+
+Ensure each has an ARCHITECTURE.md file (create if missing).
+
+At the bottom of each ARCHITECTURE.md, append:
+
+---
+
+## Governance
+
+This workspace follows the root-level governance model:
+
+- Global decisions are tracked in `/docs/DECISIONS.md`
+- Do NOT introduce architecture changes locally without updating the decisions log
+- Keep logic aligned with the monorepo architecture
+
+---
+
+3. Do NOT modify existing architecture content, only append governance section if missing.
+
+4. Do NOT introduce ADR folders, templates, or complex systems.
+
+5. Keep everything minimal and readable.
+
+6. Show me:
+- files created
+- files modified
+- diff previews
+
+Then stop.
