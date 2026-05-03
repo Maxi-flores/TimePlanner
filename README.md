@@ -13,3 +13,13 @@ The short-term goal is to keep the app and notes cleanly separated. The longer-t
 ## Deployment
 
 The root `vercel.json` points Vercel at `apps/time-planner/index.html` so the moved static app can still deploy from the monorepo root.
+
+## Notes Index
+
+Generate the local notes index with:
+
+```bash
+node scripts/index-notes.js
+```
+
+The script reads note-like text files from `content/notes-2026` and writes `data/notes-index.json`. It does not modify note files. The index is intended as the first bridge for the planner app to display notes by month, exact date, and project.

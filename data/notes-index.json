@@ -1,0 +1,357 @@
+{
+  "generatedAt": "2026-05-03T23:50:42.861Z",
+  "sourceRoot": "content/notes-2026",
+  "noteCount": 50,
+  "notes": [
+    {
+      "sourcePath": "content/notes-2026/April/Alfadenga",
+      "title": "Alfadenga",
+      "date": null,
+      "monthFolder": "April",
+      "projectName": null
+    },
+    {
+      "sourcePath": "content/notes-2026/April/Cambio de agenda",
+      "title": "Cambio de agenda",
+      "date": null,
+      "monthFolder": "April",
+      "projectName": null
+    },
+    {
+      "sourcePath": "content/notes-2026/April/Multi-ecosystem management",
+      "title": "Multi-ecosystem management",
+      "date": null,
+      "monthFolder": "April",
+      "projectName": null
+    },
+    {
+      "sourcePath": "content/notes-2026/April/portaldasfinancas",
+      "title": "portaldasfinancas",
+      "date": null,
+      "monthFolder": "April",
+      "projectName": null
+    },
+    {
+      "sourcePath": "content/notes-2026/Mei/Bulking",
+      "title": "Bulking",
+      "date": null,
+      "monthFolder": "Mei",
+      "projectName": null
+    },
+    {
+      "sourcePath": "content/notes-2026/Mei/Cambio de agenda",
+      "title": "Cambio de agenda",
+      "date": null,
+      "monthFolder": "Mei",
+      "projectName": null
+    },
+    {
+      "sourcePath": "content/notes-2026/Mei/MSZ",
+      "title": "MSZ",
+      "date": null,
+      "monthFolder": "Mei",
+      "projectName": null
+    },
+    {
+      "sourcePath": "content/notes-2026/Mei/Sapient",
+      "title": "Sapient",
+      "date": null,
+      "monthFolder": "Mei",
+      "projectName": null
+    },
+    {
+      "sourcePath": "content/notes-2026/Mei/Sentient",
+      "title": "Sentient",
+      "date": null,
+      "monthFolder": "Mei",
+      "projectName": null
+    },
+    {
+      "sourcePath": "content/notes-2026/Mei/TP - ES",
+      "title": "TP - ES",
+      "date": null,
+      "monthFolder": "Mei",
+      "projectName": null
+    },
+    {
+      "sourcePath": "content/notes-2026/Old/GGe - Odivelas",
+      "title": "GGe - Odivelas",
+      "date": null,
+      "monthFolder": null,
+      "projectName": null
+    },
+    {
+      "sourcePath": "content/notes-2026/Old/Motorgarage",
+      "title": "Motorgarage",
+      "date": null,
+      "monthFolder": null,
+      "projectName": null
+    },
+    {
+      "sourcePath": "content/notes-2026/Old/README.md",
+      "title": "README",
+      "date": null,
+      "monthFolder": null,
+      "projectName": null
+    },
+    {
+      "sourcePath": "content/notes-2026/Old/Sevilla",
+      "title": "Sevilla",
+      "date": null,
+      "monthFolder": null,
+      "projectName": null
+    },
+    {
+      "sourcePath": "content/notes-2026/Profound Projects/Bikerinstinct/26.4.25",
+      "title": "26.4.25",
+      "date": "2026-04-25",
+      "monthFolder": null,
+      "projectName": "Bikerinstinct"
+    },
+    {
+      "sourcePath": "content/notes-2026/Profound Projects/BV/CBR",
+      "title": "CBR",
+      "date": null,
+      "monthFolder": null,
+      "projectName": "BV"
+    },
+    {
+      "sourcePath": "content/notes-2026/Profound Projects/BV/MZ3",
+      "title": "MZ3",
+      "date": null,
+      "monthFolder": null,
+      "projectName": "BV"
+    },
+    {
+      "sourcePath": "content/notes-2026/Profound Projects/CM4/Print",
+      "title": "Print",
+      "date": null,
+      "monthFolder": null,
+      "projectName": "CM4"
+    },
+    {
+      "sourcePath": "content/notes-2026/Profound Projects/CSHOP/26.4.12",
+      "title": "26.4.12",
+      "date": "2026-04-12",
+      "monthFolder": null,
+      "projectName": "CSHOP"
+    },
+    {
+      "sourcePath": "content/notes-2026/Profound Projects/CSHOP/26.4.25 @",
+      "title": "26.4.25 @",
+      "date": "2026-04-25",
+      "monthFolder": null,
+      "projectName": "CSHOP"
+    },
+    {
+      "sourcePath": "content/notes-2026/Profound Projects/Dealinstinct/26.4.25",
+      "title": "26.4.25",
+      "date": "2026-04-25",
+      "monthFolder": null,
+      "projectName": "Dealinstinct"
+    },
+    {
+      "sourcePath": "content/notes-2026/Profound Projects/Examp. Developer Portfolio/WOM/26.4.11",
+      "title": "26.4.11",
+      "date": "2026-04-11",
+      "monthFolder": null,
+      "projectName": "Examp. Developer Portfolio"
+    },
+    {
+      "sourcePath": "content/notes-2026/Profound Projects/Examp. Developer Portfolio/WOM/26.4.25 @",
+      "title": "26.4.25 @",
+      "date": "2026-04-25",
+      "monthFolder": null,
+      "projectName": "Examp. Developer Portfolio"
+    },
+    {
+      "sourcePath": "content/notes-2026/Profound Projects/Flink3D/26.4.25 @",
+      "title": "26.4.25 @",
+      "date": "2026-04-25",
+      "monthFolder": null,
+      "projectName": "Flink3D"
+    },
+    {
+      "sourcePath": "content/notes-2026/Profound Projects/Fullstack dev/26.4.1",
+      "title": "26.4.1",
+      "date": "2026-04-01",
+      "monthFolder": null,
+      "projectName": "Fullstack dev"
+    },
+    {
+      "sourcePath": "content/notes-2026/Profound Projects/Fullstack dev/26.4.12",
+      "title": "26.4.12",
+      "date": "2026-04-12",
+      "monthFolder": null,
+      "projectName": "Fullstack dev"
+    },
+    {
+      "sourcePath": "content/notes-2026/Profound Projects/Fullstack dev/Temp",
+      "title": "Temp",
+      "date": null,
+      "monthFolder": null,
+      "projectName": "Fullstack dev"
+    },
+    {
+      "sourcePath": "content/notes-2026/Profound Projects/Mucho3D/26.4.25 @",
+      "title": "26.4.25 @",
+      "date": "2026-04-25",
+      "monthFolder": null,
+      "projectName": "Mucho3D"
+    },
+    {
+      "sourcePath": "content/notes-2026/Profound Projects/Parlar ES",
+      "title": "Parlar ES",
+      "date": null,
+      "monthFolder": null,
+      "projectName": null
+    },
+    {
+      "sourcePath": "content/notes-2026/Profound Projects/PF-PROJECT/ BMS-KB",
+      "title": " BMS-KB",
+      "date": null,
+      "monthFolder": null,
+      "projectName": "PF-PROJECT"
+    },
+    {
+      "sourcePath": "content/notes-2026/Profound Projects/PF-PROJECT/26.4.28",
+      "title": "26.4.28",
+      "date": "2026-04-28",
+      "monthFolder": null,
+      "projectName": "PF-PROJECT"
+    },
+    {
+      "sourcePath": "content/notes-2026/Profound Projects/PF-PROJECT/26.5.2",
+      "title": "26.5.2",
+      "date": "2026-05-02",
+      "monthFolder": null,
+      "projectName": "PF-PROJECT"
+    },
+    {
+      "sourcePath": "content/notes-2026/Profound Projects/PF-PROJECT/26.5.3 @",
+      "title": "26.5.3 @",
+      "date": "2026-05-03",
+      "monthFolder": null,
+      "projectName": "PF-PROJECT"
+    },
+    {
+      "sourcePath": "content/notes-2026/Profound Projects/PF-PROJECT/GH100 - Powerfull planning&tracking",
+      "title": "GH100 - Powerfull planning&tracking",
+      "date": null,
+      "monthFolder": null,
+      "projectName": "PF-PROJECT"
+    },
+    {
+      "sourcePath": "content/notes-2026/Profound Projects/Powerframe/26.4.11",
+      "title": "26.4.11",
+      "date": "2026-04-11",
+      "monthFolder": null,
+      "projectName": "Powerframe"
+    },
+    {
+      "sourcePath": "content/notes-2026/Profound Projects/Powerframe/26.4.25 @",
+      "title": "26.4.25 @",
+      "date": "2026-04-25",
+      "monthFolder": null,
+      "projectName": "Powerframe"
+    },
+    {
+      "sourcePath": "content/notes-2026/Profound Projects/Powerstarter Azure/26.4.10",
+      "title": "26.4.10",
+      "date": "2026-04-10",
+      "monthFolder": null,
+      "projectName": "Powerstarter Azure"
+    },
+    {
+      "sourcePath": "content/notes-2026/Profound Projects/Powerstarter Azure/26.4.11",
+      "title": "26.4.11",
+      "date": "2026-04-11",
+      "monthFolder": null,
+      "projectName": "Powerstarter Azure"
+    },
+    {
+      "sourcePath": "content/notes-2026/Profound Projects/Powerstarter Azure/26.4.25 @",
+      "title": "26.4.25 @",
+      "date": "2026-04-25",
+      "monthFolder": null,
+      "projectName": "Powerstarter Azure"
+    },
+    {
+      "sourcePath": "content/notes-2026/Profound Projects/Sapient/26.4.16",
+      "title": "26.4.16",
+      "date": "2026-04-16",
+      "monthFolder": null,
+      "projectName": "Sapient"
+    },
+    {
+      "sourcePath": "content/notes-2026/Profound Projects/Sapient/26.4.25 @",
+      "title": "26.4.25 @",
+      "date": "2026-04-25",
+      "monthFolder": null,
+      "projectName": "Sapient"
+    },
+    {
+      "sourcePath": "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.10",
+      "title": "26.4.10",
+      "date": "2026-04-10",
+      "monthFolder": null,
+      "projectName": "TheRocketTree-App"
+    },
+    {
+      "sourcePath": "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.11",
+      "title": "26.4.11",
+      "date": "2026-04-11",
+      "monthFolder": null,
+      "projectName": "TheRocketTree-App"
+    },
+    {
+      "sourcePath": "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.12",
+      "title": "26.4.12",
+      "date": "2026-04-12",
+      "monthFolder": null,
+      "projectName": "TheRocketTree-App"
+    },
+    {
+      "sourcePath": "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.13",
+      "title": "26.4.13",
+      "date": "2026-04-13",
+      "monthFolder": null,
+      "projectName": "TheRocketTree-App"
+    },
+    {
+      "sourcePath": "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.14",
+      "title": "26.4.14",
+      "date": "2026-04-14",
+      "monthFolder": null,
+      "projectName": "TheRocketTree-App"
+    },
+    {
+      "sourcePath": "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.17",
+      "title": "26.4.17",
+      "date": "2026-04-17",
+      "monthFolder": null,
+      "projectName": "TheRocketTree-App"
+    },
+    {
+      "sourcePath": "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.25 @",
+      "title": "26.4.25 @",
+      "date": "2026-04-25",
+      "monthFolder": null,
+      "projectName": "TheRocketTree-App"
+    },
+    {
+      "sourcePath": "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.9",
+      "title": "26.4.9",
+      "date": "2026-04-09",
+      "monthFolder": null,
+      "projectName": "TheRocketTree-App"
+    },
+    {
+      "sourcePath": "content/notes-2026/README.md",
+      "title": "README",
+      "date": null,
+      "monthFolder": null,
+      "projectName": null
+    }
+  ]
+}
