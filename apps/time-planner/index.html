@@ -10,29 +10,50 @@
     :root {
       --bg:        #0f172a;
       --surface:   #1e293b;
+      --surface-glass: rgba(30, 41, 59, .74);
       --surface2:  #273449;
       --border:    #334155;
       --accent:    #6366f1;
+      --accent-2:  #38bdf8;
       --accent2:   #818cf8;
       --success:   #22c55e;
       --warn:      #f59e0b;
       --danger:    #ef4444;
       --text:      #e2e8f0;
+      --muted:     #94a3b8;
       --text-muted:#94a3b8;
       --radius:    8px;
+      --radius-xl: 22px;
+      --gradient-1:#111827;
+      --gradient-2:#312e81;
+      --shadow-soft: 0 24px 70px rgba(0,0,0,.34);
       --font:      'Segoe UI', system-ui, sans-serif;
     }
     body {
       font-family: var(--font);
-      background: var(--bg);
+      background:
+        radial-gradient(circle at 18% 8%, color-mix(in srgb, var(--gradient-2) 42%, transparent), transparent 30%),
+        radial-gradient(circle at 82% 18%, color-mix(in srgb, var(--accent-2) 22%, transparent), transparent 28%),
+        linear-gradient(145deg, var(--gradient-1), var(--bg) 45%, #020617);
       color: var(--text);
       min-height: 100vh;
+    }
+    body.compact-mode main { padding-top: 12px; }
+    body.compact-mode .card,
+    body.compact-mode .orchestrator-panel,
+    body.compact-mode .level-map-section,
+    body.compact-mode .notes-column { padding: 10px; }
+    body.reduced-motion *, body.reduced-motion *::before, body.reduced-motion *::after {
+      transition: none !important;
+      animation: none !important;
+      scroll-behavior: auto !important;
     }
 
     /* ─── Layout ────────────────────────────────────────── */
     header {
-      background: var(--surface);
-      border-bottom: 1px solid var(--border);
+      background: rgba(15,23,42,.72);
+      border-bottom: 1px solid rgba(148,163,184,.22);
+      backdrop-filter: blur(18px);
       padding: 14px 24px;
       display: flex;
       align-items: center;
@@ -72,10 +93,12 @@
 
     /* ─── Shared helpers ────────────────────────────────── */
     .card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
+      background: var(--surface-glass);
+      border: 1px solid rgba(148,163,184,.22);
+      border-radius: var(--radius-xl);
       padding: 16px;
+      box-shadow: var(--shadow-soft);
+      backdrop-filter: blur(18px);
     }
     .btn {
       display: inline-flex;
@@ -94,6 +117,34 @@
     .btn-success  { background: var(--success);  color: #fff; }
     .btn-danger   { background: var(--danger);   color: #fff; }
     .btn-ghost    { background: var(--surface2); color: var(--text); }
+    .settings-shell {
+      position: relative;
+    }
+    .settings-menu {
+      display: none;
+      position: absolute;
+      right: 0;
+      top: calc(100% + 8px);
+      width: min(340px, 92vw);
+      background: var(--surface-glass);
+      border: 1px solid rgba(148,163,184,.24);
+      border-radius: var(--radius-xl);
+      padding: 14px;
+      box-shadow: var(--shadow-soft);
+      backdrop-filter: blur(18px);
+      z-index: 250;
+    }
+    .settings-menu.open { display: block; }
+    .settings-grid { display:grid; gap:10px; }
+    .global-project-bar {
+      display:flex;
+      gap:10px;
+      align-items:end;
+      justify-content:space-between;
+      margin-bottom:16px;
+      flex-wrap:wrap;
+    }
+    .global-project-bar select { width:min(360px, 100%); }
     input, select, textarea {
       background: var(--surface2);
       border: 1px solid var(--border);
@@ -281,6 +332,23 @@
     .milestone-card .ms-title { font-size: .88rem; font-weight: 600; }
     .milestone-card .ms-date  { font-size: .72rem; color: var(--text-muted); margin-top: 3px; }
     .milestone-card .ms-notes { font-size: .78rem; color: var(--text-muted); margin-top: 6px; }
+    .generated-milestones {
+      margin: 16px 0 22px;
+    }
+    .generated-milestone-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 12px;
+    }
+    .generated-milestone-card {
+      background: rgba(15,23,42,.52);
+      border: 1px solid rgba(148,163,184,.22);
+      border-radius: var(--radius-xl);
+      padding: 14px;
+      box-shadow: 0 14px 34px rgba(0,0,0,.22);
+    }
+    .generated-milestone-card strong { display:block; margin-bottom: 6px; }
+    .generated-milestone-card .actions { margin-top: 8px; color: var(--text-muted); font-size: .76rem; }
     .milestone-card .ms-actions {
       position: absolute; top: 8px; right: 8px;
       display: none; gap: 4px;
@@ -310,10 +378,12 @@
       align-items: start;
     }
     .orchestrator-panel {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
+      background: var(--surface-glass);
+      border: 1px solid rgba(148,163,184,.22);
+      border-radius: var(--radius-xl);
       overflow: hidden;
+      box-shadow: var(--shadow-soft);
+      backdrop-filter: blur(18px);
     }
     .orchestrator-panel h3 {
       font-size: .78rem;
@@ -804,6 +874,55 @@
       color: var(--text-muted);
       font-size: .82rem;
     }
+    .note-browser-grid {
+      display: grid;
+      grid-template-columns: minmax(240px, .34fr) 1fr;
+      gap: 14px;
+      margin-top: 16px;
+    }
+    .note-browser-controls {
+      background: var(--surface-glass);
+      border: 1px solid rgba(148,163,184,.22);
+      border-radius: var(--radius-xl);
+      padding: 14px;
+      box-shadow: var(--shadow-soft);
+    }
+    .note-list-panel {
+      background: var(--surface-glass);
+      border: 1px solid rgba(148,163,184,.22);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      box-shadow: var(--shadow-soft);
+    }
+    .note-list-item {
+      display:block;
+      width:100%;
+      text-align:left;
+      background:transparent;
+      border:0;
+      border-bottom:1px solid rgba(148,163,184,.16);
+      color:var(--text);
+      padding:12px 14px;
+      cursor:pointer;
+    }
+    .note-list-item:hover { background: rgba(56,189,248,.08); }
+    .note-drawer {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: min(520px, 96vw);
+      background: var(--surface-glass);
+      border-left: 1px solid rgba(148,163,184,.24);
+      box-shadow: var(--shadow-soft);
+      backdrop-filter: blur(22px);
+      z-index: 260;
+      transform: translateX(100%);
+      transition: transform .2s ease;
+      padding: 20px;
+      overflow-y: auto;
+    }
+    .note-drawer.open { transform: translateX(0); }
     .submit-note-panel {
       background: var(--surface);
       border: 1px solid var(--border);
@@ -841,6 +960,8 @@
       .roadmap-container { flex-direction: column; }
       .day-panel { width: 100%; }
       .notes-summary, .notes-layout { grid-template-columns: 1fr; }
+      .note-browser-grid { grid-template-columns: 1fr; }
+      .note-drawer { width:100%; }
       .orchestrator-grid { grid-template-columns: 1fr; }
       .project-board-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .board-shell { grid-template-columns: 1fr; }
@@ -882,9 +1003,30 @@
     <button class="tab-btn" onclick="switchTab('goals', this)">🎯 Goals</button>
     <button class="tab-btn" onclick="switchTab('calculator', this)">🧮 Calculator</button>
   </div>
+  <div class="settings-shell">
+    <button class="btn btn-ghost" onclick="toggleSettingsMenu()">Settings</button>
+    <div class="settings-menu" id="settings-menu">
+      <div class="settings-grid">
+        <div><label>Gradient color 1</label><input type="color" id="setting-gradient-1" onchange="saveSettingsFromUI()" /></div>
+        <div><label>Gradient color 2</label><input type="color" id="setting-gradient-2" onchange="saveSettingsFromUI()" /></div>
+        <div><label>Accent color</label><input type="color" id="setting-accent" onchange="saveSettingsFromUI()" /></div>
+        <label><input type="checkbox" id="setting-compact" onchange="saveSettingsFromUI()" style="width:auto;" /> Compact mode</label>
+        <label><input type="checkbox" id="setting-motion" onchange="saveSettingsFromUI()" style="width:auto;" /> Reduced motion</label>
+      </div>
+    </div>
+  </div>
 </header>
 
 <main>
+  <div class="global-project-bar card">
+    <div>
+      <label for="global-project-select">Selected project</label>
+      <select id="global-project-select" onchange="setSelectedProject(this.value)">
+        <option value="">All projects</option>
+      </select>
+    </div>
+    <span class="badge badge-accent" id="global-project-status">Unified dashboard model</span>
+  </div>
 
   <!-- ══════════════ CALENDAR VIEW ══════════════ -->
   <div id="view-calendar" class="view active">
@@ -961,6 +1103,10 @@
         </div>
       </div>
     </div>
+    <div class="generated-milestones orchestrator-panel">
+      <h3>Auto Milestones</h3>
+      <div class="generated-milestone-list" id="generated-milestone-list"></div>
+    </div>
     <div class="roadmap-container" id="roadmap-container"></div>
     <div class="orchestrator-section">
       <div class="orchestrator-header">
@@ -993,12 +1139,6 @@
       <div>
         <h2>Notes Index</h2>
         <p id="notes-generated">Loading generated notes index...</p>
-      </div>
-      <div class="notes-filter">
-        <label for="notes-project-filter">Filter by project</label>
-        <select id="notes-project-filter" onchange="renderNotesIndex()">
-          <option value="">All projects and month notes</option>
-        </select>
       </div>
     </div>
     <div class="notes-summary">
@@ -1041,19 +1181,15 @@
         <button class="btn btn-primary" id="submit-note-btn" onclick="submitFirebaseNote()" disabled>Submit Note</button>
       </div>
     </div>
-    <div class="notes-layout">
-      <div class="notes-column">
-        <h3>By Project</h3>
-        <div id="notes-by-project"></div>
+    <div class="note-browser-grid">
+      <div class="note-browser-controls">
+        <div style="margin-bottom:10px;"><label>Project</label><select id="note-project-filter" onchange="updateDashboardFilters({project:this.value})"></select></div>
+        <div style="margin-bottom:10px;"><label>Folder</label><select id="note-folder-filter" onchange="updateDashboardFilters({folder:this.value})"></select></div>
+        <div style="margin-bottom:10px;"><label>Category</label><select id="note-category-filter" onchange="updateDashboardFilters({category:this.value})"></select></div>
+        <div style="margin-bottom:10px;"><label>Date</label><input type="date" id="note-date-filter" onchange="updateDashboardFilters({date:this.value})" /></div>
+        <div><label>Search</label><input type="search" id="note-search-filter" placeholder="Search notes..." oninput="updateDashboardFilters({search:this.value})" /></div>
       </div>
-      <div class="notes-column">
-        <h3>By Month</h3>
-        <div id="notes-by-month"></div>
-      </div>
-      <div class="notes-column">
-        <h3>By Date</h3>
-        <div id="notes-by-date"></div>
-      </div>
+      <div class="note-list-panel" id="note-browser-list"></div>
     </div>
   </div>
 
@@ -1361,6 +1497,14 @@
   </div>
 </div>
 
+<div class="note-drawer" id="note-detail-drawer">
+  <div style="display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:12px;">
+    <h3 id="note-detail-title">Note</h3>
+    <button class="btn btn-ghost" onclick="closeNoteDrawer()">Close</button>
+  </div>
+  <div id="note-detail-body"></div>
+</div>
+
 <script>
 // ═══════════════════════════════════════════════════════
 //  STATE  (persisted to localStorage)
@@ -1387,15 +1531,120 @@ let notesIndex = { notes: [], generatedAt: null, noteCount: 0 };
 let notesIndexLoaded = false;
 let roadmapItems = { entities: { project: [], prompt: [], note: [], feature: [], task: [], milestone: [], decision: [], syncEvent: [] }, priorityList: [] };
 let roadmapItemsLoaded = false;
+let dashboardModel = { projects: [], notes: [], tasks: [], milestones: [], levels: [], timeline: [], categories: [], settingsDefaults: {} };
+let generatedMilestones = [];
 let roadmapLevels = { levels: [], generatedAt: null };
 let roadmapLevelsLoaded = false;
 let autoLevelAssignments = { assignments: [] };
 let extractedTasks = { tasks: [] };
 let projectStates = { projects: [] };
-let activeCategoryFilter = 'all';
+let dashboardFilters = JSON.parse(localStorage.getItem('dashboardFilters') || '{}');
+let activeCategoryFilter = dashboardFilters.category || 'all';
 let activeLevelId = null;
 let firebaseIntake = null;
 let firebaseIntakeReady = false;
+
+function loadDashboardSettings() {
+  const defaults = {
+    gradient1: '#111827',
+    gradient2: '#312e81',
+    accent: '#38bdf8',
+    compactMode: false,
+    reducedMotion: false,
+  };
+  const modelDefaults = dashboardModel.settingsDefaults || {};
+  const mergedDefaults = { ...defaults, ...modelDefaults };
+  try {
+    return { ...mergedDefaults, ...JSON.parse(localStorage.getItem('dashboardSettings') || '{}') };
+  } catch {
+    return mergedDefaults;
+  }
+}
+
+function applyDashboardSettings() {
+  const settings = loadDashboardSettings();
+  document.documentElement.style.setProperty('--gradient-1', settings.gradient1);
+  document.documentElement.style.setProperty('--gradient-2', settings.gradient2);
+  document.documentElement.style.setProperty('--accent', settings.accent);
+  document.documentElement.style.setProperty('--accent-2', settings.accent);
+  document.body.classList.toggle('compact-mode', !!settings.compactMode);
+  document.body.classList.toggle('reduced-motion', !!settings.reducedMotion);
+  const g1 = document.getElementById('setting-gradient-1');
+  const g2 = document.getElementById('setting-gradient-2');
+  const ac = document.getElementById('setting-accent');
+  const compact = document.getElementById('setting-compact');
+  const motion = document.getElementById('setting-motion');
+  if (g1) g1.value = settings.gradient1;
+  if (g2) g2.value = settings.gradient2;
+  if (ac) ac.value = settings.accent;
+  if (compact) compact.checked = !!settings.compactMode;
+  if (motion) motion.checked = !!settings.reducedMotion;
+}
+
+function saveSettingsFromUI() {
+  const settings = {
+    gradient1: document.getElementById('setting-gradient-1').value,
+    gradient2: document.getElementById('setting-gradient-2').value,
+    accent: document.getElementById('setting-accent').value,
+    compactMode: document.getElementById('setting-compact').checked,
+    reducedMotion: document.getElementById('setting-motion').checked,
+  };
+  localStorage.setItem('dashboardSettings', JSON.stringify(settings));
+  applyDashboardSettings();
+}
+
+function toggleSettingsMenu() {
+  document.getElementById('settings-menu')?.classList.toggle('open');
+}
+
+function updateDashboardFilters(patch) {
+  dashboardFilters = { ...dashboardFilters, ...patch };
+  localStorage.setItem('dashboardFilters', JSON.stringify(dashboardFilters));
+  if (patch.project !== undefined) setSelectedProject(patch.project, false);
+  if (patch.category !== undefined) activeCategoryFilter = patch.category || 'all';
+  syncFilterControls();
+  renderNotesIndex();
+  renderProjectBoard();
+  renderRoadmapOrchestrator();
+  renderNoteBrowser();
+  renderGeneratedMilestones();
+}
+
+function setSelectedProject(projectName, persist = true) {
+  dashboardFilters.project = projectName || '';
+  if (persist) localStorage.setItem('dashboardFilters', JSON.stringify(dashboardFilters));
+  syncFilterControls();
+  renderNotesIndex();
+  renderProjectBoard();
+  renderRoadmapOrchestrator();
+  renderNoteBrowser();
+  renderGeneratedMilestones();
+}
+
+function populateGlobalProjectSelect() {
+  const select = document.getElementById('global-project-select');
+  if (!select) return;
+  const projects = dashboardModel.projects?.map(p => p.projectName).sort() || [];
+  select.innerHTML = '<option value="">All projects</option>' + projects.map(project => `<option value="${escapeHtml(project)}">${escapeHtml(project)}</option>`).join('');
+  select.value = dashboardFilters.project || '';
+  setText('global-project-status', dashboardFilters.project ? `Focused: ${dashboardFilters.project}` : 'All projects');
+}
+
+function syncFilterControls() {
+  const globalProject = document.getElementById('global-project-select');
+  const noteProject = document.getElementById('note-project-filter');
+  const folder = document.getElementById('note-folder-filter');
+  const category = document.getElementById('note-category-filter');
+  const date = document.getElementById('note-date-filter');
+  const search = document.getElementById('note-search-filter');
+  if (globalProject) globalProject.value = dashboardFilters.project || '';
+  if (noteProject) noteProject.value = dashboardFilters.project || '';
+  if (folder) folder.value = dashboardFilters.folder || '';
+  if (category) category.value = dashboardFilters.category || '';
+  if (date) date.value = dashboardFilters.date || '';
+  if (search) search.value = dashboardFilters.search || '';
+  setText('global-project-status', dashboardFilters.project ? `Focused: ${dashboardFilters.project}` : 'All projects');
+}
 
 // ═══════════════════════════════════════════════════════
 //  TAB SWITCHING
@@ -1407,10 +1656,39 @@ function switchTab(name, btn) {
   btn.classList.add('active');
   if (name === 'calendar')   renderCalendar();
   if (name === 'schedule')   renderSchedule();
-  if (name === 'roadmap')    { renderRoadmap(); renderRoadmapOrchestrator(); renderProjectBoard(); }
-  if (name === 'notes')      renderNotesIndex();
+  if (name === 'roadmap')    { renderRoadmap(); renderRoadmapOrchestrator(); renderProjectBoard(); renderGeneratedMilestones(); }
+  if (name === 'notes')      { renderNotesIndex(); renderNoteBrowser(); }
   if (name === 'goals')      renderGoals();
   if (name === 'calculator') initCalculator();
+}
+
+async function loadDashboardModel() {
+  try {
+    const response = await fetch('data/dashboard-model.json', { cache: 'no-store' });
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    dashboardModel = await response.json();
+    applyDashboardModel();
+  } catch (err) {
+    console.warn('Dashboard model unavailable', err);
+  }
+}
+
+function applyDashboardModel() {
+  if (dashboardModel.notes?.length) notesIndex.notes = dashboardModel.notes;
+  if (dashboardModel.tasks?.length) extractedTasks.tasks = dashboardModel.tasks;
+  if (dashboardModel.milestones?.length) generatedMilestones = dashboardModel.milestones;
+  if (dashboardModel.levels?.length) roadmapLevels.levels = dashboardModel.levels;
+  if (dashboardModel.levelAssignments?.length) autoLevelAssignments.assignments = dashboardModel.levelAssignments;
+  if (dashboardModel.projects?.length) projectStates.projects = dashboardModel.projects;
+  if (dashboardModel.priorityList?.length) roadmapItems.priorityList = dashboardModel.priorityList;
+  applyDashboardSettings();
+  populateGlobalProjectSelect();
+  populateNoteBrowserFilters();
+  renderNotesIndex();
+  renderProjectBoard();
+  renderRoadmapOrchestrator();
+  renderNoteBrowser();
+  renderGeneratedMilestones();
 }
 
 // ═══════════════════════════════════════════════════════
@@ -1559,9 +1837,78 @@ function renderNotesIndex() {
 }
 
 function getVisibleNotes() {
-  const selectedProject = document.getElementById('notes-project-filter')?.value || '';
+  const selectedProject = dashboardFilters.project || '';
   if (!selectedProject) return notesIndex.notes || [];
   return (notesIndex.notes || []).filter(note => note.projectName === selectedProject);
+}
+
+function populateNoteBrowserFilters() {
+  const projects = [...new Set((notesIndex.notes || []).map(note => note.projectName).filter(Boolean))].sort();
+  const folders = [...new Set((notesIndex.notes || []).map(note => {
+    const parts = note.sourcePath.split('/');
+    return parts.length > 3 ? parts.slice(2, -1).join('/') : parts[2] || '';
+  }).filter(Boolean))].sort();
+  const categories = dashboardModel.categories?.length ? dashboardModel.categories : [...new Set((extractedTasks.tasks || []).map(task => task.category))].sort();
+  setSelectOptions('note-project-filter', projects, 'All projects');
+  setSelectOptions('note-folder-filter', folders, 'All folders');
+  setSelectOptions('note-category-filter', categories, 'All categories');
+  syncFilterControls();
+}
+
+function setSelectOptions(id, values, emptyLabel) {
+  const select = document.getElementById(id);
+  if (!select) return;
+  select.innerHTML = `<option value="">${emptyLabel}</option>` + values.map(value => `<option value="${escapeHtml(value)}">${escapeHtml(value)}</option>`).join('');
+}
+
+function filteredNotesForBrowser() {
+  const search = (dashboardFilters.search || '').toLowerCase();
+  const taskSources = new Set((extractedTasks.tasks || [])
+    .filter(task => !dashboardFilters.category || task.category === dashboardFilters.category)
+    .map(task => task.sourcePath));
+
+  return (notesIndex.notes || []).filter(note => {
+    if (dashboardFilters.project && note.projectName !== dashboardFilters.project) return false;
+    if (dashboardFilters.folder && !note.sourcePath.includes(`/${dashboardFilters.folder}/`)) return false;
+    if (dashboardFilters.date && note.date !== dashboardFilters.date) return false;
+    if (dashboardFilters.category && !taskSources.has(note.sourcePath)) return false;
+    if (search && !`${note.title} ${note.projectName || ''} ${note.sourcePath}`.toLowerCase().includes(search)) return false;
+    return true;
+  });
+}
+
+function renderNoteBrowser() {
+  populateNoteBrowserFilters();
+  const list = document.getElementById('note-browser-list');
+  if (!list) return;
+  const notes = filteredNotesForBrowser();
+  setText('notes-total-count', String(notes.length));
+  setText('notes-project-count', String(new Set(notes.map(note => note.projectName).filter(Boolean)).size));
+  setText('notes-dated-count', String(notes.filter(note => note.date).length));
+  list.innerHTML = notes.length ? notes.slice(0, 120).map(note => `
+    <button class="note-list-item" onclick="openNoteDetail('${jsString(note.sourcePath)}')">
+      <strong>${escapeHtml(note.title)}</strong>
+      <span class="note-meta">${escapeHtml([note.projectName, note.monthFolder, note.date].filter(Boolean).join(' · ') || note.sourcePath)}</span>
+    </button>
+  `).join('') : '<div class="notes-empty">No notes match the selected filters.</div>';
+}
+
+function openNoteDetail(sourcePath) {
+  const note = (notesIndex.notes || []).find(item => item.sourcePath === sourcePath);
+  if (!note) return;
+  document.getElementById('note-detail-title').textContent = note.title;
+  const linkedTasks = (extractedTasks.tasks || []).filter(task => task.sourcePath === sourcePath);
+  document.getElementById('note-detail-body').innerHTML = `
+    <p class="note-meta">${escapeHtml(note.sourcePath)}</p>
+    <div class="project-state-summary"><strong>Project</strong>${escapeHtml(note.projectName || 'General')}</div>
+    <div class="project-state-summary"><strong>Date</strong>${escapeHtml(note.date || 'No date detected')}</div>
+    <div class="project-state-summary"><strong>Detected tasks</strong>${linkedTasks.length ? linkedTasks.map(task => `<div class="unlock-note">${escapeHtml(task.category)} · ${escapeHtml(task.title)}</div>`).join('') : '<div class="unlock-note">None detected.</div>'}</div>
+  `;
+  document.getElementById('note-detail-drawer').classList.add('open');
+}
+
+function closeNoteDrawer() {
+  document.getElementById('note-detail-drawer')?.classList.remove('open');
 }
 
 function groupNotes(notes, getKey) {
@@ -1654,6 +2001,10 @@ function escapeHtml(value) {
   }[char]));
 }
 
+function jsString(value) {
+  return String(value ?? '').replace(/\\/g, '\\\\').replace(/'/g, "\\'").replace(/\n/g, '\\n').replace(/\r/g, '');
+}
+
 // ═══════════════════════════════════════════════════════
 //  ROADMAP ORCHESTRATOR DATA
 // ═══════════════════════════════════════════════════════
@@ -1673,14 +2024,19 @@ async function loadRoadmapItems() {
 }
 
 function renderRoadmapOrchestrator() {
-  const projects = roadmapItems.entities?.project || [];
-  const notes = roadmapItems.entities?.note || [];
+  const selectedProject = dashboardFilters.project || '';
+  const projects = (roadmapItems.entities?.project || [])
+    .filter(project => !selectedProject || (project.name || project.title) === selectedProject);
+  const projectIds = new Set(projects.map(project => project.id));
+  const notes = (roadmapItems.entities?.note || [])
+    .filter(note => !selectedProject || projectIds.has(note.projectId));
   const prompts = roadmapItems.entities?.prompt || [];
   const features = roadmapItems.entities?.feature || [];
   const syncEvents = roadmapItems.entities?.syncEvent || [];
-  const priorities = roadmapItems.priorityList || [];
+  const priorities = (roadmapItems.priorityList || [])
+    .filter(item => !selectedProject || item.projectName === selectedProject || projectIds.has(item.entityId));
 
-  setText('roadmap-project-total', `${projects.length} projects`);
+  setText('roadmap-project-total', selectedProject ? selectedProject : `${projects.length} projects`);
   const generated = document.getElementById('roadmap-generated');
   if (generated) {
     generated.textContent = roadmapItemsLoaded
@@ -1738,6 +2094,31 @@ function renderPriorityList(priorities) {
         <div class="priority-title">${escapeHtml(item.title)}</div>
         <div class="priority-reason">${escapeHtml(item.entityType)} · ${escapeHtml(item.reason || 'generated score')}</div>
       </div>
+    </div>
+  `).join('');
+}
+
+function renderGeneratedMilestones() {
+  const container = document.getElementById('generated-milestone-list');
+  if (!container) return;
+
+  const selectedProject = dashboardFilters.project || '';
+  const milestones = (generatedMilestones || [])
+    .filter(milestone => !selectedProject || milestone.projectName === selectedProject)
+    .slice()
+    .sort((a, b) => (b.dateRange?.end || '').localeCompare(a.dateRange?.end || ''));
+
+  if (!milestones.length) {
+    container.innerHTML = '<div class="notes-empty">No generated milestones match this focus.</div>';
+    return;
+  }
+
+  container.innerHTML = milestones.slice(0, 12).map(milestone => `
+    <div class="generated-milestone-card">
+      <strong>${escapeHtml(milestone.title)}</strong>
+      <div class="note-meta">${escapeHtml(milestone.projectName || 'General')} · ${escapeHtml(milestone.status || 'generated')}</div>
+      <div class="note-meta">${escapeHtml([milestone.dateRange?.start, milestone.dateRange?.end].filter(Boolean).join(' to ') || 'No detected date range')}</div>
+      <div class="actions">${(milestone.suggestedNextActions || []).slice(0, 2).map(action => escapeHtml(action)).join('<br>') || 'Review linked notes and tasks.'}</div>
     </div>
   `).join('');
 }
@@ -1841,9 +2222,12 @@ function renderProjectBoard() {
 
 function renderBoardAnalytics() {
   const tasks = filteredTasks();
-  const categories = new Set((extractedTasks.tasks || []).map(task => task.category));
-  const recentDates = new Set((notesIndex.notes || []).filter(note => note.date).map(note => note.date).sort().slice(-7));
-  setText('board-total-projects', String(projectStates.projects?.length || roadmapItems.entities?.project?.length || 0));
+  const selectedProject = dashboardFilters.project || '';
+  const scopedNotes = (notesIndex.notes || []).filter(note => !selectedProject || note.projectName === selectedProject);
+  const scopedProjects = (projectStates.projects || []).filter(project => !selectedProject || project.projectName === selectedProject);
+  const categories = new Set(tasks.map(task => task.category));
+  const recentDates = new Set(scopedNotes.filter(note => note.date).map(note => note.date).sort().slice(-7));
+  setText('board-total-projects', String(scopedProjects.length || (selectedProject ? 1 : roadmapItems.entities?.project?.length || 0)));
   setText('board-active-tasks', String(tasks.length));
   setText('board-category-count', String(categories.size));
   setText('board-recent-activity', String(recentDates.size));
@@ -1852,7 +2236,7 @@ function renderBoardAnalytics() {
 function renderCategoryFilters() {
   const bar = document.getElementById('category-filter-bar');
   if (!bar) return;
-  const cats = ['all', 'design', 'setup', 'development', '3D', 'AI', 'content', 'admin'];
+  const cats = ['all', ...(dashboardModel.categories?.length ? dashboardModel.categories : ['design', 'setup', 'development', '3D', 'AI', 'content', 'admin'])];
   bar.innerHTML = cats.map(cat => `
     <button class="category-filter ${activeCategoryFilter === cat ? 'active' : ''}" onclick="setCategoryFilter('${cat}')">${cat}</button>
   `).join('');
@@ -1860,19 +2244,33 @@ function renderCategoryFilters() {
 
 function setCategoryFilter(category) {
   activeCategoryFilter = category;
+  dashboardFilters.category = category === 'all' ? '' : category;
+  localStorage.setItem('dashboardFilters', JSON.stringify(dashboardFilters));
+  syncFilterControls();
+  renderNoteBrowser();
   renderProjectBoard();
 }
 
 function filteredTasks() {
   const tasks = extractedTasks.tasks || [];
-  return activeCategoryFilter === 'all' ? tasks : tasks.filter(task => task.category === activeCategoryFilter);
+  return tasks.filter(task => {
+    if (dashboardFilters.project && task.projectName !== dashboardFilters.project) return false;
+    if (activeCategoryFilter !== 'all' && task.category !== activeCategoryFilter) return false;
+    return true;
+  });
 }
 
 function renderRoadmapLevelMap() {
   const map = document.getElementById('roadmap-level-map');
   if (!map) return;
 
-  const levels = roadmapLevels.levels || [];
+  const selectedProject = dashboardFilters.project || '';
+  const levels = (roadmapLevels.levels || []).filter(level => {
+    if (!selectedProject) return true;
+    const merged = mergedLevel(level);
+    return (merged.projectIds || []).some(id => levelItemLabel('projectIds', id) === selectedProject) ||
+      (merged.notePaths || []).some(path => (notesIndex.notes || []).find(note => note.sourcePath === path)?.projectName === selectedProject);
+  });
   setText('level-map-count', `${levels.length} levels`);
   const generated = document.getElementById('level-map-generated');
   if (generated) {
@@ -1886,7 +2284,7 @@ function renderRoadmapLevelMap() {
     return;
   }
 
-  const points = levels.map(level => level.position || { x: 50, y: 50 });
+  const points = levels.map((level, index) => responsiveLevelPosition(level, index, levels.length));
   const lines = points.slice(0, -1).map((point, index) => {
     const next = points[index + 1];
     return `<line class="level-line" x1="${point.x}%" y1="${point.y}%" x2="${next.x}%" y2="${next.y}%" />`;
@@ -1894,7 +2292,16 @@ function renderRoadmapLevelMap() {
 
   map.innerHTML = `
     <svg class="level-map-lines" viewBox="0 0 100 100" preserveAspectRatio="none">${lines}</svg>
-    ${levels.map(level => renderLevelNode(mergedLevel(level))).join('')}`;
+    ${levels.map((level, index) => renderLevelNode(mergedLevel({ ...level, position: responsiveLevelPosition(level, index, levels.length) }))).join('')}`;
+}
+
+function responsiveLevelPosition(level, index, total) {
+  if (window.matchMedia && window.matchMedia('(max-width: 640px)').matches) {
+    const y = 8 + (index * (84 / Math.max(total - 1, 1)));
+    const x = index % 2 === 0 ? 42 : 58;
+    return { x, y };
+  }
+  return level.position || { x: 50, y: 50 };
 }
 
 function renderLevelNode(level) {
@@ -2005,14 +2412,23 @@ function unlockText(level) {
 function renderSelectedLevelSummary() {
   const container = document.getElementById('selected-level-summary');
   if (!container) return;
-  const level = activeLevelId ? getActiveLevel() : mergedLevel((roadmapLevels.levels || [])[1] || (roadmapLevels.levels || [])[0] || {});
+  const selectedProject = dashboardFilters.project || '';
+  const scopedLevels = (roadmapLevels.levels || []).filter(item => {
+    if (!selectedProject) return true;
+    const merged = mergedLevel(item);
+    return (merged.projectIds || []).some(id => levelItemLabel('projectIds', id) === selectedProject);
+  });
+  const level = activeLevelId ? getActiveLevel() : mergedLevel(scopedLevels[1] || scopedLevels[0] || {});
   if (!level?.id) {
     container.innerHTML = '<div class="notes-empty">Select a level to inspect project state.</div>';
     return;
   }
 
   const projectNames = (level.projectIds || []).map(id => levelItemLabel('projectIds', id));
-  const states = (projectStates.projects || []).filter(state => projectNames.includes(state.projectName));
+  const states = (projectStates.projects || []).filter(state =>
+    (!selectedProject || state.projectName === selectedProject) &&
+    (!projectNames.length || projectNames.includes(state.projectName))
+  );
   container.innerHTML = `
     <div class="project-state-summary">
       <strong>${escapeHtml(level.title)}</strong>
@@ -2035,8 +2451,10 @@ function renderProjectStateSummary(state) {
 function renderTimeline() {
   const container = document.getElementById('project-timeline');
   if (!container) return;
-  const notes = (notesIndex.notes || [])
+  const selectedProject = dashboardFilters.project || '';
+  const notes = (dashboardModel.timeline?.length ? dashboardModel.timeline : notesIndex.notes || [])
     .filter(note => note.date)
+    .filter(note => !selectedProject || note.projectName === selectedProject)
     .filter(note => activeCategoryFilter === 'all' || filteredTasks().some(task => task.sourcePath === note.sourcePath))
     .sort((a, b) => b.date.localeCompare(a.date))
     .slice(0, 18);
@@ -2754,8 +3172,10 @@ function formatDate(dateStr) {
 //  INIT
 // ═══════════════════════════════════════════════════════
 (function init() {
+  applyDashboardSettings();
   initScheduleDate();
   renderCalendar();
+  loadDashboardModel();
   loadNotesIndex();
   loadRoadmapItems();
   loadRoadmapLevels();

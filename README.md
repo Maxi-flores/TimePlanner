@@ -35,9 +35,11 @@ node scripts/generate-roadmap-levels.js
 node scripts/assign-notes-to-levels.js
 node scripts/extract-tasks-from-notes.js
 node scripts/generate-project-states.js
+node scripts/generate-milestones.js
+node scripts/generate-dashboard-model.js
 ```
 
-The roadmap generators read `data/notes-index.json` and write roadmap items plus level-map data for the static dashboard.
+The generators read `data/notes-index.json` and produce roadmap items, level-map assignments, extracted tasks, project states, milestones, and the unified dashboard model used by every tab.
 
 Test the static app locally from the app folder:
 

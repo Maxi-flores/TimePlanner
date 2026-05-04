@@ -5,7 +5,7 @@
 The local sync worker now follows this pipeline:
 
 ```text
-Firestore -> Markdown -> Index -> Roadmap -> Level Map -> Assignments -> Tasks -> Project States -> Commit
+Firestore -> Markdown -> Index -> Roadmap -> Level Map -> Assignments -> Tasks -> Project States -> Milestones -> Dashboard Model -> Commit
 ```
 
 ## 1. Firestore
@@ -66,7 +66,7 @@ This updates:
 - `data/roadmap-levels.json`
 - `apps/time-planner/data/roadmap-levels.json`
 
-## 6. Assignments, Tasks, And Project States
+## 6. Assignments, Tasks, Project States, Milestones, And Dashboard Model
 
 The worker then runs:
 
@@ -74,6 +74,8 @@ The worker then runs:
 node scripts/assign-notes-to-levels.js
 node scripts/extract-tasks-from-notes.js
 node scripts/generate-project-states.js
+node scripts/generate-milestones.js
+node scripts/generate-dashboard-model.js
 ```
 
 This updates:
@@ -81,6 +83,8 @@ This updates:
 - `data/roadmap-level-assignments.json`
 - `data/extracted-tasks.json`
 - `data/project-states.json`
+- `data/milestones.json`
+- `data/dashboard-model.json`
 - matching files in `apps/time-planner/data/`
 
 ## 7. Commit
@@ -106,12 +110,16 @@ With `--commit`, the worker creates one commit containing the newly written Mark
 - `data/roadmap-level-assignments.json`
 - `data/extracted-tasks.json`
 - `data/project-states.json`
+- `data/milestones.json`
+- `data/dashboard-model.json`
 - `apps/time-planner/data/notes-index.json`
 - `apps/time-planner/data/roadmap-items.json`
 - `apps/time-planner/data/roadmap-levels.json`
 - `apps/time-planner/data/roadmap-level-assignments.json`
 - `apps/time-planner/data/extracted-tasks.json`
 - `apps/time-planner/data/project-states.json`
+- `apps/time-planner/data/milestones.json`
+- `apps/time-planner/data/dashboard-model.json`
 
 The worker prevents empty commits and does not push automatically.
 

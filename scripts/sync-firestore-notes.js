@@ -21,12 +21,16 @@ const postSyncFiles = [
   "data/roadmap-level-assignments.json",
   "data/extracted-tasks.json",
   "data/project-states.json",
+  "data/milestones.json",
+  "data/dashboard-model.json",
   "apps/time-planner/data/notes-index.json",
   "apps/time-planner/data/roadmap-items.json",
   "apps/time-planner/data/roadmap-levels.json",
   "apps/time-planner/data/roadmap-level-assignments.json",
   "apps/time-planner/data/extracted-tasks.json",
   "apps/time-planner/data/project-states.json",
+  "apps/time-planner/data/milestones.json",
+  "apps/time-planner/data/dashboard-model.json",
 ];
 const serviceAccountPath =
   process.env.FIREBASE_SERVICE_ACCOUNT_PATH ||
@@ -169,6 +173,14 @@ function runPostSyncProcessing() {
     {
       label: "Generate project states",
       script: path.join(repoRoot, "scripts", "generate-project-states.js"),
+    },
+    {
+      label: "Generate milestones",
+      script: path.join(repoRoot, "scripts", "generate-milestones.js"),
+    },
+    {
+      label: "Generate dashboard model",
+      script: path.join(repoRoot, "scripts", "generate-dashboard-model.js"),
     },
   ];
 

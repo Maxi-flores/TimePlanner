@@ -1,0 +1,371 @@
+{
+  "generatedAt": "2026-05-04T17:31:18.905Z",
+  "milestoneCount": 14,
+  "milestones": [
+    {
+      "id": "milestone-bikerinstinct-2026-04-25",
+      "title": "Bikerinstinct roadmap checkpoint",
+      "projectName": "Bikerinstinct",
+      "sourceFolder": "content/notes-2026/Profound Projects/Bikerinstinct",
+      "status": "active",
+      "dateRange": {
+        "start": "2026-04-25",
+        "end": "2026-04-25"
+      },
+      "linkedNotes": [
+        "content/notes-2026/Profound Projects/Bikerinstinct/26.4.25"
+      ],
+      "linkedTasks": [],
+      "suggestedNextActions": []
+    },
+    {
+      "id": "milestone-bv-undated",
+      "title": "BV roadmap checkpoint",
+      "projectName": "BV",
+      "sourceFolder": "content/notes-2026/Profound Projects/BV",
+      "status": "needs-date",
+      "dateRange": {
+        "start": null,
+        "end": null
+      },
+      "linkedNotes": [
+        "content/notes-2026/Profound Projects/BV/CBR",
+        "content/notes-2026/Profound Projects/BV/MZ3"
+      ],
+      "linkedTasks": [
+        "task-content-notes-2026-profound-projects-bv-mz3-13",
+        "task-content-notes-2026-profound-projects-bv-mz3-24",
+        "task-content-notes-2026-profound-projects-bv-mz3-35",
+        "task-content-notes-2026-profound-projects-bv-mz3-112",
+        "task-content-notes-2026-profound-projects-bv-mz3-115"
+      ],
+      "suggestedNextActions": [
+        "30 - lunch fix",
+        "for woensdag?",
+        "@",
+        "30"
+      ]
+    },
+    {
+      "id": "milestone-cm4-undated",
+      "title": "CM4 roadmap checkpoint",
+      "projectName": "CM4",
+      "sourceFolder": "content/notes-2026/Profound Projects/CM4",
+      "status": "needs-date",
+      "dateRange": {
+        "start": null,
+        "end": null
+      },
+      "linkedNotes": [
+        "content/notes-2026/Profound Projects/CM4/Print"
+      ],
+      "linkedTasks": [],
+      "suggestedNextActions": []
+    },
+    {
+      "id": "milestone-cshop-2026-04-25",
+      "title": "CSHOP roadmap checkpoint",
+      "projectName": "CSHOP",
+      "sourceFolder": "content/notes-2026/Profound Projects/CSHOP",
+      "status": "active",
+      "dateRange": {
+        "start": "2026-04-12",
+        "end": "2026-04-25"
+      },
+      "linkedNotes": [
+        "content/notes-2026/Profound Projects/CSHOP/26.4.12",
+        "content/notes-2026/Profound Projects/CSHOP/26.4.25 @"
+      ],
+      "linkedTasks": [
+        "task-content-notes-2026-profound-projects-cshop-26-4-12-5",
+        "task-content-notes-2026-profound-projects-cshop-26-4-12-10",
+        "task-content-notes-2026-profound-projects-cshop-26-4-12-12",
+        "task-content-notes-2026-profound-projects-cshop-26-4-12-46"
+      ],
+      "suggestedNextActions": [
+        "a custom budget mapper engine with a \"stand-alone brain\" and a profile-driven router, you need a multi-layered architecture",
+        "a Vector Database (e.g., ChromaDB, Pinecone, or Milvus) to store and retrieve \"atomic",
+        ", a server with a dedicated GPU (e.g., NVIDIA RTX 3090/4090) is recommended for processing",
+        "one, or focus on the ethical implications of removing humans from the loop?"
+      ]
+    },
+    {
+      "id": "milestone-dealinstinct-2026-04-25",
+      "title": "Dealinstinct roadmap checkpoint",
+      "projectName": "Dealinstinct",
+      "sourceFolder": "content/notes-2026/Profound Projects/Dealinstinct",
+      "status": "active",
+      "dateRange": {
+        "start": "2026-04-25",
+        "end": "2026-04-25"
+      },
+      "linkedNotes": [
+        "content/notes-2026/Profound Projects/Dealinstinct/26.4.25"
+      ],
+      "linkedTasks": [],
+      "suggestedNextActions": []
+    },
+    {
+      "id": "milestone-examp-developer-portfolio-2026-04-25",
+      "title": "Examp. Developer Portfolio roadmap checkpoint",
+      "projectName": "Examp. Developer Portfolio",
+      "sourceFolder": "content/notes-2026/Profound Projects/Examp. Developer Portfolio",
+      "status": "active",
+      "dateRange": {
+        "start": "2026-04-11",
+        "end": "2026-04-25"
+      },
+      "linkedNotes": [
+        "content/notes-2026/Profound Projects/Examp. Developer Portfolio/WOM/26.4.11",
+        "content/notes-2026/Profound Projects/Examp. Developer Portfolio/WOM/26.4.25 @"
+      ],
+      "linkedTasks": [
+        "task-content-notes-2026-profound-projects-examp-developer-portfolio-wom-26-4-25-1"
+      ],
+      "suggestedNextActions": [
+        "for the setup"
+      ]
+    },
+    {
+      "id": "milestone-flink3d-2026-04-25",
+      "title": "Flink3D roadmap checkpoint",
+      "projectName": "Flink3D",
+      "sourceFolder": "content/notes-2026/Profound Projects/Flink3D",
+      "status": "active",
+      "dateRange": {
+        "start": "2026-04-25",
+        "end": "2026-04-25"
+      },
+      "linkedNotes": [
+        "content/notes-2026/Profound Projects/Flink3D/26.4.25 @"
+      ],
+      "linkedTasks": [],
+      "suggestedNextActions": []
+    },
+    {
+      "id": "milestone-fullstack-dev-2026-04-12",
+      "title": "Fullstack dev roadmap checkpoint",
+      "projectName": "Fullstack dev",
+      "sourceFolder": "content/notes-2026/Profound Projects/Fullstack dev",
+      "status": "active",
+      "dateRange": {
+        "start": "2026-04-01",
+        "end": "2026-04-12"
+      },
+      "linkedNotes": [
+        "content/notes-2026/Profound Projects/Fullstack dev/26.4.1",
+        "content/notes-2026/Profound Projects/Fullstack dev/26.4.12",
+        "content/notes-2026/Profound Projects/Fullstack dev/Temp"
+      ],
+      "linkedTasks": [],
+      "suggestedNextActions": []
+    },
+    {
+      "id": "milestone-mucho3d-2026-04-25",
+      "title": "Mucho3D roadmap checkpoint",
+      "projectName": "Mucho3D",
+      "sourceFolder": "content/notes-2026/Profound Projects/Mucho3D",
+      "status": "active",
+      "dateRange": {
+        "start": "2026-04-25",
+        "end": "2026-04-25"
+      },
+      "linkedNotes": [
+        "content/notes-2026/Profound Projects/Mucho3D/26.4.25 @"
+      ],
+      "linkedTasks": [
+        "task-content-notes-2026-profound-projects-mucho3d-26-4-25-19",
+        "task-content-notes-2026-profound-projects-mucho3d-26-4-25-23",
+        "task-content-notes-2026-profound-projects-mucho3d-26-4-25-32",
+        "task-content-notes-2026-profound-projects-mucho3d-26-4-25-60",
+        "task-content-notes-2026-profound-projects-mucho3d-26-4-25-64"
+      ],
+      "suggestedNextActions": [
+        "a secure path between the two machines. This provides a stable IP or URL that doesn't change.",
+        "on preferences.",
+        "Benefits of This Setup",
+        "In your Blender MCP Add-on settings, you simply enter your server's Tailscale IP: http://100.x.y.z:11434."
+      ]
+    },
+    {
+      "id": "milestone-pf-project-2026-05-03",
+      "title": "PF-PROJECT roadmap checkpoint",
+      "projectName": "PF-PROJECT",
+      "sourceFolder": "content/notes-2026/Profound Projects/PF-PROJECT",
+      "status": "active",
+      "dateRange": {
+        "start": "2026-04-28",
+        "end": "2026-05-03"
+      },
+      "linkedNotes": [
+        "content/notes-2026/Profound Projects/PF-PROJECT/ BMS-KB",
+        "content/notes-2026/Profound Projects/PF-PROJECT/26.4.28",
+        "content/notes-2026/Profound Projects/PF-PROJECT/26.5.2",
+        "content/notes-2026/Profound Projects/PF-PROJECT/26.5.3 @",
+        "content/notes-2026/Profound Projects/PF-PROJECT/GH100 - Powerfull planning&tracking"
+      ],
+      "linkedTasks": [
+        "task-content-notes-2026-profound-projects-pf-project-bms-kb-19",
+        "task-content-notes-2026-profound-projects-pf-project-bms-kb-57",
+        "task-content-notes-2026-profound-projects-pf-project-bms-kb-58",
+        "task-content-notes-2026-profound-projects-pf-project-bms-kb-59",
+        "task-content-notes-2026-profound-projects-pf-project-26-5-2-21",
+        "task-content-notes-2026-profound-projects-pf-project-26-5-2-22",
+        "task-content-notes-2026-profound-projects-pf-project-26-5-2-43",
+        "task-content-notes-2026-profound-projects-pf-project-26-5-2-47",
+        "task-content-notes-2026-profound-projects-pf-project-26-5-2-51",
+        "task-content-notes-2026-profound-projects-pf-project-26-5-3-23",
+        "task-content-notes-2026-profound-projects-pf-project-26-5-3-46",
+        "task-content-notes-2026-profound-projects-pf-project-26-5-3-58"
+      ],
+      "suggestedNextActions": [
+        ". It allows you to maintain the \"Time Planner\"",
+        "a new repo called ProfoundProjects-Suite.",
+        "your Time Planner code into a web-app folder.",
+        "your 2026 notes into a vault folder."
+      ]
+    },
+    {
+      "id": "milestone-powerframe-2026-04-25",
+      "title": "Powerframe roadmap checkpoint",
+      "projectName": "Powerframe",
+      "sourceFolder": "content/notes-2026/Profound Projects/Powerframe",
+      "status": "active",
+      "dateRange": {
+        "start": "2026-04-11",
+        "end": "2026-04-25"
+      },
+      "linkedNotes": [
+        "content/notes-2026/Profound Projects/Powerframe/26.4.11",
+        "content/notes-2026/Profound Projects/Powerframe/26.4.25 @"
+      ],
+      "linkedTasks": [
+        "task-content-notes-2026-profound-projects-powerframe-26-4-11-18",
+        "task-content-notes-2026-profound-projects-powerframe-26-4-11-22",
+        "task-content-notes-2026-profound-projects-powerframe-26-4-11-23",
+        "task-content-notes-2026-profound-projects-powerframe-26-4-11-24",
+        "task-content-notes-2026-profound-projects-powerframe-26-4-11-27",
+        "task-content-notes-2026-profound-projects-powerframe-26-4-11-42",
+        "task-content-notes-2026-profound-projects-powerframe-26-4-11-60",
+        "task-content-notes-2026-profound-projects-powerframe-26-4-11-62",
+        "task-content-notes-2026-profound-projects-powerframe-26-4-11-64",
+        "task-content-notes-2026-profound-projects-powerframe-26-4-11-65",
+        "task-content-notes-2026-profound-projects-powerframe-26-4-11-68",
+        "task-content-notes-2026-profound-projects-powerframe-26-4-11-70"
+      ],
+      "suggestedNextActions": [
+        "this hub, we need to create a \"Project Bridge\" within the Powerframe repo. Use this prompt for Copilot/Claude:",
+        "a module that syncs metadata from external GitHub repos into the Powerframe dashboard (e.g., commit history, issue status).",
+        "a central registry for 2D (Figma/Images) and 3D (Mucho3D/GLB) files. Each asset must be linked to a specific \"Upskilled Project\" ID.",
+        "a subscription-tier check."
+      ]
+    },
+    {
+      "id": "milestone-powerstarter-azure-2026-04-25",
+      "title": "Powerstarter Azure roadmap checkpoint",
+      "projectName": "Powerstarter Azure",
+      "sourceFolder": "content/notes-2026/Profound Projects/Powerstarter Azure",
+      "status": "active",
+      "dateRange": {
+        "start": "2026-04-10",
+        "end": "2026-04-25"
+      },
+      "linkedNotes": [
+        "content/notes-2026/Profound Projects/Powerstarter Azure/26.4.10",
+        "content/notes-2026/Profound Projects/Powerstarter Azure/26.4.11",
+        "content/notes-2026/Profound Projects/Powerstarter Azure/26.4.25 @"
+      ],
+      "linkedTasks": [
+        "task-content-notes-2026-profound-projects-powerstarter-azure-26-4-10-1",
+        "task-content-notes-2026-profound-projects-powerstarter-azure-26-4-10-24",
+        "task-content-notes-2026-profound-projects-powerstarter-azure-26-4-11-6",
+        "task-content-notes-2026-profound-projects-powerstarter-azure-26-4-11-21",
+        "task-content-notes-2026-profound-projects-powerstarter-azure-26-4-11-22",
+        "task-content-notes-2026-profound-projects-powerstarter-azure-26-4-11-24",
+        "task-content-notes-2026-profound-projects-powerstarter-azure-26-4-11-30",
+        "task-content-notes-2026-profound-projects-powerstarter-azure-26-4-11-32",
+        "task-content-notes-2026-profound-projects-powerstarter-azure-26-4-11-34",
+        "task-content-notes-2026-profound-projects-powerstarter-azure-26-4-11-44",
+        "task-content-notes-2026-profound-projects-powerstarter-azure-26-4-11-47",
+        "task-content-notes-2026-profound-projects-powerstarter-azure-26-4-11-48"
+      ],
+      "suggestedNextActions": [
+        "to Azure changes the \"instances\"",
+        "an Azure Storage Account and a File Share to hold your ChromaDB vector data and Ollama model files.",
+        "Powerframe Hub so we can get",
+        "a WorkState to the BMS schema. It should track: Bootstrapping, Testing, Reviewing, and Deployment_Ready."
+      ]
+    },
+    {
+      "id": "milestone-sapient-2026-04-25",
+      "title": "Sapient roadmap checkpoint",
+      "projectName": "Sapient",
+      "sourceFolder": "content/notes-2026/Profound Projects/Sapient",
+      "status": "active",
+      "dateRange": {
+        "start": "2026-04-16",
+        "end": "2026-04-25"
+      },
+      "linkedNotes": [
+        "content/notes-2026/Profound Projects/Sapient/26.4.16",
+        "content/notes-2026/Profound Projects/Sapient/26.4.25 @"
+      ],
+      "linkedTasks": [
+        "task-content-notes-2026-profound-projects-sapient-26-4-16-7",
+        "task-content-notes-2026-profound-projects-sapient-26-4-16-11",
+        "task-content-notes-2026-profound-projects-sapient-26-4-16-14",
+        "task-content-notes-2026-profound-projects-sapient-26-4-16-18",
+        "task-content-notes-2026-profound-projects-sapient-26-4-16-28",
+        "task-content-notes-2026-profound-projects-sapient-26-4-16-33",
+        "task-content-notes-2026-profound-projects-sapient-26-4-16-45"
+      ],
+      "suggestedNextActions": [
+        "a strict versioning differentiator for the Sapient Engine and its knowledge content. Update the packages/semantic-core, packages/knowledge-base, and apps/web-dashboard with the following:",
+        "a minimal, high-end system tag in the corner that displays: [SAPIENT_ENGINE_VERSION] // [SOPHIA_VERSION].",
+        "a bug in the 3D Tree rendering, you bump the Sapient Engine. If you add a new profound insight for your friend, you bump the Sophia Version.",
+        "a versions.ts file in packages/core that acts as the single source of truth for these strings."
+      ]
+    },
+    {
+      "id": "milestone-therockettree-app-2026-04-25",
+      "title": "TheRocketTree-App roadmap checkpoint",
+      "projectName": "TheRocketTree-App",
+      "sourceFolder": "content/notes-2026/Profound Projects/TheRocketTree-App",
+      "status": "active",
+      "dateRange": {
+        "start": "2026-04-09",
+        "end": "2026-04-25"
+      },
+      "linkedNotes": [
+        "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.10",
+        "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.11",
+        "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.12",
+        "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.13",
+        "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.14",
+        "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.17",
+        "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.25 @",
+        "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.9"
+      ],
+      "linkedTasks": [
+        "task-content-notes-2026-profound-projects-therockettree-app-26-4-10-1",
+        "task-content-notes-2026-profound-projects-therockettree-app-26-4-10-4",
+        "task-content-notes-2026-profound-projects-therockettree-app-26-4-10-6",
+        "task-content-notes-2026-profound-projects-therockettree-app-26-4-10-9",
+        "task-content-notes-2026-profound-projects-therockettree-app-26-4-10-10",
+        "task-content-notes-2026-profound-projects-therockettree-app-26-4-10-20",
+        "task-content-notes-2026-profound-projects-therockettree-app-26-4-10-48",
+        "task-content-notes-2026-profound-projects-therockettree-app-26-4-10-50",
+        "task-content-notes-2026-profound-projects-therockettree-app-26-4-10-51",
+        "task-content-notes-2026-profound-projects-therockettree-app-26-4-10-60",
+        "task-content-notes-2026-profound-projects-therockettree-app-26-4-10-63",
+        "task-content-notes-2026-profound-projects-therockettree-app-26-4-10-81"
+      ],
+      "suggestedNextActions": [
+        "GitHub Secrets",
+        "all 5 secrets listed above. To get their values:",
+        "VERCEL_TOKEN: Vercel Dashboard → Account Settings → Tokens → Create",
+        "Firebase Keys to Vercel (for each of the 3 projects)"
+      ]
+    }
+  ]
+}

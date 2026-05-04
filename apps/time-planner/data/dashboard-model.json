@@ -1,6 +1,612 @@
 {
-  "generatedAt": "2026-05-04T16:34:42.603Z",
-  "taskCount": 195,
+  "generatedAt": "2026-05-04T17:31:24.957Z",
+  "sourceFiles": {
+    "notes": "data/notes-index.json",
+    "roadmap": "data/roadmap-items.json",
+    "levels": "data/roadmap-levels.json",
+    "assignments": "data/roadmap-level-assignments.json",
+    "tasks": "data/extracted-tasks.json",
+    "states": "data/project-states.json",
+    "milestones": "data/milestones.json"
+  },
+  "projects": [
+    {
+      "projectName": "BV",
+      "summary": "BV has 2 indexed notes, 5 proposed tasks, and appears in 1 roadmap level(s).",
+      "currentStatus": "task discovery",
+      "lastActivity": null,
+      "activeCategories": [
+        "content",
+        "development"
+      ],
+      "riskFlags": [
+        "No dated notes"
+      ],
+      "nextSuggestedActions": [
+        "30 - lunch fix",
+        "for woensdag?",
+        "@",
+        "30"
+      ],
+      "noteCount": 2,
+      "taskCount": 5
+    },
+    {
+      "projectName": "Bikerinstinct",
+      "summary": "Bikerinstinct has 1 indexed notes, 0 proposed tasks, and appears in 1 roadmap level(s).",
+      "currentStatus": "indexed",
+      "lastActivity": "2026-04-25",
+      "activeCategories": [],
+      "riskFlags": [],
+      "nextSuggestedActions": [],
+      "noteCount": 1,
+      "taskCount": 0
+    },
+    {
+      "projectName": "CM4",
+      "summary": "CM4 has 1 indexed notes, 0 proposed tasks, and appears in 1 roadmap level(s).",
+      "currentStatus": "indexed",
+      "lastActivity": null,
+      "activeCategories": [],
+      "riskFlags": [
+        "No dated notes"
+      ],
+      "nextSuggestedActions": [],
+      "noteCount": 1,
+      "taskCount": 0
+    },
+    {
+      "projectName": "CSHOP",
+      "summary": "CSHOP has 2 indexed notes, 4 proposed tasks, and appears in 1 roadmap level(s).",
+      "currentStatus": "active classification",
+      "lastActivity": "2026-04-25",
+      "activeCategories": [
+        "content",
+        "development"
+      ],
+      "riskFlags": [],
+      "nextSuggestedActions": [
+        "a custom budget mapper engine with a \"stand-alone brain\" and a profile-driven router, you need a multi-layered architecture",
+        "a Vector Database (e.g., ChromaDB, Pinecone, or Milvus) to store and retrieve \"atomic",
+        ", a server with a dedicated GPU (e.g., NVIDIA RTX 3090/4090) is recommended for processing",
+        "one, or focus on the ethical implications of removing humans from the loop?"
+      ],
+      "noteCount": 2,
+      "taskCount": 4
+    },
+    {
+      "projectName": "Dealinstinct",
+      "summary": "Dealinstinct has 1 indexed notes, 0 proposed tasks, and appears in 1 roadmap level(s).",
+      "currentStatus": "indexed",
+      "lastActivity": "2026-04-25",
+      "activeCategories": [],
+      "riskFlags": [],
+      "nextSuggestedActions": [],
+      "noteCount": 1,
+      "taskCount": 0
+    },
+    {
+      "projectName": "Examp. Developer Portfolio",
+      "summary": "Examp. Developer Portfolio has 2 indexed notes, 1 proposed tasks, and appears in 1 roadmap level(s).",
+      "currentStatus": "active classification",
+      "lastActivity": "2026-04-25",
+      "activeCategories": [
+        "setup"
+      ],
+      "riskFlags": [],
+      "nextSuggestedActions": [
+        "for the setup"
+      ],
+      "noteCount": 2,
+      "taskCount": 1
+    },
+    {
+      "projectName": "Flink3D",
+      "summary": "Flink3D has 1 indexed notes, 0 proposed tasks, and appears in 1 roadmap level(s).",
+      "currentStatus": "indexed",
+      "lastActivity": "2026-04-25",
+      "activeCategories": [],
+      "riskFlags": [],
+      "nextSuggestedActions": [],
+      "noteCount": 1,
+      "taskCount": 0
+    },
+    {
+      "projectName": "Fullstack dev",
+      "summary": "Fullstack dev has 3 indexed notes, 0 proposed tasks, and appears in 1 roadmap level(s).",
+      "currentStatus": "indexed",
+      "lastActivity": "2026-04-12",
+      "activeCategories": [],
+      "riskFlags": [],
+      "nextSuggestedActions": [],
+      "noteCount": 3,
+      "taskCount": 0
+    },
+    {
+      "projectName": "Mucho3D",
+      "summary": "Mucho3D has 1 indexed notes, 5 proposed tasks, and appears in 1 roadmap level(s).",
+      "currentStatus": "task discovery",
+      "lastActivity": "2026-04-25",
+      "activeCategories": [
+        "content",
+        "development",
+        "setup"
+      ],
+      "riskFlags": [],
+      "nextSuggestedActions": [
+        "a secure path between the two machines. This provides a stable IP or URL that doesn't change.",
+        "on preferences.",
+        "Benefits of This Setup",
+        "In your Blender MCP Add-on settings, you simply enter your server's Tailscale IP: http://100.x.y.z:11434."
+      ],
+      "noteCount": 1,
+      "taskCount": 5
+    },
+    {
+      "projectName": "PF-PROJECT",
+      "summary": "PF-PROJECT has 5 indexed notes, 23 proposed tasks, and appears in 1 roadmap level(s).",
+      "currentStatus": "task discovery",
+      "lastActivity": "2026-05-03",
+      "activeCategories": [
+        "3D",
+        "content",
+        "design",
+        "development",
+        "setup"
+      ],
+      "riskFlags": [
+        "High task volume"
+      ],
+      "nextSuggestedActions": [
+        ". It allows you to maintain the \"Time Planner\"",
+        "a new repo called ProfoundProjects-Suite.",
+        "your Time Planner code into a web-app folder.",
+        "your 2026 notes into a vault folder."
+      ],
+      "noteCount": 5,
+      "taskCount": 23
+    },
+    {
+      "projectName": "Powerframe",
+      "summary": "Powerframe has 2 indexed notes, 24 proposed tasks, and appears in 1 roadmap level(s).",
+      "currentStatus": "active classification",
+      "lastActivity": "2026-04-25",
+      "activeCategories": [
+        "3D",
+        "content",
+        "design",
+        "development",
+        "setup"
+      ],
+      "riskFlags": [
+        "High task volume"
+      ],
+      "nextSuggestedActions": [
+        "this hub, we need to create a \"Project Bridge\" within the Powerframe repo. Use this prompt for Copilot/Claude:",
+        "a module that syncs metadata from external GitHub repos into the Powerframe dashboard (e.g., commit history, issue status).",
+        "a central registry for 2D (Figma/Images) and 3D (Mucho3D/GLB) files. Each asset must be linked to a specific \"Upskilled Project\" ID.",
+        "a subscription-tier check."
+      ],
+      "noteCount": 2,
+      "taskCount": 24
+    },
+    {
+      "projectName": "Powerstarter Azure",
+      "summary": "Powerstarter Azure has 3 indexed notes, 14 proposed tasks, and appears in 1 roadmap level(s).",
+      "currentStatus": "active classification",
+      "lastActivity": "2026-04-25",
+      "activeCategories": [
+        "content",
+        "design",
+        "development",
+        "setup"
+      ],
+      "riskFlags": [
+        "High task volume"
+      ],
+      "nextSuggestedActions": [
+        "to Azure changes the \"instances\"",
+        "an Azure Storage Account and a File Share to hold your ChromaDB vector data and Ollama model files.",
+        "Powerframe Hub so we can get",
+        "a WorkState to the BMS schema. It should track: Bootstrapping, Testing, Reviewing, and Deployment_Ready."
+      ],
+      "noteCount": 3,
+      "taskCount": 14
+    },
+    {
+      "projectName": "Sapient",
+      "summary": "Sapient has 2 indexed notes, 7 proposed tasks, and appears in 1 roadmap level(s).",
+      "currentStatus": "task discovery",
+      "lastActivity": "2026-04-25",
+      "activeCategories": [
+        "content",
+        "development"
+      ],
+      "riskFlags": [],
+      "nextSuggestedActions": [
+        "a strict versioning differentiator for the Sapient Engine and its knowledge content. Update the packages/semantic-core, packages/knowledge-base, and apps/web-dashboard with the following:",
+        "a minimal, high-end system tag in the corner that displays: [SAPIENT_ENGINE_VERSION] // [SOPHIA_VERSION].",
+        "a bug in the 3D Tree rendering, you bump the Sapient Engine. If you add a new profound insight for your friend, you bump the Sophia Version.",
+        "a versions.ts file in packages/core that acts as the single source of truth for these strings."
+      ],
+      "noteCount": 2,
+      "taskCount": 7
+    },
+    {
+      "projectName": "TheRocketTree-App",
+      "summary": "TheRocketTree-App has 8 indexed notes, 70 proposed tasks, and appears in 1 roadmap level(s).",
+      "currentStatus": "task discovery",
+      "lastActivity": "2026-04-25",
+      "activeCategories": [
+        "design",
+        "development",
+        "setup"
+      ],
+      "riskFlags": [
+        "High task volume"
+      ],
+      "nextSuggestedActions": [
+        "GitHub Secrets",
+        "all 5 secrets listed above. To get their values:",
+        "VERCEL_TOKEN: Vercel Dashboard → Account Settings → Tokens → Create",
+        "Firebase Keys to Vercel (for each of the 3 projects)"
+      ],
+      "noteCount": 8,
+      "taskCount": 70
+    }
+  ],
+  "notes": [
+    {
+      "sourcePath": "content/notes-2026/April/Alfadenga",
+      "title": "Alfadenga",
+      "date": null,
+      "monthFolder": "April",
+      "projectName": null
+    },
+    {
+      "sourcePath": "content/notes-2026/April/Cambio de agenda",
+      "title": "Cambio de agenda",
+      "date": null,
+      "monthFolder": "April",
+      "projectName": null
+    },
+    {
+      "sourcePath": "content/notes-2026/April/Multi-ecosystem management",
+      "title": "Multi-ecosystem management",
+      "date": null,
+      "monthFolder": "April",
+      "projectName": null
+    },
+    {
+      "sourcePath": "content/notes-2026/April/portaldasfinancas",
+      "title": "portaldasfinancas",
+      "date": null,
+      "monthFolder": "April",
+      "projectName": null
+    },
+    {
+      "sourcePath": "content/notes-2026/Mei/Bulking",
+      "title": "Bulking",
+      "date": null,
+      "monthFolder": "Mei",
+      "projectName": null
+    },
+    {
+      "sourcePath": "content/notes-2026/Mei/Cambio de agenda",
+      "title": "Cambio de agenda",
+      "date": null,
+      "monthFolder": "Mei",
+      "projectName": null
+    },
+    {
+      "sourcePath": "content/notes-2026/Mei/MSZ",
+      "title": "MSZ",
+      "date": null,
+      "monthFolder": "Mei",
+      "projectName": null
+    },
+    {
+      "sourcePath": "content/notes-2026/Mei/Sapient",
+      "title": "Sapient",
+      "date": null,
+      "monthFolder": "Mei",
+      "projectName": null
+    },
+    {
+      "sourcePath": "content/notes-2026/Mei/Sentient",
+      "title": "Sentient",
+      "date": null,
+      "monthFolder": "Mei",
+      "projectName": null
+    },
+    {
+      "sourcePath": "content/notes-2026/Mei/TP - ES",
+      "title": "TP - ES",
+      "date": null,
+      "monthFolder": "Mei",
+      "projectName": null
+    },
+    {
+      "sourcePath": "content/notes-2026/Old/GGe - Odivelas",
+      "title": "GGe - Odivelas",
+      "date": null,
+      "monthFolder": null,
+      "projectName": null
+    },
+    {
+      "sourcePath": "content/notes-2026/Old/Motorgarage",
+      "title": "Motorgarage",
+      "date": null,
+      "monthFolder": null,
+      "projectName": null
+    },
+    {
+      "sourcePath": "content/notes-2026/Old/README.md",
+      "title": "README",
+      "date": null,
+      "monthFolder": null,
+      "projectName": null
+    },
+    {
+      "sourcePath": "content/notes-2026/Old/Sevilla",
+      "title": "Sevilla",
+      "date": null,
+      "monthFolder": null,
+      "projectName": null
+    },
+    {
+      "sourcePath": "content/notes-2026/Profound Projects/Bikerinstinct/26.4.25",
+      "title": "26.4.25",
+      "date": "2026-04-25",
+      "monthFolder": null,
+      "projectName": "Bikerinstinct"
+    },
+    {
+      "sourcePath": "content/notes-2026/Profound Projects/BV/CBR",
+      "title": "CBR",
+      "date": null,
+      "monthFolder": null,
+      "projectName": "BV"
+    },
+    {
+      "sourcePath": "content/notes-2026/Profound Projects/BV/MZ3",
+      "title": "MZ3",
+      "date": null,
+      "monthFolder": null,
+      "projectName": "BV"
+    },
+    {
+      "sourcePath": "content/notes-2026/Profound Projects/CM4/Print",
+      "title": "Print",
+      "date": null,
+      "monthFolder": null,
+      "projectName": "CM4"
+    },
+    {
+      "sourcePath": "content/notes-2026/Profound Projects/CSHOP/26.4.12",
+      "title": "26.4.12",
+      "date": "2026-04-12",
+      "monthFolder": null,
+      "projectName": "CSHOP"
+    },
+    {
+      "sourcePath": "content/notes-2026/Profound Projects/CSHOP/26.4.25 @",
+      "title": "26.4.25 @",
+      "date": "2026-04-25",
+      "monthFolder": null,
+      "projectName": "CSHOP"
+    },
+    {
+      "sourcePath": "content/notes-2026/Profound Projects/Dealinstinct/26.4.25",
+      "title": "26.4.25",
+      "date": "2026-04-25",
+      "monthFolder": null,
+      "projectName": "Dealinstinct"
+    },
+    {
+      "sourcePath": "content/notes-2026/Profound Projects/Examp. Developer Portfolio/WOM/26.4.11",
+      "title": "26.4.11",
+      "date": "2026-04-11",
+      "monthFolder": null,
+      "projectName": "Examp. Developer Portfolio"
+    },
+    {
+      "sourcePath": "content/notes-2026/Profound Projects/Examp. Developer Portfolio/WOM/26.4.25 @",
+      "title": "26.4.25 @",
+      "date": "2026-04-25",
+      "monthFolder": null,
+      "projectName": "Examp. Developer Portfolio"
+    },
+    {
+      "sourcePath": "content/notes-2026/Profound Projects/Flink3D/26.4.25 @",
+      "title": "26.4.25 @",
+      "date": "2026-04-25",
+      "monthFolder": null,
+      "projectName": "Flink3D"
+    },
+    {
+      "sourcePath": "content/notes-2026/Profound Projects/Fullstack dev/26.4.1",
+      "title": "26.4.1",
+      "date": "2026-04-01",
+      "monthFolder": null,
+      "projectName": "Fullstack dev"
+    },
+    {
+      "sourcePath": "content/notes-2026/Profound Projects/Fullstack dev/26.4.12",
+      "title": "26.4.12",
+      "date": "2026-04-12",
+      "monthFolder": null,
+      "projectName": "Fullstack dev"
+    },
+    {
+      "sourcePath": "content/notes-2026/Profound Projects/Fullstack dev/Temp",
+      "title": "Temp",
+      "date": null,
+      "monthFolder": null,
+      "projectName": "Fullstack dev"
+    },
+    {
+      "sourcePath": "content/notes-2026/Profound Projects/Mucho3D/26.4.25 @",
+      "title": "26.4.25 @",
+      "date": "2026-04-25",
+      "monthFolder": null,
+      "projectName": "Mucho3D"
+    },
+    {
+      "sourcePath": "content/notes-2026/Profound Projects/Parlar ES",
+      "title": "Parlar ES",
+      "date": null,
+      "monthFolder": null,
+      "projectName": null
+    },
+    {
+      "sourcePath": "content/notes-2026/Profound Projects/PF-PROJECT/ BMS-KB",
+      "title": " BMS-KB",
+      "date": null,
+      "monthFolder": null,
+      "projectName": "PF-PROJECT"
+    },
+    {
+      "sourcePath": "content/notes-2026/Profound Projects/PF-PROJECT/26.4.28",
+      "title": "26.4.28",
+      "date": "2026-04-28",
+      "monthFolder": null,
+      "projectName": "PF-PROJECT"
+    },
+    {
+      "sourcePath": "content/notes-2026/Profound Projects/PF-PROJECT/26.5.2",
+      "title": "26.5.2",
+      "date": "2026-05-02",
+      "monthFolder": null,
+      "projectName": "PF-PROJECT"
+    },
+    {
+      "sourcePath": "content/notes-2026/Profound Projects/PF-PROJECT/26.5.3 @",
+      "title": "26.5.3 @",
+      "date": "2026-05-03",
+      "monthFolder": null,
+      "projectName": "PF-PROJECT"
+    },
+    {
+      "sourcePath": "content/notes-2026/Profound Projects/PF-PROJECT/GH100 - Powerfull planning&tracking",
+      "title": "GH100 - Powerfull planning&tracking",
+      "date": null,
+      "monthFolder": null,
+      "projectName": "PF-PROJECT"
+    },
+    {
+      "sourcePath": "content/notes-2026/Profound Projects/Powerframe/26.4.11",
+      "title": "26.4.11",
+      "date": "2026-04-11",
+      "monthFolder": null,
+      "projectName": "Powerframe"
+    },
+    {
+      "sourcePath": "content/notes-2026/Profound Projects/Powerframe/26.4.25 @",
+      "title": "26.4.25 @",
+      "date": "2026-04-25",
+      "monthFolder": null,
+      "projectName": "Powerframe"
+    },
+    {
+      "sourcePath": "content/notes-2026/Profound Projects/Powerstarter Azure/26.4.10",
+      "title": "26.4.10",
+      "date": "2026-04-10",
+      "monthFolder": null,
+      "projectName": "Powerstarter Azure"
+    },
+    {
+      "sourcePath": "content/notes-2026/Profound Projects/Powerstarter Azure/26.4.11",
+      "title": "26.4.11",
+      "date": "2026-04-11",
+      "monthFolder": null,
+      "projectName": "Powerstarter Azure"
+    },
+    {
+      "sourcePath": "content/notes-2026/Profound Projects/Powerstarter Azure/26.4.25 @",
+      "title": "26.4.25 @",
+      "date": "2026-04-25",
+      "monthFolder": null,
+      "projectName": "Powerstarter Azure"
+    },
+    {
+      "sourcePath": "content/notes-2026/Profound Projects/Sapient/26.4.16",
+      "title": "26.4.16",
+      "date": "2026-04-16",
+      "monthFolder": null,
+      "projectName": "Sapient"
+    },
+    {
+      "sourcePath": "content/notes-2026/Profound Projects/Sapient/26.4.25 @",
+      "title": "26.4.25 @",
+      "date": "2026-04-25",
+      "monthFolder": null,
+      "projectName": "Sapient"
+    },
+    {
+      "sourcePath": "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.10",
+      "title": "26.4.10",
+      "date": "2026-04-10",
+      "monthFolder": null,
+      "projectName": "TheRocketTree-App"
+    },
+    {
+      "sourcePath": "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.11",
+      "title": "26.4.11",
+      "date": "2026-04-11",
+      "monthFolder": null,
+      "projectName": "TheRocketTree-App"
+    },
+    {
+      "sourcePath": "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.12",
+      "title": "26.4.12",
+      "date": "2026-04-12",
+      "monthFolder": null,
+      "projectName": "TheRocketTree-App"
+    },
+    {
+      "sourcePath": "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.13",
+      "title": "26.4.13",
+      "date": "2026-04-13",
+      "monthFolder": null,
+      "projectName": "TheRocketTree-App"
+    },
+    {
+      "sourcePath": "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.14",
+      "title": "26.4.14",
+      "date": "2026-04-14",
+      "monthFolder": null,
+      "projectName": "TheRocketTree-App"
+    },
+    {
+      "sourcePath": "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.17",
+      "title": "26.4.17",
+      "date": "2026-04-17",
+      "monthFolder": null,
+      "projectName": "TheRocketTree-App"
+    },
+    {
+      "sourcePath": "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.25 @",
+      "title": "26.4.25 @",
+      "date": "2026-04-25",
+      "monthFolder": null,
+      "projectName": "TheRocketTree-App"
+    },
+    {
+      "sourcePath": "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.9",
+      "title": "26.4.9",
+      "date": "2026-04-09",
+      "monthFolder": null,
+      "projectName": "TheRocketTree-App"
+    },
+    {
+      "sourcePath": "content/notes-2026/README.md",
+      "title": "README",
+      "date": null,
+      "monthFolder": null,
+      "projectName": null
+    }
+  ],
   "tasks": [
     {
       "id": "task-content-notes-2026-april-alfadenga-14",
@@ -2147,5 +2753,1459 @@
       "createdFrom": "note",
       "decisionContext": null
     }
-  ]
+  ],
+  "milestones": [
+    {
+      "id": "milestone-bikerinstinct-2026-04-25",
+      "title": "Bikerinstinct roadmap checkpoint",
+      "projectName": "Bikerinstinct",
+      "sourceFolder": "content/notes-2026/Profound Projects/Bikerinstinct",
+      "status": "active",
+      "dateRange": {
+        "start": "2026-04-25",
+        "end": "2026-04-25"
+      },
+      "linkedNotes": [
+        "content/notes-2026/Profound Projects/Bikerinstinct/26.4.25"
+      ],
+      "linkedTasks": [],
+      "suggestedNextActions": []
+    },
+    {
+      "id": "milestone-bv-undated",
+      "title": "BV roadmap checkpoint",
+      "projectName": "BV",
+      "sourceFolder": "content/notes-2026/Profound Projects/BV",
+      "status": "needs-date",
+      "dateRange": {
+        "start": null,
+        "end": null
+      },
+      "linkedNotes": [
+        "content/notes-2026/Profound Projects/BV/CBR",
+        "content/notes-2026/Profound Projects/BV/MZ3"
+      ],
+      "linkedTasks": [
+        "task-content-notes-2026-profound-projects-bv-mz3-13",
+        "task-content-notes-2026-profound-projects-bv-mz3-24",
+        "task-content-notes-2026-profound-projects-bv-mz3-35",
+        "task-content-notes-2026-profound-projects-bv-mz3-112",
+        "task-content-notes-2026-profound-projects-bv-mz3-115"
+      ],
+      "suggestedNextActions": [
+        "30 - lunch fix",
+        "for woensdag?",
+        "@",
+        "30"
+      ]
+    },
+    {
+      "id": "milestone-cm4-undated",
+      "title": "CM4 roadmap checkpoint",
+      "projectName": "CM4",
+      "sourceFolder": "content/notes-2026/Profound Projects/CM4",
+      "status": "needs-date",
+      "dateRange": {
+        "start": null,
+        "end": null
+      },
+      "linkedNotes": [
+        "content/notes-2026/Profound Projects/CM4/Print"
+      ],
+      "linkedTasks": [],
+      "suggestedNextActions": []
+    },
+    {
+      "id": "milestone-cshop-2026-04-25",
+      "title": "CSHOP roadmap checkpoint",
+      "projectName": "CSHOP",
+      "sourceFolder": "content/notes-2026/Profound Projects/CSHOP",
+      "status": "active",
+      "dateRange": {
+        "start": "2026-04-12",
+        "end": "2026-04-25"
+      },
+      "linkedNotes": [
+        "content/notes-2026/Profound Projects/CSHOP/26.4.12",
+        "content/notes-2026/Profound Projects/CSHOP/26.4.25 @"
+      ],
+      "linkedTasks": [
+        "task-content-notes-2026-profound-projects-cshop-26-4-12-5",
+        "task-content-notes-2026-profound-projects-cshop-26-4-12-10",
+        "task-content-notes-2026-profound-projects-cshop-26-4-12-12",
+        "task-content-notes-2026-profound-projects-cshop-26-4-12-46"
+      ],
+      "suggestedNextActions": [
+        "a custom budget mapper engine with a \"stand-alone brain\" and a profile-driven router, you need a multi-layered architecture",
+        "a Vector Database (e.g., ChromaDB, Pinecone, or Milvus) to store and retrieve \"atomic",
+        ", a server with a dedicated GPU (e.g., NVIDIA RTX 3090/4090) is recommended for processing",
+        "one, or focus on the ethical implications of removing humans from the loop?"
+      ]
+    },
+    {
+      "id": "milestone-dealinstinct-2026-04-25",
+      "title": "Dealinstinct roadmap checkpoint",
+      "projectName": "Dealinstinct",
+      "sourceFolder": "content/notes-2026/Profound Projects/Dealinstinct",
+      "status": "active",
+      "dateRange": {
+        "start": "2026-04-25",
+        "end": "2026-04-25"
+      },
+      "linkedNotes": [
+        "content/notes-2026/Profound Projects/Dealinstinct/26.4.25"
+      ],
+      "linkedTasks": [],
+      "suggestedNextActions": []
+    },
+    {
+      "id": "milestone-examp-developer-portfolio-2026-04-25",
+      "title": "Examp. Developer Portfolio roadmap checkpoint",
+      "projectName": "Examp. Developer Portfolio",
+      "sourceFolder": "content/notes-2026/Profound Projects/Examp. Developer Portfolio",
+      "status": "active",
+      "dateRange": {
+        "start": "2026-04-11",
+        "end": "2026-04-25"
+      },
+      "linkedNotes": [
+        "content/notes-2026/Profound Projects/Examp. Developer Portfolio/WOM/26.4.11",
+        "content/notes-2026/Profound Projects/Examp. Developer Portfolio/WOM/26.4.25 @"
+      ],
+      "linkedTasks": [
+        "task-content-notes-2026-profound-projects-examp-developer-portfolio-wom-26-4-25-1"
+      ],
+      "suggestedNextActions": [
+        "for the setup"
+      ]
+    },
+    {
+      "id": "milestone-flink3d-2026-04-25",
+      "title": "Flink3D roadmap checkpoint",
+      "projectName": "Flink3D",
+      "sourceFolder": "content/notes-2026/Profound Projects/Flink3D",
+      "status": "active",
+      "dateRange": {
+        "start": "2026-04-25",
+        "end": "2026-04-25"
+      },
+      "linkedNotes": [
+        "content/notes-2026/Profound Projects/Flink3D/26.4.25 @"
+      ],
+      "linkedTasks": [],
+      "suggestedNextActions": []
+    },
+    {
+      "id": "milestone-fullstack-dev-2026-04-12",
+      "title": "Fullstack dev roadmap checkpoint",
+      "projectName": "Fullstack dev",
+      "sourceFolder": "content/notes-2026/Profound Projects/Fullstack dev",
+      "status": "active",
+      "dateRange": {
+        "start": "2026-04-01",
+        "end": "2026-04-12"
+      },
+      "linkedNotes": [
+        "content/notes-2026/Profound Projects/Fullstack dev/26.4.1",
+        "content/notes-2026/Profound Projects/Fullstack dev/26.4.12",
+        "content/notes-2026/Profound Projects/Fullstack dev/Temp"
+      ],
+      "linkedTasks": [],
+      "suggestedNextActions": []
+    },
+    {
+      "id": "milestone-mucho3d-2026-04-25",
+      "title": "Mucho3D roadmap checkpoint",
+      "projectName": "Mucho3D",
+      "sourceFolder": "content/notes-2026/Profound Projects/Mucho3D",
+      "status": "active",
+      "dateRange": {
+        "start": "2026-04-25",
+        "end": "2026-04-25"
+      },
+      "linkedNotes": [
+        "content/notes-2026/Profound Projects/Mucho3D/26.4.25 @"
+      ],
+      "linkedTasks": [
+        "task-content-notes-2026-profound-projects-mucho3d-26-4-25-19",
+        "task-content-notes-2026-profound-projects-mucho3d-26-4-25-23",
+        "task-content-notes-2026-profound-projects-mucho3d-26-4-25-32",
+        "task-content-notes-2026-profound-projects-mucho3d-26-4-25-60",
+        "task-content-notes-2026-profound-projects-mucho3d-26-4-25-64"
+      ],
+      "suggestedNextActions": [
+        "a secure path between the two machines. This provides a stable IP or URL that doesn't change.",
+        "on preferences.",
+        "Benefits of This Setup",
+        "In your Blender MCP Add-on settings, you simply enter your server's Tailscale IP: http://100.x.y.z:11434."
+      ]
+    },
+    {
+      "id": "milestone-pf-project-2026-05-03",
+      "title": "PF-PROJECT roadmap checkpoint",
+      "projectName": "PF-PROJECT",
+      "sourceFolder": "content/notes-2026/Profound Projects/PF-PROJECT",
+      "status": "active",
+      "dateRange": {
+        "start": "2026-04-28",
+        "end": "2026-05-03"
+      },
+      "linkedNotes": [
+        "content/notes-2026/Profound Projects/PF-PROJECT/ BMS-KB",
+        "content/notes-2026/Profound Projects/PF-PROJECT/26.4.28",
+        "content/notes-2026/Profound Projects/PF-PROJECT/26.5.2",
+        "content/notes-2026/Profound Projects/PF-PROJECT/26.5.3 @",
+        "content/notes-2026/Profound Projects/PF-PROJECT/GH100 - Powerfull planning&tracking"
+      ],
+      "linkedTasks": [
+        "task-content-notes-2026-profound-projects-pf-project-bms-kb-19",
+        "task-content-notes-2026-profound-projects-pf-project-bms-kb-57",
+        "task-content-notes-2026-profound-projects-pf-project-bms-kb-58",
+        "task-content-notes-2026-profound-projects-pf-project-bms-kb-59",
+        "task-content-notes-2026-profound-projects-pf-project-26-5-2-21",
+        "task-content-notes-2026-profound-projects-pf-project-26-5-2-22",
+        "task-content-notes-2026-profound-projects-pf-project-26-5-2-43",
+        "task-content-notes-2026-profound-projects-pf-project-26-5-2-47",
+        "task-content-notes-2026-profound-projects-pf-project-26-5-2-51",
+        "task-content-notes-2026-profound-projects-pf-project-26-5-3-23",
+        "task-content-notes-2026-profound-projects-pf-project-26-5-3-46",
+        "task-content-notes-2026-profound-projects-pf-project-26-5-3-58"
+      ],
+      "suggestedNextActions": [
+        ". It allows you to maintain the \"Time Planner\"",
+        "a new repo called ProfoundProjects-Suite.",
+        "your Time Planner code into a web-app folder.",
+        "your 2026 notes into a vault folder."
+      ]
+    },
+    {
+      "id": "milestone-powerframe-2026-04-25",
+      "title": "Powerframe roadmap checkpoint",
+      "projectName": "Powerframe",
+      "sourceFolder": "content/notes-2026/Profound Projects/Powerframe",
+      "status": "active",
+      "dateRange": {
+        "start": "2026-04-11",
+        "end": "2026-04-25"
+      },
+      "linkedNotes": [
+        "content/notes-2026/Profound Projects/Powerframe/26.4.11",
+        "content/notes-2026/Profound Projects/Powerframe/26.4.25 @"
+      ],
+      "linkedTasks": [
+        "task-content-notes-2026-profound-projects-powerframe-26-4-11-18",
+        "task-content-notes-2026-profound-projects-powerframe-26-4-11-22",
+        "task-content-notes-2026-profound-projects-powerframe-26-4-11-23",
+        "task-content-notes-2026-profound-projects-powerframe-26-4-11-24",
+        "task-content-notes-2026-profound-projects-powerframe-26-4-11-27",
+        "task-content-notes-2026-profound-projects-powerframe-26-4-11-42",
+        "task-content-notes-2026-profound-projects-powerframe-26-4-11-60",
+        "task-content-notes-2026-profound-projects-powerframe-26-4-11-62",
+        "task-content-notes-2026-profound-projects-powerframe-26-4-11-64",
+        "task-content-notes-2026-profound-projects-powerframe-26-4-11-65",
+        "task-content-notes-2026-profound-projects-powerframe-26-4-11-68",
+        "task-content-notes-2026-profound-projects-powerframe-26-4-11-70"
+      ],
+      "suggestedNextActions": [
+        "this hub, we need to create a \"Project Bridge\" within the Powerframe repo. Use this prompt for Copilot/Claude:",
+        "a module that syncs metadata from external GitHub repos into the Powerframe dashboard (e.g., commit history, issue status).",
+        "a central registry for 2D (Figma/Images) and 3D (Mucho3D/GLB) files. Each asset must be linked to a specific \"Upskilled Project\" ID.",
+        "a subscription-tier check."
+      ]
+    },
+    {
+      "id": "milestone-powerstarter-azure-2026-04-25",
+      "title": "Powerstarter Azure roadmap checkpoint",
+      "projectName": "Powerstarter Azure",
+      "sourceFolder": "content/notes-2026/Profound Projects/Powerstarter Azure",
+      "status": "active",
+      "dateRange": {
+        "start": "2026-04-10",
+        "end": "2026-04-25"
+      },
+      "linkedNotes": [
+        "content/notes-2026/Profound Projects/Powerstarter Azure/26.4.10",
+        "content/notes-2026/Profound Projects/Powerstarter Azure/26.4.11",
+        "content/notes-2026/Profound Projects/Powerstarter Azure/26.4.25 @"
+      ],
+      "linkedTasks": [
+        "task-content-notes-2026-profound-projects-powerstarter-azure-26-4-10-1",
+        "task-content-notes-2026-profound-projects-powerstarter-azure-26-4-10-24",
+        "task-content-notes-2026-profound-projects-powerstarter-azure-26-4-11-6",
+        "task-content-notes-2026-profound-projects-powerstarter-azure-26-4-11-21",
+        "task-content-notes-2026-profound-projects-powerstarter-azure-26-4-11-22",
+        "task-content-notes-2026-profound-projects-powerstarter-azure-26-4-11-24",
+        "task-content-notes-2026-profound-projects-powerstarter-azure-26-4-11-30",
+        "task-content-notes-2026-profound-projects-powerstarter-azure-26-4-11-32",
+        "task-content-notes-2026-profound-projects-powerstarter-azure-26-4-11-34",
+        "task-content-notes-2026-profound-projects-powerstarter-azure-26-4-11-44",
+        "task-content-notes-2026-profound-projects-powerstarter-azure-26-4-11-47",
+        "task-content-notes-2026-profound-projects-powerstarter-azure-26-4-11-48"
+      ],
+      "suggestedNextActions": [
+        "to Azure changes the \"instances\"",
+        "an Azure Storage Account and a File Share to hold your ChromaDB vector data and Ollama model files.",
+        "Powerframe Hub so we can get",
+        "a WorkState to the BMS schema. It should track: Bootstrapping, Testing, Reviewing, and Deployment_Ready."
+      ]
+    },
+    {
+      "id": "milestone-sapient-2026-04-25",
+      "title": "Sapient roadmap checkpoint",
+      "projectName": "Sapient",
+      "sourceFolder": "content/notes-2026/Profound Projects/Sapient",
+      "status": "active",
+      "dateRange": {
+        "start": "2026-04-16",
+        "end": "2026-04-25"
+      },
+      "linkedNotes": [
+        "content/notes-2026/Profound Projects/Sapient/26.4.16",
+        "content/notes-2026/Profound Projects/Sapient/26.4.25 @"
+      ],
+      "linkedTasks": [
+        "task-content-notes-2026-profound-projects-sapient-26-4-16-7",
+        "task-content-notes-2026-profound-projects-sapient-26-4-16-11",
+        "task-content-notes-2026-profound-projects-sapient-26-4-16-14",
+        "task-content-notes-2026-profound-projects-sapient-26-4-16-18",
+        "task-content-notes-2026-profound-projects-sapient-26-4-16-28",
+        "task-content-notes-2026-profound-projects-sapient-26-4-16-33",
+        "task-content-notes-2026-profound-projects-sapient-26-4-16-45"
+      ],
+      "suggestedNextActions": [
+        "a strict versioning differentiator for the Sapient Engine and its knowledge content. Update the packages/semantic-core, packages/knowledge-base, and apps/web-dashboard with the following:",
+        "a minimal, high-end system tag in the corner that displays: [SAPIENT_ENGINE_VERSION] // [SOPHIA_VERSION].",
+        "a bug in the 3D Tree rendering, you bump the Sapient Engine. If you add a new profound insight for your friend, you bump the Sophia Version.",
+        "a versions.ts file in packages/core that acts as the single source of truth for these strings."
+      ]
+    },
+    {
+      "id": "milestone-therockettree-app-2026-04-25",
+      "title": "TheRocketTree-App roadmap checkpoint",
+      "projectName": "TheRocketTree-App",
+      "sourceFolder": "content/notes-2026/Profound Projects/TheRocketTree-App",
+      "status": "active",
+      "dateRange": {
+        "start": "2026-04-09",
+        "end": "2026-04-25"
+      },
+      "linkedNotes": [
+        "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.10",
+        "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.11",
+        "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.12",
+        "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.13",
+        "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.14",
+        "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.17",
+        "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.25 @",
+        "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.9"
+      ],
+      "linkedTasks": [
+        "task-content-notes-2026-profound-projects-therockettree-app-26-4-10-1",
+        "task-content-notes-2026-profound-projects-therockettree-app-26-4-10-4",
+        "task-content-notes-2026-profound-projects-therockettree-app-26-4-10-6",
+        "task-content-notes-2026-profound-projects-therockettree-app-26-4-10-9",
+        "task-content-notes-2026-profound-projects-therockettree-app-26-4-10-10",
+        "task-content-notes-2026-profound-projects-therockettree-app-26-4-10-20",
+        "task-content-notes-2026-profound-projects-therockettree-app-26-4-10-48",
+        "task-content-notes-2026-profound-projects-therockettree-app-26-4-10-50",
+        "task-content-notes-2026-profound-projects-therockettree-app-26-4-10-51",
+        "task-content-notes-2026-profound-projects-therockettree-app-26-4-10-60",
+        "task-content-notes-2026-profound-projects-therockettree-app-26-4-10-63",
+        "task-content-notes-2026-profound-projects-therockettree-app-26-4-10-81"
+      ],
+      "suggestedNextActions": [
+        "GitHub Secrets",
+        "all 5 secrets listed above. To get their values:",
+        "VERCEL_TOKEN: Vercel Dashboard → Account Settings → Tokens → Create",
+        "Firebase Keys to Vercel (for each of the 3 projects)"
+      ]
+    }
+  ],
+  "levels": [
+    {
+      "id": "level-01",
+      "title": "Intake Gate",
+      "tier": 1,
+      "status": "completed",
+      "projectIds": [
+        "project-therockettree-app",
+        "project-pf-project"
+      ],
+      "notePaths": [
+        "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.10",
+        "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.11",
+        "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.12",
+        "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.13",
+        "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.14",
+        "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.17",
+        "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.25 @",
+        "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.9"
+      ],
+      "promptIds": [
+        "prompt-content-notes-2026-profound-projects-cshop-26-4-25",
+        "prompt-content-notes-2026-profound-projects-examp-developer-portfolio-wom-26-4-25"
+      ],
+      "featureIds": [
+        "feature-bikerinstinct-roadmap-intake",
+        "feature-bv-roadmap-intake"
+      ],
+      "taskIds": [
+        "task-review-bikerinstinct-26-4-25",
+        "task-review-cshop-26-4-12",
+        "task-review-cshop-26-4-25",
+        "task-review-dealinstinct-26-4-25"
+      ],
+      "tags": [
+        "tier-1",
+        "completed",
+        "therockettree-app",
+        "pf-project"
+      ],
+      "description": "Capture incoming notes and preserve source context.",
+      "position": {
+        "x": 18,
+        "y": 8
+      }
+    },
+    {
+      "id": "level-02",
+      "title": "Project Sorting",
+      "tier": 2,
+      "status": "active",
+      "projectIds": [
+        "project-powerstarter-azure",
+        "project-cshop"
+      ],
+      "notePaths": [
+        "content/notes-2026/Profound Projects/Powerstarter Azure/26.4.10",
+        "content/notes-2026/Profound Projects/Powerstarter Azure/26.4.11",
+        "content/notes-2026/Profound Projects/Powerstarter Azure/26.4.25 @",
+        "content/notes-2026/Profound Projects/CSHOP/26.4.12",
+        "content/notes-2026/Profound Projects/CSHOP/26.4.25 @"
+      ],
+      "promptIds": [
+        "prompt-content-notes-2026-profound-projects-examp-developer-portfolio-wom-26-4-25",
+        "prompt-content-notes-2026-profound-projects-flink3d-26-4-25"
+      ],
+      "featureIds": [
+        "feature-bv-roadmap-intake",
+        "feature-cm4-roadmap-intake"
+      ],
+      "taskIds": [
+        "task-review-dealinstinct-26-4-25",
+        "task-review-examp-developer-portfolio-26-4-11",
+        "task-review-examp-developer-portfolio-26-4-25",
+        "task-review-flink3d-26-4-25"
+      ],
+      "tags": [
+        "tier-2",
+        "active",
+        "powerstarter-azure",
+        "cshop"
+      ],
+      "description": "Classify indexed notes into project lanes and working buckets.",
+      "position": {
+        "x": 62,
+        "y": 21
+      }
+    },
+    {
+      "id": "level-03",
+      "title": "Prompt Lab",
+      "tier": 3,
+      "status": "unlocked",
+      "projectIds": [
+        "project-examp-developer-portfolio",
+        "project-powerframe"
+      ],
+      "notePaths": [
+        "content/notes-2026/Profound Projects/Examp. Developer Portfolio/WOM/26.4.11",
+        "content/notes-2026/Profound Projects/Examp. Developer Portfolio/WOM/26.4.25 @",
+        "content/notes-2026/Profound Projects/Powerframe/26.4.11",
+        "content/notes-2026/Profound Projects/Powerframe/26.4.25 @"
+      ],
+      "promptIds": [
+        "prompt-content-notes-2026-profound-projects-flink3d-26-4-25",
+        "prompt-content-notes-2026-profound-projects-mucho3d-26-4-25"
+      ],
+      "featureIds": [
+        "feature-cm4-roadmap-intake",
+        "feature-cshop-roadmap-intake"
+      ],
+      "taskIds": [
+        "task-review-flink3d-26-4-25",
+        "task-review-fullstack-dev-26-4-1",
+        "task-review-fullstack-dev-26-4-12",
+        "task-review-mucho3d-26-4-25"
+      ],
+      "tags": [
+        "tier-3",
+        "unlocked",
+        "examp-developer-portfolio",
+        "powerframe"
+      ],
+      "description": "Connect prompt sessions to projects, notes, and requested changes.",
+      "position": {
+        "x": 34,
+        "y": 35
+      }
+    },
+    {
+      "id": "level-04",
+      "title": "Feature Forge",
+      "tier": 4,
+      "status": "unlocked",
+      "projectIds": [
+        "project-sapient",
+        "project-flink3d"
+      ],
+      "notePaths": [
+        "content/notes-2026/Profound Projects/Sapient/26.4.16",
+        "content/notes-2026/Profound Projects/Sapient/26.4.25 @",
+        "content/notes-2026/Profound Projects/Flink3D/26.4.25 @"
+      ],
+      "promptIds": [
+        "prompt-content-notes-2026-profound-projects-mucho3d-26-4-25",
+        "prompt-content-notes-2026-profound-projects-pf-project-26-5-3"
+      ],
+      "featureIds": [
+        "feature-cshop-roadmap-intake",
+        "feature-dealinstinct-roadmap-intake"
+      ],
+      "taskIds": [
+        "task-review-mucho3d-26-4-25",
+        "task-review-pf-project-26-4-28",
+        "task-review-pf-project-26-5-2",
+        "task-review-pf-project-26-5-3"
+      ],
+      "tags": [
+        "tier-4",
+        "unlocked",
+        "sapient",
+        "flink3d"
+      ],
+      "description": "Turn recurring notes and prompts into feature candidates.",
+      "position": {
+        "x": 76,
+        "y": 49
+      }
+    },
+    {
+      "id": "level-05",
+      "title": "Task Trail",
+      "tier": 5,
+      "status": "locked",
+      "projectIds": [
+        "project-mucho3d",
+        "project-fullstack-dev"
+      ],
+      "notePaths": [
+        "content/notes-2026/Profound Projects/Mucho3D/26.4.25 @",
+        "content/notes-2026/Profound Projects/Fullstack dev/26.4.1",
+        "content/notes-2026/Profound Projects/Fullstack dev/26.4.12",
+        "content/notes-2026/Profound Projects/Fullstack dev/Temp"
+      ],
+      "promptIds": [
+        "prompt-content-notes-2026-profound-projects-pf-project-26-5-3",
+        "prompt-content-notes-2026-profound-projects-powerframe-26-4-25"
+      ],
+      "featureIds": [
+        "feature-dealinstinct-roadmap-intake",
+        "feature-examp-developer-portfolio-roadmap-intake"
+      ],
+      "taskIds": [
+        "task-review-pf-project-26-5-3",
+        "task-review-powerframe-26-4-11",
+        "task-review-powerframe-26-4-25",
+        "task-review-powerstarter-azure-26-4-10"
+      ],
+      "tags": [
+        "tier-5",
+        "locked",
+        "mucho3d",
+        "fullstack-dev"
+      ],
+      "description": "Break feature candidates into concrete tasks and review loops.",
+      "position": {
+        "x": 25,
+        "y": 64
+      }
+    },
+    {
+      "id": "level-06",
+      "title": "Milestone Ridge",
+      "tier": 6,
+      "status": "locked",
+      "projectIds": [
+        "project-bikerinstinct",
+        "project-dealinstinct"
+      ],
+      "notePaths": [
+        "content/notes-2026/Profound Projects/Bikerinstinct/26.4.25",
+        "content/notes-2026/Profound Projects/Dealinstinct/26.4.25"
+      ],
+      "promptIds": [
+        "prompt-content-notes-2026-profound-projects-powerframe-26-4-25",
+        "prompt-content-notes-2026-profound-projects-powerstarter-azure-26-4-25"
+      ],
+      "featureIds": [
+        "feature-examp-developer-portfolio-roadmap-intake",
+        "feature-flink3d-roadmap-intake"
+      ],
+      "taskIds": [
+        "task-review-powerstarter-azure-26-4-10",
+        "task-review-powerstarter-azure-26-4-11",
+        "task-review-powerstarter-azure-26-4-25",
+        "task-review-sapient-26-4-16"
+      ],
+      "tags": [
+        "tier-6",
+        "locked",
+        "bikerinstinct",
+        "dealinstinct"
+      ],
+      "description": "Promote stable task clusters into dated milestones.",
+      "position": {
+        "x": 58,
+        "y": 78
+      }
+    },
+    {
+      "id": "level-07",
+      "title": "Release Summit",
+      "tier": 7,
+      "status": "locked",
+      "projectIds": [
+        "project-bv",
+        "project-cm4"
+      ],
+      "notePaths": [
+        "content/notes-2026/Profound Projects/BV/CBR",
+        "content/notes-2026/Profound Projects/BV/MZ3",
+        "content/notes-2026/Profound Projects/CM4/Print"
+      ],
+      "promptIds": [
+        "prompt-content-notes-2026-profound-projects-powerstarter-azure-26-4-25",
+        "prompt-content-notes-2026-profound-projects-sapient-26-4-25"
+      ],
+      "featureIds": [
+        "feature-flink3d-roadmap-intake",
+        "feature-fullstack-dev-roadmap-intake"
+      ],
+      "taskIds": [
+        "task-review-sapient-26-4-16",
+        "task-review-sapient-26-4-25",
+        "task-review-therockettree-app-26-4-10",
+        "task-review-therockettree-app-26-4-11"
+      ],
+      "tags": [
+        "tier-7",
+        "locked",
+        "bv",
+        "cm4"
+      ],
+      "description": "Prepare reviewed roadmap slices for sync, export, and publishing.",
+      "position": {
+        "x": 42,
+        "y": 92
+      }
+    }
+  ],
+  "levelAssignments": [
+    {
+      "levelId": "level-01",
+      "projectIds": [
+        "project-therockettree-app",
+        "project-pf-project"
+      ],
+      "notePaths": [
+        "content/notes-2026/Profound Projects/PF-PROJECT/ BMS-KB",
+        "content/notes-2026/Profound Projects/PF-PROJECT/26.4.28",
+        "content/notes-2026/Profound Projects/PF-PROJECT/26.5.2",
+        "content/notes-2026/Profound Projects/PF-PROJECT/26.5.3 @",
+        "content/notes-2026/Profound Projects/PF-PROJECT/GH100 - Powerfull planning&tracking",
+        "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.10",
+        "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.11",
+        "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.12",
+        "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.13",
+        "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.14",
+        "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.17",
+        "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.25 @",
+        "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.9"
+      ],
+      "promptIds": [
+        "prompt-content-notes-2026-profound-projects-cshop-26-4-25",
+        "prompt-content-notes-2026-profound-projects-examp-developer-portfolio-wom-26-4-25"
+      ],
+      "featureIds": [
+        "feature-bikerinstinct-roadmap-intake",
+        "feature-bv-roadmap-intake"
+      ],
+      "taskIds": [
+        "task-review-bikerinstinct-26-4-25",
+        "task-review-cshop-26-4-12",
+        "task-review-cshop-26-4-25",
+        "task-review-dealinstinct-26-4-25"
+      ],
+      "tags": [
+        "tier-1",
+        "completed",
+        "therockettree-app",
+        "pf-project",
+        "auto-assigned"
+      ],
+      "reasons": [
+        {
+          "sourcePath": "content/notes-2026/Profound Projects/PF-PROJECT/ BMS-KB",
+          "score": 62,
+          "reason": "matched project PF-PROJECT"
+        },
+        {
+          "sourcePath": "content/notes-2026/Profound Projects/PF-PROJECT/26.4.28",
+          "score": 67,
+          "reason": "matched project PF-PROJECT"
+        },
+        {
+          "sourcePath": "content/notes-2026/Profound Projects/PF-PROJECT/26.5.2",
+          "score": 75,
+          "reason": "matched project PF-PROJECT"
+        },
+        {
+          "sourcePath": "content/notes-2026/Profound Projects/PF-PROJECT/26.5.3 @",
+          "score": 75,
+          "reason": "matched project PF-PROJECT"
+        },
+        {
+          "sourcePath": "content/notes-2026/Profound Projects/PF-PROJECT/GH100 - Powerfull planning&tracking",
+          "score": 62,
+          "reason": "matched project PF-PROJECT"
+        },
+        {
+          "sourcePath": "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.10",
+          "score": 127,
+          "reason": "matched project TheRocketTree-App"
+        },
+        {
+          "sourcePath": "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.11",
+          "score": 127,
+          "reason": "matched project TheRocketTree-App"
+        },
+        {
+          "sourcePath": "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.12",
+          "score": 127,
+          "reason": "matched project TheRocketTree-App"
+        },
+        {
+          "sourcePath": "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.13",
+          "score": 127,
+          "reason": "matched project TheRocketTree-App"
+        },
+        {
+          "sourcePath": "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.14",
+          "score": 127,
+          "reason": "matched project TheRocketTree-App"
+        },
+        {
+          "sourcePath": "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.17",
+          "score": 127,
+          "reason": "matched project TheRocketTree-App"
+        },
+        {
+          "sourcePath": "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.25 @",
+          "score": 127,
+          "reason": "matched project TheRocketTree-App"
+        },
+        {
+          "sourcePath": "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.9",
+          "score": 127,
+          "reason": "matched project TheRocketTree-App"
+        }
+      ]
+    },
+    {
+      "levelId": "level-02",
+      "projectIds": [
+        "project-powerstarter-azure",
+        "project-cshop"
+      ],
+      "notePaths": [
+        "content/notes-2026/Profound Projects/CSHOP/26.4.12",
+        "content/notes-2026/Profound Projects/CSHOP/26.4.25 @",
+        "content/notes-2026/Profound Projects/Parlar ES",
+        "content/notes-2026/Profound Projects/Powerstarter Azure/26.4.10",
+        "content/notes-2026/Profound Projects/Powerstarter Azure/26.4.11",
+        "content/notes-2026/Profound Projects/Powerstarter Azure/26.4.25 @"
+      ],
+      "promptIds": [
+        "prompt-content-notes-2026-profound-projects-examp-developer-portfolio-wom-26-4-25",
+        "prompt-content-notes-2026-profound-projects-flink3d-26-4-25"
+      ],
+      "featureIds": [
+        "feature-bv-roadmap-intake",
+        "feature-cm4-roadmap-intake"
+      ],
+      "taskIds": [
+        "task-review-dealinstinct-26-4-25",
+        "task-review-examp-developer-portfolio-26-4-11",
+        "task-review-examp-developer-portfolio-26-4-25",
+        "task-review-flink3d-26-4-25"
+      ],
+      "tags": [
+        "tier-2",
+        "active",
+        "powerstarter-azure",
+        "cshop",
+        "auto-assigned"
+      ],
+      "reasons": [
+        {
+          "sourcePath": "content/notes-2026/Profound Projects/CSHOP/26.4.12",
+          "score": 133,
+          "reason": "matched project CSHOP"
+        },
+        {
+          "sourcePath": "content/notes-2026/Profound Projects/CSHOP/26.4.25 @",
+          "score": 133,
+          "reason": "matched project CSHOP"
+        },
+        {
+          "sourcePath": "content/notes-2026/Profound Projects/Parlar ES",
+          "score": 18,
+          "reason": "matched title/date/path hints"
+        },
+        {
+          "sourcePath": "content/notes-2026/Profound Projects/Powerstarter Azure/26.4.10",
+          "score": 133,
+          "reason": "matched project Powerstarter Azure"
+        },
+        {
+          "sourcePath": "content/notes-2026/Profound Projects/Powerstarter Azure/26.4.11",
+          "score": 133,
+          "reason": "matched project Powerstarter Azure"
+        },
+        {
+          "sourcePath": "content/notes-2026/Profound Projects/Powerstarter Azure/26.4.25 @",
+          "score": 133,
+          "reason": "matched project Powerstarter Azure"
+        }
+      ]
+    },
+    {
+      "levelId": "level-03",
+      "projectIds": [
+        "project-examp-developer-portfolio",
+        "project-powerframe"
+      ],
+      "notePaths": [
+        "content/notes-2026/Profound Projects/Examp. Developer Portfolio/WOM/26.4.11",
+        "content/notes-2026/Profound Projects/Examp. Developer Portfolio/WOM/26.4.25 @",
+        "content/notes-2026/Profound Projects/Powerframe/26.4.11",
+        "content/notes-2026/Profound Projects/Powerframe/26.4.25 @"
+      ],
+      "promptIds": [
+        "prompt-content-notes-2026-profound-projects-flink3d-26-4-25",
+        "prompt-content-notes-2026-profound-projects-mucho3d-26-4-25",
+        "prompt-content-notes-2026-profound-projects-therockettree-app-26-4-25"
+      ],
+      "featureIds": [
+        "feature-cm4-roadmap-intake",
+        "feature-cshop-roadmap-intake"
+      ],
+      "taskIds": [
+        "task-review-flink3d-26-4-25",
+        "task-review-fullstack-dev-26-4-1",
+        "task-review-fullstack-dev-26-4-12",
+        "task-review-mucho3d-26-4-25"
+      ],
+      "tags": [
+        "tier-3",
+        "unlocked",
+        "examp-developer-portfolio",
+        "powerframe",
+        "auto-assigned"
+      ],
+      "reasons": [
+        {
+          "sourcePath": "content/notes-2026/Profound Projects/Examp. Developer Portfolio/WOM/26.4.11",
+          "score": 127,
+          "reason": "matched project Examp. Developer Portfolio"
+        },
+        {
+          "sourcePath": "content/notes-2026/Profound Projects/Examp. Developer Portfolio/WOM/26.4.25 @",
+          "score": 127,
+          "reason": "matched project Examp. Developer Portfolio"
+        },
+        {
+          "sourcePath": "content/notes-2026/Profound Projects/Powerframe/26.4.11",
+          "score": 127,
+          "reason": "matched project Powerframe"
+        },
+        {
+          "sourcePath": "content/notes-2026/Profound Projects/Powerframe/26.4.25 @",
+          "score": 127,
+          "reason": "matched project Powerframe"
+        }
+      ]
+    },
+    {
+      "levelId": "level-04",
+      "projectIds": [
+        "project-sapient",
+        "project-flink3d"
+      ],
+      "notePaths": [
+        "content/notes-2026/Profound Projects/Flink3D/26.4.25 @",
+        "content/notes-2026/Profound Projects/Sapient/26.4.16",
+        "content/notes-2026/Profound Projects/Sapient/26.4.25 @"
+      ],
+      "promptIds": [
+        "prompt-content-notes-2026-profound-projects-mucho3d-26-4-25",
+        "prompt-content-notes-2026-profound-projects-pf-project-26-5-3"
+      ],
+      "featureIds": [
+        "feature-cshop-roadmap-intake",
+        "feature-dealinstinct-roadmap-intake"
+      ],
+      "taskIds": [
+        "task-review-mucho3d-26-4-25",
+        "task-review-pf-project-26-4-28",
+        "task-review-pf-project-26-5-2",
+        "task-review-pf-project-26-5-3"
+      ],
+      "tags": [
+        "tier-4",
+        "unlocked",
+        "sapient",
+        "flink3d",
+        "auto-assigned"
+      ],
+      "reasons": [
+        {
+          "sourcePath": "content/notes-2026/Profound Projects/Flink3D/26.4.25 @",
+          "score": 116,
+          "reason": "matched project Flink3D"
+        },
+        {
+          "sourcePath": "content/notes-2026/Profound Projects/Sapient/26.4.16",
+          "score": 116,
+          "reason": "matched project Sapient"
+        },
+        {
+          "sourcePath": "content/notes-2026/Profound Projects/Sapient/26.4.25 @",
+          "score": 116,
+          "reason": "matched project Sapient"
+        }
+      ]
+    },
+    {
+      "levelId": "level-05",
+      "projectIds": [
+        "project-mucho3d",
+        "project-fullstack-dev"
+      ],
+      "notePaths": [
+        "content/notes-2026/Profound Projects/Fullstack dev/26.4.1",
+        "content/notes-2026/Profound Projects/Fullstack dev/26.4.12",
+        "content/notes-2026/Profound Projects/Fullstack dev/Temp",
+        "content/notes-2026/Profound Projects/Mucho3D/26.4.25 @"
+      ],
+      "promptIds": [
+        "prompt-content-notes-2026-profound-projects-pf-project-26-5-3",
+        "prompt-content-notes-2026-profound-projects-powerframe-26-4-25"
+      ],
+      "featureIds": [
+        "feature-dealinstinct-roadmap-intake",
+        "feature-examp-developer-portfolio-roadmap-intake"
+      ],
+      "taskIds": [
+        "task-review-pf-project-26-5-3",
+        "task-review-powerframe-26-4-11",
+        "task-review-powerframe-26-4-25",
+        "task-review-powerstarter-azure-26-4-10",
+        "task-review-therockettree-app-26-4-12",
+        "task-review-therockettree-app-26-4-13",
+        "task-review-therockettree-app-26-4-14",
+        "task-review-therockettree-app-26-4-17",
+        "task-review-therockettree-app-26-4-25",
+        "task-review-therockettree-app-26-4-9"
+      ],
+      "tags": [
+        "tier-5",
+        "locked",
+        "mucho3d",
+        "fullstack-dev",
+        "auto-assigned"
+      ],
+      "reasons": [
+        {
+          "sourcePath": "content/notes-2026/Profound Projects/Fullstack dev/26.4.1",
+          "score": 110,
+          "reason": "matched project Fullstack dev"
+        },
+        {
+          "sourcePath": "content/notes-2026/Profound Projects/Fullstack dev/26.4.12",
+          "score": 110,
+          "reason": "matched project Fullstack dev"
+        },
+        {
+          "sourcePath": "content/notes-2026/Profound Projects/Fullstack dev/Temp",
+          "score": 110,
+          "reason": "matched project Fullstack dev"
+        },
+        {
+          "sourcePath": "content/notes-2026/Profound Projects/Mucho3D/26.4.25 @",
+          "score": 110,
+          "reason": "matched project Mucho3D"
+        }
+      ]
+    },
+    {
+      "levelId": "level-06",
+      "projectIds": [
+        "project-bikerinstinct",
+        "project-dealinstinct"
+      ],
+      "notePaths": [
+        "content/notes-2026/Profound Projects/Bikerinstinct/26.4.25",
+        "content/notes-2026/Profound Projects/Dealinstinct/26.4.25"
+      ],
+      "promptIds": [
+        "prompt-content-notes-2026-profound-projects-powerframe-26-4-25",
+        "prompt-content-notes-2026-profound-projects-powerstarter-azure-26-4-25"
+      ],
+      "featureIds": [
+        "feature-examp-developer-portfolio-roadmap-intake",
+        "feature-flink3d-roadmap-intake"
+      ],
+      "taskIds": [
+        "task-review-powerstarter-azure-26-4-10",
+        "task-review-powerstarter-azure-26-4-11",
+        "task-review-powerstarter-azure-26-4-25",
+        "task-review-sapient-26-4-16"
+      ],
+      "tags": [
+        "tier-6",
+        "locked",
+        "bikerinstinct",
+        "dealinstinct",
+        "auto-assigned"
+      ],
+      "reasons": [
+        {
+          "sourcePath": "content/notes-2026/Profound Projects/Bikerinstinct/26.4.25",
+          "score": 110,
+          "reason": "matched project Bikerinstinct"
+        },
+        {
+          "sourcePath": "content/notes-2026/Profound Projects/Dealinstinct/26.4.25",
+          "score": 110,
+          "reason": "matched project Dealinstinct"
+        }
+      ]
+    },
+    {
+      "levelId": "level-07",
+      "projectIds": [
+        "project-bv",
+        "project-cm4"
+      ],
+      "notePaths": [
+        "content/notes-2026/Profound Projects/BV/CBR",
+        "content/notes-2026/Profound Projects/BV/MZ3",
+        "content/notes-2026/Profound Projects/CM4/Print"
+      ],
+      "promptIds": [
+        "prompt-content-notes-2026-profound-projects-powerstarter-azure-26-4-25",
+        "prompt-content-notes-2026-profound-projects-sapient-26-4-25"
+      ],
+      "featureIds": [
+        "feature-flink3d-roadmap-intake",
+        "feature-fullstack-dev-roadmap-intake"
+      ],
+      "taskIds": [
+        "task-review-sapient-26-4-16",
+        "task-review-sapient-26-4-25",
+        "task-review-therockettree-app-26-4-10",
+        "task-review-therockettree-app-26-4-11"
+      ],
+      "tags": [
+        "tier-7",
+        "locked",
+        "bv",
+        "cm4",
+        "auto-assigned"
+      ],
+      "reasons": [
+        {
+          "sourcePath": "content/notes-2026/Profound Projects/BV/CBR",
+          "score": 110,
+          "reason": "matched project BV"
+        },
+        {
+          "sourcePath": "content/notes-2026/Profound Projects/BV/MZ3",
+          "score": 110,
+          "reason": "matched project BV"
+        },
+        {
+          "sourcePath": "content/notes-2026/Profound Projects/CM4/Print",
+          "score": 110,
+          "reason": "matched project CM4"
+        }
+      ]
+    }
+  ],
+  "timeline": [
+    {
+      "date": "2026-05-03",
+      "projectName": "PF-PROJECT",
+      "title": "26.5.3 @",
+      "type": "prompt",
+      "sourcePath": "content/notes-2026/Profound Projects/PF-PROJECT/26.5.3 @"
+    },
+    {
+      "date": "2026-05-02",
+      "projectName": "PF-PROJECT",
+      "title": "26.5.2",
+      "type": "note",
+      "sourcePath": "content/notes-2026/Profound Projects/PF-PROJECT/26.5.2"
+    },
+    {
+      "date": "2026-04-28",
+      "projectName": "PF-PROJECT",
+      "title": "26.4.28",
+      "type": "note",
+      "sourcePath": "content/notes-2026/Profound Projects/PF-PROJECT/26.4.28"
+    },
+    {
+      "date": "2026-04-25",
+      "projectName": "Bikerinstinct",
+      "title": "26.4.25",
+      "type": "note",
+      "sourcePath": "content/notes-2026/Profound Projects/Bikerinstinct/26.4.25"
+    },
+    {
+      "date": "2026-04-25",
+      "projectName": "CSHOP",
+      "title": "26.4.25 @",
+      "type": "prompt",
+      "sourcePath": "content/notes-2026/Profound Projects/CSHOP/26.4.25 @"
+    },
+    {
+      "date": "2026-04-25",
+      "projectName": "Dealinstinct",
+      "title": "26.4.25",
+      "type": "note",
+      "sourcePath": "content/notes-2026/Profound Projects/Dealinstinct/26.4.25"
+    },
+    {
+      "date": "2026-04-25",
+      "projectName": "Examp. Developer Portfolio",
+      "title": "26.4.25 @",
+      "type": "prompt",
+      "sourcePath": "content/notes-2026/Profound Projects/Examp. Developer Portfolio/WOM/26.4.25 @"
+    },
+    {
+      "date": "2026-04-25",
+      "projectName": "Flink3D",
+      "title": "26.4.25 @",
+      "type": "prompt",
+      "sourcePath": "content/notes-2026/Profound Projects/Flink3D/26.4.25 @"
+    },
+    {
+      "date": "2026-04-25",
+      "projectName": "Mucho3D",
+      "title": "26.4.25 @",
+      "type": "prompt",
+      "sourcePath": "content/notes-2026/Profound Projects/Mucho3D/26.4.25 @"
+    },
+    {
+      "date": "2026-04-25",
+      "projectName": "Powerframe",
+      "title": "26.4.25 @",
+      "type": "prompt",
+      "sourcePath": "content/notes-2026/Profound Projects/Powerframe/26.4.25 @"
+    },
+    {
+      "date": "2026-04-25",
+      "projectName": "Powerstarter Azure",
+      "title": "26.4.25 @",
+      "type": "prompt",
+      "sourcePath": "content/notes-2026/Profound Projects/Powerstarter Azure/26.4.25 @"
+    },
+    {
+      "date": "2026-04-25",
+      "projectName": "Sapient",
+      "title": "26.4.25 @",
+      "type": "prompt",
+      "sourcePath": "content/notes-2026/Profound Projects/Sapient/26.4.25 @"
+    },
+    {
+      "date": "2026-04-25",
+      "projectName": "TheRocketTree-App",
+      "title": "26.4.25 @",
+      "type": "prompt",
+      "sourcePath": "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.25 @"
+    },
+    {
+      "date": "2026-04-17",
+      "projectName": "TheRocketTree-App",
+      "title": "26.4.17",
+      "type": "note",
+      "sourcePath": "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.17"
+    },
+    {
+      "date": "2026-04-16",
+      "projectName": "Sapient",
+      "title": "26.4.16",
+      "type": "note",
+      "sourcePath": "content/notes-2026/Profound Projects/Sapient/26.4.16"
+    },
+    {
+      "date": "2026-04-14",
+      "projectName": "TheRocketTree-App",
+      "title": "26.4.14",
+      "type": "note",
+      "sourcePath": "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.14"
+    },
+    {
+      "date": "2026-04-13",
+      "projectName": "TheRocketTree-App",
+      "title": "26.4.13",
+      "type": "note",
+      "sourcePath": "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.13"
+    },
+    {
+      "date": "2026-04-12",
+      "projectName": "CSHOP",
+      "title": "26.4.12",
+      "type": "note",
+      "sourcePath": "content/notes-2026/Profound Projects/CSHOP/26.4.12"
+    },
+    {
+      "date": "2026-04-12",
+      "projectName": "Fullstack dev",
+      "title": "26.4.12",
+      "type": "note",
+      "sourcePath": "content/notes-2026/Profound Projects/Fullstack dev/26.4.12"
+    },
+    {
+      "date": "2026-04-12",
+      "projectName": "TheRocketTree-App",
+      "title": "26.4.12",
+      "type": "note",
+      "sourcePath": "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.12"
+    },
+    {
+      "date": "2026-04-11",
+      "projectName": "Examp. Developer Portfolio",
+      "title": "26.4.11",
+      "type": "note",
+      "sourcePath": "content/notes-2026/Profound Projects/Examp. Developer Portfolio/WOM/26.4.11"
+    },
+    {
+      "date": "2026-04-11",
+      "projectName": "Powerframe",
+      "title": "26.4.11",
+      "type": "note",
+      "sourcePath": "content/notes-2026/Profound Projects/Powerframe/26.4.11"
+    },
+    {
+      "date": "2026-04-11",
+      "projectName": "Powerstarter Azure",
+      "title": "26.4.11",
+      "type": "note",
+      "sourcePath": "content/notes-2026/Profound Projects/Powerstarter Azure/26.4.11"
+    },
+    {
+      "date": "2026-04-11",
+      "projectName": "TheRocketTree-App",
+      "title": "26.4.11",
+      "type": "note",
+      "sourcePath": "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.11"
+    },
+    {
+      "date": "2026-04-10",
+      "projectName": "Powerstarter Azure",
+      "title": "26.4.10",
+      "type": "note",
+      "sourcePath": "content/notes-2026/Profound Projects/Powerstarter Azure/26.4.10"
+    },
+    {
+      "date": "2026-04-10",
+      "projectName": "TheRocketTree-App",
+      "title": "26.4.10",
+      "type": "note",
+      "sourcePath": "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.10"
+    },
+    {
+      "date": "2026-04-09",
+      "projectName": "TheRocketTree-App",
+      "title": "26.4.9",
+      "type": "note",
+      "sourcePath": "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.9"
+    },
+    {
+      "date": "2026-04-01",
+      "projectName": "Fullstack dev",
+      "title": "26.4.1",
+      "type": "note",
+      "sourcePath": "content/notes-2026/Profound Projects/Fullstack dev/26.4.1"
+    }
+  ],
+  "categories": [
+    "3D",
+    "content",
+    "design",
+    "development",
+    "setup"
+  ],
+  "priorityList": [
+    {
+      "id": "project-therockettree-app",
+      "entityType": "project",
+      "title": "TheRocketTree-App",
+      "score": 104,
+      "reason": "8 notes, 8 dated"
+    },
+    {
+      "id": "project-pf-project",
+      "entityType": "project",
+      "title": "PF-PROJECT",
+      "score": 70,
+      "reason": "5 notes, 3 dated"
+    },
+    {
+      "id": "project-powerstarter-azure",
+      "entityType": "project",
+      "title": "Powerstarter Azure",
+      "score": 54,
+      "reason": "3 notes, 3 dated"
+    },
+    {
+      "id": "project-cshop",
+      "entityType": "project",
+      "title": "CSHOP",
+      "score": 44,
+      "reason": "2 notes, 2 dated"
+    },
+    {
+      "id": "project-examp-developer-portfolio",
+      "entityType": "project",
+      "title": "Examp. Developer Portfolio",
+      "score": 44,
+      "reason": "2 notes, 2 dated"
+    },
+    {
+      "id": "project-powerframe",
+      "entityType": "project",
+      "title": "Powerframe",
+      "score": 44,
+      "reason": "2 notes, 2 dated"
+    },
+    {
+      "id": "project-sapient",
+      "entityType": "project",
+      "title": "Sapient",
+      "score": 44,
+      "reason": "2 notes, 2 dated"
+    },
+    {
+      "id": "task-review-pf-project-26-5-3",
+      "entityType": "task",
+      "title": "Review PF-PROJECT note 26.5.3 @",
+      "score": 38,
+      "reason": "dated 2026-05-03"
+    },
+    {
+      "id": "project-flink3d",
+      "entityType": "project",
+      "title": "Flink3D",
+      "score": 34,
+      "reason": "1 notes, 1 dated"
+    },
+    {
+      "id": "project-mucho3d",
+      "entityType": "project",
+      "title": "Mucho3D",
+      "score": 34,
+      "reason": "1 notes, 1 dated"
+    },
+    {
+      "id": "project-fullstack-dev",
+      "entityType": "project",
+      "title": "Fullstack dev",
+      "score": 32,
+      "reason": "3 notes, 2 dated"
+    },
+    {
+      "id": "task-review-pf-project-26-5-2",
+      "entityType": "task",
+      "title": "Review PF-PROJECT note 26.5.2",
+      "score": 32,
+      "reason": "dated 2026-05-02"
+    },
+    {
+      "id": "project-bikerinstinct",
+      "entityType": "project",
+      "title": "Bikerinstinct",
+      "score": 31,
+      "reason": "1 notes, 1 dated"
+    },
+    {
+      "id": "project-dealinstinct",
+      "entityType": "project",
+      "title": "Dealinstinct",
+      "score": 31,
+      "reason": "1 notes, 1 dated"
+    },
+    {
+      "id": "task-review-cshop-26-4-25",
+      "entityType": "task",
+      "title": "Review CSHOP note 26.4.25 @",
+      "score": 30,
+      "reason": "dated 2026-04-25"
+    },
+    {
+      "id": "task-review-examp-developer-portfolio-26-4-25",
+      "entityType": "task",
+      "title": "Review Examp. Developer Portfolio note 26.4.25 @",
+      "score": 30,
+      "reason": "dated 2026-04-25"
+    },
+    {
+      "id": "task-review-flink3d-26-4-25",
+      "entityType": "task",
+      "title": "Review Flink3D note 26.4.25 @",
+      "score": 30,
+      "reason": "dated 2026-04-25"
+    },
+    {
+      "id": "task-review-mucho3d-26-4-25",
+      "entityType": "task",
+      "title": "Review Mucho3D note 26.4.25 @",
+      "score": 30,
+      "reason": "dated 2026-04-25"
+    },
+    {
+      "id": "task-review-powerframe-26-4-25",
+      "entityType": "task",
+      "title": "Review Powerframe note 26.4.25 @",
+      "score": 30,
+      "reason": "dated 2026-04-25"
+    },
+    {
+      "id": "task-review-powerstarter-azure-26-4-25",
+      "entityType": "task",
+      "title": "Review Powerstarter Azure note 26.4.25 @",
+      "score": 30,
+      "reason": "dated 2026-04-25"
+    }
+  ],
+  "settingsDefaults": {
+    "gradient1": "#111827",
+    "gradient2": "#312e81",
+    "accent": "#38bdf8",
+    "compactMode": false,
+    "reducedMotion": false
+  }
 }
