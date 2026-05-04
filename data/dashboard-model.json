@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-04T17:31:24.957Z",
+  "generatedAt": "2026-05-04T18:27:05.538Z",
   "sourceFiles": {
     "notes": "data/notes-index.json",
     "roadmap": "data/roadmap-items.json",
@@ -4205,7 +4205,24 @@
     "gradient1": "#111827",
     "gradient2": "#312e81",
     "accent": "#38bdf8",
+    "glowColor": "#38bdf8",
+    "glowBlur": 22,
+    "glowOpacity": 62,
+    "glowSpeed": 8,
+    "orbSize": 520,
+    "orbOpacity": 34,
+    "orbEnabled": true,
+    "themePreset": "powerframe",
     "compactMode": false,
-    "reducedMotion": false
+    "reducedMotion": false,
+    "userName": "",
+    "userProfile": "",
+    "userNote": "",
+    "userAvatar": "img/symbol_logo_small.png",
+    "displayUser": false,
+    "aiProvider": "Ollama",
+    "aiModel": "qwen",
+    "aiEndpoint": "http://localhost:11434",
+    "aiEnabled": false
   }
 }

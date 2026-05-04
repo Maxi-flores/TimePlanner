@@ -4,6 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>2026 – Monthly Roadmap Planner</title>
+  <link rel="icon" href="img/favicon_io/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="img/favicon_io/favicon-32x32.png" />
+  <link rel="apple-touch-icon" href="img/favicon_io/apple-touch-icon.png" />
   <style>
     /* ─── Reset & Base ─────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -27,8 +30,26 @@
       --gradient-1:#111827;
       --gradient-2:#312e81;
       --shadow-soft: 0 24px 70px rgba(0,0,0,.34);
+      --glow-color: #38bdf8;
+      --glow-size: 2px;
+      --glow-blur: 22px;
+      --glow-opacity: .62;
+      --glow-speed: 8s;
+      --orb-color: #6366f1;
+      --orb-size: 520px;
+      --orb-opacity: .34;
+      --orb-blur: 44px;
       --font:      'Segoe UI', system-ui, sans-serif;
     }
+    body.theme-light {
+      --bg:#edf4ff; --surface:#ffffff; --surface-glass:rgba(255,255,255,.72); --surface2:#e6edf8;
+      --border:#c5d1e3; --text:#0f172a; --muted:#526174; --text-muted:#526174; --shadow-soft:0 24px 70px rgba(37,56,88,.18);
+    }
+    body.theme-aurora { --gradient-1:#08111f; --gradient-2:#0f766e; --accent:#22d3ee; --accent-2:#a78bfa; --orb-color:#14b8a6; }
+    body.theme-powerframe { --gradient-1:#050b1d; --gradient-2:#312e81; --accent:#38bdf8; --accent-2:#8b5cf6; --orb-color:#6366f1; }
+    body.theme-solar { --gradient-1:#190b14; --gradient-2:#7c2d12; --accent:#f59e0b; --accent-2:#fb7185; --orb-color:#fb923c; }
+    body.theme-forest { --gradient-1:#06130d; --gradient-2:#14532d; --accent:#34d399; --accent-2:#84cc16; --orb-color:#22c55e; }
+    body.theme-mono { --gradient-1:#030712; --gradient-2:#1f2937; --accent:#e5e7eb; --accent-2:#94a3b8; --orb-color:#94a3b8; }
     body {
       font-family: var(--font);
       background:
@@ -37,6 +58,29 @@
         linear-gradient(145deg, var(--gradient-1), var(--bg) 45%, #020617);
       color: var(--text);
       min-height: 100vh;
+      overflow-x: hidden;
+    }
+    body::before {
+      content:"";
+      position: fixed;
+      inset: auto auto -14vh -8vw;
+      width: var(--orb-size);
+      height: var(--orb-size);
+      border-radius: 50%;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 34% 30%, color-mix(in srgb, #fff 22%, var(--orb-color)), transparent 16%),
+        radial-gradient(circle, var(--orb-color), transparent 64%);
+      filter: blur(var(--orb-blur));
+      opacity: var(--orb-opacity);
+      transform: translate3d(0,0,0);
+      animation: orb-drift 16s ease-in-out infinite alternate;
+      z-index: -1;
+    }
+    body.orb-off::before { display:none; }
+    @keyframes orb-drift {
+      from { transform: translate(-4vw, 4vh) scale(.94); }
+      to { transform: translate(62vw, -52vh) scale(1.15); }
     }
     body.compact-mode main { padding-top: 12px; }
     body.compact-mode .card,
@@ -63,8 +107,40 @@
       top: 0;
       z-index: 100;
     }
-    header h1 { font-size: 1.25rem; font-weight: 700; letter-spacing: .03em; }
+    header h1 { font-size: .95rem; font-weight: 700; letter-spacing: .02em; line-height:1.05; }
     header h1 span { color: var(--accent2); }
+    .brand {
+      display:flex;
+      align-items:center;
+      gap:10px;
+      min-width:max-content;
+    }
+    .brand-logo {
+      width:85px;
+      height:85px;
+      object-fit:contain;
+      filter: drop-shadow(0 0 16px color-mix(in srgb, var(--accent-2) 60%, transparent));
+    }
+    .header-actions { display:flex; align-items:center; gap:8px; }
+    .user-chip {
+      display:none;
+      align-items:center;
+      gap:8px;
+      background:var(--surface-glass);
+      border:1px solid rgba(148,163,184,.2);
+      border-radius:999px;
+      padding:5px 10px 5px 5px;
+    }
+    .user-chip.visible { display:flex; }
+    .user-avatar {
+      width:30px;
+      height:30px;
+      object-fit:cover;
+      border-radius:999px;
+      background:var(--surface2);
+      border:1px solid rgba(148,163,184,.25);
+    }
+    .user-chip strong { font-size:.78rem; }
     .tabs {
       display: flex;
       gap: 4px;
@@ -100,6 +176,29 @@
       box-shadow: var(--shadow-soft);
       backdrop-filter: blur(18px);
     }
+    .glow-edge {
+      position: relative;
+      isolation: isolate;
+    }
+    .glow-edge::after {
+      content:"";
+      position:absolute;
+      inset: calc(var(--glow-size) * -1);
+      border-radius: inherit;
+      pointer-events:none;
+      background: conic-gradient(from var(--glow-angle), transparent 0 24%, color-mix(in srgb, var(--glow-color) 86%, transparent) 34%, transparent 48% 100%);
+      filter: blur(var(--glow-blur));
+      opacity: var(--glow-opacity);
+      z-index:-1;
+      animation: glow-spin var(--glow-speed) linear infinite;
+    }
+    body.reduced-motion .glow-edge::after { animation:none; }
+    @property --glow-angle {
+      syntax: '<angle>';
+      initial-value: 0deg;
+      inherits: false;
+    }
+    @keyframes glow-spin { to { --glow-angle: 360deg; } }
     .btn {
       display: inline-flex;
       align-items: center;
@@ -117,15 +216,17 @@
     .btn-success  { background: var(--success);  color: #fff; }
     .btn-danger   { background: var(--danger);   color: #fff; }
     .btn-ghost    { background: var(--surface2); color: var(--text); }
-    .settings-shell {
+    .menu-shell, .settings-shell {
       position: relative;
     }
-    .settings-menu {
+    .app-menu, .settings-panel {
       display: none;
       position: absolute;
       right: 0;
       top: calc(100% + 8px);
-      width: min(340px, 92vw);
+      width: min(430px, 94vw);
+      max-height: 82vh;
+      overflow-y: auto;
       background: var(--surface-glass);
       border: 1px solid rgba(148,163,184,.24);
       border-radius: var(--radius-xl);
@@ -134,8 +235,69 @@
       backdrop-filter: blur(18px);
       z-index: 250;
     }
-    .settings-menu.open { display: block; }
+    .app-menu.open { display: block; }
+    .settings-panel.open { display:block; }
+    .app-menu { width:min(260px, 90vw); }
+    .menu-tabs {
+      display:grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap:6px;
+      margin-bottom:12px;
+    }
+    .menu-tab {
+      background:var(--surface2);
+      border:1px solid rgba(148,163,184,.18);
+      color:var(--text-muted);
+      border-radius:12px;
+      padding:8px 6px;
+      cursor:pointer;
+      font-size:.74rem;
+      font-weight:700;
+    }
+    .menu-tab.active { background:var(--accent); color:#fff; border-color:var(--accent); }
+    .menu-panel { display:none; }
+    .menu-panel.active { display:block; }
+    .menu-list { display:grid; gap:6px; margin-bottom:4px; }
+    .menu-item {
+      width:100%;
+      justify-content:flex-start;
+      border:1px solid rgba(148,163,184,.16);
+    }
+    .menu-item.active { background: var(--accent); color:#fff; }
+    .menu-section {
+      border-top:1px solid rgba(148,163,184,.18);
+      padding-top:12px;
+      margin-top:12px;
+    }
+    .theme-preset-grid { display:grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap:8px; }
+    .theme-preset {
+      border:1px solid rgba(148,163,184,.22);
+      background:var(--surface2);
+      color:var(--text);
+      border-radius:12px;
+      padding:9px;
+      cursor:pointer;
+      text-align:left;
+    }
+    .theme-preset span { display:block; color:var(--text-muted); font-size:.7rem; margin-top:3px; }
     .settings-grid { display:grid; gap:10px; }
+    .footer {
+      max-width:1300px;
+      margin: 26px auto 0;
+      padding: 18px 24px 28px;
+      display:grid;
+      justify-items:center;
+      gap:10px;
+      color:var(--text-muted);
+    }
+    .footer-logo {
+      width:34px;
+      height:34px;
+      object-fit:contain;
+      opacity:.78;
+      filter: drop-shadow(0 0 12px color-mix(in srgb, var(--accent-2) 45%, transparent));
+    }
+    .footer-links { display:flex; gap:8px; flex-wrap:wrap; justify-content:center; }
     .global-project-bar {
       display:flex;
       gap:10px;
@@ -181,6 +343,66 @@
     .badge-success { background: #14532d; color: #4ade80; }
     .badge-warn    { background: #78350f; color: #fcd34d; }
     .badge-danger  { background: #7f1d1d; color: #fca5a5; }
+    .dashboard-grid {
+      display:grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap:14px;
+    }
+    .dashboard-widget {
+      min-height: 150px;
+      cursor:pointer;
+      transition: transform .16s ease, border-color .16s ease;
+    }
+    .dashboard-widget:hover { transform: translateY(-2px); border-color: color-mix(in srgb, var(--accent) 70%, var(--border)); }
+    .widget-value { font-size:2rem; font-weight:800; margin:8px 0 4px; }
+    .widget-list { display:grid; gap:6px; margin-top:10px; color:var(--text-muted); font-size:.78rem; }
+    .widget-wide { grid-column: span 2; }
+    .mini-roadmap {
+      display:grid;
+      grid-template-columns: repeat(7, minmax(32px, 1fr));
+      gap:8px;
+      align-items:center;
+      margin-top:12px;
+    }
+    .mini-level {
+      aspect-ratio:1;
+      border-radius:999px;
+      border:2px solid var(--border);
+      display:grid;
+      place-items:center;
+      font-size:.72rem;
+      font-weight:800;
+      background:var(--surface2);
+      color:var(--text);
+    }
+    .mini-level.completed { border-color:var(--success); color:#86efac; }
+    .mini-level.active { border-color:var(--warn); color:#fcd34d; }
+    .mini-level.locked { opacity:.52; }
+    .deploy-grid {
+      display:grid;
+      grid-template-columns: minmax(280px,.8fr) minmax(360px,1.2fr);
+      gap:14px;
+      align-items:start;
+    }
+    .deploy-status {
+      display:grid;
+      gap:10px;
+    }
+    .deploy-row {
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      border-bottom:1px solid rgba(148,163,184,.16);
+      padding:8px 0;
+      font-size:.84rem;
+    }
+    .agent-suggestion {
+      border:1px solid rgba(148,163,184,.18);
+      border-radius:14px;
+      padding:10px;
+      background:rgba(15,23,42,.32);
+      margin-top:8px;
+    }
 
     /* ─── CALENDAR ──────────────────────────────────────── */
     .cal-nav {
@@ -948,7 +1170,7 @@
     @media print {
       header, .tabs, .btn, .day-panel, .overlay { display: none !important; }
       main { padding: 0; max-width: 100%; }
-      .view { display: block !important; }
+  .view { display: block !important; }
       body { background: #fff; color: #000; }
       .card, .goal-card, .milestone-card { background: #fff; border-color: #ccc; }
     }
@@ -956,6 +1178,13 @@
     /* ─── Responsive ─────────────────────────────────────── */
     @media (max-width: 640px) {
       main { padding: 12px; }
+      header { align-items:flex-start; }
+      .brand-logo { width:64px; height:64px; }
+      .tabs { display:none; }
+      .dashboard-grid { grid-template-columns: 1fr; }
+      .widget-wide { grid-column: auto; }
+      .deploy-grid { grid-template-columns:1fr; }
+      .menu-tabs { grid-template-columns: repeat(2, 1fr); }
       .cal-cell { min-height: 56px; }
       .roadmap-container { flex-direction: column; }
       .day-panel { width: 100%; }
@@ -985,6 +1214,7 @@
       }
     }
     @media (min-width: 641px) and (max-width: 980px) {
+      .dashboard-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .project-board-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .board-shell { grid-template-columns: .9fr 1.1fr; }
       .level-map { min-height: 720px; }
@@ -994,24 +1224,90 @@
 <body>
 
 <header>
-  <h1>2026 <span>Roadmap Planner</span></h1>
+  <div class="brand">
+    <img class="brand-logo" src="img/symbol_logo_small.png" alt="" />
+    <h1>2026 <span>Roadmap Planner</span></h1>
+  </div>
   <div class="tabs">
-    <button class="tab-btn active" onclick="switchTab('calendar', this)">📅 Calendar</button>
+    <button class="tab-btn active" onclick="switchTab('dashboard', this)">Dashboard</button>
+    <button class="tab-btn" onclick="switchTab('calendar', this)">📅 Calendar</button>
     <button class="tab-btn" onclick="switchTab('schedule', this)">🕐 Daily Schedule</button>
     <button class="tab-btn" onclick="switchTab('roadmap', this)">🗺 Roadmap</button>
     <button class="tab-btn" onclick="switchTab('notes', this)">Notes</button>
     <button class="tab-btn" onclick="switchTab('goals', this)">🎯 Goals</button>
     <button class="tab-btn" onclick="switchTab('calculator', this)">🧮 Calculator</button>
+    <button class="tab-btn" onclick="switchTab('deploy', this)">Deploy</button>
   </div>
-  <div class="settings-shell">
-    <button class="btn btn-ghost" onclick="toggleSettingsMenu()">Settings</button>
-    <div class="settings-menu" id="settings-menu">
-      <div class="settings-grid">
+  <div class="header-actions">
+    <div class="user-chip" id="user-chip">
+      <img class="user-avatar" id="user-avatar" src="img/symbol_logo_small.png" alt="" />
+      <strong id="user-chip-name">User</strong>
+    </div>
+    <div class="menu-shell">
+      <button class="btn btn-ghost" onclick="toggleAppMenu()">Menu</button>
+      <div class="app-menu" id="app-menu">
+        <div class="menu-list">
+          <button class="btn btn-ghost menu-item active" data-menu-tab="dashboard" onclick="switchTab('dashboard')">Dashboard overview</button>
+          <button class="btn btn-ghost menu-item" data-menu-tab="calendar" onclick="switchTab('calendar')">Calendar layers</button>
+          <button class="btn btn-ghost menu-item" data-menu-tab="schedule" onclick="switchTab('schedule')">Daily schedule</button>
+          <button class="btn btn-ghost menu-item" data-menu-tab="roadmap" onclick="switchTab('roadmap')">Roadmap map</button>
+          <button class="btn btn-ghost menu-item" data-menu-tab="notes" onclick="switchTab('notes')">Notes browser</button>
+          <button class="btn btn-ghost menu-item" data-menu-tab="goals" onclick="switchTab('goals')">Goals and task deploys</button>
+          <button class="btn btn-ghost menu-item" data-menu-tab="calculator" onclick="switchTab('calculator')">Calculator</button>
+          <button class="btn btn-ghost menu-item" data-menu-tab="deploy" onclick="switchTab('deploy')">Deployment result</button>
+        </div>
+      </div>
+    </div>
+    <div class="settings-shell">
+      <button class="btn btn-ghost" onclick="toggleSettingsPanel()">Settings</button>
+      <div class="settings-panel" id="settings-panel">
+        <div class="menu-tabs">
+          <button class="menu-tab active" data-settings-panel-tab="theme" onclick="switchSettingsPanel('theme')">Theme</button>
+          <button class="menu-tab" data-settings-panel-tab="account" onclick="switchSettingsPanel('account')">User</button>
+          <button class="menu-tab" data-settings-panel-tab="ai" onclick="switchSettingsPanel('ai')">AI</button>
+        </div>
+        <div class="menu-panel active" id="settings-panel-theme">
+        <p class="section-title">Theme presets</p>
+        <div class="theme-preset-grid">
+          <button class="theme-preset" onclick="setThemePreset('powerframe')">Powerframe<span>Dark navy, cyan and violet</span></button>
+          <button class="theme-preset" onclick="setThemePreset('light')">Light<span>Bright workspace mode</span></button>
+          <button class="theme-preset" onclick="setThemePreset('aurora')">Aurora<span>Teal and violet glass</span></button>
+          <button class="theme-preset" onclick="setThemePreset('solar')">Solar<span>Amber and warm rose</span></button>
+          <button class="theme-preset" onclick="setThemePreset('forest')">Forest<span>Deep green system</span></button>
+          <button class="theme-preset" onclick="setThemePreset('mono')">Mono<span>Neutral graphite</span></button>
+        </div>
+        <div class="menu-section settings-grid">
+        <p class="section-title">Theme settings</p>
         <div><label>Gradient color 1</label><input type="color" id="setting-gradient-1" onchange="saveSettingsFromUI()" /></div>
         <div><label>Gradient color 2</label><input type="color" id="setting-gradient-2" onchange="saveSettingsFromUI()" /></div>
         <div><label>Accent color</label><input type="color" id="setting-accent" onchange="saveSettingsFromUI()" /></div>
+        <div><label>Glow color</label><input type="color" id="setting-glow-color" onchange="saveSettingsFromUI()" /></div>
+        <div><label>Glow blur</label><input type="range" id="setting-glow-blur" min="4" max="48" onchange="saveSettingsFromUI()" /></div>
+        <div><label>Glow opacity</label><input type="range" id="setting-glow-opacity" min="0" max="100" onchange="saveSettingsFromUI()" /></div>
+        <div><label>Glow speed</label><input type="range" id="setting-glow-speed" min="4" max="24" onchange="saveSettingsFromUI()" /></div>
+        <div><label>Orb size</label><input type="range" id="setting-orb-size" min="220" max="900" onchange="saveSettingsFromUI()" /></div>
+        <div><label>Orb opacity</label><input type="range" id="setting-orb-opacity" min="0" max="80" onchange="saveSettingsFromUI()" /></div>
+        <label><input type="checkbox" id="setting-orb" onchange="saveSettingsFromUI()" style="width:auto;" /> 3D orb background</label>
         <label><input type="checkbox" id="setting-compact" onchange="saveSettingsFromUI()" style="width:auto;" /> Compact mode</label>
         <label><input type="checkbox" id="setting-motion" onchange="saveSettingsFromUI()" style="width:auto;" /> Reduced motion</label>
+        </div>
+      </div>
+      <div class="menu-panel settings-grid" id="settings-panel-account">
+        <p class="section-title">User account</p>
+        <label><input type="checkbox" id="setting-display-user" onchange="saveSettingsFromUI()" style="width:auto;" /> Show profile in header</label>
+        <div><label>Avatar image path or URL</label><input type="text" id="setting-user-avatar" placeholder="img/symbol_logo_small.png" onchange="saveSettingsFromUI()" /></div>
+        <div><label>Name</label><input type="text" id="setting-user-name" placeholder="Your name" onchange="saveSettingsFromUI()" /></div>
+        <div><label>Role / profile</label><input type="text" id="setting-user-profile" placeholder="Builder, planner, founder..." onchange="saveSettingsFromUI()" /></div>
+        <div><label>Profile note</label><textarea id="setting-user-note" rows="2" placeholder="Personal context for this board" onchange="saveSettingsFromUI()"></textarea></div>
+      </div>
+      <div class="menu-panel settings-grid" id="settings-panel-ai">
+        <p class="section-title">AI orchestrator</p>
+        <div><label>Local model provider</label><input type="text" id="setting-ai-provider" value="Ollama" onchange="saveSettingsFromUI()" /></div>
+        <div><label>Model</label><input type="text" id="setting-ai-model" value="qwen" onchange="saveSettingsFromUI()" /></div>
+        <div><label>Local endpoint</label><input type="text" id="setting-ai-endpoint" value="http://localhost:11434" onchange="saveSettingsFromUI()" /></div>
+        <label><input type="checkbox" id="setting-ai-enabled" onchange="saveSettingsFromUI()" style="width:auto;" /> Enable local AI suggestions</label>
+        <p class="note-meta">This UI is prepared for Ollama/Qwen, but does not call the model until a local worker is added.</p>
+      </div>
       </div>
     </div>
   </div>
@@ -1028,9 +1324,54 @@
     <span class="badge badge-accent" id="global-project-status">Unified dashboard model</span>
   </div>
 
+  <!-- ══════════════ DASHBOARD VIEW ══════════════ -->
+  <div id="view-dashboard" class="view active">
+    <div class="dashboard-grid">
+      <div class="card dashboard-widget widget-wide" onclick="switchTab('roadmap')">
+        <p class="section-title">Roadmap focus</p>
+        <div class="widget-value" id="dash-roadmap-count">0</div>
+        <div class="note-meta" id="dash-roadmap-project">All projects</div>
+        <div class="mini-roadmap" id="dash-roadmap-mini"></div>
+        <div class="widget-list" id="dash-roadmap-list"></div>
+      </div>
+      <div class="card dashboard-widget" onclick="switchTab('calendar')">
+        <p class="section-title">Calendar</p>
+        <div class="widget-value" id="dash-calendar-count">0</div>
+        <div class="note-meta">Planned events and goal deploys</div>
+        <div class="widget-list" id="dash-calendar-list"></div>
+      </div>
+      <div class="card dashboard-widget" onclick="switchTab('goals')">
+        <p class="section-title">Goals</p>
+        <div class="widget-value" id="dash-goals-count">0</div>
+        <div class="note-meta">Local goals with task progress</div>
+        <div class="widget-list" id="dash-goals-list"></div>
+      </div>
+      <div class="card dashboard-widget" onclick="switchTab('notes')">
+        <p class="section-title">Notes</p>
+        <div class="widget-value" id="dash-notes-count">0</div>
+        <div class="note-meta">Indexed note sources</div>
+        <div class="widget-list" id="dash-notes-list"></div>
+      </div>
+      <div class="card dashboard-widget" onclick="switchTab('deploy')">
+        <p class="section-title">Deployment</p>
+        <div class="widget-value" id="dash-deploy-status">Static</div>
+        <div class="note-meta" id="dash-deploy-version">Version loading</div>
+        <div class="widget-list" id="dash-deploy-list"></div>
+      </div>
+      <div class="card dashboard-widget widget-wide" onclick="switchTab('roadmap')">
+        <p class="section-title">Milestones and tasks</p>
+        <div class="widget-list" id="dash-milestones-list"></div>
+      </div>
+      <div class="card dashboard-widget widget-wide" onclick="switchTab('schedule')">
+        <p class="section-title">Timeline pulse</p>
+        <div class="widget-list" id="dash-timeline-list"></div>
+      </div>
+    </div>
+  </div>
+
   <!-- ══════════════ CALENDAR VIEW ══════════════ -->
-  <div id="view-calendar" class="view active">
-    <div class="card">
+  <div id="view-calendar" class="view">
+    <div class="card glow-edge">
       <div class="cal-nav">
         <div class="btns">
           <button class="btn btn-ghost" onclick="calNav(-1)">‹ Prev</button>
@@ -1204,7 +1545,7 @@
         <button class="btn btn-primary" onclick="openAddGoalModal()">+ Goal</button>
       </div>
     </div>
-    <div class="goals-grid" id="goals-grid"></div>
+    <div class="goals-grid glow-edge" id="goals-grid"></div>
   </div>
 
   <!-- ══════════════ CALCULATOR VIEW ══════════════ -->
@@ -1268,7 +1609,41 @@
     </div>
   </div>
 
+  <!-- ══════════════ DEPLOYMENT RESULT VIEW ══════════════ -->
+  <div id="view-deploy" class="view">
+    <div class="deploy-grid">
+      <div class="card">
+        <p class="section-title">Deployment project result</p>
+        <div class="deploy-status">
+          <div class="deploy-row"><span>Build mode</span><strong id="deploy-build-mode">Static local app</strong></div>
+          <div class="deploy-row"><span>Build status</span><strong id="deploy-build-status">Ready</strong></div>
+          <div class="deploy-row"><span>Version date</span><strong id="deploy-version-date">-</strong></div>
+          <div class="deploy-row"><span>Selected project</span><strong id="deploy-selected-project">All projects</strong></div>
+          <div class="deploy-row"><span>Data model</span><strong id="deploy-model-status">Loading</strong></div>
+          <div class="deploy-row"><span>Notes/tasks</span><strong id="deploy-data-counts">-</strong></div>
+        </div>
+      </div>
+      <div class="card">
+        <p class="section-title">AI project orchestrator</p>
+        <div class="deploy-row"><span>Provider</span><strong id="deploy-ai-provider">Ollama</strong></div>
+        <div class="deploy-row"><span>Model</span><strong id="deploy-ai-model">qwen</strong></div>
+        <div class="deploy-row"><span>Mode</span><strong id="deploy-ai-mode">Local suggestion scaffold</strong></div>
+        <div id="deploy-ai-suggestions"></div>
+      </div>
+    </div>
+  </div>
+
 </main>
+
+<footer class="footer">
+  <img class="footer-logo" src="img/symbol_logo_small.png" alt="" />
+  <div class="footer-links">
+    <button class="btn btn-ghost" onclick="toggleAppMenu()">Menu</button>
+    <button class="btn btn-ghost" onclick="toggleSettingsPanel()">Settings</button>
+    <button class="btn btn-ghost" onclick="openInfoModal('contact')">Contact</button>
+    <button class="btn btn-ghost" onclick="openInfoModal('faq')">FAQ</button>
+  </div>
+</footer>
 
 <!-- ─── Day Detail Side Panel ────────────────────────── -->
 <div class="overlay" id="overlay" onclick="closeDayPanel()"></div>
@@ -1505,6 +1880,14 @@
   <div id="note-detail-body"></div>
 </div>
 
+<div class="modal" id="modal-info">
+  <h3 id="info-modal-title">Info</h3>
+  <div id="info-modal-body" class="note-meta"></div>
+  <div class="modal-footer">
+    <button class="btn btn-ghost" onclick="closeModal('modal-info')">Close</button>
+  </div>
+</div>
+
 <script>
 // ═══════════════════════════════════════════════════════
 //  STATE  (persisted to localStorage)
@@ -1549,8 +1932,25 @@ function loadDashboardSettings() {
     gradient1: '#111827',
     gradient2: '#312e81',
     accent: '#38bdf8',
+    glowColor: '#38bdf8',
+    glowBlur: 22,
+    glowOpacity: 62,
+    glowSpeed: 8,
+    orbSize: 520,
+    orbOpacity: 34,
+    orbEnabled: true,
+    themePreset: 'powerframe',
     compactMode: false,
     reducedMotion: false,
+    userName: '',
+    userProfile: '',
+    userNote: '',
+    userAvatar: 'img/symbol_logo_small.png',
+    displayUser: false,
+    aiProvider: 'Ollama',
+    aiModel: 'qwen',
+    aiEndpoint: 'http://localhost:11434',
+    aiEnabled: false,
   };
   const modelDefaults = dashboardModel.settingsDefaults || {};
   const mergedDefaults = { ...defaults, ...modelDefaults };
@@ -1567,34 +1967,126 @@ function applyDashboardSettings() {
   document.documentElement.style.setProperty('--gradient-2', settings.gradient2);
   document.documentElement.style.setProperty('--accent', settings.accent);
   document.documentElement.style.setProperty('--accent-2', settings.accent);
+  document.documentElement.style.setProperty('--glow-color', settings.glowColor);
+  document.documentElement.style.setProperty('--glow-blur', `${settings.glowBlur}px`);
+  document.documentElement.style.setProperty('--glow-opacity', String(settings.glowOpacity / 100));
+  document.documentElement.style.setProperty('--glow-speed', `${settings.glowSpeed}s`);
+  document.documentElement.style.setProperty('--orb-size', `${settings.orbSize}px`);
+  document.documentElement.style.setProperty('--orb-opacity', String(settings.orbOpacity / 100));
+  document.body.classList.remove('theme-light', 'theme-aurora', 'theme-powerframe', 'theme-solar', 'theme-forest', 'theme-mono');
+  document.body.classList.add(`theme-${settings.themePreset || 'powerframe'}`);
+  document.body.classList.toggle('orb-off', !settings.orbEnabled);
   document.body.classList.toggle('compact-mode', !!settings.compactMode);
   document.body.classList.toggle('reduced-motion', !!settings.reducedMotion);
   const g1 = document.getElementById('setting-gradient-1');
   const g2 = document.getElementById('setting-gradient-2');
   const ac = document.getElementById('setting-accent');
+  const glowColor = document.getElementById('setting-glow-color');
+  const glowBlur = document.getElementById('setting-glow-blur');
+  const glowOpacity = document.getElementById('setting-glow-opacity');
+  const glowSpeed = document.getElementById('setting-glow-speed');
+  const orbSize = document.getElementById('setting-orb-size');
+  const orbOpacity = document.getElementById('setting-orb-opacity');
+  const orb = document.getElementById('setting-orb');
   const compact = document.getElementById('setting-compact');
   const motion = document.getElementById('setting-motion');
+  const userName = document.getElementById('setting-user-name');
+  const userProfile = document.getElementById('setting-user-profile');
+  const userNote = document.getElementById('setting-user-note');
+  const userAvatar = document.getElementById('setting-user-avatar');
+  const displayUser = document.getElementById('setting-display-user');
+  const aiProvider = document.getElementById('setting-ai-provider');
+  const aiModel = document.getElementById('setting-ai-model');
+  const aiEndpoint = document.getElementById('setting-ai-endpoint');
+  const aiEnabled = document.getElementById('setting-ai-enabled');
   if (g1) g1.value = settings.gradient1;
   if (g2) g2.value = settings.gradient2;
   if (ac) ac.value = settings.accent;
+  if (glowColor) glowColor.value = settings.glowColor;
+  if (glowBlur) glowBlur.value = settings.glowBlur;
+  if (glowOpacity) glowOpacity.value = settings.glowOpacity;
+  if (glowSpeed) glowSpeed.value = settings.glowSpeed;
+  if (orbSize) orbSize.value = settings.orbSize;
+  if (orbOpacity) orbOpacity.value = settings.orbOpacity;
+  if (orb) orb.checked = !!settings.orbEnabled;
   if (compact) compact.checked = !!settings.compactMode;
   if (motion) motion.checked = !!settings.reducedMotion;
+  if (userName) userName.value = settings.userName || '';
+  if (userProfile) userProfile.value = settings.userProfile || '';
+  if (userNote) userNote.value = settings.userNote || '';
+  if (userAvatar) userAvatar.value = settings.userAvatar || 'img/symbol_logo_small.png';
+  if (displayUser) displayUser.checked = !!settings.displayUser;
+  const chip = document.getElementById('user-chip');
+  const chipName = document.getElementById('user-chip-name');
+  const avatar = document.getElementById('user-avatar');
+  if (chip) chip.classList.toggle('visible', !!settings.displayUser);
+  if (chipName) chipName.textContent = settings.userName || 'User';
+  if (avatar) avatar.src = settings.userAvatar || 'img/symbol_logo_small.png';
+  if (aiProvider) aiProvider.value = settings.aiProvider || 'Ollama';
+  if (aiModel) aiModel.value = settings.aiModel || 'qwen';
+  if (aiEndpoint) aiEndpoint.value = settings.aiEndpoint || 'http://localhost:11434';
+  if (aiEnabled) aiEnabled.checked = !!settings.aiEnabled;
+  renderDashboard();
+  renderDeploymentResult();
 }
 
 function saveSettingsFromUI() {
+  const previous = loadDashboardSettings();
   const settings = {
+    ...previous,
     gradient1: document.getElementById('setting-gradient-1').value,
     gradient2: document.getElementById('setting-gradient-2').value,
     accent: document.getElementById('setting-accent').value,
+    glowColor: document.getElementById('setting-glow-color').value,
+    glowBlur: Number(document.getElementById('setting-glow-blur').value),
+    glowOpacity: Number(document.getElementById('setting-glow-opacity').value),
+    glowSpeed: Number(document.getElementById('setting-glow-speed').value),
+    orbSize: Number(document.getElementById('setting-orb-size').value),
+    orbOpacity: Number(document.getElementById('setting-orb-opacity').value),
+    orbEnabled: document.getElementById('setting-orb').checked,
     compactMode: document.getElementById('setting-compact').checked,
     reducedMotion: document.getElementById('setting-motion').checked,
+    userName: document.getElementById('setting-user-name').value.trim(),
+    userProfile: document.getElementById('setting-user-profile').value.trim(),
+    userNote: document.getElementById('setting-user-note').value.trim(),
+    userAvatar: document.getElementById('setting-user-avatar').value.trim() || 'img/symbol_logo_small.png',
+    displayUser: document.getElementById('setting-display-user').checked,
+    aiProvider: document.getElementById('setting-ai-provider').value.trim() || 'Ollama',
+    aiModel: document.getElementById('setting-ai-model').value.trim() || 'qwen',
+    aiEndpoint: document.getElementById('setting-ai-endpoint').value.trim() || 'http://localhost:11434',
+    aiEnabled: document.getElementById('setting-ai-enabled').checked,
   };
   localStorage.setItem('dashboardSettings', JSON.stringify(settings));
   applyDashboardSettings();
 }
 
-function toggleSettingsMenu() {
-  document.getElementById('settings-menu')?.classList.toggle('open');
+function toggleAppMenu() {
+  document.getElementById('app-menu')?.classList.toggle('open');
+  document.getElementById('settings-panel')?.classList.remove('open');
+}
+
+function toggleSettingsPanel() {
+  document.getElementById('settings-panel')?.classList.toggle('open');
+  document.getElementById('app-menu')?.classList.remove('open');
+}
+
+function switchSettingsPanel(panel) {
+  document.querySelectorAll('[data-settings-panel-tab]').forEach(tab => tab.classList.toggle('active', tab.dataset.settingsPanelTab === panel));
+  document.querySelectorAll('[id^="settings-panel-"]').forEach(item => item.classList.toggle('active', item.id === `settings-panel-${panel}`));
+}
+
+function setThemePreset(preset) {
+  const presets = {
+    powerframe: { themePreset:'powerframe', gradient1:'#050b1d', gradient2:'#312e81', accent:'#38bdf8', glowColor:'#38bdf8', orbEnabled:true },
+    light: { themePreset:'light', gradient1:'#eaf2ff', gradient2:'#c7d2fe', accent:'#2563eb', glowColor:'#60a5fa', orbEnabled:true },
+    aurora: { themePreset:'aurora', gradient1:'#08111f', gradient2:'#0f766e', accent:'#22d3ee', glowColor:'#a78bfa', orbEnabled:true },
+    solar: { themePreset:'solar', gradient1:'#190b14', gradient2:'#7c2d12', accent:'#f59e0b', glowColor:'#fb7185', orbEnabled:true },
+    forest: { themePreset:'forest', gradient1:'#06130d', gradient2:'#14532d', accent:'#34d399', glowColor:'#84cc16', orbEnabled:true },
+    mono: { themePreset:'mono', gradient1:'#030712', gradient2:'#1f2937', accent:'#e5e7eb', glowColor:'#94a3b8', orbEnabled:false },
+  };
+  const settings = { ...loadDashboardSettings(), ...presets[preset] };
+  localStorage.setItem('dashboardSettings', JSON.stringify(settings));
+  applyDashboardSettings();
 }
 
 function updateDashboardFilters(patch) {
@@ -1608,6 +2100,7 @@ function updateDashboardFilters(patch) {
   renderRoadmapOrchestrator();
   renderNoteBrowser();
   renderGeneratedMilestones();
+  renderDashboard();
 }
 
 function setSelectedProject(projectName, persist = true) {
@@ -1619,6 +2112,7 @@ function setSelectedProject(projectName, persist = true) {
   renderRoadmapOrchestrator();
   renderNoteBrowser();
   renderGeneratedMilestones();
+  renderDashboard();
 }
 
 function populateGlobalProjectSelect() {
@@ -1652,14 +2146,20 @@ function syncFilterControls() {
 function switchTab(name, btn) {
   document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.menu-item').forEach(b => b.classList.toggle('active', b.dataset.menuTab === name));
   document.getElementById('view-' + name).classList.add('active');
-  btn.classList.add('active');
+  const tabButton = btn || [...document.querySelectorAll('.tab-btn')].find(button => button.getAttribute('onclick')?.includes(`'${name}'`));
+  if (tabButton) tabButton.classList.add('active');
+  document.getElementById('app-menu')?.classList.remove('open');
+  document.getElementById('settings-panel')?.classList.remove('open');
+  if (name === 'dashboard')  renderDashboard();
   if (name === 'calendar')   renderCalendar();
   if (name === 'schedule')   renderSchedule();
   if (name === 'roadmap')    { renderRoadmap(); renderRoadmapOrchestrator(); renderProjectBoard(); renderGeneratedMilestones(); }
   if (name === 'notes')      { renderNotesIndex(); renderNoteBrowser(); }
   if (name === 'goals')      renderGoals();
   if (name === 'calculator') initCalculator();
+  if (name === 'deploy')     renderDeploymentResult();
 }
 
 async function loadDashboardModel() {
@@ -1689,6 +2189,103 @@ function applyDashboardModel() {
   renderRoadmapOrchestrator();
   renderNoteBrowser();
   renderGeneratedMilestones();
+  renderDashboard();
+}
+
+function renderDashboard() {
+  const settings = loadDashboardSettings();
+  const scopedNotes = getVisibleNotes();
+  const selectedProject = dashboardFilters.project || '';
+  const scopedLevels = projectScopedLevels();
+  const priorityItems = (dashboardModel.priorityList?.length ? dashboardModel.priorityList : roadmapItems.priorityList || [])
+    .filter(item => !selectedProject || item.projectName === selectedProject)
+    .slice(0, 4);
+  const upcomingEvents = state.events.slice().sort((a, b) => (a.date || '').localeCompare(b.date || '')).slice(0, 4);
+  const goals = state.goals || [];
+  const openGoalTasks = goals.reduce((sum, goal) => sum + goal.tasks.filter(task => !task.done).length, 0);
+  const milestones = (generatedMilestones || []).filter(ms => !dashboardFilters.project || ms.projectName === dashboardFilters.project).slice(0, 4);
+  const timeline = (dashboardModel.timeline || []).filter(item => !dashboardFilters.project || item.projectName === dashboardFilters.project).slice(0, 5);
+
+  setText('dash-roadmap-count', String(scopedLevels.length));
+  setText('dash-roadmap-project', selectedProject ? `Focused on ${selectedProject}` : 'All project levels');
+  setText('dash-calendar-count', String(upcomingEvents.length));
+  setText('dash-goals-count', String(goals.length));
+  setText('dash-notes-count', String(scopedNotes.length));
+
+  setHtml('dash-roadmap-mini', scopedLevels.length
+    ? scopedLevels.slice(0, 7).map(level => `<span class="mini-level ${escapeHtml(level.status || 'locked')}">${escapeHtml(level.tier || '')}</span>`).join('')
+    : '<span class="note-meta">No levels</span>');
+  setHtml('dash-roadmap-list', priorityItems.length
+    ? priorityItems.map(item => `<div>${escapeHtml(item.title)} · ${Math.round(item.score || 0)}</div>`).join('')
+    : '<div>No priorities for this project focus.</div>');
+  setHtml('dash-calendar-list', upcomingEvents.length
+    ? upcomingEvents.map(item => `<div>${escapeHtml(item.date)} · ${escapeHtml(item.title)}</div>`).join('')
+    : '<div>No local calendar events yet.</div>');
+  setHtml('dash-goals-list', goals.length
+    ? goals.slice(0, 4).map(goal => `<div>${escapeHtml(goal.title)} · ${goal.tasks.filter(task => task.done).length}/${goal.tasks.length} tasks</div>`).join('') + `<div>${openGoalTasks} open task${openGoalTasks === 1 ? '' : 's'}</div>`
+    : '<div>No local goals yet.</div>');
+  setHtml('dash-notes-list', scopedNotes.slice(0, 4).map(note => `<div>${escapeHtml(note.title)}</div>`).join('') || '<div>No notes in this focus.</div>');
+  setHtml('dash-milestones-list', milestones.length
+    ? milestones.map(ms => `<div><strong>${escapeHtml(ms.projectName)}</strong> · ${escapeHtml(ms.title)}</div>`).join('')
+    : '<div>No generated milestones in this focus.</div>');
+  setHtml('dash-timeline-list', timeline.length
+    ? timeline.map(item => `<div>${escapeHtml(item.date)} · ${escapeHtml(item.projectName)} · ${escapeHtml(item.title)}</div>`).join('')
+    : `<div>${escapeHtml(settings.userName || 'Your board')} has no timeline entries in this focus.</div>`);
+  setText('dash-deploy-status', 'Ready');
+  setText('dash-deploy-version', dashboardModel.generatedAt ? `Model ${formatGeneratedAt(dashboardModel.generatedAt)}` : 'Local static version');
+  setHtml('dash-deploy-list', getAiPlanningSuggestions().slice(0, 2).map(item => `<div>${escapeHtml(item)}</div>`).join(''));
+  renderDeploymentResult();
+}
+
+function projectScopedLevels() {
+  const selectedProject = dashboardFilters.project || '';
+  return (roadmapLevels.levels || []).filter(level => {
+    if (!selectedProject) return true;
+    const merged = mergedLevel(level);
+    return (merged.projectIds || []).some(id => levelItemLabel('projectIds', id) === selectedProject) ||
+      (merged.notePaths || []).some(path => (notesIndex.notes || []).find(note => note.sourcePath === path)?.projectName === selectedProject);
+  });
+}
+
+function renderDeploymentResult() {
+  const settings = loadDashboardSettings();
+  const selectedProject = dashboardFilters.project || '';
+  const notes = getVisibleNotes();
+  const tasks = filteredTasks();
+  setText('deploy-version-date', dashboardModel.generatedAt ? formatGeneratedAt(dashboardModel.generatedAt) : new Date().toLocaleDateString());
+  setText('deploy-selected-project', selectedProject || 'All projects');
+  setText('deploy-model-status', dashboardModel.generatedAt ? 'Generated dashboard-model.json' : 'Waiting for model');
+  setText('deploy-data-counts', `${notes.length} notes · ${tasks.length} active tasks`);
+  setText('deploy-ai-provider', settings.aiProvider || 'Ollama');
+  setText('deploy-ai-model', settings.aiModel || 'qwen');
+  setText('deploy-ai-mode', settings.aiEnabled ? 'Ready for local worker' : 'Disabled in menu');
+  setHtml('deploy-ai-suggestions', getAiPlanningSuggestions().map(item => `
+    <div class="agent-suggestion">${escapeHtml(item)}</div>
+  `).join(''));
+}
+
+function getAiPlanningSuggestions() {
+  const selectedProject = dashboardFilters.project || '';
+  const notes = getVisibleNotes();
+  const tasks = filteredTasks();
+  const milestones = (generatedMilestones || []).filter(ms => !selectedProject || ms.projectName === selectedProject);
+  const suggestions = [];
+  if (selectedProject) suggestions.push(`Focus next planning pass on ${selectedProject}: ${notes.length} notes, ${tasks.length} proposed tasks, ${milestones.length} milestones.`);
+  else suggestions.push(`Pick one active project filter before asking Qwen for sequencing; all-project context is broad with ${notes.length} notes.`);
+  if (tasks.length) suggestions.push(`Ask Ollama/Qwen to cluster ${tasks.length} tasks into now/next/later and flag blockers before scheduling.`);
+  if (milestones.length) suggestions.push(`Use milestone date ranges as the planning spine, then let the agent suggest calendar deployments.`);
+  suggestions.push('Future local worker: send dashboard-model.json plus selected localStorage preferences to Ollama at the configured endpoint.');
+  return suggestions;
+}
+
+function openInfoModal(type) {
+  const title = type === 'contact' ? 'Contact' : 'FAQ';
+  const body = type === 'contact'
+    ? 'This is a local-first planning dashboard. Add your preferred contact details in User settings when you want them displayed.'
+    : 'Use Menu for navigation, Settings for theme/user/AI preferences, and the project selector to focus every tab on one project.';
+  setText('info-modal-title', title);
+  setHtml('info-modal-body', `<p>${escapeHtml(body)}</p>`);
+  openModal('modal-info');
 }
 
 // ═══════════════════════════════════════════════════════
@@ -1989,6 +2586,11 @@ function formatGeneratedAt(value) {
 function setText(id, value) {
   const el = document.getElementById(id);
   if (el) el.textContent = value;
+}
+
+function setHtml(id, value) {
+  const el = document.getElementById(id);
+  if (el) el.innerHTML = value;
 }
 
 function escapeHtml(value) {
@@ -2671,6 +3273,7 @@ function saveEvent() {
   closeModal('modal-event');
   renderCalendar();
   if (currentPanelDate === ev.date) renderDayPanel();
+  renderDashboard();
 }
 
 function deleteEvent(id) {
@@ -2678,6 +3281,7 @@ function deleteEvent(id) {
   saveState();
   renderCalendar();
   if (currentPanelDate) renderDayPanel();
+  renderDashboard();
 }
 
 // ═══════════════════════════════════════════════════════
@@ -2768,6 +3372,7 @@ function saveBlock() {
   saveState();
   closeModal('modal-block');
   renderSchedule();
+  renderDashboard();
 }
 
 function deleteBlock(dateStr, id) {
@@ -2775,6 +3380,7 @@ function deleteBlock(dateStr, id) {
   state.blocks[dateStr] = state.blocks[dateStr].filter(b => b.id !== id);
   saveState();
   renderSchedule();
+  renderDashboard();
 }
 
 // ═══════════════════════════════════════════════════════
@@ -2867,6 +3473,7 @@ function saveMilestone() {
   saveState();
   closeModal('modal-milestone');
   renderRoadmap();
+  renderDashboard();
 }
 
 function toggleMilestoneStatus(id) {
@@ -2875,12 +3482,14 @@ function toggleMilestoneStatus(id) {
   ms.status = ms.status === 'todo' ? 'in-progress' : ms.status === 'in-progress' ? 'done' : 'todo';
   saveState();
   renderRoadmap();
+  renderDashboard();
 }
 
 function deleteMilestone(id) {
   state.milestones = state.milestones.filter(m => m.id !== id);
   saveState();
   renderRoadmap();
+  renderDashboard();
 }
 
 // ═══════════════════════════════════════════════════════
@@ -2972,17 +3581,23 @@ function saveGoal() {
   const title = document.getElementById('goal-title').value.trim();
   if (!title) { alert('Please enter a goal title.'); return; }
   const rawTasks = document.getElementById('goal-tasks').value.split('\n').filter(t => t.trim());
-  state.goals.push({
+  const goal = {
     id:       uid(),
     title,
     month:    document.getElementById('goal-month').value,
     category: document.getElementById('goal-cat').value,
     desc:     document.getElementById('goal-desc').value.trim(),
     tasks:    rawTasks.map(t => ({ id: uid(), text: t.trim(), done: false })),
-  });
+  };
+  state.goals.push(goal);
+  connectGoalToCalendar(goal);
+  connectGoalToMilestone(goal);
   saveState();
   closeModal('modal-goal');
   renderGoals();
+  renderCalendar();
+  renderRoadmap();
+  renderDashboard();
 }
 
 function deleteGoal(id) {
@@ -2996,8 +3611,11 @@ function toggleTask(goalId, taskId, checked) {
   if (!goal) return;
   const task = goal.tasks.find(t => t.id === taskId);
   if (task) task.done = checked;
+  if (task && checked) connectTaskCompletionToCalendar(goal, task);
   saveState();
   renderGoals();
+  renderCalendar();
+  renderDashboard();
 }
 
 function addTask(goalId) {
@@ -3006,9 +3624,13 @@ function addTask(goalId) {
   if (!text) return;
   const goal = state.goals.find(g => g.id === goalId);
   if (!goal) return;
-  goal.tasks.push({ id: uid(), text, done: false });
+  const task = { id: uid(), text, done: false };
+  goal.tasks.push(task);
+  connectTaskDeploymentToCalendar(goal, task);
   saveState();
   renderGoals();
+  renderCalendar();
+  renderDashboard();
 }
 
 function deleteTask(goalId, taskId) {
@@ -3017,6 +3639,71 @@ function deleteTask(goalId, taskId) {
   goal.tasks = goal.tasks.filter(t => t.id !== taskId);
   saveState();
   renderGoals();
+  renderDashboard();
+}
+
+function firstDayOfGoalMonth(goal) {
+  return goal.month ? `${goal.month}-01` : isoDate(today.getFullYear(), today.getMonth() + 1, today.getDate());
+}
+
+function connectGoalToCalendar(goal) {
+  const sourceId = `goal-${goal.id}`;
+  if (state.events.some(event => event.sourceId === sourceId)) return;
+  state.events.push({
+    id: uid(),
+    date: firstDayOfGoalMonth(goal),
+    title: `Goal launch: ${goal.title}`,
+    category: goal.category || 'goal',
+    start: '',
+    end: '',
+    notes: goal.desc || 'Auto-linked from Goals.',
+    sourceId,
+  });
+}
+
+function connectGoalToMilestone(goal) {
+  const sourceId = `goal-${goal.id}`;
+  if (state.milestones.some(ms => ms.sourceId === sourceId)) return;
+  state.milestones.push({
+    id: uid(),
+    title: `Goal milestone: ${goal.title}`,
+    date: firstDayOfGoalMonth(goal),
+    status: 'todo',
+    lane: 'Goals',
+    priority: 'medium',
+    notes: `${goal.tasks.length} linked goal tasks`,
+    sourceId,
+  });
+}
+
+function connectTaskDeploymentToCalendar(goal, task) {
+  const sourceId = `task-${task.id}`;
+  if (state.events.some(event => event.sourceId === sourceId)) return;
+  state.events.push({
+    id: uid(),
+    date: firstDayOfGoalMonth(goal),
+    title: `Task deployed: ${task.text}`,
+    category: goal.category || 'goal',
+    start: '',
+    end: '',
+    notes: `Auto-linked from goal: ${goal.title}`,
+    sourceId,
+  });
+}
+
+function connectTaskCompletionToCalendar(goal, task) {
+  const sourceId = `done-${task.id}`;
+  if (state.events.some(event => event.sourceId === sourceId)) return;
+  state.events.push({
+    id: uid(),
+    date: isoDate(today.getFullYear(), today.getMonth() + 1, today.getDate()),
+    title: `Completed: ${task.text}`,
+    category: goal.category || 'goal',
+    start: '',
+    end: '',
+    notes: `Completion logged from goal: ${goal.title}`,
+    sourceId,
+  });
 }
 
 // ═══════════════════════════════════════════════════════
