@@ -11,14 +11,14 @@ Both modes read pending Firestore `syncQueue` items, fetch related `notes` docum
 
 ## Local Write To Commit
 
-With `--commit`, the worker stages only the Markdown files created during that run:
+With `--commit`, the worker stages the Markdown files created during that run plus regenerated index and roadmap data:
 
 ```bash
 git add -- <created files>
 git commit -m "Sync notes from Firestore"
 ```
 
-The worker skips Git automation when no files are written and also checks for staged changes before committing, preventing empty commits.
+The worker skips Git automation when no files are written and also checks for staged changes before committing, preventing empty commits. It creates at most one commit per run.
 
 ## Manual Push For Now
 

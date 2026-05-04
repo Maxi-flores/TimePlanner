@@ -14,6 +14,12 @@ try {
 const repoRoot = path.resolve(__dirname, "..");
 const notesRoot = path.join(repoRoot, "content", "notes-2026");
 const inboxRoot = path.join(notesRoot, "Inbox");
+const postSyncFiles = [
+  "data/notes-index.json",
+  "data/roadmap-items.json",
+  "apps/time-planner/data/notes-index.json",
+  "apps/time-planner/data/roadmap-items.json",
+];
 const serviceAccountPath =
   process.env.FIREBASE_SERVICE_ACCOUNT_PATH ||
   process.env.GOOGLE_APPLICATION_CREDENTIALS;
@@ -115,20 +121,70 @@ function runGit(args) {
   };
 }
 
-function commitCreatedFiles(createdFiles) {
+function runNodeScript(scriptPath) {
+  const result = spawnSync(process.execPath, [scriptPath], {
+    cwd: repoRoot,
+    encoding: "utf8",
+    shell: false,
+  });
+
+  return {
+    ok: result.status === 0,
+    status: result.status,
+    stdout: result.stdout.trim(),
+    stderr: result.stderr.trim(),
+  };
+}
+
+function runPostSyncProcessing() {
+  const steps = [
+    {
+      label: "Regenerate notes index",
+      script: path.join(repoRoot, "scripts", "index-notes.js"),
+    },
+    {
+      label: "Regenerate roadmap items",
+      script: path.join(repoRoot, "scripts", "generate-roadmap.js"),
+    },
+  ];
+
+  for (const step of steps) {
+    console.log(`Post-sync: ${step.label}...`);
+    const result = runNodeScript(step.script);
+    if (!result.ok) {
+      console.error(`Post-sync failed: ${step.label}`);
+      if (result.stdout) console.error(result.stdout);
+      if (result.stderr) console.error(result.stderr);
+      process.exitCode = 1;
+      return false;
+    }
+    if (result.stdout) console.log(result.stdout);
+  }
+
+  console.log("Post-sync processing complete.");
+  return true;
+}
+
+function existingPostSyncFiles() {
+  return postSyncFiles
+    .map((filePath) => path.join(repoRoot, filePath))
+    .filter((filePath) => fs.existsSync(filePath));
+}
+
+function commitSyncFiles(filesToStage) {
   if (!shouldCommit) {
     console.log("Commit mode disabled. Re-run with --commit to stage and commit written notes.");
     return;
   }
 
-  if (createdFiles.length === 0) {
+  if (filesToStage.length === 0) {
     console.log("No files written; skipping git add and git commit.");
     return;
   }
 
-  const relativeFiles = createdFiles.map((filePath) =>
+  const relativeFiles = [...new Set(filesToStage.map((filePath) =>
     path.relative(repoRoot, filePath).split(path.sep).join("/")
-  );
+  ))];
 
   const addResult = runGit(["add", "--", ...relativeFiles]);
   if (!addResult.ok) {
@@ -247,7 +303,17 @@ async function main() {
   }
 
   console.log(`Local write complete. ${writtenCount} note(s) written.`);
-  commitCreatedFiles(createdFiles);
+  if (createdFiles.length === 0) {
+    console.log("No files written; skipping post-sync index and roadmap regeneration.");
+    return;
+  }
+
+  const postSyncOk = runPostSyncProcessing();
+  const filesToStage = postSyncOk
+    ? [...createdFiles, ...existingPostSyncFiles()]
+    : createdFiles;
+
+  commitSyncFiles(filesToStage);
 }
 
 main().catch((err) => {

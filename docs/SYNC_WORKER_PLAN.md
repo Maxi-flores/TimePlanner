@@ -89,6 +89,8 @@ git commit -m "Sync notes from Firestore"
 
 It prevents empty commits and never pushes automatically.
 
+If one or more notes were written, the worker also regenerates the notes index and roadmap data before the optional commit. Commit mode includes those generated files in the same commit.
+
 ## Safety Rules
 
 - Do not commit service account JSON files.
