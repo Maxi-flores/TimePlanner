@@ -5,7 +5,7 @@
 The local sync worker now follows this pipeline:
 
 ```text
-Firestore -> Markdown -> Index -> Roadmap -> Commit
+Firestore -> Markdown -> Index -> Roadmap -> Level Map -> Commit
 ```
 
 ## 1. Firestore
@@ -53,7 +53,20 @@ This updates:
 - `data/roadmap-items.json`
 - `apps/time-planner/data/roadmap-items.json`
 
-## 5. Commit
+## 5. Level Map
+
+After roadmap items are regenerated, the worker runs:
+
+```bash
+node scripts/generate-roadmap-levels.js
+```
+
+This updates:
+
+- `data/roadmap-levels.json`
+- `apps/time-planner/data/roadmap-levels.json`
+
+## 6. Commit
 
 By default, the worker does not commit:
 
@@ -72,8 +85,10 @@ With `--commit`, the worker creates one commit containing the newly written Mark
 - `content/notes-2026/Inbox/...`
 - `data/notes-index.json`
 - `data/roadmap-items.json`
+- `data/roadmap-levels.json`
 - `apps/time-planner/data/notes-index.json`
 - `apps/time-planner/data/roadmap-items.json`
+- `apps/time-planner/data/roadmap-levels.json`
 
 The worker prevents empty commits and does not push automatically.
 

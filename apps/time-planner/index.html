@@ -374,6 +374,128 @@
     }
     .placeholder-item:last-child { border-bottom: none; }
     .placeholder-title { color: var(--text); font-size: .84rem; font-weight: 700; }
+    .level-map-section {
+      background: linear-gradient(180deg, rgba(30,41,59,.98), rgba(15,23,42,.98));
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px;
+      margin-bottom: 20px;
+      overflow: hidden;
+    }
+    .level-map-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: flex-end;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+    .level-map-header h2 { font-size: 1.1rem; font-weight: 700; margin-bottom: 4px; }
+    .level-map-header p { color: var(--text-muted); font-size: .82rem; }
+    .level-map {
+      position: relative;
+      min-height: 620px;
+      border-radius: var(--radius);
+      border: 1px solid rgba(148, 163, 184, .24);
+      background:
+        linear-gradient(rgba(148,163,184,.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(148,163,184,.06) 1px, transparent 1px),
+        radial-gradient(circle at 20% 15%, rgba(99,102,241,.16), transparent 26%),
+        radial-gradient(circle at 76% 70%, rgba(34,197,94,.12), transparent 24%),
+        var(--surface2);
+      background-size: 34px 34px, 34px 34px, auto, auto, auto;
+    }
+    .level-map-lines {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+    .level-line {
+      stroke: rgba(129, 140, 248, .65);
+      stroke-width: 4;
+      stroke-linecap: round;
+      stroke-dasharray: 9 8;
+    }
+    .level-node {
+      position: absolute;
+      width: 76px;
+      height: 76px;
+      transform: translate(-50%, -50%);
+      border-radius: 999px;
+      border: 3px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      box-shadow: 0 12px 28px rgba(0,0,0,.28);
+    }
+    .level-node.locked { opacity: .64; cursor: pointer; background: #111827; }
+    .level-node.unlocked { border-color: var(--accent2); }
+    .level-node.active {
+      border-color: #fcd34d;
+      box-shadow: 0 0 0 5px rgba(245,158,11,.18), 0 18px 34px rgba(0,0,0,.34);
+    }
+    .level-node.completed { border-color: var(--success); background: #123524; }
+    .level-node .level-mark { font-size: 1.15rem; font-weight: 800; }
+    .level-node .level-state { font-size: .58rem; text-transform: uppercase; letter-spacing: .07em; color: var(--text-muted); }
+    .level-label {
+      position: absolute;
+      transform: translate(-50%, 44px);
+      width: 150px;
+      text-align: center;
+      font-size: .75rem;
+      font-weight: 700;
+      color: var(--text);
+      pointer-events: none;
+    }
+    .level-panel-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      max-height: 54vh;
+      overflow-y: auto;
+      padding-right: 4px;
+    }
+    .level-tag-box {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 10px;
+      min-height: 96px;
+    }
+    .level-tag-box h4 {
+      font-size: .72rem;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+    .level-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .level-tag {
+      border-radius: 999px;
+      padding: 4px 8px;
+      font-size: .7rem;
+      font-weight: 700;
+      max-width: 100%;
+      overflow-wrap: anywhere;
+    }
+    .level-tag.project { background: #312e81; color: #c7d2fe; }
+    .level-tag.note { background: #14532d; color: #86efac; }
+    .level-tag.prompt { background: #78350f; color: #fcd34d; }
+    .level-tag.feature { background: #1e3a5f; color: #7dd3fc; }
+    .level-tag.task { background: #4a044e; color: #f0abfc; }
+    .level-tag.manual { background: #334155; color: var(--text); }
+    .level-assignment-row {
+      display: grid;
+      grid-template-columns: 130px 1fr auto;
+      gap: 8px;
+      align-items: end;
+      margin: 12px 0;
+    }
+    .level-panel-note { color: var(--text-muted); font-size: .78rem; margin: 6px 0 12px; }
 
     /* ─── DAILY SCHEDULE ─────────────────────────────────── */
     .schedule-header {
@@ -646,6 +768,9 @@
       .day-panel { width: 100%; }
       .notes-summary, .notes-layout { grid-template-columns: 1fr; }
       .orchestrator-grid { grid-template-columns: 1fr; }
+      .level-map { min-height: 720px; }
+      .level-panel-grid { grid-template-columns: 1fr; }
+      .level-assignment-row { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -710,6 +835,16 @@
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:10px;">
       <h2 style="font-size:1.1rem;font-weight:700;">🗺 Roadmap &amp; Milestones</h2>
       <button class="btn btn-primary" onclick="openAddMilestoneModal()">+ Milestone</button>
+    </div>
+    <div class="level-map-section">
+      <div class="level-map-header">
+        <div>
+          <h2>Roadmap Level Map</h2>
+          <p id="level-map-generated">Loading campaign path...</p>
+        </div>
+        <span class="badge badge-accent" id="level-map-count">0 levels</span>
+      </div>
+      <div class="level-map" id="roadmap-level-map"></div>
     </div>
     <div class="roadmap-container" id="roadmap-container"></div>
     <div class="orchestrator-section">
@@ -1059,6 +1194,58 @@
   </div>
 </div>
 
+<!-- Roadmap Level Modal -->
+<div class="modal" id="modal-roadmap-level" style="width:min(860px,94vw);">
+  <h3 id="level-modal-title">Roadmap Level</h3>
+  <p class="level-panel-note" id="level-modal-description"></p>
+  <div class="level-assignment-row">
+    <div>
+      <label for="level-assign-type">Box</label>
+      <select id="level-assign-type" onchange="populateLevelAssignmentOptions()">
+        <option value="projectIds">Project tag</option>
+        <option value="notePaths">Note tags</option>
+        <option value="promptIds">Prompt tags</option>
+        <option value="featureIds">Feature tags</option>
+        <option value="taskIds">Task tags</option>
+      </select>
+    </div>
+    <div>
+      <label for="level-assign-item">Indexed item</label>
+      <select id="level-assign-item"></select>
+    </div>
+    <button class="btn btn-primary" onclick="assignItemToLevel()">Assign</button>
+  </div>
+  <div class="level-panel-grid">
+    <div class="level-tag-box">
+      <h4>Project tag</h4>
+      <div class="level-tags" id="level-box-projectIds"></div>
+    </div>
+    <div class="level-tag-box">
+      <h4>Note tags</h4>
+      <div class="level-tags" id="level-box-notePaths"></div>
+    </div>
+    <div class="level-tag-box">
+      <h4>Prompt tags</h4>
+      <div class="level-tags" id="level-box-promptIds"></div>
+    </div>
+    <div class="level-tag-box">
+      <h4>Feature tags</h4>
+      <div class="level-tags" id="level-box-featureIds"></div>
+    </div>
+    <div class="level-tag-box">
+      <h4>Task tags</h4>
+      <div class="level-tags" id="level-box-taskIds"></div>
+    </div>
+    <div class="level-tag-box">
+      <h4>Manual tags</h4>
+      <div class="level-tags" id="level-box-tags"></div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-ghost" onclick="closeModal('modal-roadmap-level')">Close</button>
+  </div>
+</div>
+
 <script>
 // ═══════════════════════════════════════════════════════
 //  STATE  (persisted to localStorage)
@@ -1085,6 +1272,9 @@ let notesIndex = { notes: [], generatedAt: null, noteCount: 0 };
 let notesIndexLoaded = false;
 let roadmapItems = { entities: { project: [], prompt: [], note: [], feature: [], task: [], milestone: [], decision: [], syncEvent: [] }, priorityList: [] };
 let roadmapItemsLoaded = false;
+let roadmapLevels = { levels: [], generatedAt: null };
+let roadmapLevelsLoaded = false;
+let activeLevelId = null;
 let firebaseIntake = null;
 let firebaseIntakeReady = false;
 
@@ -1098,7 +1288,7 @@ function switchTab(name, btn) {
   btn.classList.add('active');
   if (name === 'calendar')   renderCalendar();
   if (name === 'schedule')   renderSchedule();
-  if (name === 'roadmap')    { renderRoadmap(); renderRoadmapOrchestrator(); }
+  if (name === 'roadmap')    { renderRoadmap(); renderRoadmapOrchestrator(); renderRoadmapLevelMap(); }
   if (name === 'notes')      renderNotesIndex();
   if (name === 'goals')      renderGoals();
   if (name === 'calculator') initCalculator();
@@ -1458,6 +1648,181 @@ function renderPromptAndChangePlaceholders(prompts, features, syncEvents) {
       <div>${escapeHtml(item.meta)}</div>
     </div>
   `).join('');
+}
+
+// ═══════════════════════════════════════════════════════
+//  ROADMAP LEVEL MAP
+// ═══════════════════════════════════════════════════════
+async function loadRoadmapLevels() {
+  try {
+    const response = await fetch('data/roadmap-levels.json', { cache: 'no-store' });
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    roadmapLevels = await response.json();
+    roadmapLevelsLoaded = true;
+    renderRoadmapLevelMap();
+  } catch (err) {
+    const generated = document.getElementById('level-map-generated');
+    if (generated) generated.textContent = 'Roadmap levels unavailable. Run node scripts/generate-roadmap-levels.js.';
+  }
+}
+
+function loadLevelAssignments() {
+  try {
+    return JSON.parse(localStorage.getItem('roadmapLevelAssignments')) || {};
+  } catch {
+    return {};
+  }
+}
+
+function saveLevelAssignments(assignments) {
+  localStorage.setItem('roadmapLevelAssignments', JSON.stringify(assignments));
+}
+
+function mergedLevel(level) {
+  const assignments = loadLevelAssignments()[level.id] || {};
+  return {
+    ...level,
+    projectIds: mergeUnique(level.projectIds, assignments.projectIds),
+    notePaths: mergeUnique(level.notePaths, assignments.notePaths),
+    promptIds: mergeUnique(level.promptIds, assignments.promptIds),
+    featureIds: mergeUnique(level.featureIds, assignments.featureIds),
+    taskIds: mergeUnique(level.taskIds, assignments.taskIds),
+    tags: mergeUnique(level.tags, assignments.tags),
+  };
+}
+
+function mergeUnique(a = [], b = []) {
+  return [...new Set([...(a || []), ...(b || [])])];
+}
+
+function renderRoadmapLevelMap() {
+  const map = document.getElementById('roadmap-level-map');
+  if (!map) return;
+
+  const levels = roadmapLevels.levels || [];
+  setText('level-map-count', `${levels.length} levels`);
+  const generated = document.getElementById('level-map-generated');
+  if (generated) {
+    generated.textContent = roadmapLevelsLoaded
+      ? `Generated ${formatGeneratedAt(roadmapLevels.generatedAt)} from roadmap-items.json`
+      : 'Loading campaign path...';
+  }
+
+  if (!levels.length) {
+    map.innerHTML = '<div class="notes-empty">No roadmap levels generated.</div>';
+    return;
+  }
+
+  const points = levels.map(level => level.position || { x: 50, y: 50 });
+  const lines = points.slice(0, -1).map((point, index) => {
+    const next = points[index + 1];
+    return `<line class="level-line" x1="${point.x}%" y1="${point.y}%" x2="${next.x}%" y2="${next.y}%" />`;
+  }).join('');
+
+  map.innerHTML = `
+    <svg class="level-map-lines" viewBox="0 0 100 100" preserveAspectRatio="none">${lines}</svg>
+    ${levels.map(level => renderLevelNode(mergedLevel(level))).join('')}`;
+}
+
+function renderLevelNode(level) {
+  const pos = level.position || { x: 50, y: 50 };
+  const mark = {
+    completed: '✓',
+    active: String(level.tier),
+    unlocked: String(level.tier),
+    locked: 'LOCK',
+  }[level.status] || String(level.tier);
+
+  return `
+    <button class="level-node ${escapeHtml(level.status)}" style="left:${pos.x}%;top:${pos.y}%;" onclick="openRoadmapLevel('${escapeHtml(level.id)}')">
+      <span>
+        <span class="level-mark">${escapeHtml(mark)}</span>
+        <span class="level-state">${escapeHtml(level.status)}</span>
+      </span>
+    </button>
+    <div class="level-label" style="left:${pos.x}%;top:${pos.y}%;">${escapeHtml(level.title)}</div>`;
+}
+
+function openRoadmapLevel(levelId) {
+  activeLevelId = levelId;
+  const level = getActiveLevel();
+  if (!level) return;
+
+  document.getElementById('level-modal-title').textContent = `Tier ${level.tier}: ${level.title}`;
+  document.getElementById('level-modal-description').textContent = `${level.status} · ${level.description || ''}`;
+  populateLevelAssignmentOptions();
+  renderLevelModalBoxes(level);
+  openModal('modal-roadmap-level');
+}
+
+function getActiveLevel() {
+  const level = (roadmapLevels.levels || []).find(item => item.id === activeLevelId);
+  return level ? mergedLevel(level) : null;
+}
+
+function populateLevelAssignmentOptions() {
+  const type = document.getElementById('level-assign-type')?.value || 'projectIds';
+  const select = document.getElementById('level-assign-item');
+  if (!select) return;
+
+  const options = levelAssignmentOptions(type);
+  select.innerHTML = options.map(item => `<option value="${escapeHtml(item.value)}">${escapeHtml(item.label)}</option>`).join('');
+}
+
+function levelAssignmentOptions(type) {
+  const entities = roadmapItems.entities || {};
+  if (type === 'projectIds') return (entities.project || []).map(item => ({ value: item.id, label: item.name || item.title }));
+  if (type === 'notePaths') return (notesIndex.notes || []).map(item => ({ value: item.sourcePath, label: item.title }));
+  if (type === 'promptIds') return (entities.prompt || []).map(item => ({ value: item.id, label: item.title }));
+  if (type === 'featureIds') return (entities.feature || []).map(item => ({ value: item.id, label: item.title }));
+  if (type === 'taskIds') return (entities.task || []).map(item => ({ value: item.id, label: item.title }));
+  return [];
+}
+
+function assignItemToLevel() {
+  if (!activeLevelId) return;
+  const type = document.getElementById('level-assign-type').value;
+  const value = document.getElementById('level-assign-item').value;
+  if (!value) return;
+
+  const assignments = loadLevelAssignments();
+  if (!assignments[activeLevelId]) assignments[activeLevelId] = {};
+  if (!assignments[activeLevelId][type]) assignments[activeLevelId][type] = [];
+  if (!assignments[activeLevelId][type].includes(value)) {
+    assignments[activeLevelId][type].push(value);
+  }
+  saveLevelAssignments(assignments);
+
+  renderLevelModalBoxes(getActiveLevel());
+  renderRoadmapLevelMap();
+}
+
+function renderLevelModalBoxes(level) {
+  renderLevelTagBox('projectIds', level.projectIds, 'project');
+  renderLevelTagBox('notePaths', level.notePaths, 'note');
+  renderLevelTagBox('promptIds', level.promptIds, 'prompt');
+  renderLevelTagBox('featureIds', level.featureIds, 'feature');
+  renderLevelTagBox('taskIds', level.taskIds, 'task');
+  renderLevelTagBox('tags', level.tags, 'manual');
+}
+
+function renderLevelTagBox(type, values = [], tagClass) {
+  const box = document.getElementById(`level-box-${type}`);
+  if (!box) return;
+  const labels = values.map(value => levelItemLabel(type, value));
+  box.innerHTML = labels.length
+    ? labels.map(label => `<span class="level-tag ${tagClass}">${escapeHtml(label)}</span>`).join('')
+    : '<span class="note-meta">No assignments yet.</span>';
+}
+
+function levelItemLabel(type, value) {
+  const entities = roadmapItems.entities || {};
+  if (type === 'projectIds') return (entities.project || []).find(item => item.id === value)?.name || value;
+  if (type === 'notePaths') return (notesIndex.notes || []).find(item => item.sourcePath === value)?.title || value;
+  if (type === 'promptIds') return (entities.prompt || []).find(item => item.id === value)?.title || value;
+  if (type === 'featureIds') return (entities.feature || []).find(item => item.id === value)?.title || value;
+  if (type === 'taskIds') return (entities.task || []).find(item => item.id === value)?.title || value;
+  return value;
 }
 
 // ═══════════════════════════════════════════════════════
@@ -2150,6 +2515,7 @@ function formatDate(dateStr) {
   renderCalendar();
   loadNotesIndex();
   loadRoadmapItems();
+  loadRoadmapLevels();
   loadFirebaseIntake();
 })();
 </script>

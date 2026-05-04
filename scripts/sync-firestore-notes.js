@@ -17,8 +17,10 @@ const inboxRoot = path.join(notesRoot, "Inbox");
 const postSyncFiles = [
   "data/notes-index.json",
   "data/roadmap-items.json",
+  "data/roadmap-levels.json",
   "apps/time-planner/data/notes-index.json",
   "apps/time-planner/data/roadmap-items.json",
+  "apps/time-planner/data/roadmap-levels.json",
 ];
 const serviceAccountPath =
   process.env.FIREBASE_SERVICE_ACCOUNT_PATH ||
@@ -145,6 +147,10 @@ function runPostSyncProcessing() {
     {
       label: "Regenerate roadmap items",
       script: path.join(repoRoot, "scripts", "generate-roadmap.js"),
+    },
+    {
+      label: "Regenerate roadmap levels",
+      script: path.join(repoRoot, "scripts", "generate-roadmap-levels.js"),
     },
   ];
 

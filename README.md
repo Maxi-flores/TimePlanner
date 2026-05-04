@@ -31,9 +31,10 @@ Generate the roadmap orchestration data after regenerating the notes index:
 ```bash
 node scripts/index-notes.js
 node scripts/generate-roadmap.js
+node scripts/generate-roadmap-levels.js
 ```
 
-The roadmap generator reads `data/notes-index.json` and writes `data/roadmap-items.json` plus `apps/time-planner/data/roadmap-items.json` for the static dashboard.
+The roadmap generators read `data/notes-index.json` and write roadmap items plus level-map data for the static dashboard.
 
 Test the static app locally from the app folder:
 

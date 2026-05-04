@@ -1,0 +1,296 @@
+{
+  "generatedAt": "2026-05-04T13:18:59.658Z",
+  "source": {
+    "roadmapItemsPath": "data/roadmap-items.json"
+  },
+  "levels": [
+    {
+      "id": "level-01",
+      "title": "Intake Gate",
+      "tier": 1,
+      "status": "completed",
+      "projectIds": [
+        "project-therockettree-app",
+        "project-pf-project"
+      ],
+      "notePaths": [
+        "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.10",
+        "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.11",
+        "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.12",
+        "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.13",
+        "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.14",
+        "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.17",
+        "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.25 @",
+        "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.9"
+      ],
+      "promptIds": [
+        "prompt-content-notes-2026-profound-projects-cshop-26-4-25",
+        "prompt-content-notes-2026-profound-projects-examp-developer-portfolio-wom-26-4-25"
+      ],
+      "featureIds": [
+        "feature-bikerinstinct-roadmap-intake",
+        "feature-bv-roadmap-intake"
+      ],
+      "taskIds": [
+        "task-review-bikerinstinct-26-4-25",
+        "task-review-cshop-26-4-12",
+        "task-review-cshop-26-4-25",
+        "task-review-dealinstinct-26-4-25"
+      ],
+      "tags": [
+        "tier-1",
+        "completed",
+        "therockettree-app",
+        "pf-project"
+      ],
+      "description": "Capture incoming notes and preserve source context.",
+      "position": {
+        "x": 18,
+        "y": 8
+      }
+    },
+    {
+      "id": "level-02",
+      "title": "Project Sorting",
+      "tier": 2,
+      "status": "active",
+      "projectIds": [
+        "project-powerstarter-azure",
+        "project-cshop"
+      ],
+      "notePaths": [
+        "content/notes-2026/Profound Projects/Powerstarter Azure/26.4.10",
+        "content/notes-2026/Profound Projects/Powerstarter Azure/26.4.11",
+        "content/notes-2026/Profound Projects/Powerstarter Azure/26.4.25 @",
+        "content/notes-2026/Profound Projects/CSHOP/26.4.12",
+        "content/notes-2026/Profound Projects/CSHOP/26.4.25 @"
+      ],
+      "promptIds": [
+        "prompt-content-notes-2026-profound-projects-examp-developer-portfolio-wom-26-4-25",
+        "prompt-content-notes-2026-profound-projects-flink3d-26-4-25"
+      ],
+      "featureIds": [
+        "feature-bv-roadmap-intake",
+        "feature-cm4-roadmap-intake"
+      ],
+      "taskIds": [
+        "task-review-dealinstinct-26-4-25",
+        "task-review-examp-developer-portfolio-26-4-11",
+        "task-review-examp-developer-portfolio-26-4-25",
+        "task-review-flink3d-26-4-25"
+      ],
+      "tags": [
+        "tier-2",
+        "active",
+        "powerstarter-azure",
+        "cshop"
+      ],
+      "description": "Classify indexed notes into project lanes and working buckets.",
+      "position": {
+        "x": 62,
+        "y": 21
+      }
+    },
+    {
+      "id": "level-03",
+      "title": "Prompt Lab",
+      "tier": 3,
+      "status": "unlocked",
+      "projectIds": [
+        "project-examp-developer-portfolio",
+        "project-powerframe"
+      ],
+      "notePaths": [
+        "content/notes-2026/Profound Projects/Examp. Developer Portfolio/WOM/26.4.11",
+        "content/notes-2026/Profound Projects/Examp. Developer Portfolio/WOM/26.4.25 @",
+        "content/notes-2026/Profound Projects/Powerframe/26.4.11",
+        "content/notes-2026/Profound Projects/Powerframe/26.4.25 @"
+      ],
+      "promptIds": [
+        "prompt-content-notes-2026-profound-projects-flink3d-26-4-25",
+        "prompt-content-notes-2026-profound-projects-mucho3d-26-4-25"
+      ],
+      "featureIds": [
+        "feature-cm4-roadmap-intake",
+        "feature-cshop-roadmap-intake"
+      ],
+      "taskIds": [
+        "task-review-flink3d-26-4-25",
+        "task-review-fullstack-dev-26-4-1",
+        "task-review-fullstack-dev-26-4-12",
+        "task-review-mucho3d-26-4-25"
+      ],
+      "tags": [
+        "tier-3",
+        "unlocked",
+        "examp-developer-portfolio",
+        "powerframe"
+      ],
+      "description": "Connect prompt sessions to projects, notes, and requested changes.",
+      "position": {
+        "x": 34,
+        "y": 35
+      }
+    },
+    {
+      "id": "level-04",
+      "title": "Feature Forge",
+      "tier": 4,
+      "status": "unlocked",
+      "projectIds": [
+        "project-sapient",
+        "project-flink3d"
+      ],
+      "notePaths": [
+        "content/notes-2026/Profound Projects/Sapient/26.4.16",
+        "content/notes-2026/Profound Projects/Sapient/26.4.25 @",
+        "content/notes-2026/Profound Projects/Flink3D/26.4.25 @"
+      ],
+      "promptIds": [
+        "prompt-content-notes-2026-profound-projects-mucho3d-26-4-25",
+        "prompt-content-notes-2026-profound-projects-pf-project-26-5-3"
+      ],
+      "featureIds": [
+        "feature-cshop-roadmap-intake",
+        "feature-dealinstinct-roadmap-intake"
+      ],
+      "taskIds": [
+        "task-review-mucho3d-26-4-25",
+        "task-review-pf-project-26-4-28",
+        "task-review-pf-project-26-5-2",
+        "task-review-pf-project-26-5-3"
+      ],
+      "tags": [
+        "tier-4",
+        "unlocked",
+        "sapient",
+        "flink3d"
+      ],
+      "description": "Turn recurring notes and prompts into feature candidates.",
+      "position": {
+        "x": 76,
+        "y": 49
+      }
+    },
+    {
+      "id": "level-05",
+      "title": "Task Trail",
+      "tier": 5,
+      "status": "locked",
+      "projectIds": [
+        "project-mucho3d",
+        "project-fullstack-dev"
+      ],
+      "notePaths": [
+        "content/notes-2026/Profound Projects/Mucho3D/26.4.25 @",
+        "content/notes-2026/Profound Projects/Fullstack dev/26.4.1",
+        "content/notes-2026/Profound Projects/Fullstack dev/26.4.12",
+        "content/notes-2026/Profound Projects/Fullstack dev/Temp"
+      ],
+      "promptIds": [
+        "prompt-content-notes-2026-profound-projects-pf-project-26-5-3",
+        "prompt-content-notes-2026-profound-projects-powerframe-26-4-25"
+      ],
+      "featureIds": [
+        "feature-dealinstinct-roadmap-intake",
+        "feature-examp-developer-portfolio-roadmap-intake"
+      ],
+      "taskIds": [
+        "task-review-pf-project-26-5-3",
+        "task-review-powerframe-26-4-11",
+        "task-review-powerframe-26-4-25",
+        "task-review-powerstarter-azure-26-4-10"
+      ],
+      "tags": [
+        "tier-5",
+        "locked",
+        "mucho3d",
+        "fullstack-dev"
+      ],
+      "description": "Break feature candidates into concrete tasks and review loops.",
+      "position": {
+        "x": 25,
+        "y": 64
+      }
+    },
+    {
+      "id": "level-06",
+      "title": "Milestone Ridge",
+      "tier": 6,
+      "status": "locked",
+      "projectIds": [
+        "project-bikerinstinct",
+        "project-dealinstinct"
+      ],
+      "notePaths": [
+        "content/notes-2026/Profound Projects/Bikerinstinct/26.4.25",
+        "content/notes-2026/Profound Projects/Dealinstinct/26.4.25"
+      ],
+      "promptIds": [
+        "prompt-content-notes-2026-profound-projects-powerframe-26-4-25",
+        "prompt-content-notes-2026-profound-projects-powerstarter-azure-26-4-25"
+      ],
+      "featureIds": [
+        "feature-examp-developer-portfolio-roadmap-intake",
+        "feature-flink3d-roadmap-intake"
+      ],
+      "taskIds": [
+        "task-review-powerstarter-azure-26-4-10",
+        "task-review-powerstarter-azure-26-4-11",
+        "task-review-powerstarter-azure-26-4-25",
+        "task-review-sapient-26-4-16"
+      ],
+      "tags": [
+        "tier-6",
+        "locked",
+        "bikerinstinct",
+        "dealinstinct"
+      ],
+      "description": "Promote stable task clusters into dated milestones.",
+      "position": {
+        "x": 58,
+        "y": 78
+      }
+    },
+    {
+      "id": "level-07",
+      "title": "Release Summit",
+      "tier": 7,
+      "status": "locked",
+      "projectIds": [
+        "project-bv",
+        "project-cm4"
+      ],
+      "notePaths": [
+        "content/notes-2026/Profound Projects/BV/CBR",
+        "content/notes-2026/Profound Projects/BV/MZ3",
+        "content/notes-2026/Profound Projects/CM4/Print"
+      ],
+      "promptIds": [
+        "prompt-content-notes-2026-profound-projects-powerstarter-azure-26-4-25",
+        "prompt-content-notes-2026-profound-projects-sapient-26-4-25"
+      ],
+      "featureIds": [
+        "feature-flink3d-roadmap-intake",
+        "feature-fullstack-dev-roadmap-intake"
+      ],
+      "taskIds": [
+        "task-review-sapient-26-4-16",
+        "task-review-sapient-26-4-25",
+        "task-review-therockettree-app-26-4-10",
+        "task-review-therockettree-app-26-4-11"
+      ],
+      "tags": [
+        "tier-7",
+        "locked",
+        "bv",
+        "cm4"
+      ],
+      "description": "Prepare reviewed roadmap slices for sync, export, and publishing.",
+      "position": {
+        "x": 42,
+        "y": 92
+      }
+    }
+  ]
+}
