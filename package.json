@@ -1,0 +1,19 @@
+{
+  "name": "timeplanner",
+  "version": "1.0.0",
+  "description": "This repository is being organized as a small monorepo for the static time planner app and the 2026 notes archive that will later feed it.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "firebase-admin": "^13.8.0"
+  }
+}
