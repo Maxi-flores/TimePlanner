@@ -2,7 +2,7 @@
 
 ## Purpose
 
-`scripts/sync-firestore-notes.js` is a local Node worker that pulls pending Firebase intake records into the Git-backed notes folder. It does not commit, push, or delete content.
+`scripts/sync-firestore-notes.js` is a local Node worker that pulls pending Firebase intake records into the Git-backed notes folder. By default it does not commit, push, or delete content. Commit mode is opt-in with `--commit`.
 
 ## Local Service Account Setup
 
@@ -26,6 +26,12 @@ Point the worker at the service account:
 ```bash
 set FIREBASE_SERVICE_ACCOUNT_PATH=firebase-service-account.local.json
 node scripts/sync-firestore-notes.js
+```
+
+Optional commit mode:
+
+```powershell
+node scripts/sync-firestore-notes.js --commit
 ```
 
 PowerShell alternative:
@@ -73,10 +79,21 @@ After a local file is written, the worker updates the queue item:
 
 This means the content exists locally but has not been committed or pushed yet.
 
+## Git Commit Mode
+
+When run with `--commit`, the worker stages only the Markdown files created during that run and commits them with:
+
+```bash
+git commit -m "Sync notes from Firestore"
+```
+
+It prevents empty commits and never pushes automatically.
+
 ## Safety Rules
 
 - Do not commit service account JSON files.
-- Do not auto-commit from this worker.
+- Do not auto-commit unless the worker was run with `--commit`.
+- Do not push automatically.
 - Do not overwrite existing note files.
 - Do not delete Firestore documents after local write.
 - Treat Git commits as a separate reviewed step.

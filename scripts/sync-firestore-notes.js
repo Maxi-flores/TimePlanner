@@ -1,5 +1,6 @@
 const fs = require("node:fs");
 const path = require("node:path");
+const { spawnSync } = require("node:child_process");
 
 let admin;
 try {
@@ -16,6 +17,7 @@ const inboxRoot = path.join(notesRoot, "Inbox");
 const serviceAccountPath =
   process.env.FIREBASE_SERVICE_ACCOUNT_PATH ||
   process.env.GOOGLE_APPLICATION_CREDENTIALS;
+const shouldCommit = process.argv.includes("--commit");
 
 function initFirebase() {
   if (admin.apps.length) return;
@@ -98,6 +100,74 @@ function nextAvailablePath(basePath) {
   throw new Error(`Unable to find available filename for ${basePath}`);
 }
 
+function runGit(args) {
+  const result = spawnSync("git", args, {
+    cwd: repoRoot,
+    encoding: "utf8",
+    shell: false,
+  });
+
+  return {
+    ok: result.status === 0,
+    status: result.status,
+    stdout: result.stdout.trim(),
+    stderr: result.stderr.trim(),
+  };
+}
+
+function commitCreatedFiles(createdFiles) {
+  if (!shouldCommit) {
+    console.log("Commit mode disabled. Re-run with --commit to stage and commit written notes.");
+    return;
+  }
+
+  if (createdFiles.length === 0) {
+    console.log("No files written; skipping git add and git commit.");
+    return;
+  }
+
+  const relativeFiles = createdFiles.map((filePath) =>
+    path.relative(repoRoot, filePath).split(path.sep).join("/")
+  );
+
+  const addResult = runGit(["add", "--", ...relativeFiles]);
+  if (!addResult.ok) {
+    console.error("git add failed.");
+    if (addResult.stderr) console.error(addResult.stderr);
+    process.exitCode = 1;
+    return;
+  }
+
+  console.log("Files staged:");
+  relativeFiles.forEach((filePath) => console.log(`- ${filePath}`));
+
+  const diffResult = runGit(["diff", "--cached", "--quiet", "--", ...relativeFiles]);
+  if (diffResult.status === 0) {
+    console.log("No staged changes detected; skipping empty commit.");
+    return;
+  }
+
+  if (diffResult.status !== 1) {
+    console.error("Unable to inspect staged changes.");
+    if (diffResult.stderr) console.error(diffResult.stderr);
+    process.exitCode = 1;
+    return;
+  }
+
+  const commitResult = runGit(["commit", "-m", "Sync notes from Firestore"]);
+  if (!commitResult.ok) {
+    console.error("git commit failed.");
+    if (commitResult.stdout) console.error(commitResult.stdout);
+    if (commitResult.stderr) console.error(commitResult.stderr);
+    process.exitCode = 1;
+    return;
+  }
+
+  console.log("Commit result:");
+  if (commitResult.stdout) console.log(commitResult.stdout);
+  console.log("No push was attempted.");
+}
+
 async function main() {
   initFirebase();
   const db = admin.firestore();
@@ -117,6 +187,7 @@ async function main() {
   fs.mkdirSync(inboxRoot, { recursive: true });
 
   let writtenCount = 0;
+  const createdFiles = [];
   for (const queueDoc of snapshot.docs) {
     const queue = queueDoc.data();
     const noteId = queue.noteId;
@@ -162,10 +233,21 @@ async function main() {
     });
 
     writtenCount += 1;
+    createdFiles.push(targetPath);
     console.log(`Wrote ${relativeTarget}`);
   }
 
-  console.log(`Local write complete. ${writtenCount} note(s) written. No Git commit was created.`);
+  console.log("Files written:");
+  if (createdFiles.length === 0) {
+    console.log("- none");
+  } else {
+    createdFiles
+      .map((filePath) => path.relative(repoRoot, filePath).split(path.sep).join("/"))
+      .forEach((filePath) => console.log(`- ${filePath}`));
+  }
+
+  console.log(`Local write complete. ${writtenCount} note(s) written.`);
+  commitCreatedFiles(createdFiles);
 }
 
 main().catch((err) => {
