@@ -1,0 +1,437 @@
+{
+  "generatedAt": "2026-05-04T13:46:03.845Z",
+  "projectCount": 14,
+  "projects": [
+    {
+      "projectName": "BV",
+      "summary": "BV has 2 indexed notes, 5 proposed tasks, and appears in 1 roadmap level(s).",
+      "currentStatus": "task discovery",
+      "nextSuggestedActions": [
+        "30 - lunch fix",
+        "for woensdag?",
+        "@",
+        "30"
+      ],
+      "activeCategories": [
+        "content",
+        "development"
+      ],
+      "riskFlags": [
+        "No dated notes"
+      ],
+      "lastActivity": null,
+      "recentNotes": [
+        {
+          "title": "CBR",
+          "date": null,
+          "sourcePath": "content/notes-2026/Profound Projects/BV/CBR"
+        },
+        {
+          "title": "MZ3",
+          "date": null,
+          "sourcePath": "content/notes-2026/Profound Projects/BV/MZ3"
+        }
+      ],
+      "roadmapLevels": [
+        "Release Summit"
+      ]
+    },
+    {
+      "projectName": "Bikerinstinct",
+      "summary": "Bikerinstinct has 1 indexed notes, 0 proposed tasks, and appears in 1 roadmap level(s).",
+      "currentStatus": "indexed",
+      "nextSuggestedActions": [],
+      "activeCategories": [],
+      "riskFlags": [],
+      "lastActivity": "2026-04-25",
+      "recentNotes": [
+        {
+          "title": "26.4.25",
+          "date": "2026-04-25",
+          "sourcePath": "content/notes-2026/Profound Projects/Bikerinstinct/26.4.25"
+        }
+      ],
+      "roadmapLevels": [
+        "Milestone Ridge"
+      ]
+    },
+    {
+      "projectName": "CM4",
+      "summary": "CM4 has 1 indexed notes, 0 proposed tasks, and appears in 1 roadmap level(s).",
+      "currentStatus": "indexed",
+      "nextSuggestedActions": [],
+      "activeCategories": [],
+      "riskFlags": [
+        "No dated notes"
+      ],
+      "lastActivity": null,
+      "recentNotes": [
+        {
+          "title": "Print",
+          "date": null,
+          "sourcePath": "content/notes-2026/Profound Projects/CM4/Print"
+        }
+      ],
+      "roadmapLevels": [
+        "Release Summit"
+      ]
+    },
+    {
+      "projectName": "CSHOP",
+      "summary": "CSHOP has 2 indexed notes, 4 proposed tasks, and appears in 1 roadmap level(s).",
+      "currentStatus": "active classification",
+      "nextSuggestedActions": [
+        "a custom budget mapper engine with a \"stand-alone brain\" and a profile-driven router, you need a multi-layered architecture",
+        "a Vector Database (e.g., ChromaDB, Pinecone, or Milvus) to store and retrieve \"atomic",
+        ", a server with a dedicated GPU (e.g., NVIDIA RTX 3090/4090) is recommended for processing",
+        "one, or focus on the ethical implications of removing humans from the loop?"
+      ],
+      "activeCategories": [
+        "content",
+        "development"
+      ],
+      "riskFlags": [],
+      "lastActivity": "2026-04-25",
+      "recentNotes": [
+        {
+          "title": "26.4.25 @",
+          "date": "2026-04-25",
+          "sourcePath": "content/notes-2026/Profound Projects/CSHOP/26.4.25 @"
+        },
+        {
+          "title": "26.4.12",
+          "date": "2026-04-12",
+          "sourcePath": "content/notes-2026/Profound Projects/CSHOP/26.4.12"
+        }
+      ],
+      "roadmapLevels": [
+        "Project Sorting"
+      ]
+    },
+    {
+      "projectName": "Dealinstinct",
+      "summary": "Dealinstinct has 1 indexed notes, 0 proposed tasks, and appears in 1 roadmap level(s).",
+      "currentStatus": "indexed",
+      "nextSuggestedActions": [],
+      "activeCategories": [],
+      "riskFlags": [],
+      "lastActivity": "2026-04-25",
+      "recentNotes": [
+        {
+          "title": "26.4.25",
+          "date": "2026-04-25",
+          "sourcePath": "content/notes-2026/Profound Projects/Dealinstinct/26.4.25"
+        }
+      ],
+      "roadmapLevels": [
+        "Milestone Ridge"
+      ]
+    },
+    {
+      "projectName": "Examp. Developer Portfolio",
+      "summary": "Examp. Developer Portfolio has 2 indexed notes, 1 proposed tasks, and appears in 1 roadmap level(s).",
+      "currentStatus": "active classification",
+      "nextSuggestedActions": [
+        "for the setup"
+      ],
+      "activeCategories": [
+        "setup"
+      ],
+      "riskFlags": [],
+      "lastActivity": "2026-04-25",
+      "recentNotes": [
+        {
+          "title": "26.4.25 @",
+          "date": "2026-04-25",
+          "sourcePath": "content/notes-2026/Profound Projects/Examp. Developer Portfolio/WOM/26.4.25 @"
+        },
+        {
+          "title": "26.4.11",
+          "date": "2026-04-11",
+          "sourcePath": "content/notes-2026/Profound Projects/Examp. Developer Portfolio/WOM/26.4.11"
+        }
+      ],
+      "roadmapLevels": [
+        "Prompt Lab"
+      ]
+    },
+    {
+      "projectName": "Flink3D",
+      "summary": "Flink3D has 1 indexed notes, 0 proposed tasks, and appears in 1 roadmap level(s).",
+      "currentStatus": "indexed",
+      "nextSuggestedActions": [],
+      "activeCategories": [],
+      "riskFlags": [],
+      "lastActivity": "2026-04-25",
+      "recentNotes": [
+        {
+          "title": "26.4.25 @",
+          "date": "2026-04-25",
+          "sourcePath": "content/notes-2026/Profound Projects/Flink3D/26.4.25 @"
+        }
+      ],
+      "roadmapLevels": [
+        "Feature Forge"
+      ]
+    },
+    {
+      "projectName": "Fullstack dev",
+      "summary": "Fullstack dev has 3 indexed notes, 0 proposed tasks, and appears in 1 roadmap level(s).",
+      "currentStatus": "indexed",
+      "nextSuggestedActions": [],
+      "activeCategories": [],
+      "riskFlags": [],
+      "lastActivity": "2026-04-12",
+      "recentNotes": [
+        {
+          "title": "26.4.12",
+          "date": "2026-04-12",
+          "sourcePath": "content/notes-2026/Profound Projects/Fullstack dev/26.4.12"
+        },
+        {
+          "title": "26.4.1",
+          "date": "2026-04-01",
+          "sourcePath": "content/notes-2026/Profound Projects/Fullstack dev/26.4.1"
+        },
+        {
+          "title": "Temp",
+          "date": null,
+          "sourcePath": "content/notes-2026/Profound Projects/Fullstack dev/Temp"
+        }
+      ],
+      "roadmapLevels": [
+        "Task Trail"
+      ]
+    },
+    {
+      "projectName": "Mucho3D",
+      "summary": "Mucho3D has 1 indexed notes, 5 proposed tasks, and appears in 1 roadmap level(s).",
+      "currentStatus": "task discovery",
+      "nextSuggestedActions": [
+        "a secure path between the two machines. This provides a stable IP or URL that doesn't change.",
+        "on preferences.",
+        "Benefits of This Setup",
+        "In your Blender MCP Add-on settings, you simply enter your server's Tailscale IP: http://100.x.y.z:11434."
+      ],
+      "activeCategories": [
+        "content",
+        "development",
+        "setup"
+      ],
+      "riskFlags": [],
+      "lastActivity": "2026-04-25",
+      "recentNotes": [
+        {
+          "title": "26.4.25 @",
+          "date": "2026-04-25",
+          "sourcePath": "content/notes-2026/Profound Projects/Mucho3D/26.4.25 @"
+        }
+      ],
+      "roadmapLevels": [
+        "Task Trail"
+      ]
+    },
+    {
+      "projectName": "PF-PROJECT",
+      "summary": "PF-PROJECT has 5 indexed notes, 23 proposed tasks, and appears in 1 roadmap level(s).",
+      "currentStatus": "task discovery",
+      "nextSuggestedActions": [
+        ". It allows you to maintain the \"Time Planner\"",
+        "a new repo called ProfoundProjects-Suite.",
+        "your Time Planner code into a web-app folder.",
+        "your 2026 notes into a vault folder."
+      ],
+      "activeCategories": [
+        "3D",
+        "content",
+        "design",
+        "development",
+        "setup"
+      ],
+      "riskFlags": [
+        "High task volume"
+      ],
+      "lastActivity": "2026-05-03",
+      "recentNotes": [
+        {
+          "title": "26.5.3 @",
+          "date": "2026-05-03",
+          "sourcePath": "content/notes-2026/Profound Projects/PF-PROJECT/26.5.3 @"
+        },
+        {
+          "title": "26.5.2",
+          "date": "2026-05-02",
+          "sourcePath": "content/notes-2026/Profound Projects/PF-PROJECT/26.5.2"
+        },
+        {
+          "title": "26.4.28",
+          "date": "2026-04-28",
+          "sourcePath": "content/notes-2026/Profound Projects/PF-PROJECT/26.4.28"
+        },
+        {
+          "title": " BMS-KB",
+          "date": null,
+          "sourcePath": "content/notes-2026/Profound Projects/PF-PROJECT/ BMS-KB"
+        }
+      ],
+      "roadmapLevels": [
+        "Intake Gate"
+      ]
+    },
+    {
+      "projectName": "Powerframe",
+      "summary": "Powerframe has 2 indexed notes, 24 proposed tasks, and appears in 1 roadmap level(s).",
+      "currentStatus": "active classification",
+      "nextSuggestedActions": [
+        "this hub, we need to create a \"Project Bridge\" within the Powerframe repo. Use this prompt for Copilot/Claude:",
+        "a module that syncs metadata from external GitHub repos into the Powerframe dashboard (e.g., commit history, issue status).",
+        "a central registry for 2D (Figma/Images) and 3D (Mucho3D/GLB) files. Each asset must be linked to a specific \"Upskilled Project\" ID.",
+        "a subscription-tier check."
+      ],
+      "activeCategories": [
+        "3D",
+        "content",
+        "design",
+        "development",
+        "setup"
+      ],
+      "riskFlags": [
+        "High task volume"
+      ],
+      "lastActivity": "2026-04-25",
+      "recentNotes": [
+        {
+          "title": "26.4.25 @",
+          "date": "2026-04-25",
+          "sourcePath": "content/notes-2026/Profound Projects/Powerframe/26.4.25 @"
+        },
+        {
+          "title": "26.4.11",
+          "date": "2026-04-11",
+          "sourcePath": "content/notes-2026/Profound Projects/Powerframe/26.4.11"
+        }
+      ],
+      "roadmapLevels": [
+        "Prompt Lab"
+      ]
+    },
+    {
+      "projectName": "Powerstarter Azure",
+      "summary": "Powerstarter Azure has 3 indexed notes, 14 proposed tasks, and appears in 1 roadmap level(s).",
+      "currentStatus": "active classification",
+      "nextSuggestedActions": [
+        "to Azure changes the \"instances\"",
+        "an Azure Storage Account and a File Share to hold your ChromaDB vector data and Ollama model files.",
+        "Powerframe Hub so we can get",
+        "a WorkState to the BMS schema. It should track: Bootstrapping, Testing, Reviewing, and Deployment_Ready."
+      ],
+      "activeCategories": [
+        "content",
+        "design",
+        "development",
+        "setup"
+      ],
+      "riskFlags": [
+        "High task volume"
+      ],
+      "lastActivity": "2026-04-25",
+      "recentNotes": [
+        {
+          "title": "26.4.25 @",
+          "date": "2026-04-25",
+          "sourcePath": "content/notes-2026/Profound Projects/Powerstarter Azure/26.4.25 @"
+        },
+        {
+          "title": "26.4.11",
+          "date": "2026-04-11",
+          "sourcePath": "content/notes-2026/Profound Projects/Powerstarter Azure/26.4.11"
+        },
+        {
+          "title": "26.4.10",
+          "date": "2026-04-10",
+          "sourcePath": "content/notes-2026/Profound Projects/Powerstarter Azure/26.4.10"
+        }
+      ],
+      "roadmapLevels": [
+        "Project Sorting"
+      ]
+    },
+    {
+      "projectName": "Sapient",
+      "summary": "Sapient has 2 indexed notes, 7 proposed tasks, and appears in 1 roadmap level(s).",
+      "currentStatus": "task discovery",
+      "nextSuggestedActions": [
+        "a strict versioning differentiator for the Sapient Engine and its knowledge content. Update the packages/semantic-core, packages/knowledge-base, and apps/web-dashboard with the following:",
+        "a minimal, high-end system tag in the corner that displays: [SAPIENT_ENGINE_VERSION] // [SOPHIA_VERSION].",
+        "a bug in the 3D Tree rendering, you bump the Sapient Engine. If you add a new profound insight for your friend, you bump the Sophia Version.",
+        "a versions.ts file in packages/core that acts as the single source of truth for these strings."
+      ],
+      "activeCategories": [
+        "content",
+        "development"
+      ],
+      "riskFlags": [],
+      "lastActivity": "2026-04-25",
+      "recentNotes": [
+        {
+          "title": "26.4.25 @",
+          "date": "2026-04-25",
+          "sourcePath": "content/notes-2026/Profound Projects/Sapient/26.4.25 @"
+        },
+        {
+          "title": "26.4.16",
+          "date": "2026-04-16",
+          "sourcePath": "content/notes-2026/Profound Projects/Sapient/26.4.16"
+        }
+      ],
+      "roadmapLevels": [
+        "Feature Forge"
+      ]
+    },
+    {
+      "projectName": "TheRocketTree-App",
+      "summary": "TheRocketTree-App has 8 indexed notes, 70 proposed tasks, and appears in 1 roadmap level(s).",
+      "currentStatus": "task discovery",
+      "nextSuggestedActions": [
+        "GitHub Secrets",
+        "all 5 secrets listed above. To get their values:",
+        "VERCEL_TOKEN: Vercel Dashboard → Account Settings → Tokens → Create",
+        "Firebase Keys to Vercel (for each of the 3 projects)"
+      ],
+      "activeCategories": [
+        "design",
+        "development",
+        "setup"
+      ],
+      "riskFlags": [
+        "High task volume"
+      ],
+      "lastActivity": "2026-04-25",
+      "recentNotes": [
+        {
+          "title": "26.4.25 @",
+          "date": "2026-04-25",
+          "sourcePath": "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.25 @"
+        },
+        {
+          "title": "26.4.17",
+          "date": "2026-04-17",
+          "sourcePath": "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.17"
+        },
+        {
+          "title": "26.4.14",
+          "date": "2026-04-14",
+          "sourcePath": "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.14"
+        },
+        {
+          "title": "26.4.13",
+          "date": "2026-04-13",
+          "sourcePath": "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.13"
+        }
+      ],
+      "roadmapLevels": [
+        "Intake Gate"
+      ]
+    }
+  ]
+}

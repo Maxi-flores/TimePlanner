@@ -32,6 +32,9 @@ Generate the roadmap orchestration data after regenerating the notes index:
 node scripts/index-notes.js
 node scripts/generate-roadmap.js
 node scripts/generate-roadmap-levels.js
+node scripts/assign-notes-to-levels.js
+node scripts/extract-tasks-from-notes.js
+node scripts/generate-project-states.js
 ```
 
 The roadmap generators read `data/notes-index.json` and write roadmap items plus level-map data for the static dashboard.

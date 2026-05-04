@@ -18,9 +18,15 @@ const postSyncFiles = [
   "data/notes-index.json",
   "data/roadmap-items.json",
   "data/roadmap-levels.json",
+  "data/roadmap-level-assignments.json",
+  "data/extracted-tasks.json",
+  "data/project-states.json",
   "apps/time-planner/data/notes-index.json",
   "apps/time-planner/data/roadmap-items.json",
   "apps/time-planner/data/roadmap-levels.json",
+  "apps/time-planner/data/roadmap-level-assignments.json",
+  "apps/time-planner/data/extracted-tasks.json",
+  "apps/time-planner/data/project-states.json",
 ];
 const serviceAccountPath =
   process.env.FIREBASE_SERVICE_ACCOUNT_PATH ||
@@ -151,6 +157,18 @@ function runPostSyncProcessing() {
     {
       label: "Regenerate roadmap levels",
       script: path.join(repoRoot, "scripts", "generate-roadmap-levels.js"),
+    },
+    {
+      label: "Assign notes to levels",
+      script: path.join(repoRoot, "scripts", "assign-notes-to-levels.js"),
+    },
+    {
+      label: "Extract tasks from notes",
+      script: path.join(repoRoot, "scripts", "extract-tasks-from-notes.js"),
+    },
+    {
+      label: "Generate project states",
+      script: path.join(repoRoot, "scripts", "generate-project-states.js"),
     },
   ];
 

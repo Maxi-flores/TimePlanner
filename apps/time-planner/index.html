@@ -382,6 +382,37 @@
       margin-bottom: 20px;
       overflow: hidden;
     }
+    .project-board-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin: 12px 0 14px;
+    }
+    .board-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 12px;
+    }
+    .board-card .value { font-size: 1.35rem; font-weight: 800; }
+    .board-card .label { color: var(--text-muted); font-size: .7rem; text-transform: uppercase; letter-spacing: .08em; }
+    .category-filter-bar { display: flex; gap: 6px; flex-wrap: wrap; margin: 0 0 12px; }
+    .category-filter {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      border-radius: 999px;
+      padding: 5px 10px;
+      font-size: .75rem;
+      cursor: pointer;
+    }
+    .category-filter.active { color: #fff; border-color: var(--accent2); background: var(--accent); }
+    .board-shell {
+      display: grid;
+      grid-template-columns: minmax(320px, 1fr) minmax(300px, .7fr);
+      gap: 14px;
+      align-items: start;
+    }
     .level-map-header {
       display: flex;
       justify-content: space-between;
@@ -432,6 +463,15 @@
       cursor: pointer;
       box-shadow: 0 12px 28px rgba(0,0,0,.28);
     }
+    .level-node .node-badges { display:flex; gap:2px; justify-content:center; margin-top:3px; }
+    .node-badge { width: 8px; height: 8px; border-radius: 999px; background: var(--accent2); }
+    .node-badge.design { background:#f472b6; }
+    .node-badge.setup { background:#38bdf8; }
+    .node-badge.development { background:#818cf8; }
+    .node-badge.\33 D { background:#fb923c; }
+    .node-badge.AI { background:#22c55e; }
+    .node-badge.content { background:#facc15; }
+    .node-badge.admin { background:#94a3b8; }
     .level-node.locked { opacity: .64; cursor: pointer; background: #111827; }
     .level-node.unlocked { border-color: var(--accent2); }
     .level-node.active {
@@ -496,6 +536,40 @@
       margin: 12px 0;
     }
     .level-panel-note { color: var(--text-muted); font-size: .78rem; margin: 6px 0 12px; }
+    .level-detail-panel, .timeline-panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .level-detail-panel h3, .timeline-panel h3 {
+      font-size: .78rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--border);
+      background: var(--surface2);
+    }
+    .level-detail-body, .timeline-list { padding: 12px 14px; }
+    .project-state-summary {
+      border-bottom: 1px solid var(--border);
+      padding: 10px 0;
+      font-size: .82rem;
+    }
+    .project-state-summary:last-child { border-bottom: none; }
+    .project-state-summary strong { display:block; margin-bottom:4px; }
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 86px 1fr;
+      gap: 10px;
+      border-bottom: 1px solid var(--border);
+      padding: 8px 0;
+      font-size: .8rem;
+    }
+    .timeline-item:last-child { border-bottom: none; }
+    .timeline-date { color: var(--accent2); font-weight: 700; font-size: .74rem; }
+    .unlock-note { color: var(--text-muted); font-size: .72rem; margin-top: 4px; }
 
     /* ─── DAILY SCHEDULE ─────────────────────────────────── */
     .schedule-header {
@@ -768,9 +842,31 @@
       .day-panel { width: 100%; }
       .notes-summary, .notes-layout { grid-template-columns: 1fr; }
       .orchestrator-grid { grid-template-columns: 1fr; }
-      .level-map { min-height: 720px; }
+      .project-board-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .board-shell { grid-template-columns: 1fr; }
+      .level-map-section { padding: 12px; margin-left: -4px; margin-right: -4px; }
+      .level-map { min-height: 820px; width: 100%; }
+      .level-node { width: 88px; height: 88px; }
+      .level-label { width: 132px; transform: translate(-50%, 50px); font-size: .72rem; }
       .level-panel-grid { grid-template-columns: 1fr; }
       .level-assignment-row { grid-template-columns: 1fr; }
+      #modal-roadmap-level.open {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        top: auto;
+        width: 100% !important;
+        max-height: 86vh;
+        transform: none;
+        border-radius: 16px 16px 0 0;
+        overflow-y: auto;
+      }
+    }
+    @media (min-width: 641px) and (max-width: 980px) {
+      .project-board-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .board-shell { grid-template-columns: .9fr 1.1fr; }
+      .level-map { min-height: 720px; }
     }
   </style>
 </head>
@@ -839,12 +935,31 @@
     <div class="level-map-section">
       <div class="level-map-header">
         <div>
-          <h2>Roadmap Level Map</h2>
+          <h2>Main Project Board</h2>
           <p id="level-map-generated">Loading campaign path...</p>
         </div>
         <span class="badge badge-accent" id="level-map-count">0 levels</span>
       </div>
-      <div class="level-map" id="roadmap-level-map"></div>
+      <div class="project-board-grid">
+        <div class="board-card"><div class="value" id="board-total-projects">0</div><div class="label">Projects</div></div>
+        <div class="board-card"><div class="value" id="board-active-tasks">0</div><div class="label">Active tasks</div></div>
+        <div class="board-card"><div class="value" id="board-category-count">0</div><div class="label">Categories</div></div>
+        <div class="board-card"><div class="value" id="board-recent-activity">0</div><div class="label">Recent activity</div></div>
+      </div>
+      <div class="category-filter-bar" id="category-filter-bar"></div>
+      <div class="board-shell">
+        <div class="level-map" id="roadmap-level-map"></div>
+        <div style="display:grid;gap:14px;">
+          <div class="level-detail-panel">
+            <h3>Selected Level Summary</h3>
+            <div class="level-detail-body" id="selected-level-summary"></div>
+          </div>
+          <div class="timeline-panel">
+            <h3>Timeline</h3>
+            <div class="timeline-list" id="project-timeline"></div>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="roadmap-container" id="roadmap-container"></div>
     <div class="orchestrator-section">
@@ -1274,6 +1389,10 @@ let roadmapItems = { entities: { project: [], prompt: [], note: [], feature: [],
 let roadmapItemsLoaded = false;
 let roadmapLevels = { levels: [], generatedAt: null };
 let roadmapLevelsLoaded = false;
+let autoLevelAssignments = { assignments: [] };
+let extractedTasks = { tasks: [] };
+let projectStates = { projects: [] };
+let activeCategoryFilter = 'all';
 let activeLevelId = null;
 let firebaseIntake = null;
 let firebaseIntakeReady = false;
@@ -1288,7 +1407,7 @@ function switchTab(name, btn) {
   btn.classList.add('active');
   if (name === 'calendar')   renderCalendar();
   if (name === 'schedule')   renderSchedule();
-  if (name === 'roadmap')    { renderRoadmap(); renderRoadmapOrchestrator(); renderRoadmapLevelMap(); }
+  if (name === 'roadmap')    { renderRoadmap(); renderRoadmapOrchestrator(); renderProjectBoard(); }
   if (name === 'notes')      renderNotesIndex();
   if (name === 'goals')      renderGoals();
   if (name === 'calculator') initCalculator();
@@ -1659,11 +1778,27 @@ async function loadRoadmapLevels() {
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
     roadmapLevels = await response.json();
     roadmapLevelsLoaded = true;
-    renderRoadmapLevelMap();
+    renderProjectBoard();
   } catch (err) {
     const generated = document.getElementById('level-map-generated');
     if (generated) generated.textContent = 'Roadmap levels unavailable. Run node scripts/generate-roadmap-levels.js.';
   }
+}
+
+async function loadProjectBoardData() {
+  const files = [
+    ['data/roadmap-level-assignments.json', value => { autoLevelAssignments = value; }],
+    ['data/extracted-tasks.json', value => { extractedTasks = value; }],
+    ['data/project-states.json', value => { projectStates = value; }],
+  ];
+
+  for (const [url, assign] of files) {
+    try {
+      const response = await fetch(url, { cache: 'no-store' });
+      if (response.ok) assign(await response.json());
+    } catch {}
+  }
+  renderProjectBoard();
 }
 
 function loadLevelAssignments() {
@@ -1679,20 +1814,58 @@ function saveLevelAssignments(assignments) {
 }
 
 function mergedLevel(level) {
+  const auto = (autoLevelAssignments.assignments || []).find(item => item.levelId === level.id) || {};
   const assignments = loadLevelAssignments()[level.id] || {};
   return {
     ...level,
-    projectIds: mergeUnique(level.projectIds, assignments.projectIds),
-    notePaths: mergeUnique(level.notePaths, assignments.notePaths),
-    promptIds: mergeUnique(level.promptIds, assignments.promptIds),
-    featureIds: mergeUnique(level.featureIds, assignments.featureIds),
-    taskIds: mergeUnique(level.taskIds, assignments.taskIds),
-    tags: mergeUnique(level.tags, assignments.tags),
+    projectIds: mergeUnique(mergeUnique(level.projectIds, auto.projectIds), assignments.projectIds),
+    notePaths: mergeUnique(mergeUnique(level.notePaths, auto.notePaths), assignments.notePaths),
+    promptIds: mergeUnique(mergeUnique(level.promptIds, auto.promptIds), assignments.promptIds),
+    featureIds: mergeUnique(mergeUnique(level.featureIds, auto.featureIds), assignments.featureIds),
+    taskIds: mergeUnique(mergeUnique(level.taskIds, auto.taskIds), assignments.taskIds),
+    tags: mergeUnique(mergeUnique(level.tags, auto.tags), assignments.tags),
   };
 }
 
 function mergeUnique(a = [], b = []) {
   return [...new Set([...(a || []), ...(b || [])])];
+}
+
+function renderProjectBoard() {
+  renderBoardAnalytics();
+  renderCategoryFilters();
+  renderRoadmapLevelMap();
+  renderTimeline();
+  renderSelectedLevelSummary();
+}
+
+function renderBoardAnalytics() {
+  const tasks = filteredTasks();
+  const categories = new Set((extractedTasks.tasks || []).map(task => task.category));
+  const recentDates = new Set((notesIndex.notes || []).filter(note => note.date).map(note => note.date).sort().slice(-7));
+  setText('board-total-projects', String(projectStates.projects?.length || roadmapItems.entities?.project?.length || 0));
+  setText('board-active-tasks', String(tasks.length));
+  setText('board-category-count', String(categories.size));
+  setText('board-recent-activity', String(recentDates.size));
+}
+
+function renderCategoryFilters() {
+  const bar = document.getElementById('category-filter-bar');
+  if (!bar) return;
+  const cats = ['all', 'design', 'setup', 'development', '3D', 'AI', 'content', 'admin'];
+  bar.innerHTML = cats.map(cat => `
+    <button class="category-filter ${activeCategoryFilter === cat ? 'active' : ''}" onclick="setCategoryFilter('${cat}')">${cat}</button>
+  `).join('');
+}
+
+function setCategoryFilter(category) {
+  activeCategoryFilter = category;
+  renderProjectBoard();
+}
+
+function filteredTasks() {
+  const tasks = extractedTasks.tasks || [];
+  return activeCategoryFilter === 'all' ? tasks : tasks.filter(task => task.category === activeCategoryFilter);
 }
 
 function renderRoadmapLevelMap() {
@@ -1732,15 +1905,18 @@ function renderLevelNode(level) {
     unlocked: String(level.tier),
     locked: 'LOCK',
   }[level.status] || String(level.tier);
+  const badges = levelCategories(level).slice(0, 4).map(cat => `<span class="node-badge ${escapeHtml(cat)}"></span>`).join('');
+  const action = level.status === 'locked' ? unlockText(level) : suggestedAction(level);
 
   return `
     <button class="level-node ${escapeHtml(level.status)}" style="left:${pos.x}%;top:${pos.y}%;" onclick="openRoadmapLevel('${escapeHtml(level.id)}')">
       <span>
         <span class="level-mark">${escapeHtml(mark)}</span>
         <span class="level-state">${escapeHtml(level.status)}</span>
+        <span class="node-badges">${badges}</span>
       </span>
     </button>
-    <div class="level-label" style="left:${pos.x}%;top:${pos.y}%;">${escapeHtml(level.title)}</div>`;
+    <div class="level-label" style="left:${pos.x}%;top:${pos.y}%;">${escapeHtml(level.title)}<div class="unlock-note">${escapeHtml(action)}</div></div>`;
 }
 
 function openRoadmapLevel(levelId) {
@@ -1753,6 +1929,7 @@ function openRoadmapLevel(levelId) {
   populateLevelAssignmentOptions();
   renderLevelModalBoxes(level);
   openModal('modal-roadmap-level');
+  renderSelectedLevelSummary();
 }
 
 function getActiveLevel() {
@@ -1804,6 +1981,72 @@ function renderLevelModalBoxes(level) {
   renderLevelTagBox('featureIds', level.featureIds, 'feature');
   renderLevelTagBox('taskIds', level.taskIds, 'task');
   renderLevelTagBox('tags', level.tags, 'manual');
+}
+
+function levelCategories(level) {
+  const taskIds = new Set(level.taskIds || []);
+  return [...new Set((extractedTasks.tasks || [])
+    .filter(task => taskIds.has(task.id) || (level.projectIds || []).some(pid => levelItemLabel('projectIds', pid) === task.projectName))
+    .map(task => task.category))];
+}
+
+function suggestedAction(level) {
+  const projectName = (level.projectIds || []).map(id => levelItemLabel('projectIds', id))[0];
+  const state = (projectStates.projects || []).find(item => item.projectName === projectName);
+  return state?.nextSuggestedActions?.[0] || 'choose path';
+}
+
+function unlockText(level) {
+  if ((level.notePaths || []).length < 2) return 'needs notes';
+  if ((level.taskIds || []).length < 2) return 'needs tasks';
+  return 'needs review';
+}
+
+function renderSelectedLevelSummary() {
+  const container = document.getElementById('selected-level-summary');
+  if (!container) return;
+  const level = activeLevelId ? getActiveLevel() : mergedLevel((roadmapLevels.levels || [])[1] || (roadmapLevels.levels || [])[0] || {});
+  if (!level?.id) {
+    container.innerHTML = '<div class="notes-empty">Select a level to inspect project state.</div>';
+    return;
+  }
+
+  const projectNames = (level.projectIds || []).map(id => levelItemLabel('projectIds', id));
+  const states = (projectStates.projects || []).filter(state => projectNames.includes(state.projectName));
+  container.innerHTML = `
+    <div class="project-state-summary">
+      <strong>${escapeHtml(level.title)}</strong>
+      <div>${escapeHtml(level.status)} · ${escapeHtml(level.description || '')}</div>
+      <div class="unlock-note">${level.status === 'locked' ? `Unlock: ${unlockText(level)}` : `Next: ${suggestedAction(level)}`}</div>
+    </div>
+    ${states.length ? states.map(renderProjectStateSummary).join('') : '<div class="notes-empty">No project summaries assigned yet.</div>'}`;
+}
+
+function renderProjectStateSummary(state) {
+  return `
+    <div class="project-state-summary">
+      <strong>${escapeHtml(state.projectName)}</strong>
+      <div>${escapeHtml(state.summary)}</div>
+      <div class="unlock-note">Status: ${escapeHtml(state.currentStatus)} · Last: ${escapeHtml(state.lastActivity || 'unknown')}</div>
+      <div class="level-tags" style="margin-top:6px;">${(state.activeCategories || []).map(cat => `<span class="level-tag ${cat}">${escapeHtml(cat)}</span>`).join('')}</div>
+    </div>`;
+}
+
+function renderTimeline() {
+  const container = document.getElementById('project-timeline');
+  if (!container) return;
+  const notes = (notesIndex.notes || [])
+    .filter(note => note.date)
+    .filter(note => activeCategoryFilter === 'all' || filteredTasks().some(task => task.sourcePath === note.sourcePath))
+    .sort((a, b) => b.date.localeCompare(a.date))
+    .slice(0, 18);
+
+  container.innerHTML = notes.length ? notes.map(note => `
+    <div class="timeline-item">
+      <div class="timeline-date">${escapeHtml(note.date)}</div>
+      <div><strong>${escapeHtml(note.projectName || 'General')}</strong><div>${escapeHtml(note.title)}</div></div>
+    </div>
+  `).join('') : '<div class="notes-empty">No timeline entries for this filter.</div>';
 }
 
 function renderLevelTagBox(type, values = [], tagClass) {
@@ -2516,6 +2759,7 @@ function formatDate(dateStr) {
   loadNotesIndex();
   loadRoadmapItems();
   loadRoadmapLevels();
+  loadProjectBoardData();
   loadFirebaseIntake();
 })();
 </script>
