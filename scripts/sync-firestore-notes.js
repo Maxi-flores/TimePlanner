@@ -23,6 +23,7 @@ const postSyncFiles = [
   "data/project-states.json",
   "data/milestones.json",
   "data/dashboard-model.json",
+  "data/ai-suggestions.json",
   "apps/time-planner/data/notes-index.json",
   "apps/time-planner/data/roadmap-items.json",
   "apps/time-planner/data/roadmap-levels.json",
@@ -31,6 +32,7 @@ const postSyncFiles = [
   "apps/time-planner/data/project-states.json",
   "apps/time-planner/data/milestones.json",
   "apps/time-planner/data/dashboard-model.json",
+  "apps/time-planner/data/ai-suggestions.json",
 ];
 const serviceAccountPath =
   process.env.FIREBASE_SERVICE_ACCOUNT_PATH ||
@@ -181,6 +183,10 @@ function runPostSyncProcessing() {
     {
       label: "Generate dashboard model",
       script: path.join(repoRoot, "scripts", "generate-dashboard-model.js"),
+    },
+    {
+      label: "Generate AI suggestions",
+      script: path.join(repoRoot, "scripts", "generate-ai-suggestions.js"),
     },
   ];
 

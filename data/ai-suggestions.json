@@ -1,0 +1,525 @@
+{
+  "generatedAt": "2026-05-04T20:59:35.716Z",
+  "source": "data/dashboard-model.json",
+  "mode": "deterministic-local",
+  "projects": [
+    {
+      "projectName": "BV",
+      "generatedAt": "2026-05-04T20:59:35.714Z",
+      "status": "task discovery",
+      "context": {
+        "noteCount": 2,
+        "taskCount": 5,
+        "milestoneCount": 1,
+        "levelCount": 1,
+        "categories": [
+          "content",
+          "development"
+        ],
+        "lastActivity": null
+      },
+      "actionPrompts": [
+        "Review BV and turn the latest notes into a now/next/later execution plan.",
+        "Compare BV milestones against active tasks and suggest the next deployable slice.",
+        "Identify decisions in BV notes that should become tracked tasks before scheduling.",
+        "Use recent notes (CBR; MZ3) as the planning context for BV."
+      ],
+      "nextActions": [
+        "30 - lunch fix",
+        "for woensdag?",
+        "@",
+        "30"
+      ],
+      "blockers": [
+        "No dated notes"
+      ],
+      "summaryPrompt": "Summarize BV using 2 notes, 5 tasks, 1 milestones, and current status \"task discovery\". Return project state, next three actions, and blockers.",
+      "obsidianNotePrompt": "Create an Obsidian-ready project note for BV with sections: Status, Decisions, Next Actions, Blockers, Linked Notes, and Calendar Deployment.",
+      "decisionPrompt": "Extract explicit and implied decisions for BV. Output each as a proposed task first, never edit source notes directly."
+    },
+    {
+      "projectName": "Bikerinstinct",
+      "generatedAt": "2026-05-04T20:59:35.715Z",
+      "status": "indexed",
+      "context": {
+        "noteCount": 1,
+        "taskCount": 0,
+        "milestoneCount": 1,
+        "levelCount": 1,
+        "categories": [],
+        "lastActivity": "2026-04-25"
+      },
+      "actionPrompts": [
+        "Review Bikerinstinct and turn the latest notes into a now/next/later execution plan.",
+        "Compare Bikerinstinct milestones against active tasks and suggest the next deployable slice.",
+        "Identify decisions in Bikerinstinct notes that should become tracked tasks before scheduling.",
+        "Use recent notes (26.4.25) as the planning context for Bikerinstinct."
+      ],
+      "nextActions": [
+        "Choose one concrete setup task and assign it to the next calendar slot.",
+        "Validate milestone: Bikerinstinct roadmap checkpoint",
+        "Run a blocker pass before adding new scope."
+      ],
+      "blockers": [
+        "Source notes need classification into decisions, tasks, and milestones.",
+        "No extracted tasks found yet."
+      ],
+      "summaryPrompt": "Summarize Bikerinstinct using 1 notes, 0 tasks, 1 milestones, and current status \"indexed\". Return project state, next three actions, and blockers.",
+      "obsidianNotePrompt": "Create an Obsidian-ready project note for Bikerinstinct with sections: Status, Decisions, Next Actions, Blockers, Linked Notes, and Calendar Deployment.",
+      "decisionPrompt": "Extract explicit and implied decisions for Bikerinstinct. Output each as a proposed task first, never edit source notes directly."
+    },
+    {
+      "projectName": "CM4",
+      "generatedAt": "2026-05-04T20:59:35.715Z",
+      "status": "indexed",
+      "context": {
+        "noteCount": 1,
+        "taskCount": 0,
+        "milestoneCount": 1,
+        "levelCount": 1,
+        "categories": [],
+        "lastActivity": null
+      },
+      "actionPrompts": [
+        "Review CM4 and turn the latest notes into a now/next/later execution plan.",
+        "Compare CM4 milestones against active tasks and suggest the next deployable slice.",
+        "Identify decisions in CM4 notes that should become tracked tasks before scheduling.",
+        "Use recent notes (Print) as the planning context for CM4."
+      ],
+      "nextActions": [
+        "Choose one concrete setup task and assign it to the next calendar slot.",
+        "Validate milestone: CM4 roadmap checkpoint",
+        "Run a blocker pass before adding new scope."
+      ],
+      "blockers": [
+        "No dated notes"
+      ],
+      "summaryPrompt": "Summarize CM4 using 1 notes, 0 tasks, 1 milestones, and current status \"indexed\". Return project state, next three actions, and blockers.",
+      "obsidianNotePrompt": "Create an Obsidian-ready project note for CM4 with sections: Status, Decisions, Next Actions, Blockers, Linked Notes, and Calendar Deployment.",
+      "decisionPrompt": "Extract explicit and implied decisions for CM4. Output each as a proposed task first, never edit source notes directly."
+    },
+    {
+      "projectName": "CSHOP",
+      "generatedAt": "2026-05-04T20:59:35.715Z",
+      "status": "active classification",
+      "context": {
+        "noteCount": 2,
+        "taskCount": 4,
+        "milestoneCount": 1,
+        "levelCount": 1,
+        "categories": [
+          "content",
+          "development"
+        ],
+        "lastActivity": "2026-04-25"
+      },
+      "actionPrompts": [
+        "Review CSHOP and turn the latest notes into a now/next/later execution plan.",
+        "Compare CSHOP milestones against active tasks and suggest the next deployable slice.",
+        "Identify decisions in CSHOP notes that should become tracked tasks before scheduling.",
+        "Use recent notes (26.4.25 @; 26.4.12) as the planning context for CSHOP."
+      ],
+      "nextActions": [
+        "a custom budget mapper engine with a \"stand-alone brain\" and a profile-driven router, you need a multi-layered architecture",
+        "a Vector Database (e.g., ChromaDB, Pinecone, or Milvus) to store and retrieve \"atomic",
+        ", a server with a dedicated GPU (e.g., NVIDIA RTX 3090/4090) is recommended for processing",
+        "one, or focus on the ethical implications of removing humans from the loop?"
+      ],
+      "blockers": [
+        "Source notes need classification into decisions, tasks, and milestones.",
+        "Tasks are proposed and need owner/status confirmation."
+      ],
+      "summaryPrompt": "Summarize CSHOP using 2 notes, 4 tasks, 1 milestones, and current status \"active classification\". Return project state, next three actions, and blockers.",
+      "obsidianNotePrompt": "Create an Obsidian-ready project note for CSHOP with sections: Status, Decisions, Next Actions, Blockers, Linked Notes, and Calendar Deployment.",
+      "decisionPrompt": "Extract explicit and implied decisions for CSHOP. Output each as a proposed task first, never edit source notes directly."
+    },
+    {
+      "projectName": "Dealinstinct",
+      "generatedAt": "2026-05-04T20:59:35.715Z",
+      "status": "indexed",
+      "context": {
+        "noteCount": 1,
+        "taskCount": 0,
+        "milestoneCount": 1,
+        "levelCount": 1,
+        "categories": [],
+        "lastActivity": "2026-04-25"
+      },
+      "actionPrompts": [
+        "Review Dealinstinct and turn the latest notes into a now/next/later execution plan.",
+        "Compare Dealinstinct milestones against active tasks and suggest the next deployable slice.",
+        "Identify decisions in Dealinstinct notes that should become tracked tasks before scheduling.",
+        "Use recent notes (26.4.25) as the planning context for Dealinstinct."
+      ],
+      "nextActions": [
+        "Choose one concrete setup task and assign it to the next calendar slot.",
+        "Validate milestone: Dealinstinct roadmap checkpoint",
+        "Run a blocker pass before adding new scope."
+      ],
+      "blockers": [
+        "Source notes need classification into decisions, tasks, and milestones.",
+        "No extracted tasks found yet."
+      ],
+      "summaryPrompt": "Summarize Dealinstinct using 1 notes, 0 tasks, 1 milestones, and current status \"indexed\". Return project state, next three actions, and blockers.",
+      "obsidianNotePrompt": "Create an Obsidian-ready project note for Dealinstinct with sections: Status, Decisions, Next Actions, Blockers, Linked Notes, and Calendar Deployment.",
+      "decisionPrompt": "Extract explicit and implied decisions for Dealinstinct. Output each as a proposed task first, never edit source notes directly."
+    },
+    {
+      "projectName": "Examp. Developer Portfolio",
+      "generatedAt": "2026-05-04T20:59:35.715Z",
+      "status": "active classification",
+      "context": {
+        "noteCount": 2,
+        "taskCount": 1,
+        "milestoneCount": 1,
+        "levelCount": 0,
+        "categories": [
+          "setup"
+        ],
+        "lastActivity": "2026-04-25"
+      },
+      "actionPrompts": [
+        "Review Examp. Developer Portfolio and turn the latest notes into a now/next/later execution plan.",
+        "Compare Examp. Developer Portfolio milestones against active tasks and suggest the next deployable slice.",
+        "Identify decisions in Examp. Developer Portfolio notes that should become tracked tasks before scheduling.",
+        "Use recent notes (26.4.25 @; 26.4.11) as the planning context for Examp. Developer Portfolio."
+      ],
+      "nextActions": [
+        "for the setup"
+      ],
+      "blockers": [
+        "Source notes need classification into decisions, tasks, and milestones.",
+        "Tasks are proposed and need owner/status confirmation."
+      ],
+      "summaryPrompt": "Summarize Examp. Developer Portfolio using 2 notes, 1 tasks, 1 milestones, and current status \"active classification\". Return project state, next three actions, and blockers.",
+      "obsidianNotePrompt": "Create an Obsidian-ready project note for Examp. Developer Portfolio with sections: Status, Decisions, Next Actions, Blockers, Linked Notes, and Calendar Deployment.",
+      "decisionPrompt": "Extract explicit and implied decisions for Examp. Developer Portfolio. Output each as a proposed task first, never edit source notes directly."
+    },
+    {
+      "projectName": "Flink3D",
+      "generatedAt": "2026-05-04T20:59:35.715Z",
+      "status": "indexed",
+      "context": {
+        "noteCount": 1,
+        "taskCount": 0,
+        "milestoneCount": 1,
+        "levelCount": 1,
+        "categories": [],
+        "lastActivity": "2026-04-25"
+      },
+      "actionPrompts": [
+        "Review Flink3D and turn the latest notes into a now/next/later execution plan.",
+        "Compare Flink3D milestones against active tasks and suggest the next deployable slice.",
+        "Identify decisions in Flink3D notes that should become tracked tasks before scheduling.",
+        "Use recent notes (26.4.25 @) as the planning context for Flink3D."
+      ],
+      "nextActions": [
+        "Choose one concrete setup task and assign it to the next calendar slot.",
+        "Validate milestone: Flink3D roadmap checkpoint",
+        "Run a blocker pass before adding new scope."
+      ],
+      "blockers": [
+        "Source notes need classification into decisions, tasks, and milestones.",
+        "No extracted tasks found yet."
+      ],
+      "summaryPrompt": "Summarize Flink3D using 1 notes, 0 tasks, 1 milestones, and current status \"indexed\". Return project state, next three actions, and blockers.",
+      "obsidianNotePrompt": "Create an Obsidian-ready project note for Flink3D with sections: Status, Decisions, Next Actions, Blockers, Linked Notes, and Calendar Deployment.",
+      "decisionPrompt": "Extract explicit and implied decisions for Flink3D. Output each as a proposed task first, never edit source notes directly."
+    },
+    {
+      "projectName": "Fullstack dev",
+      "generatedAt": "2026-05-04T20:59:35.715Z",
+      "status": "indexed",
+      "context": {
+        "noteCount": 3,
+        "taskCount": 0,
+        "milestoneCount": 1,
+        "levelCount": 0,
+        "categories": [],
+        "lastActivity": "2026-04-12"
+      },
+      "actionPrompts": [
+        "Review Fullstack dev and turn the latest notes into a now/next/later execution plan.",
+        "Compare Fullstack dev milestones against active tasks and suggest the next deployable slice.",
+        "Identify decisions in Fullstack dev notes that should become tracked tasks before scheduling.",
+        "Use recent notes (26.4.12; 26.4.1; Temp) as the planning context for Fullstack dev."
+      ],
+      "nextActions": [
+        "Choose one concrete setup task and assign it to the next calendar slot.",
+        "Validate milestone: Fullstack dev roadmap checkpoint",
+        "Run a blocker pass before adding new scope."
+      ],
+      "blockers": [
+        "Source notes need classification into decisions, tasks, and milestones.",
+        "No extracted tasks found yet."
+      ],
+      "summaryPrompt": "Summarize Fullstack dev using 3 notes, 0 tasks, 1 milestones, and current status \"indexed\". Return project state, next three actions, and blockers.",
+      "obsidianNotePrompt": "Create an Obsidian-ready project note for Fullstack dev with sections: Status, Decisions, Next Actions, Blockers, Linked Notes, and Calendar Deployment.",
+      "decisionPrompt": "Extract explicit and implied decisions for Fullstack dev. Output each as a proposed task first, never edit source notes directly."
+    },
+    {
+      "projectName": "Mucho3D",
+      "generatedAt": "2026-05-04T20:59:35.715Z",
+      "status": "task discovery",
+      "context": {
+        "noteCount": 1,
+        "taskCount": 5,
+        "milestoneCount": 1,
+        "levelCount": 1,
+        "categories": [
+          "content",
+          "development",
+          "setup"
+        ],
+        "lastActivity": "2026-04-25"
+      },
+      "actionPrompts": [
+        "Review Mucho3D and turn the latest notes into a now/next/later execution plan.",
+        "Compare Mucho3D milestones against active tasks and suggest the next deployable slice.",
+        "Identify decisions in Mucho3D notes that should become tracked tasks before scheduling.",
+        "Use recent notes (26.4.25 @) as the planning context for Mucho3D."
+      ],
+      "nextActions": [
+        "a secure path between the two machines. This provides a stable IP or URL that doesn't change.",
+        "on preferences.",
+        "Benefits of This Setup",
+        "In your Blender MCP Add-on settings, you simply enter your server's Tailscale IP: http://100.x.y.z:11434."
+      ],
+      "blockers": [
+        "Source notes need classification into decisions, tasks, and milestones.",
+        "Tasks are proposed and need owner/status confirmation."
+      ],
+      "summaryPrompt": "Summarize Mucho3D using 1 notes, 5 tasks, 1 milestones, and current status \"task discovery\". Return project state, next three actions, and blockers.",
+      "obsidianNotePrompt": "Create an Obsidian-ready project note for Mucho3D with sections: Status, Decisions, Next Actions, Blockers, Linked Notes, and Calendar Deployment.",
+      "decisionPrompt": "Extract explicit and implied decisions for Mucho3D. Output each as a proposed task first, never edit source notes directly."
+    },
+    {
+      "projectName": "PF-PROJECT",
+      "generatedAt": "2026-05-04T20:59:35.715Z",
+      "status": "task discovery",
+      "context": {
+        "noteCount": 5,
+        "taskCount": 23,
+        "milestoneCount": 1,
+        "levelCount": 1,
+        "categories": [
+          "3D",
+          "content",
+          "design",
+          "development",
+          "setup"
+        ],
+        "lastActivity": "2026-05-03"
+      },
+      "actionPrompts": [
+        "Review PF-PROJECT and turn the latest notes into a now/next/later execution plan.",
+        "Compare PF-PROJECT milestones against active tasks and suggest the next deployable slice.",
+        "Identify decisions in PF-PROJECT notes that should become tracked tasks before scheduling.",
+        "Use recent notes (26.5.3 @; 26.5.2; 26.4.28) as the planning context for PF-PROJECT."
+      ],
+      "nextActions": [
+        ". It allows you to maintain the \"Time Planner\"",
+        "a new repo called ProfoundProjects-Suite.",
+        "your Time Planner code into a web-app folder.",
+        "your 2026 notes into a vault folder."
+      ],
+      "blockers": [
+        "High task volume"
+      ],
+      "summaryPrompt": "Summarize PF-PROJECT using 5 notes, 23 tasks, 1 milestones, and current status \"task discovery\". Return project state, next three actions, and blockers.",
+      "obsidianNotePrompt": "Create an Obsidian-ready project note for PF-PROJECT with sections: Status, Decisions, Next Actions, Blockers, Linked Notes, and Calendar Deployment.",
+      "decisionPrompt": "Extract explicit and implied decisions for PF-PROJECT. Output each as a proposed task first, never edit source notes directly."
+    },
+    {
+      "projectName": "Powerframe",
+      "generatedAt": "2026-05-04T20:59:35.715Z",
+      "status": "active classification",
+      "context": {
+        "noteCount": 2,
+        "taskCount": 24,
+        "milestoneCount": 1,
+        "levelCount": 1,
+        "categories": [
+          "3D",
+          "content",
+          "design",
+          "development",
+          "setup"
+        ],
+        "lastActivity": "2026-04-25"
+      },
+      "actionPrompts": [
+        "Review Powerframe and turn the latest notes into a now/next/later execution plan.",
+        "Compare Powerframe milestones against active tasks and suggest the next deployable slice.",
+        "Identify decisions in Powerframe notes that should become tracked tasks before scheduling.",
+        "Use recent notes (26.4.25 @; 26.4.11) as the planning context for Powerframe."
+      ],
+      "nextActions": [
+        "this hub, we need to create a \"Project Bridge\" within the Powerframe repo. Use this prompt for Copilot/Claude:",
+        "a module that syncs metadata from external GitHub repos into the Powerframe dashboard (e.g., commit history, issue status).",
+        "a central registry for 2D (Figma/Images) and 3D (Mucho3D/GLB) files. Each asset must be linked to a specific \"Upskilled Project\" ID.",
+        "a subscription-tier check."
+      ],
+      "blockers": [
+        "High task volume"
+      ],
+      "summaryPrompt": "Summarize Powerframe using 2 notes, 24 tasks, 1 milestones, and current status \"active classification\". Return project state, next three actions, and blockers.",
+      "obsidianNotePrompt": "Create an Obsidian-ready project note for Powerframe with sections: Status, Decisions, Next Actions, Blockers, Linked Notes, and Calendar Deployment.",
+      "decisionPrompt": "Extract explicit and implied decisions for Powerframe. Output each as a proposed task first, never edit source notes directly."
+    },
+    {
+      "projectName": "Powerstarter Azure",
+      "generatedAt": "2026-05-04T20:59:35.715Z",
+      "status": "active classification",
+      "context": {
+        "noteCount": 3,
+        "taskCount": 14,
+        "milestoneCount": 1,
+        "levelCount": 0,
+        "categories": [
+          "content",
+          "design",
+          "development",
+          "setup"
+        ],
+        "lastActivity": "2026-04-25"
+      },
+      "actionPrompts": [
+        "Review Powerstarter Azure and turn the latest notes into a now/next/later execution plan.",
+        "Compare Powerstarter Azure milestones against active tasks and suggest the next deployable slice.",
+        "Identify decisions in Powerstarter Azure notes that should become tracked tasks before scheduling.",
+        "Use recent notes (26.4.25 @; 26.4.11; 26.4.10) as the planning context for Powerstarter Azure."
+      ],
+      "nextActions": [
+        "to Azure changes the \"instances\"",
+        "an Azure Storage Account and a File Share to hold your ChromaDB vector data and Ollama model files.",
+        "Powerframe Hub so we can get",
+        "a WorkState to the BMS schema. It should track: Bootstrapping, Testing, Reviewing, and Deployment_Ready."
+      ],
+      "blockers": [
+        "High task volume"
+      ],
+      "summaryPrompt": "Summarize Powerstarter Azure using 3 notes, 14 tasks, 1 milestones, and current status \"active classification\". Return project state, next three actions, and blockers.",
+      "obsidianNotePrompt": "Create an Obsidian-ready project note for Powerstarter Azure with sections: Status, Decisions, Next Actions, Blockers, Linked Notes, and Calendar Deployment.",
+      "decisionPrompt": "Extract explicit and implied decisions for Powerstarter Azure. Output each as a proposed task first, never edit source notes directly."
+    },
+    {
+      "projectName": "Sapient",
+      "generatedAt": "2026-05-04T20:59:35.715Z",
+      "status": "task discovery",
+      "context": {
+        "noteCount": 2,
+        "taskCount": 7,
+        "milestoneCount": 1,
+        "levelCount": 1,
+        "categories": [
+          "content",
+          "development"
+        ],
+        "lastActivity": "2026-04-25"
+      },
+      "actionPrompts": [
+        "Review Sapient and turn the latest notes into a now/next/later execution plan.",
+        "Compare Sapient milestones against active tasks and suggest the next deployable slice.",
+        "Identify decisions in Sapient notes that should become tracked tasks before scheduling.",
+        "Use recent notes (26.4.25 @; 26.4.16) as the planning context for Sapient."
+      ],
+      "nextActions": [
+        "a strict versioning differentiator for the Sapient Engine and its knowledge content. Update the packages/semantic-core, packages/knowledge-base, and apps/web-dashboard with the following:",
+        "a minimal, high-end system tag in the corner that displays: [SAPIENT_ENGINE_VERSION] // [SOPHIA_VERSION].",
+        "a bug in the 3D Tree rendering, you bump the Sapient Engine. If you add a new profound insight for your friend, you bump the Sophia Version.",
+        "a versions.ts file in packages/core that acts as the single source of truth for these strings."
+      ],
+      "blockers": [
+        "Source notes need classification into decisions, tasks, and milestones.",
+        "Tasks are proposed and need owner/status confirmation."
+      ],
+      "summaryPrompt": "Summarize Sapient using 2 notes, 7 tasks, 1 milestones, and current status \"task discovery\". Return project state, next three actions, and blockers.",
+      "obsidianNotePrompt": "Create an Obsidian-ready project note for Sapient with sections: Status, Decisions, Next Actions, Blockers, Linked Notes, and Calendar Deployment.",
+      "decisionPrompt": "Extract explicit and implied decisions for Sapient. Output each as a proposed task first, never edit source notes directly."
+    },
+    {
+      "projectName": "TheRocketTree-App",
+      "generatedAt": "2026-05-04T20:59:35.716Z",
+      "status": "task discovery",
+      "context": {
+        "noteCount": 8,
+        "taskCount": 70,
+        "milestoneCount": 1,
+        "levelCount": 1,
+        "categories": [
+          "design",
+          "development",
+          "setup"
+        ],
+        "lastActivity": "2026-04-25"
+      },
+      "actionPrompts": [
+        "Review TheRocketTree-App and turn the latest notes into a now/next/later execution plan.",
+        "Compare TheRocketTree-App milestones against active tasks and suggest the next deployable slice.",
+        "Identify decisions in TheRocketTree-App notes that should become tracked tasks before scheduling.",
+        "Use recent notes (26.4.25 @; 26.4.17; 26.4.14) as the planning context for TheRocketTree-App."
+      ],
+      "nextActions": [
+        "GitHub Secrets",
+        "all 5 secrets listed above. To get their values:",
+        "VERCEL_TOKEN: Vercel Dashboard → Account Settings → Tokens → Create",
+        "Firebase Keys to Vercel (for each of the 3 projects)"
+      ],
+      "blockers": [
+        "High task volume"
+      ],
+      "summaryPrompt": "Summarize TheRocketTree-App using 8 notes, 70 tasks, 1 milestones, and current status \"task discovery\". Return project state, next three actions, and blockers.",
+      "obsidianNotePrompt": "Create an Obsidian-ready project note for TheRocketTree-App with sections: Status, Decisions, Next Actions, Blockers, Linked Notes, and Calendar Deployment.",
+      "decisionPrompt": "Extract explicit and implied decisions for TheRocketTree-App. Output each as a proposed task first, never edit source notes directly."
+    },
+    {
+      "projectName": "General",
+      "generatedAt": "2026-05-04T20:59:35.716Z",
+      "status": "needs review",
+      "context": {
+        "noteCount": 16,
+        "taskCount": 42,
+        "milestoneCount": 0,
+        "levelCount": 0,
+        "categories": [
+          "content",
+          "development",
+          "setup",
+          "design"
+        ],
+        "lastActivity": null
+      },
+      "actionPrompts": [
+        "Review General and turn the latest notes into a now/next/later execution plan.",
+        "Compare General milestones against active tasks and suggest the next deployable slice.",
+        "Identify decisions in General notes that should become tracked tasks before scheduling.",
+        "Use recent notes (Alfadenga; Cambio de agenda; Multi-ecosystem management) as the planning context for General."
+      ],
+      "nextActions": [
+        "Start with: /",
+        "Create a milestone from the strongest current project direction.",
+        "Run a blocker pass before adding new scope."
+      ],
+      "blockers": [
+        "Source notes need classification into decisions, tasks, and milestones.",
+        "Tasks are proposed and need owner/status confirmation."
+      ],
+      "summaryPrompt": "Summarize General using 16 notes, 42 tasks, 0 milestones, and current status \"unknown\". Return project state, next three actions, and blockers.",
+      "obsidianNotePrompt": "Create an Obsidian-ready project note for General with sections: Status, Decisions, Next Actions, Blockers, Linked Notes, and Calendar Deployment.",
+      "decisionPrompt": "Extract explicit and implied decisions for General. Output each as a proposed task first, never edit source notes directly."
+    }
+  ],
+  "global": {
+    "actionPrompts": [
+      "Pick a focused project before asking the assistant to sequence work.",
+      "Regenerate dashboard-model.json after note sync, then refresh AI suggestions.",
+      "Use the Deploy tab checks before running local Ollama/Qwen actions."
+    ],
+    "nextActions": [
+      "Select a project.",
+      "Review AI readiness.",
+      "Generate prompt ideas or suggested tasks."
+    ]
+  }
+}

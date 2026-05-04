@@ -7,7 +7,11 @@
     "doc": "docs"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "generate": "node scripts/index-notes.js && node scripts/generate-roadmap.js && node scripts/generate-roadmap-levels.js && node scripts/assign-notes-to-levels.js && node scripts/extract-tasks-from-notes.js && node scripts/generate-project-states.js && node scripts/generate-milestones.js && node scripts/generate-dashboard-model.js && node scripts/generate-ai-suggestions.js",
+    "validate": "node scripts/validate-config.js",
+    "sync": "node scripts/sync-firestore-notes.js",
+    "sync:commit": "node scripts/sync-firestore-notes.js --commit",
+    "serve": "cd apps/time-planner && python -m http.server 4173"
   },
   "keywords": [],
   "author": "",

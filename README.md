@@ -37,9 +37,25 @@ node scripts/extract-tasks-from-notes.js
 node scripts/generate-project-states.js
 node scripts/generate-milestones.js
 node scripts/generate-dashboard-model.js
+node scripts/generate-ai-suggestions.js
+node scripts/validate-config.js
 ```
 
-The generators read `data/notes-index.json` and produce roadmap items, level-map assignments, extracted tasks, project states, milestones, and the unified dashboard model used by every tab.
+The generators read `data/notes-index.json` and produce roadmap items, level-map assignments, extracted tasks, project states, milestones, the unified dashboard model, and deterministic AI suggestions used by the dedicated AI assistant tab.
+
+You can also run the full generation command with:
+
+```bash
+npm run generate
+npm run validate
+```
+
+Sync worker commands:
+
+```bash
+npm run sync
+npm run sync:commit
+```
 
 Test the static app locally from the app folder:
 
@@ -49,3 +65,9 @@ python -m http.server 4173
 ```
 
 Then open `http://localhost:4173`.
+
+From the monorepo root:
+
+```bash
+npm run serve
+```

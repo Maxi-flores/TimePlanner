@@ -114,6 +114,7 @@
       align-items:center;
       gap:10px;
       min-width:max-content;
+      justify-content:flex-start;
     }
     .brand-logo {
       width:85px;
@@ -121,17 +122,34 @@
       object-fit:contain;
       filter: drop-shadow(0 0 16px color-mix(in srgb, var(--accent-2) 60%, transparent));
     }
-    .header-actions { display:flex; align-items:center; gap:8px; }
+    .header-right {
+      margin-left:auto;
+      display:grid;
+      justify-items:end;
+      gap:8px;
+      min-width:max-content;
+    }
+    .header-actions { display:flex; align-items:center; justify-content:flex-end; gap:8px; }
+    .header-mini-title {
+      font-size:.48rem;
+      font-weight:700;
+      letter-spacing:.04em;
+      text-transform:uppercase;
+      color:var(--text-muted);
+      text-align:right;
+    }
+    .user-shell { position:relative; }
     .user-chip {
-      display:none;
+      display:flex;
       align-items:center;
       gap:8px;
       background:var(--surface-glass);
       border:1px solid rgba(148,163,184,.2);
       border-radius:999px;
       padding:5px 10px 5px 5px;
+      color:var(--text);
+      cursor:pointer;
     }
-    .user-chip.visible { display:flex; }
     .user-avatar {
       width:30px;
       height:30px;
@@ -141,6 +159,7 @@
       border:1px solid rgba(148,163,184,.25);
     }
     .user-chip strong { font-size:.78rem; }
+    .user-chip.profile-hidden strong { display:none; }
     .tabs {
       display: flex;
       gap: 4px;
@@ -216,10 +235,10 @@
     .btn-success  { background: var(--success);  color: #fff; }
     .btn-danger   { background: var(--danger);   color: #fff; }
     .btn-ghost    { background: var(--surface2); color: var(--text); }
-    .menu-shell, .settings-shell {
+    .menu-shell {
       position: relative;
     }
-    .app-menu, .settings-panel {
+    .app-menu, .user-menu {
       display: none;
       position: absolute;
       right: 0;
@@ -236,11 +255,12 @@
       z-index: 250;
     }
     .app-menu.open { display: block; }
-    .settings-panel.open { display:block; }
-    .app-menu { width:min(260px, 90vw); }
+    .user-menu.open { display:block; }
+    .app-menu { width:min(460px, 94vw); }
+    .user-menu { width:min(380px, 92vw); }
     .menu-tabs {
       display:grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(3, 1fr);
       gap:6px;
       margin-bottom:12px;
     }
@@ -291,13 +311,22 @@
       color:var(--text-muted);
     }
     .footer-logo {
-      width:34px;
-      height:34px;
+      width:58px;
+      height:58px;
       object-fit:contain;
       opacity:.78;
       filter: drop-shadow(0 0 12px color-mix(in srgb, var(--accent-2) 45%, transparent));
     }
-    .footer-links { display:flex; gap:8px; flex-wrap:wrap; justify-content:center; }
+    .footer-links { display:flex; gap:18px; flex-wrap:wrap; justify-content:center; }
+    .footer-link {
+      background:none;
+      border:0;
+      color:var(--text-muted);
+      cursor:pointer;
+      padding:2px 0;
+      font:inherit;
+    }
+    .footer-link:hover { color:var(--text); }
     .global-project-bar {
       display:flex;
       gap:10px;
@@ -403,6 +432,100 @@
       background:rgba(15,23,42,.32);
       margin-top:8px;
     }
+    .ai-grid {
+      display:grid;
+      grid-template-columns:minmax(280px,.85fr) minmax(360px,1.15fr);
+      gap:14px;
+      align-items:start;
+    }
+    .ai-panel-list { display:grid; gap:8px; margin-top:10px; }
+    .ai-cardlet {
+      border:1px solid rgba(148,163,184,.18);
+      background:var(--surface2);
+      border-radius:var(--radius);
+      padding:10px;
+      font-size:.82rem;
+      color:var(--text-muted);
+    }
+    .ai-cardlet strong { color:var(--text); display:block; margin-bottom:4px; }
+    .ai-actions { display:flex; gap:8px; flex-wrap:wrap; margin-top:12px; }
+    .ai-status-ok { color:var(--success); }
+    .ai-status-warn { color:var(--warn); }
+    .ai-status-bad { color:var(--danger); }
+    .ai-bot-button {
+      position:fixed;
+      right:20px;
+      bottom:22px;
+      width:54px;
+      height:54px;
+      border-radius:999px;
+      border:1px solid rgba(125,211,252,.45);
+      background:linear-gradient(135deg, var(--accent), var(--accent2));
+      color:#fff;
+      box-shadow:var(--shadow-soft);
+      cursor:pointer;
+      z-index:220;
+      font-weight:800;
+    }
+    .ai-bot-panel {
+      display:none;
+      position:fixed;
+      right:20px;
+      bottom:88px;
+      width:min(430px, calc(100vw - 28px));
+      max-height:72vh;
+      overflow:auto;
+      background:var(--surface-glass);
+      border:1px solid rgba(148,163,184,.24);
+      border-radius:var(--radius-xl);
+      padding:14px;
+      box-shadow:var(--shadow-soft);
+      backdrop-filter:blur(18px);
+      z-index:230;
+    }
+    .ai-bot-panel.open { display:block; }
+    .ai-bot-header {
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:10px;
+      margin-bottom:10px;
+    }
+    .ai-output {
+      margin-top:10px;
+      padding:10px;
+      border-radius:var(--radius);
+      background:rgba(15,23,42,.46);
+      border:1px solid rgba(148,163,184,.16);
+      white-space:pre-wrap;
+      font-size:.8rem;
+      color:var(--text-muted);
+    }
+    .phase-status-strip {
+      display:flex;
+      gap:8px;
+      align-items:center;
+      flex-wrap:wrap;
+      margin: 0 0 14px;
+    }
+    .phase-table {
+      display:grid;
+      gap:8px;
+    }
+    .phase-row {
+      display:grid;
+      grid-template-columns: auto 1fr 1fr 1fr;
+      gap:10px;
+      align-items:center;
+      background:var(--surface-glass);
+      border:1px solid rgba(148,163,184,.18);
+      border-radius:14px;
+      padding:10px 12px;
+    }
+    .phase-row input { width:auto; }
+    .phase-cell-title { font-weight:700; font-size:.86rem; }
+    .phase-cell-meta { color:var(--text-muted); font-size:.76rem; }
+    .priority-task { order:-1; border-left:3px solid var(--warn); padding-left:6px; }
 
     /* ─── CALENDAR ──────────────────────────────────────── */
     .cal-nav {
@@ -463,6 +586,11 @@
     .cal-event-pill.goal    { background: #78350f; color: #fcd34d; }
     .cal-event-pill.health  { background: #1e3a5f; color: #7dd3fc; }
     .cal-event-pill.travel  { background: #3b0764; color: #e879f9; }
+    .cal-event-pill.phase-0-10, .cal-event-pill.phase-10-20 { background:#1e3a5f; color:#7dd3fc; }
+    .cal-event-pill.phase-20-30, .cal-event-pill.phase-30-40 { background:#312e81; color:#c7d2fe; }
+    .cal-event-pill.phase-40-50, .cal-event-pill.phase-50-60 { background:#14532d; color:#86efac; }
+    .cal-event-pill.phase-60-70, .cal-event-pill.phase-70-80 { background:#78350f; color:#fcd34d; }
+    .cal-event-pill.phase-80-90, .cal-event-pill.phase-90-100 { background:#4a044e; color:#f0abfc; }
 
     /* ─── DAY DETAIL PANEL ──────────────────────────────── */
     .day-panel {
@@ -1183,7 +1311,9 @@
       .tabs { display:none; }
       .dashboard-grid { grid-template-columns: 1fr; }
       .widget-wide { grid-column: auto; }
-      .deploy-grid { grid-template-columns:1fr; }
+      .deploy-grid, .ai-grid { grid-template-columns:1fr; }
+      .phase-row { grid-template-columns: auto 1fr; }
+      .phase-row .phase-cell-meta { grid-column:2; }
       .menu-tabs { grid-template-columns: repeat(2, 1fr); }
       .cal-cell { min-height: 56px; }
       .roadmap-container { flex-direction: column; }
@@ -1226,47 +1356,61 @@
 <header>
   <div class="brand">
     <img class="brand-logo" src="img/symbol_logo_small.png" alt="" />
-    <h1>2026 <span>Roadmap Planner</span></h1>
   </div>
   <div class="tabs">
     <button class="tab-btn active" onclick="switchTab('dashboard', this)">Dashboard</button>
     <button class="tab-btn" onclick="switchTab('calendar', this)">📅 Calendar</button>
     <button class="tab-btn" onclick="switchTab('schedule', this)">🕐 Daily Schedule</button>
     <button class="tab-btn" onclick="switchTab('roadmap', this)">🗺 Roadmap</button>
+    <button class="tab-btn" onclick="switchTab('phases', this)">Phases</button>
     <button class="tab-btn" onclick="switchTab('notes', this)">Notes</button>
     <button class="tab-btn" onclick="switchTab('goals', this)">🎯 Goals</button>
+    <button class="tab-btn" onclick="switchTab('ai', this)">AI</button>
     <button class="tab-btn" onclick="switchTab('calculator', this)">🧮 Calculator</button>
     <button class="tab-btn" onclick="switchTab('deploy', this)">Deploy</button>
   </div>
-  <div class="header-actions">
-    <div class="user-chip" id="user-chip">
-      <img class="user-avatar" id="user-avatar" src="img/symbol_logo_small.png" alt="" />
-      <strong id="user-chip-name">User</strong>
+  <div class="header-right">
+    <div class="header-actions">
+    <div class="user-shell">
+      <button class="user-chip" id="user-chip" onclick="toggleUserMenu()" type="button" aria-label="Open user settings">
+        <img class="user-avatar" id="user-avatar" src="img/symbol_logo_small.png" alt="" />
+        <strong id="user-chip-name">User</strong>
+      </button>
+      <div class="user-menu" id="user-menu">
+        <div class="menu-panel settings-grid active">
+          <p class="section-title">User account</p>
+          <label><input type="checkbox" id="setting-display-user" onchange="saveSettingsFromUI()" style="width:auto;" /> Show profile name in header</label>
+          <div><label>Avatar image path or URL</label><input type="text" id="setting-user-avatar" placeholder="img/symbol_logo_small.png" onchange="saveSettingsFromUI()" /></div>
+          <div><label>Name</label><input type="text" id="setting-user-name" placeholder="Your name" onchange="saveSettingsFromUI()" /></div>
+          <div><label>Role / profile</label><input type="text" id="setting-user-profile" placeholder="Builder, planner, founder..." onchange="saveSettingsFromUI()" /></div>
+          <div><label>Profile note</label><textarea id="setting-user-note" rows="2" placeholder="Personal context for this board" onchange="saveSettingsFromUI()"></textarea></div>
+          <button class="btn btn-ghost" onclick="logoutUser()" type="button">Logout local profile</button>
+        </div>
+      </div>
     </div>
     <div class="menu-shell">
       <button class="btn btn-ghost" onclick="toggleAppMenu()">Menu</button>
       <div class="app-menu" id="app-menu">
-        <div class="menu-list">
+        <div class="menu-tabs">
+          <button class="menu-tab active" data-menu-panel-tab="nav" onclick="switchMenuPanel('nav')">Menu</button>
+          <button class="menu-tab" data-menu-panel-tab="theme" onclick="switchMenuPanel('theme')">Theme</button>
+          <button class="menu-tab" data-menu-panel-tab="ai" onclick="switchMenuPanel('ai')">AI</button>
+        </div>
+        <div class="menu-panel active" id="menu-panel-nav">
+          <div class="menu-list">
           <button class="btn btn-ghost menu-item active" data-menu-tab="dashboard" onclick="switchTab('dashboard')">Dashboard overview</button>
           <button class="btn btn-ghost menu-item" data-menu-tab="calendar" onclick="switchTab('calendar')">Calendar layers</button>
           <button class="btn btn-ghost menu-item" data-menu-tab="schedule" onclick="switchTab('schedule')">Daily schedule</button>
           <button class="btn btn-ghost menu-item" data-menu-tab="roadmap" onclick="switchTab('roadmap')">Roadmap map</button>
+          <button class="btn btn-ghost menu-item" data-menu-tab="phases" onclick="switchTab('phases')">Project phases</button>
           <button class="btn btn-ghost menu-item" data-menu-tab="notes" onclick="switchTab('notes')">Notes browser</button>
           <button class="btn btn-ghost menu-item" data-menu-tab="goals" onclick="switchTab('goals')">Goals and task deploys</button>
+          <button class="btn btn-ghost menu-item" data-menu-tab="ai" onclick="switchTab('ai')">AI assistant</button>
           <button class="btn btn-ghost menu-item" data-menu-tab="calculator" onclick="switchTab('calculator')">Calculator</button>
           <button class="btn btn-ghost menu-item" data-menu-tab="deploy" onclick="switchTab('deploy')">Deployment result</button>
         </div>
       </div>
-    </div>
-    <div class="settings-shell">
-      <button class="btn btn-ghost" onclick="toggleSettingsPanel()">Settings</button>
-      <div class="settings-panel" id="settings-panel">
-        <div class="menu-tabs">
-          <button class="menu-tab active" data-settings-panel-tab="theme" onclick="switchSettingsPanel('theme')">Theme</button>
-          <button class="menu-tab" data-settings-panel-tab="account" onclick="switchSettingsPanel('account')">User</button>
-          <button class="menu-tab" data-settings-panel-tab="ai" onclick="switchSettingsPanel('ai')">AI</button>
-        </div>
-        <div class="menu-panel active" id="settings-panel-theme">
+      <div class="menu-panel" id="menu-panel-theme">
         <p class="section-title">Theme presets</p>
         <div class="theme-preset-grid">
           <button class="theme-preset" onclick="setThemePreset('powerframe')">Powerframe<span>Dark navy, cyan and violet</span></button>
@@ -1292,15 +1436,7 @@
         <label><input type="checkbox" id="setting-motion" onchange="saveSettingsFromUI()" style="width:auto;" /> Reduced motion</label>
         </div>
       </div>
-      <div class="menu-panel settings-grid" id="settings-panel-account">
-        <p class="section-title">User account</p>
-        <label><input type="checkbox" id="setting-display-user" onchange="saveSettingsFromUI()" style="width:auto;" /> Show profile in header</label>
-        <div><label>Avatar image path or URL</label><input type="text" id="setting-user-avatar" placeholder="img/symbol_logo_small.png" onchange="saveSettingsFromUI()" /></div>
-        <div><label>Name</label><input type="text" id="setting-user-name" placeholder="Your name" onchange="saveSettingsFromUI()" /></div>
-        <div><label>Role / profile</label><input type="text" id="setting-user-profile" placeholder="Builder, planner, founder..." onchange="saveSettingsFromUI()" /></div>
-        <div><label>Profile note</label><textarea id="setting-user-note" rows="2" placeholder="Personal context for this board" onchange="saveSettingsFromUI()"></textarea></div>
-      </div>
-      <div class="menu-panel settings-grid" id="settings-panel-ai">
+      <div class="menu-panel settings-grid" id="menu-panel-ai">
         <p class="section-title">AI orchestrator</p>
         <div><label>Local model provider</label><input type="text" id="setting-ai-provider" value="Ollama" onchange="saveSettingsFromUI()" /></div>
         <div><label>Model</label><input type="text" id="setting-ai-model" value="qwen" onchange="saveSettingsFromUI()" /></div>
@@ -1310,6 +1446,8 @@
       </div>
       </div>
     </div>
+    </div>
+    <h1 class="header-mini-title">2026 <span>Roadmap Planner</span></h1>
   </div>
 </header>
 
@@ -1323,6 +1461,10 @@
     </div>
     <span class="badge badge-accent" id="global-project-status">Unified dashboard model</span>
   </div>
+  <div class="phase-status-strip card">
+    <span class="badge badge-accent" id="project-phase-status">Phase: select a project</span>
+    <span class="note-meta" id="project-phase-detail">Phase checklist and goal phase classifications are local to this browser.</span>
+  </div>
 
   <!-- ══════════════ DASHBOARD VIEW ══════════════ -->
   <div id="view-dashboard" class="view active">
@@ -1331,6 +1473,7 @@
         <p class="section-title">Roadmap focus</p>
         <div class="widget-value" id="dash-roadmap-count">0</div>
         <div class="note-meta" id="dash-roadmap-project">All projects</div>
+        <div class="badge badge-accent" id="dash-phase-status" style="margin-top:8px;">Phase status</div>
         <div class="mini-roadmap" id="dash-roadmap-mini"></div>
         <div class="widget-list" id="dash-roadmap-list"></div>
       </div>
@@ -1371,6 +1514,9 @@
 
   <!-- ══════════════ CALENDAR VIEW ══════════════ -->
   <div id="view-calendar" class="view">
+    <div class="phase-status-strip">
+      <span class="badge badge-accent" id="calendar-phase-status">Phase status</span>
+    </div>
     <div class="card glow-edge">
       <div class="cal-nav">
         <div class="btns">
@@ -1422,6 +1568,7 @@
           <p id="level-map-generated">Loading campaign path...</p>
         </div>
         <span class="badge badge-accent" id="level-map-count">0 levels</span>
+        <span class="badge badge-accent" id="roadmap-phase-status">Phase status</span>
       </div>
       <div class="project-board-grid">
         <div class="board-card"><div class="value" id="board-total-projects">0</div><div class="label">Projects</div></div>
@@ -1471,6 +1618,20 @@
           <div class="placeholder-list" id="roadmap-placeholder-list"></div>
         </div>
       </div>
+    </div>
+  </div>
+
+  <!-- ══════════════ NOTES VIEW ══════════════ -->
+  <div id="view-phases" class="view">
+    <div class="card">
+      <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:14px;">
+        <div>
+          <h2 style="font-size:1.1rem;font-weight:700;">Project Phase Configuration</h2>
+          <p class="note-meta" id="phase-config-project">Select a project to check phase rows.</p>
+        </div>
+        <button class="btn btn-ghost" onclick="clearProjectPhaseChecks()">Clear Checks</button>
+      </div>
+      <div class="phase-table" id="phase-table"></div>
     </div>
   </div>
 
@@ -1548,6 +1709,43 @@
     <div class="goals-grid glow-edge" id="goals-grid"></div>
   </div>
 
+  <!-- ══════════════ AI ASSISTANT VIEW ══════════════ -->
+  <div id="view-ai" class="view">
+    <div class="ai-grid">
+      <div class="card">
+        <p class="section-title">AI working assistant</p>
+        <div class="deploy-status">
+          <div class="deploy-row"><span>Provider</span><strong id="ai-provider-status">Ollama</strong></div>
+          <div class="deploy-row"><span>Model</span><strong id="ai-model-status">qwen</strong></div>
+          <div class="deploy-row"><span>Endpoint</span><strong id="ai-endpoint-status">-</strong></div>
+          <div class="deploy-row"><span>Mode</span><strong id="ai-mode-status">Deterministic fallback</strong></div>
+          <div class="deploy-row"><span>Selected project</span><strong id="ai-selected-project">All projects</strong></div>
+        </div>
+        <div class="ai-actions">
+          <button class="btn btn-primary" onclick="testAiConnection()">Test AI Connection</button>
+          <button class="btn btn-ghost" onclick="openAiBot()">Open Assistant</button>
+        </div>
+        <div class="ai-output" id="ai-action-output">AI calls run only after a button click. If Ollama is unavailable, this app uses generated deterministic suggestions.</div>
+      </div>
+      <div class="card">
+        <p class="section-title">Prompt idea generator</p>
+        <div class="ai-panel-list" id="ai-prompt-ideas"></div>
+      </div>
+      <div class="card">
+        <p class="section-title">Task suggestion panel</p>
+        <div class="ai-panel-list" id="ai-task-suggestions"></div>
+      </div>
+      <div class="card">
+        <p class="section-title">Decision extraction panel</p>
+        <div class="ai-panel-list" id="ai-decision-panel"></div>
+      </div>
+      <div class="card">
+        <p class="section-title">Project summary assistant</p>
+        <div class="ai-panel-list" id="ai-summary-panel"></div>
+      </div>
+    </div>
+  </div>
+
   <!-- ══════════════ CALCULATOR VIEW ══════════════ -->
   <div id="view-calculator" class="view">
     <h2 style="font-size:1.1rem;font-weight:700;margin-bottom:20px;">🧮 Time &amp; Progress Calculator</h2>
@@ -1619,15 +1817,27 @@
           <div class="deploy-row"><span>Build status</span><strong id="deploy-build-status">Ready</strong></div>
           <div class="deploy-row"><span>Version date</span><strong id="deploy-version-date">-</strong></div>
           <div class="deploy-row"><span>Selected project</span><strong id="deploy-selected-project">All projects</strong></div>
+          <div class="deploy-row"><span>Project phase</span><strong id="deploy-phase-status">No phase selected</strong></div>
           <div class="deploy-row"><span>Data model</span><strong id="deploy-model-status">Loading</strong></div>
           <div class="deploy-row"><span>Notes/tasks</span><strong id="deploy-data-counts">-</strong></div>
         </div>
       </div>
       <div class="card">
-        <p class="section-title">AI project orchestrator</p>
+        <p class="section-title">AI readiness checks</p>
         <div class="deploy-row"><span>Provider</span><strong id="deploy-ai-provider">Ollama</strong></div>
         <div class="deploy-row"><span>Model</span><strong id="deploy-ai-model">qwen</strong></div>
-        <div class="deploy-row"><span>Mode</span><strong id="deploy-ai-mode">Local suggestion scaffold</strong></div>
+        <div class="deploy-row"><span>AI enabled</span><strong id="deploy-ai-enabled">Off</strong></div>
+        <div class="deploy-row"><span>Endpoint configured</span><strong id="deploy-ai-endpoint">Missing</strong></div>
+        <div class="deploy-row"><span>Dashboard model</span><strong id="deploy-ai-model-ready">Missing</strong></div>
+        <div class="deploy-row"><span>Project context</span><strong id="deploy-ai-context">Select project</strong></div>
+        <div class="deploy-row"><span>Connection</span><strong id="deploy-ai-connection">Not tested</strong></div>
+        <div class="ai-actions">
+          <button class="btn btn-primary" onclick="testAiConnection()">Test AI Connection</button>
+          <button class="btn btn-ghost" onclick="runAiAction('prompts')">Generate Prompt Ideas</button>
+          <button class="btn btn-ghost" onclick="runAiAction('tasks')">Generate Suggested Tasks</button>
+          <button class="btn btn-ghost" onclick="runAiAction('summary')">Summarize Selected Project</button>
+        </div>
+        <div class="ai-output" id="deploy-ai-output">Ready for local checks.</div>
         <div id="deploy-ai-suggestions"></div>
       </div>
     </div>
@@ -1635,13 +1845,35 @@
 
 </main>
 
+<button class="ai-bot-button" onclick="toggleAiBot()" type="button" aria-label="Open AI assistant">AI</button>
+<div class="ai-bot-panel" id="ai-bot-panel">
+  <div class="ai-bot-header">
+    <div>
+      <p class="section-title">AI agent bot</p>
+      <div class="note-meta">Local deterministic suggestions first. Ollama/Qwen only runs on click.</div>
+    </div>
+    <button class="btn btn-ghost" onclick="closeAiBot()" type="button">Close</button>
+  </div>
+  <label>Assistant project</label>
+  <select id="ai-bot-project" onchange="setAiBotProject(this.value)"><option value="">All projects</option></select>
+  <div class="ai-actions">
+    <button class="btn btn-ghost" onclick="runAiAction('roadmap')">Roadmap next step</button>
+    <button class="btn btn-ghost" onclick="runAiAction('tasks')">Extract tasks</button>
+    <button class="btn btn-ghost" onclick="runAiAction('summary')">Summarize project</button>
+    <button class="btn btn-ghost" onclick="runAiAction('blockers')">Find blockers</button>
+    <button class="btn btn-ghost" onclick="runAiAction('obsidian')">Generate Obsidian note</button>
+  </div>
+  <div class="ai-panel-list" id="ai-bot-prompts"></div>
+  <div class="ai-output" id="ai-bot-output">Choose an action.</div>
+</div>
+
 <footer class="footer">
   <img class="footer-logo" src="img/symbol_logo_small.png" alt="" />
   <div class="footer-links">
-    <button class="btn btn-ghost" onclick="toggleAppMenu()">Menu</button>
-    <button class="btn btn-ghost" onclick="toggleSettingsPanel()">Settings</button>
-    <button class="btn btn-ghost" onclick="openInfoModal('contact')">Contact</button>
-    <button class="btn btn-ghost" onclick="openInfoModal('faq')">FAQ</button>
+    <button class="footer-link" onclick="toggleAppMenu()">Menu</button>
+    <button class="footer-link" onclick="openMenuPanel('theme')">Settings</button>
+    <button class="footer-link" onclick="openInfoModal('contact')">Contact</button>
+    <button class="footer-link" onclick="openInfoModal('faq')">FAQ</button>
   </div>
 </footer>
 
@@ -1797,12 +2029,16 @@
     <div>
       <label>Category</label>
       <select id="goal-cat">
-        <option value="work">Work</option>
-        <option value="personal">Personal</option>
-        <option value="health">Health</option>
-        <option value="travel">Travel</option>
-        <option value="learning">Learning</option>
-        <option value="finance">Finance</option>
+        <option value="phase-0-10">0-10%</option>
+        <option value="phase-10-20">10-20%</option>
+        <option value="phase-20-30">20-30%</option>
+        <option value="phase-30-40">30-40%</option>
+        <option value="phase-40-50">40-50%</option>
+        <option value="phase-50-60">50-60%</option>
+        <option value="phase-60-70">60-70%</option>
+        <option value="phase-70-80">70-80%</option>
+        <option value="phase-80-90">80-90%</option>
+        <option value="phase-90-100">90-100%</option>
       </select>
     </div>
   </div>
@@ -1921,11 +2157,49 @@ let roadmapLevelsLoaded = false;
 let autoLevelAssignments = { assignments: [] };
 let extractedTasks = { tasks: [] };
 let projectStates = { projects: [] };
+let aiSuggestions = { projects: [], global: { actionPrompts: [], nextActions: [] } };
+let aiConnectionStatus = "Not tested";
+let aiBotState = JSON.parse(localStorage.getItem('aiBotState') || '{"open":false,"project":""}');
 let dashboardFilters = JSON.parse(localStorage.getItem('dashboardFilters') || '{}');
 let activeCategoryFilter = dashboardFilters.category || 'all';
 let activeLevelId = null;
 let firebaseIntake = null;
 let firebaseIntakeReady = false;
+let projectPhaseChecks = loadProjectPhaseChecks();
+
+const GOAL_PHASES = {
+  'phase-0-10': { range:'0-10%', label: 'Concept dev phase', action:'AI start project', tools:'ChatGPT/Claude/Gemini/Grok', color: '#38bdf8' },
+  'phase-10-20': { range:'10-20%', label: 'Logic and data prompts', action:'Project detail notes', tools:'OneNote/Obsidian/Github 2026 repo', color: '#60a5fa' },
+  'phase-20-30': { range:'20-30%', label: 'Repo build setup', action:'Project indexation/Concept version/repo framework', tools:'Excel/Obsidian/Github', color: '#818cf8' },
+  'phase-30-40': { range:'30-40%', label: 'Page structure design', action:'Project UI/UX design/Project orchestration/repo architecture', tools:'Affinity/Obsidian/Github', color: '#a78bfa' },
+  'phase-40-50': { range:'40-50%', label: 'Remote/Local build', action:'Repo refinement/Claude code/Codex code', tools:'Github/Copilot/ChatGPT/Claude/Codex', color: '#34d399' },
+  'phase-50-60': { range:'50-60%', label: 'AI Project management', action:'Version syncing/Local repo setup/Deployment structure', tools:'Obsidian/Claude/Codex', color: '#22c55e' },
+  'phase-60-70': { range:'60-70%', label: 'Product body code', action:'AI_3D builder/FX effects and game prompts/MCP object prompts', tools:'Blender/Houdini/MCP bridge at Mucho3D.de', color: '#f59e0b' },
+  'phase-70-80': { range:'70-80%', label: 'Mobile/Game engine', action:'UI_Unity coding with Claude/Mobile App development fase', tools:'Unity/Android studio/Xcode', color: '#fb923c' },
+  'phase-80-90': { range:'80-90%', label: 'Deployment/connectors', action:'Local servers/Vercel deployment/3th party integrations', tools:'Vimexx/Appstore/Vercel/Github', color: '#e879f9' },
+  'phase-90-100': { range:'90-100%', label: 'Tools and hosted functions', action:'Business production level', tools:'SQL database/Shipping/inventory management', color: '#fb7185' },
+};
+
+function goalPhaseLabel(value) {
+  const phase = GOAL_PHASES[value];
+  return phase ? `${phase.range} ${phase.label}` : value || 'Goal phase';
+}
+
+function goalPhaseColor(value) {
+  return GOAL_PHASES[value]?.color || '#888';
+}
+
+function loadProjectPhaseChecks() {
+  try {
+    return JSON.parse(localStorage.getItem('projectPhaseChecks') || '{}');
+  } catch {
+    return {};
+  }
+}
+
+function saveProjectPhaseChecks() {
+  localStorage.setItem('projectPhaseChecks', JSON.stringify(projectPhaseChecks));
+}
 
 function loadDashboardSettings() {
   const defaults = {
@@ -2019,8 +2293,8 @@ function applyDashboardSettings() {
   const chip = document.getElementById('user-chip');
   const chipName = document.getElementById('user-chip-name');
   const avatar = document.getElementById('user-avatar');
-  if (chip) chip.classList.toggle('visible', !!settings.displayUser);
-  if (chipName) chipName.textContent = settings.userName || 'User';
+  if (chip) chip.classList.toggle('profile-hidden', !settings.displayUser);
+  if (chipName) chipName.textContent = settings.displayUser ? (settings.userName || 'User') : 'User';
   if (avatar) avatar.src = settings.userAvatar || 'img/symbol_logo_small.png';
   if (aiProvider) aiProvider.value = settings.aiProvider || 'Ollama';
   if (aiModel) aiModel.value = settings.aiModel || 'qwen';
@@ -2028,6 +2302,8 @@ function applyDashboardSettings() {
   if (aiEnabled) aiEnabled.checked = !!settings.aiEnabled;
   renderDashboard();
   renderDeploymentResult();
+  renderAiAssistant();
+  renderAiBot();
 }
 
 function saveSettingsFromUI() {
@@ -2061,18 +2337,40 @@ function saveSettingsFromUI() {
 }
 
 function toggleAppMenu() {
-  document.getElementById('app-menu')?.classList.toggle('open');
-  document.getElementById('settings-panel')?.classList.remove('open');
+  const menu = document.getElementById('app-menu');
+  menu?.classList.toggle('open');
+  document.getElementById('user-menu')?.classList.remove('open');
+  if (menu?.classList.contains('open')) switchMenuPanel('nav');
 }
 
-function toggleSettingsPanel() {
-  document.getElementById('settings-panel')?.classList.toggle('open');
+function openMenuPanel(panel = 'nav') {
+  document.getElementById('app-menu')?.classList.add('open');
+  document.getElementById('user-menu')?.classList.remove('open');
+  switchMenuPanel(panel);
+}
+
+function toggleUserMenu() {
+  document.getElementById('user-menu')?.classList.toggle('open');
   document.getElementById('app-menu')?.classList.remove('open');
 }
 
-function switchSettingsPanel(panel) {
-  document.querySelectorAll('[data-settings-panel-tab]').forEach(tab => tab.classList.toggle('active', tab.dataset.settingsPanelTab === panel));
-  document.querySelectorAll('[id^="settings-panel-"]').forEach(item => item.classList.toggle('active', item.id === `settings-panel-${panel}`));
+function switchMenuPanel(panel) {
+  document.querySelectorAll('[data-menu-panel-tab]').forEach(tab => tab.classList.toggle('active', tab.dataset.menuPanelTab === panel));
+  document.querySelectorAll('[id^="menu-panel-"]').forEach(item => item.classList.toggle('active', item.id === `menu-panel-${panel}`));
+}
+
+function logoutUser() {
+  const settings = {
+    ...loadDashboardSettings(),
+    userName: '',
+    userProfile: '',
+    userNote: '',
+    userAvatar: 'img/symbol_logo_small.png',
+    displayUser: false,
+  };
+  localStorage.setItem('dashboardSettings', JSON.stringify(settings));
+  document.getElementById('user-menu')?.classList.remove('open');
+  applyDashboardSettings();
 }
 
 function setThemePreset(preset) {
@@ -2101,6 +2399,10 @@ function updateDashboardFilters(patch) {
   renderNoteBrowser();
   renderGeneratedMilestones();
   renderDashboard();
+  renderPhaseStatus();
+  renderPhaseTable();
+  renderAiAssistant();
+  renderAiBot();
 }
 
 function setSelectedProject(projectName, persist = true) {
@@ -2113,6 +2415,10 @@ function setSelectedProject(projectName, persist = true) {
   renderNoteBrowser();
   renderGeneratedMilestones();
   renderDashboard();
+  renderPhaseStatus();
+  renderPhaseTable();
+  renderAiAssistant();
+  renderAiBot();
 }
 
 function populateGlobalProjectSelect() {
@@ -2151,13 +2457,15 @@ function switchTab(name, btn) {
   const tabButton = btn || [...document.querySelectorAll('.tab-btn')].find(button => button.getAttribute('onclick')?.includes(`'${name}'`));
   if (tabButton) tabButton.classList.add('active');
   document.getElementById('app-menu')?.classList.remove('open');
-  document.getElementById('settings-panel')?.classList.remove('open');
+  document.getElementById('user-menu')?.classList.remove('open');
   if (name === 'dashboard')  renderDashboard();
   if (name === 'calendar')   renderCalendar();
   if (name === 'schedule')   renderSchedule();
   if (name === 'roadmap')    { renderRoadmap(); renderRoadmapOrchestrator(); renderProjectBoard(); renderGeneratedMilestones(); }
+  if (name === 'phases')     renderPhaseTable();
   if (name === 'notes')      { renderNotesIndex(); renderNoteBrowser(); }
   if (name === 'goals')      renderGoals();
+  if (name === 'ai')         renderAiAssistant();
   if (name === 'calculator') initCalculator();
   if (name === 'deploy')     renderDeploymentResult();
 }
@@ -2170,6 +2478,19 @@ async function loadDashboardModel() {
     applyDashboardModel();
   } catch (err) {
     console.warn('Dashboard model unavailable', err);
+  }
+}
+
+async function loadAiSuggestions() {
+  try {
+    const response = await fetch('data/ai-suggestions.json', { cache: 'no-store' });
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    aiSuggestions = await response.json();
+    renderAiAssistant();
+    renderAiBot();
+    renderDeploymentResult();
+  } catch (err) {
+    console.warn('AI suggestions unavailable', err);
   }
 }
 
@@ -2190,6 +2511,8 @@ function applyDashboardModel() {
   renderNoteBrowser();
   renderGeneratedMilestones();
   renderDashboard();
+  renderAiAssistant();
+  renderAiBot();
 }
 
 function renderDashboard() {
@@ -2201,13 +2524,17 @@ function renderDashboard() {
     .filter(item => !selectedProject || item.projectName === selectedProject)
     .slice(0, 4);
   const upcomingEvents = state.events.slice().sort((a, b) => (a.date || '').localeCompare(b.date || '')).slice(0, 4);
-  const goals = state.goals || [];
+  const goals = selectedProjectGoals();
   const openGoalTasks = goals.reduce((sum, goal) => sum + goal.tasks.filter(task => !task.done).length, 0);
+  const priorityGoalTasks = goals.flatMap(goal => (goal.tasks || [])
+    .filter(task => task.priority && !task.done)
+    .map(task => ({ ...task, goalTitle: goal.title })));
   const milestones = (generatedMilestones || []).filter(ms => !dashboardFilters.project || ms.projectName === dashboardFilters.project).slice(0, 4);
   const timeline = (dashboardModel.timeline || []).filter(item => !dashboardFilters.project || item.projectName === dashboardFilters.project).slice(0, 5);
 
   setText('dash-roadmap-count', String(scopedLevels.length));
   setText('dash-roadmap-project', selectedProject ? `Focused on ${selectedProject}` : 'All project levels');
+  setText('dash-phase-status', projectPhaseState(selectedProject).current ? goalPhaseLabel(projectPhaseState(selectedProject).current) : 'No project phase selected');
   setText('dash-calendar-count', String(upcomingEvents.length));
   setText('dash-goals-count', String(goals.length));
   setText('dash-notes-count', String(scopedNotes.length));
@@ -2225,16 +2552,23 @@ function renderDashboard() {
     ? goals.slice(0, 4).map(goal => `<div>${escapeHtml(goal.title)} · ${goal.tasks.filter(task => task.done).length}/${goal.tasks.length} tasks</div>`).join('') + `<div>${openGoalTasks} open task${openGoalTasks === 1 ? '' : 's'}</div>`
     : '<div>No local goals yet.</div>');
   setHtml('dash-notes-list', scopedNotes.slice(0, 4).map(note => `<div>${escapeHtml(note.title)}</div>`).join('') || '<div>No notes in this focus.</div>');
-  setHtml('dash-milestones-list', milestones.length
-    ? milestones.map(ms => `<div><strong>${escapeHtml(ms.projectName)}</strong> · ${escapeHtml(ms.title)}</div>`).join('')
+  setHtml('dash-milestones-list', (milestones.length || priorityGoalTasks.length)
+    ? [
+        ...priorityGoalTasks.slice(0, 4).map(task => `<div><strong>Priority</strong> · ${escapeHtml(task.text)} <span class="note-meta">(${escapeHtml(task.goalTitle)})</span></div>`),
+        ...milestones.map(ms => `<div><strong>${escapeHtml(ms.projectName)}</strong> · ${escapeHtml(ms.title)}</div>`)
+      ].join('')
     : '<div>No generated milestones in this focus.</div>');
   setHtml('dash-timeline-list', timeline.length
     ? timeline.map(item => `<div>${escapeHtml(item.date)} · ${escapeHtml(item.projectName)} · ${escapeHtml(item.title)}</div>`).join('')
     : `<div>${escapeHtml(settings.userName || 'Your board')} has no timeline entries in this focus.</div>`);
   setText('dash-deploy-status', 'Ready');
   setText('dash-deploy-version', dashboardModel.generatedAt ? `Model ${formatGeneratedAt(dashboardModel.generatedAt)}` : 'Local static version');
-  setHtml('dash-deploy-list', getAiPlanningSuggestions().slice(0, 2).map(item => `<div>${escapeHtml(item)}</div>`).join(''));
+  setHtml('dash-deploy-list', [
+    dashboardModel.generatedAt ? 'dashboard-model.json loaded' : 'dashboard-model.json waiting',
+    selectedProject ? `Project context: ${selectedProject}` : 'No focused project selected',
+  ].map(item => `<div>${escapeHtml(item)}</div>`).join(''));
   renderDeploymentResult();
+  renderPhaseStatus();
 }
 
 function projectScopedLevels() {
@@ -2252,30 +2586,249 @@ function renderDeploymentResult() {
   const selectedProject = dashboardFilters.project || '';
   const notes = getVisibleNotes();
   const tasks = filteredTasks();
+  const checks = aiReadinessChecks();
   setText('deploy-version-date', dashboardModel.generatedAt ? formatGeneratedAt(dashboardModel.generatedAt) : new Date().toLocaleDateString());
   setText('deploy-selected-project', selectedProject || 'All projects');
   setText('deploy-model-status', dashboardModel.generatedAt ? 'Generated dashboard-model.json' : 'Waiting for model');
   setText('deploy-data-counts', `${notes.length} notes · ${tasks.length} active tasks`);
   setText('deploy-ai-provider', settings.aiProvider || 'Ollama');
   setText('deploy-ai-model', settings.aiModel || 'qwen');
-  setText('deploy-ai-mode', settings.aiEnabled ? 'Ready for local worker' : 'Disabled in menu');
-  setHtml('deploy-ai-suggestions', getAiPlanningSuggestions().map(item => `
+  setStatusText('deploy-ai-enabled', checks.enabled ? 'On' : 'Off', checks.enabled);
+  setStatusText('deploy-ai-endpoint', checks.endpoint ? 'Configured' : 'Missing', checks.endpoint);
+  setStatusText('deploy-ai-model-ready', checks.model ? 'Loaded' : 'Missing', checks.model);
+  setStatusText('deploy-ai-context', checks.project ? selectedProject : 'Select project', checks.project);
+  setText('deploy-ai-connection', aiConnectionStatus);
+  setHtml('deploy-ai-suggestions', getAiPlanningSuggestions().slice(0, 4).map(item => `
     <div class="agent-suggestion">${escapeHtml(item)}</div>
   `).join(''));
+  renderPhaseStatus();
 }
 
 function getAiPlanningSuggestions() {
-  const selectedProject = dashboardFilters.project || '';
-  const notes = getVisibleNotes();
-  const tasks = filteredTasks();
-  const milestones = (generatedMilestones || []).filter(ms => !selectedProject || ms.projectName === selectedProject);
-  const suggestions = [];
-  if (selectedProject) suggestions.push(`Focus next planning pass on ${selectedProject}: ${notes.length} notes, ${tasks.length} proposed tasks, ${milestones.length} milestones.`);
-  else suggestions.push(`Pick one active project filter before asking Qwen for sequencing; all-project context is broad with ${notes.length} notes.`);
-  if (tasks.length) suggestions.push(`Ask Ollama/Qwen to cluster ${tasks.length} tasks into now/next/later and flag blockers before scheduling.`);
-  if (milestones.length) suggestions.push(`Use milestone date ranges as the planning spine, then let the agent suggest calendar deployments.`);
-  suggestions.push('Future local worker: send dashboard-model.json plus selected localStorage preferences to Ollama at the configured endpoint.');
-  return suggestions;
+  const suggestion = currentAiSuggestion();
+  if (suggestion) return suggestion.actionPrompts || [];
+  return aiSuggestions.global?.actionPrompts || ['Generate AI suggestions after dashboard-model.json is available.'];
+}
+
+function currentAiSuggestion(projectName = dashboardFilters.project || aiBotState.project || '') {
+  if (projectName) return (aiSuggestions.projects || []).find(item => item.projectName === projectName);
+  return (aiSuggestions.projects || [])[0] || null;
+}
+
+function aiReadinessChecks() {
+  const settings = loadDashboardSettings();
+  return {
+    enabled: !!settings.aiEnabled,
+    endpoint: !!String(settings.aiEndpoint || '').trim(),
+    model: !!dashboardModel.generatedAt,
+    project: !!(dashboardFilters.project || aiBotState.project),
+  };
+}
+
+function setStatusText(id, text, ok) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.textContent = text;
+  el.classList.toggle('ai-status-ok', !!ok);
+  el.classList.toggle('ai-status-warn', !ok);
+}
+
+function renderAiAssistant() {
+  const settings = loadDashboardSettings();
+  const selectedProject = dashboardFilters.project || aiBotState.project || '';
+  const suggestion = currentAiSuggestion(selectedProject);
+  const checks = aiReadinessChecks();
+  setText('ai-provider-status', settings.aiProvider || 'Ollama');
+  setText('ai-model-status', settings.aiModel || 'qwen');
+  setText('ai-endpoint-status', settings.aiEndpoint || 'Not configured');
+  setText('ai-mode-status', checks.enabled ? 'Local Ollama ready on click' : 'Deterministic fallback');
+  setText('ai-selected-project', selectedProject || 'All projects');
+  setHtml('ai-prompt-ideas', renderAiList(suggestion?.actionPrompts || aiSuggestions.global?.actionPrompts || [], 'Prompt'));
+  setHtml('ai-task-suggestions', renderAiList(suggestion?.nextActions || [], 'Next action'));
+  setHtml('ai-decision-panel', renderAiList([suggestion?.decisionPrompt].filter(Boolean), 'Decision prompt'));
+  setHtml('ai-summary-panel', renderAiList([suggestion?.summaryPrompt, suggestion?.obsidianNotePrompt].filter(Boolean), 'Summary'));
+}
+
+function renderAiList(items, label) {
+  return items.length
+    ? items.map((item, index) => `<div class="ai-cardlet"><strong>${escapeHtml(label)} ${index + 1}</strong>${escapeHtml(item)}</div>`).join('')
+    : '<div class="notes-empty">No suggestions generated for this focus yet.</div>';
+}
+
+function populateAiBotProjectSelect() {
+  const select = document.getElementById('ai-bot-project');
+  if (!select) return;
+  const projects = dashboardModel.projects?.map(project => project.projectName).sort() || [];
+  select.innerHTML = '<option value="">All projects</option>' + projects.map(project => `<option value="${escapeHtml(project)}">${escapeHtml(project)}</option>`).join('');
+  select.value = aiBotState.project || dashboardFilters.project || '';
+}
+
+function renderAiBot() {
+  const panel = document.getElementById('ai-bot-panel');
+  if (panel) panel.classList.toggle('open', !!aiBotState.open);
+  populateAiBotProjectSelect();
+  const suggestion = currentAiSuggestion(aiBotState.project || dashboardFilters.project || '');
+  setHtml('ai-bot-prompts', renderAiList((suggestion?.actionPrompts || []).slice(0, 3), 'Idea'));
+}
+
+function saveAiBotState() {
+  localStorage.setItem('aiBotState', JSON.stringify(aiBotState));
+}
+
+function toggleAiBot() {
+  aiBotState.open = !aiBotState.open;
+  if (!aiBotState.project && dashboardFilters.project) aiBotState.project = dashboardFilters.project;
+  saveAiBotState();
+  renderAiBot();
+}
+
+function openAiBot() {
+  aiBotState.open = true;
+  if (!aiBotState.project && dashboardFilters.project) aiBotState.project = dashboardFilters.project;
+  saveAiBotState();
+  renderAiBot();
+}
+
+function closeAiBot() {
+  aiBotState.open = false;
+  saveAiBotState();
+  renderAiBot();
+}
+
+function setAiBotProject(projectName) {
+  aiBotState.project = projectName || '';
+  if (projectName) setSelectedProject(projectName);
+  saveAiBotState();
+  renderAiAssistant();
+  renderAiBot();
+}
+
+async function testAiConnection() {
+  const settings = loadDashboardSettings();
+  const endpoint = String(settings.aiEndpoint || '').replace(/\/$/, '');
+  if (!settings.aiEnabled) {
+    aiConnectionStatus = 'Disabled in settings';
+    setText('deploy-ai-output', 'Enable local AI suggestions in Menu > AI before testing Ollama.');
+    setText('ai-action-output', 'Enable local AI suggestions in Menu > AI before testing Ollama.');
+    renderDeploymentResult();
+    renderAiAssistant();
+    return false;
+  }
+  if (!endpoint) {
+    aiConnectionStatus = 'Missing endpoint';
+    renderDeploymentResult();
+    renderAiAssistant();
+    return false;
+  }
+  try {
+    const response = await fetch(`${endpoint}/api/tags`, { method: 'GET' });
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    aiConnectionStatus = 'Connected';
+    setText('deploy-ai-output', `Connected to ${endpoint}.`);
+    setText('ai-action-output', `Connected to ${endpoint}.`);
+    renderDeploymentResult();
+    renderAiAssistant();
+    return true;
+  } catch (err) {
+    aiConnectionStatus = 'Fallback active';
+    const message = `Ollama unavailable: ${err.message}. Using deterministic suggestions.`;
+    setText('deploy-ai-output', message);
+    setText('ai-action-output', message);
+    renderDeploymentResult();
+    renderAiAssistant();
+    return false;
+  }
+}
+
+function runAiAction(action) {
+  const suggestion = currentAiSuggestion(aiBotState.project || dashboardFilters.project || '');
+  const fallback = {
+    roadmap: suggestion?.nextActions?.[0] || 'Select a project and choose the next roadmap level to unlock.',
+    prompts: (suggestion?.actionPrompts || []).join('\n\n') || 'No prompt ideas generated yet.',
+    tasks: (suggestion?.nextActions || []).join('\n') || 'No suggested tasks generated yet.',
+    summary: suggestion?.summaryPrompt || 'Select a project to summarize.',
+    blockers: (suggestion?.blockers || []).join('\n') || 'No blockers detected.',
+    obsidian: suggestion?.obsidianNotePrompt || 'Select a project to generate an Obsidian note prompt.',
+  }[action] || 'Choose an assistant action.';
+  const output = `Deterministic ${action} suggestion:\n${fallback}`;
+  setText('deploy-ai-output', output);
+  setText('ai-action-output', output);
+  setText('ai-bot-output', output);
+  renderAiAssistant();
+  renderAiBot();
+}
+
+function selectedProjectName() {
+  return dashboardFilters.project || '';
+}
+
+function selectedProjectGoals() {
+  const project = selectedProjectName();
+  return (state.goals || []).filter(goal => !project || goal.projectName === project);
+}
+
+function projectPhaseState(project = selectedProjectName()) {
+  const checked = project ? Object.keys(projectPhaseChecks[project] || {}).filter(key => projectPhaseChecks[project][key]) : [];
+  const goalPhases = (state.goals || [])
+    .filter(goal => !project || goal.projectName === project)
+    .map(goal => goal.category)
+    .filter(Boolean);
+  const phases = [...new Set([...checked, ...goalPhases])];
+  const ordered = Object.keys(GOAL_PHASES);
+  const current = phases.sort((a, b) => ordered.indexOf(a) - ordered.indexOf(b)).at(-1) || null;
+  return { current, checkedCount: checked.length, goalCount: goalPhases.length };
+}
+
+function renderPhaseStatus() {
+  const project = selectedProjectName();
+  const status = projectPhaseState(project);
+  const label = status.current ? goalPhaseLabel(status.current) : 'No phase selected';
+  setText('project-phase-status', project ? `${project}: ${label}` : `All projects: ${label}`);
+  setText('project-phase-detail', `${status.checkedCount} checked phase rows · ${status.goalCount} goal phase classifications`);
+  setText('deploy-phase-status', label);
+  setText('calendar-phase-status', project ? `${project} · ${label}` : label);
+  setText('roadmap-phase-status', label);
+}
+
+function renderPhaseTable() {
+  const project = selectedProjectName();
+  const table = document.getElementById('phase-table');
+  if (!table) return;
+  setText('phase-config-project', project ? `Checking phase rows for ${project}` : 'Select a project to store phase checks for a specific project.');
+  const checks = project ? (projectPhaseChecks[project] || {}) : {};
+  table.innerHTML = Object.entries(GOAL_PHASES).map(([key, phase]) => `
+    <label class="phase-row">
+      <input type="checkbox" ${checks[key] ? 'checked' : ''} ${project ? '' : 'disabled'} onchange="toggleProjectPhase('${jsString(key)}', this.checked)" />
+      <span>
+        <span class="phase-cell-title" style="color:${phase.color};">${escapeHtml(phase.range)} ${escapeHtml(phase.label)}</span>
+        <span class="phase-cell-meta">${escapeHtml(phase.action)}</span>
+      </span>
+      <span class="phase-cell-meta">${escapeHtml(phase.tools)}</span>
+      <span class="phase-cell-meta">${checks[key] ? 'Checked' : 'Open'}</span>
+    </label>
+  `).join('');
+}
+
+function toggleProjectPhase(phaseKey, checked) {
+  const project = selectedProjectName();
+  if (!project) return;
+  if (!projectPhaseChecks[project]) projectPhaseChecks[project] = {};
+  projectPhaseChecks[project][phaseKey] = checked;
+  saveProjectPhaseChecks();
+  renderPhaseStatus();
+  renderPhaseTable();
+  renderDashboard();
+  renderDeploymentResult();
+}
+
+function clearProjectPhaseChecks() {
+  const project = selectedProjectName();
+  if (!project) return;
+  projectPhaseChecks[project] = {};
+  saveProjectPhaseChecks();
+  renderPhaseStatus();
+  renderPhaseTable();
+  renderDashboard();
 }
 
 function openInfoModal(type) {
@@ -3102,6 +3655,7 @@ function calNav(dir) {
 }
 
 function renderCalendar() {
+  renderPhaseStatus();
   const MONTHS = ['January','February','March','April','May','June',
                   'July','August','September','October','November','December'];
   const DAYS   = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
@@ -3201,7 +3755,14 @@ function renderDayPanel() {
   }
 
   events.forEach(ev => {
-    const CAT_COLORS = { work:'#6366f1', personal:'#22c55e', goal:'#f59e0b', health:'#38bdf8', travel:'#e879f9' };
+    const CAT_COLORS = {
+      work:'#6366f1',
+      personal:'#22c55e',
+      goal:'#f59e0b',
+      health:'#38bdf8',
+      travel:'#e879f9',
+      ...Object.fromEntries(Object.entries(GOAL_PHASES).map(([key, value]) => [key, value.color])),
+    };
     const item = document.createElement('div');
     item.className = 'event-item';
     item.innerHTML = `
@@ -3210,7 +3771,7 @@ function renderDayPanel() {
         <div class="event-item-title">${ev.title}</div>
         <div class="event-item-meta">
           ${ev.start ? ev.start + (ev.end ? ' – ' + ev.end : '') + ' · ' : ''}
-          <span class="badge badge-accent">${ev.category}</span>
+          <span class="badge badge-accent">${escapeHtml(goalPhaseLabel(ev.category))}</span>
         </div>
         ${ev.notes ? `<div style="font-size:.75rem;color:var(--text-muted);margin-top:4px;">${ev.notes}</div>` : ''}
       </div>
@@ -3387,6 +3948,7 @@ function deleteBlock(dateStr, id) {
 //  ROADMAP / MILESTONES
 // ═══════════════════════════════════════════════════════
 function renderRoadmap() {
+  renderPhaseStatus();
   const container = document.getElementById('roadmap-container');
   container.innerHTML = '';
 
@@ -3500,9 +4062,12 @@ function renderGoals() {
   const grid   = document.getElementById('goals-grid');
   grid.innerHTML = '';
 
-  const goals = filter
-    ? state.goals.filter(g => g.month === filter)
-    : state.goals;
+  const project = selectedProjectName();
+  const goals = (state.goals || []).filter(goal => {
+    if (filter && goal.month !== filter) return false;
+    if (project && goal.projectName !== project) return false;
+    return true;
+  });
 
   if (goals.length === 0) {
     grid.innerHTML = `<p style="color:var(--text-muted);font-size:.85rem;">No goals yet. Click "+ Goal" to add one.</p>`;
@@ -3517,15 +4082,15 @@ function renderGoals() {
     const card = document.createElement('div');
     card.className = 'goal-card';
 
-    const CAT_COLORS = { work:'#6366f1', personal:'#22c55e', health:'#38bdf8', travel:'#e879f9', learning:'#f59e0b', finance:'#fb7185' };
-    const color = CAT_COLORS[goal.category] || '#888';
+    const color = goalPhaseColor(goal.category);
+    const phaseLabel = goalPhaseLabel(goal.category);
 
     card.innerHTML = `
       <div class="goal-title">
         <span style="border-left:3px solid ${color};padding-left:8px;">${goal.title}</span>
         <button class="task-delete" onclick="deleteGoal('${goal.id}')">✕</button>
       </div>
-      ${goal.month ? `<div style="font-size:.72rem;color:var(--text-muted);margin-bottom:6px;">📅 ${goal.month}</div>` : ''}
+      <div style="font-size:.72rem;color:var(--text-muted);margin-bottom:6px;">${goal.month ? `📅 ${goal.month} · ` : ''}${escapeHtml(goal.projectName || 'No project')} · ${escapeHtml(phaseLabel)}</div>
       ${goal.desc  ? `<div class="goal-desc">${goal.desc}</div>` : ''}
       <div class="progress-bar"><div class="progress-bar-fill" style="width:${pct}%;background:${color};"></div></div>
       <div class="progress-label">${done}/${total} tasks · ${pct}%</div>
@@ -3557,12 +4122,13 @@ function renderTaskList(goal) {
   const container = document.getElementById('tasks-' + goal.id);
   if (!container) return;
   container.innerHTML = '';
-  goal.tasks.forEach(task => {
+  goal.tasks.slice().sort((a, b) => Number(!!b.priority) - Number(!!a.priority)).forEach(task => {
     const item = document.createElement('div');
-    item.className = 'task-item' + (task.done ? ' done' : '');
+    item.className = 'task-item' + (task.done ? ' done' : '') + (task.priority ? ' priority-task' : '');
     item.innerHTML = `
       <input type="checkbox" ${task.done ? 'checked' : ''} onchange="toggleTask('${goal.id}','${task.id}',this.checked)" />
-      <span>${task.text}</span>
+      <button class="task-delete" title="Toggle priority" onclick="toggleTaskPriority('${goal.id}','${task.id}')">${task.priority ? '★' : '☆'}</button>
+      <span>${escapeHtml(task.text)}</span>
       <button class="task-delete" onclick="deleteTask('${goal.id}','${task.id}')">✕</button>`;
     container.appendChild(item);
   });
@@ -3586,8 +4152,13 @@ function saveGoal() {
     title,
     month:    document.getElementById('goal-month').value,
     category: document.getElementById('goal-cat').value,
+    projectName: dashboardFilters.project || '',
     desc:     document.getElementById('goal-desc').value.trim(),
-    tasks:    rawTasks.map(t => ({ id: uid(), text: t.trim(), done: false })),
+    tasks:    rawTasks.map(t => {
+      const text = t.trim();
+      const priority = text.startsWith('!') || text.startsWith('*');
+      return { id: uid(), text: priority ? text.slice(1).trim() : text, done: false, priority };
+    }),
   };
   state.goals.push(goal);
   connectGoalToCalendar(goal);
@@ -3624,12 +4195,24 @@ function addTask(goalId) {
   if (!text) return;
   const goal = state.goals.find(g => g.id === goalId);
   if (!goal) return;
-  const task = { id: uid(), text, done: false };
+  const priority = text.startsWith('!') || text.startsWith('*');
+  const task = { id: uid(), text: priority ? text.slice(1).trim() : text, done: false, priority };
   goal.tasks.push(task);
   connectTaskDeploymentToCalendar(goal, task);
   saveState();
   renderGoals();
   renderCalendar();
+  renderDashboard();
+}
+
+function toggleTaskPriority(goalId, taskId) {
+  const goal = state.goals.find(g => g.id === goalId);
+  if (!goal) return;
+  const task = goal.tasks.find(t => t.id === taskId);
+  if (!task) return;
+  task.priority = !task.priority;
+  saveState();
+  renderGoals();
   renderDashboard();
 }
 
@@ -3862,7 +4445,10 @@ function formatDate(dateStr) {
   applyDashboardSettings();
   initScheduleDate();
   renderCalendar();
+  renderPhaseStatus();
+  renderPhaseTable();
   loadDashboardModel();
+  loadAiSuggestions();
   loadNotesIndex();
   loadRoadmapItems();
   loadRoadmapLevels();

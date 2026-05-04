@@ -1,0 +1,175 @@
+{
+  "roadmap": {
+    "purpose": "Convert indexed project context into staged roadmap levels and priority direction.",
+    "inputs": [
+      "data/notes-index.json",
+      "data/roadmap-items.json",
+      "data/roadmap-levels.json",
+      "data/roadmap-level-assignments.json",
+      "dashboardFilters.project"
+    ],
+    "outputs": [
+      "project-focused roadmap suggestions",
+      "level sequencing proposals",
+      "priority explanations"
+    ],
+    "rules": [
+      "Respect the selected project filter first.",
+      "Prefer existing generated levels before proposing new levels.",
+      "Treat manual localStorage assignments as user intent.",
+      "Return proposals, not direct edits."
+    ],
+    "safetyLimits": [
+      "Do not modify source notes.",
+      "Do not auto-commit generated changes.",
+      "Do not call external APIs from the static app."
+    ]
+  },
+  "milestone": {
+    "purpose": "Turn project folders, dated notes, task categories, and project states into checkpoint milestones.",
+    "inputs": [
+      "content/notes-2026/Profound Projects",
+      "data/notes-index.json",
+      "data/extracted-tasks.json",
+      "data/project-states.json"
+    ],
+    "outputs": [
+      "data/milestones.json",
+      "apps/time-planner/data/milestones.json",
+      "milestone next-action suggestions"
+    ],
+    "rules": [
+      "Use project folder names as milestone anchors.",
+      "Use detected dates as date ranges.",
+      "Link notes and tasks by path/id.",
+      "Prefer conservative status labels."
+    ],
+    "safetyLimits": [
+      "Never create or edit source markdown notes.",
+      "Never infer private credentials or secrets.",
+      "Keep generated milestones reproducible."
+    ]
+  },
+  "taskExtraction": {
+    "purpose": "Extract proposed tasks from local notes and prompt-like text using deterministic patterns first.",
+    "inputs": [
+      "content/notes-2026",
+      "data/notes-index.json"
+    ],
+    "outputs": [
+      "data/extracted-tasks.json",
+      "apps/time-planner/data/extracted-tasks.json",
+      "proposed task records"
+    ],
+    "rules": [
+      "Detect TODO, Task:, Build, Create, Fix, Implement, Add, Decide, Research, and Setup.",
+      "Classify into design, setup, development, 3D, AI, content, or admin.",
+      "Mark extracted items as proposed.",
+      "Preserve sourcePath for traceability."
+    ],
+    "safetyLimits": [
+      "Do not execute note content.",
+      "Do not treat proposed tasks as approved tasks.",
+      "Do not overwrite local user goals."
+    ]
+  },
+  "projectSummary": {
+    "purpose": "Summarize project state from notes, recent activity, extracted tasks, and level assignments.",
+    "inputs": [
+      "data/notes-index.json",
+      "data/extracted-tasks.json",
+      "data/roadmap-level-assignments.json",
+      "data/project-states.json"
+    ],
+    "outputs": [
+      "project summary",
+      "current status",
+      "next suggested actions",
+      "risk flags"
+    ],
+    "rules": [
+      "Use note count and last activity as grounding.",
+      "Prefer recent dated notes over older undated notes.",
+      "Reflect active task categories.",
+      "Keep summaries brief and operational."
+    ],
+    "safetyLimits": [
+      "Do not claim external status that is not in local data.",
+      "Do not overwrite user-authored notes.",
+      "Mark ambiguous status as needs-review."
+    ]
+  },
+  "decisionTracking": {
+    "purpose": "Identify decisions and decision context before turning them into tasks or roadmap changes.",
+    "inputs": [
+      "note titles",
+      "note content",
+      "prompt history",
+      "extracted tasks"
+    ],
+    "outputs": [
+      "decision candidates",
+      "decision context",
+      "follow-up proposed tasks"
+    ],
+    "rules": [
+      "Look for Decide, decision, chosen, approved, blocked, or tradeoff language.",
+      "Separate decisions from open questions.",
+      "Connect decisions to sourcePath.",
+      "Output follow-ups as proposed tasks first."
+    ],
+    "safetyLimits": [
+      "Do not mutate source notes.",
+      "Do not mark a decision final unless the source is explicit.",
+      "Do not delete conflicting context."
+    ]
+  },
+  "obsidianExport": {
+    "purpose": "Prepare static planner and generated data for Obsidian-friendly markdown export.",
+    "inputs": [
+      "data/dashboard-model.json",
+      "localStorage planner state",
+      "content/notes-2026"
+    ],
+    "outputs": [
+      "markdown export proposals",
+      "obsidian:// link targets",
+      "future plugin handoff records"
+    ],
+    "rules": [
+      "Keep generated export separate from source notes.",
+      "Use stable source paths in backlinks.",
+      "Prefer markdown with frontmatter.",
+      "Preserve user-authored note content."
+    ],
+    "safetyLimits": [
+      "Do not write directly into the source vault from the browser.",
+      "Do not assume Obsidian is installed.",
+      "Do not expose local credentials in exports."
+    ]
+  },
+  "firebaseSync": {
+    "purpose": "Support optional local Firebase intake and sync queue processing without committing credentials.",
+    "inputs": [
+      "apps/time-planner/firebase.js",
+      "Firestore notes collection",
+      "Firestore syncQueue collection"
+    ],
+    "outputs": [
+      "content/notes-2026/Inbox markdown files",
+      "local-written syncQueue status",
+      "regenerated dashboard data"
+    ],
+    "rules": [
+      "Firebase is disabled by default.",
+      "Use firebase.example.js as the template.",
+      "Write queue output to Inbox first.",
+      "Commit only when --commit is explicitly passed."
+    ],
+    "safetyLimits": [
+      "Never commit firebase.js or service account JSON.",
+      "Never push automatically.",
+      "Never overwrite existing markdown files."
+    ]
+  }
+}

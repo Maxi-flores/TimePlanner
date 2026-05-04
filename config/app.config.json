@@ -1,0 +1,13 @@
+{
+  "appName": "Time Planner",
+  "appMode": "local-first",
+  "dataSource": "apps/time-planner/data/dashboard-model.json",
+  "notesSource": "content/notes-2026",
+  "firebaseEnabled": false,
+  "aiEnabled": false,
+  "aiProvider": "ollama",
+  "aiModel": "qwen",
+  "aiEndpoint": "http://localhost:11434",
+  "syncMode": "manual",
+  "obsidianMode": "export-ready"
+}
