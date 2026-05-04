@@ -5,3 +5,5 @@ dist
 build
 .env*
 apps/time-planner/firebase.js
+firebase-service-account*.json
+service-account*.json
