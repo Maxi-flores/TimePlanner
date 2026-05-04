@@ -23,3 +23,23 @@ node scripts/index-notes.js
 ```
 
 The script reads note-like text files from `content/notes-2026` and writes `data/notes-index.json`. It does not modify note files. The index is intended as the first bridge for the planner app to display notes by month, exact date, and project.
+
+For the static planner, the same generated index is copied to `apps/time-planner/data/notes-index.json`, where `apps/time-planner/index.html` can load it with a relative `data/notes-index.json` request.
+
+Generate the roadmap orchestration data after regenerating the notes index:
+
+```bash
+node scripts/index-notes.js
+node scripts/generate-roadmap.js
+```
+
+The roadmap generator reads `data/notes-index.json` and writes `data/roadmap-items.json` plus `apps/time-planner/data/roadmap-items.json` for the static dashboard.
+
+Test the static app locally from the app folder:
+
+```bash
+cd apps/time-planner
+python -m http.server 4173
+```
+
+Then open `http://localhost:4173`.

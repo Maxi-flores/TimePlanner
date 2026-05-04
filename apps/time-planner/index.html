@@ -47,6 +47,7 @@
     .tabs {
       display: flex;
       gap: 4px;
+      flex-wrap: wrap;
     }
     .tab-btn {
       background: none;
@@ -291,6 +292,88 @@
       border-radius: 4px; padding: 2px 6px; font-size: .7rem;
     }
     .ms-btn:hover { color: var(--text); }
+    .orchestrator-section { margin-top: 22px; }
+    .orchestrator-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+    .orchestrator-header h2 { font-size: 1.1rem; font-weight: 700; margin-bottom: 4px; }
+    .orchestrator-header p { color: var(--text-muted); font-size: .82rem; }
+    .orchestrator-grid {
+      display: grid;
+      grid-template-columns: minmax(280px, 1.15fr) repeat(2, minmax(240px, .9fr));
+      gap: 14px;
+      align-items: start;
+    }
+    .orchestrator-panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .orchestrator-panel h3 {
+      font-size: .78rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--border);
+      background: var(--surface2);
+    }
+    .org-tree, .priority-list, .placeholder-list { padding: 10px 14px 14px; }
+    .org-project {
+      border-bottom: 1px solid var(--border);
+      padding: 9px 0;
+    }
+    .org-project:last-child { border-bottom: none; }
+    .org-project-title {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      font-weight: 700;
+      font-size: .88rem;
+    }
+    .org-project-meta, .placeholder-item, .priority-reason {
+      color: var(--text-muted);
+      font-size: .72rem;
+      margin-top: 3px;
+    }
+    .org-note {
+      margin: 6px 0 0 12px;
+      padding-left: 10px;
+      border-left: 1px solid var(--border);
+      font-size: .78rem;
+      color: var(--text);
+      overflow-wrap: anywhere;
+    }
+    .priority-item {
+      display: grid;
+      grid-template-columns: 44px 1fr;
+      gap: 10px;
+      padding: 9px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .priority-item:last-child { border-bottom: none; }
+    .priority-score {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      text-align: center;
+      padding: 5px 0;
+      font-weight: 700;
+      color: var(--accent2);
+    }
+    .priority-title { font-size: .84rem; font-weight: 700; }
+    .placeholder-item {
+      padding: 9px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .placeholder-item:last-child { border-bottom: none; }
+    .placeholder-title { color: var(--text); font-size: .84rem; font-weight: 700; }
 
     /* ─── DAILY SCHEDULE ─────────────────────────────────── */
     .schedule-header {
@@ -451,6 +534,81 @@
     .modal h3 { font-size: 1rem; font-weight: 700; margin-bottom: 16px; }
     .modal-footer { display: flex; gap: 8px; justify-content: flex-end; margin-top: 16px; }
 
+    /* ─── NOTES INDEX ───────────────────────────────────── */
+    .notes-toolbar {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+    .notes-toolbar h2 { font-size: 1.1rem; font-weight: 700; margin-bottom: 4px; }
+    .notes-toolbar p { color: var(--text-muted); font-size: .82rem; }
+    .notes-filter { width: min(320px, 100%); }
+    .notes-summary {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .notes-stat {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 12px 14px;
+    }
+    .notes-stat .value { font-size: 1.35rem; font-weight: 700; }
+    .notes-stat .label { color: var(--text-muted); font-size: .72rem; text-transform: uppercase; letter-spacing: .08em; margin-top: 2px; }
+    .notes-layout {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      align-items: start;
+    }
+    .notes-column {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .notes-column h3 {
+      font-size: .78rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--border);
+      background: var(--surface2);
+    }
+    .notes-group { border-bottom: 1px solid var(--border); }
+    .notes-group:last-child { border-bottom: none; }
+    .notes-group-title {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 10px 14px 4px;
+      font-weight: 700;
+      font-size: .88rem;
+    }
+    .notes-count { color: var(--text-muted); font-size: .75rem; font-weight: 500; }
+    .note-link {
+      display: block;
+      padding: 7px 14px;
+      color: var(--text);
+      text-decoration: none;
+      font-size: .82rem;
+      border-top: 1px solid rgba(148, 163, 184, .12);
+      overflow-wrap: anywhere;
+    }
+    .note-link:hover { background: var(--surface2); }
+    .note-meta { display: block; color: var(--text-muted); font-size: .7rem; margin-top: 2px; }
+    .notes-empty {
+      padding: 18px 14px;
+      color: var(--text-muted);
+      font-size: .82rem;
+    }
+
     /* ─── Print ──────────────────────────────────────────── */
     @media print {
       header, .tabs, .btn, .day-panel, .overlay { display: none !important; }
@@ -466,6 +624,8 @@
       .cal-cell { min-height: 56px; }
       .roadmap-container { flex-direction: column; }
       .day-panel { width: 100%; }
+      .notes-summary, .notes-layout { grid-template-columns: 1fr; }
+      .orchestrator-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -477,6 +637,7 @@
     <button class="tab-btn active" onclick="switchTab('calendar', this)">📅 Calendar</button>
     <button class="tab-btn" onclick="switchTab('schedule', this)">🕐 Daily Schedule</button>
     <button class="tab-btn" onclick="switchTab('roadmap', this)">🗺 Roadmap</button>
+    <button class="tab-btn" onclick="switchTab('notes', this)">Notes</button>
     <button class="tab-btn" onclick="switchTab('goals', this)">🎯 Goals</button>
     <button class="tab-btn" onclick="switchTab('calculator', this)">🧮 Calculator</button>
   </div>
@@ -531,6 +692,73 @@
       <button class="btn btn-primary" onclick="openAddMilestoneModal()">+ Milestone</button>
     </div>
     <div class="roadmap-container" id="roadmap-container"></div>
+    <div class="orchestrator-section">
+      <div class="orchestrator-header">
+        <div>
+          <h2>Roadmap Orchestrator</h2>
+          <p id="roadmap-generated">Loading generated roadmap items...</p>
+        </div>
+        <span class="badge badge-accent" id="roadmap-project-total">0 projects</span>
+      </div>
+      <div class="orchestrator-grid">
+        <div class="orchestrator-panel">
+          <h3>Project Organogram</h3>
+          <div class="org-tree" id="roadmap-org-tree"></div>
+        </div>
+        <div class="orchestrator-panel">
+          <h3>Priority Engine</h3>
+          <div class="priority-list" id="roadmap-priority-list"></div>
+        </div>
+        <div class="orchestrator-panel">
+          <h3>Prompts &amp; Changes</h3>
+          <div class="placeholder-list" id="roadmap-placeholder-list"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════ NOTES VIEW ══════════════ -->
+  <div id="view-notes" class="view">
+    <div class="notes-toolbar">
+      <div>
+        <h2>Notes Index</h2>
+        <p id="notes-generated">Loading generated notes index...</p>
+      </div>
+      <div class="notes-filter">
+        <label for="notes-project-filter">Filter by project</label>
+        <select id="notes-project-filter" onchange="renderNotesIndex()">
+          <option value="">All projects and month notes</option>
+        </select>
+      </div>
+    </div>
+    <div class="notes-summary">
+      <div class="notes-stat">
+        <div class="value" id="notes-total-count">0</div>
+        <div class="label">Visible notes</div>
+      </div>
+      <div class="notes-stat">
+        <div class="value" id="notes-project-count">0</div>
+        <div class="label">Projects</div>
+      </div>
+      <div class="notes-stat">
+        <div class="value" id="notes-dated-count">0</div>
+        <div class="label">Dated notes</div>
+      </div>
+    </div>
+    <div class="notes-layout">
+      <div class="notes-column">
+        <h3>By Project</h3>
+        <div id="notes-by-project"></div>
+      </div>
+      <div class="notes-column">
+        <h3>By Month</h3>
+        <div id="notes-by-month"></div>
+      </div>
+      <div class="notes-column">
+        <h3>By Date</h3>
+        <div id="notes-by-date"></div>
+      </div>
+    </div>
   </div>
 
   <!-- ══════════════ GOALS VIEW ══════════════ -->
@@ -807,6 +1035,10 @@ function saveState() {
 }
 
 let state = loadState();
+let notesIndex = { notes: [], generatedAt: null, noteCount: 0 };
+let notesIndexLoaded = false;
+let roadmapItems = { entities: { project: [], prompt: [], note: [], feature: [], task: [], milestone: [], decision: [], syncEvent: [] }, priorityList: [] };
+let roadmapItemsLoaded = false;
 
 // ═══════════════════════════════════════════════════════
 //  TAB SWITCHING
@@ -818,9 +1050,276 @@ function switchTab(name, btn) {
   btn.classList.add('active');
   if (name === 'calendar')   renderCalendar();
   if (name === 'schedule')   renderSchedule();
-  if (name === 'roadmap')    renderRoadmap();
+  if (name === 'roadmap')    { renderRoadmap(); renderRoadmapOrchestrator(); }
+  if (name === 'notes')      renderNotesIndex();
   if (name === 'goals')      renderGoals();
   if (name === 'calculator') initCalculator();
+}
+
+// ═══════════════════════════════════════════════════════
+//  NOTES INDEX
+// ═══════════════════════════════════════════════════════
+async function loadNotesIndex() {
+  try {
+    const response = await fetch('data/notes-index.json', { cache: 'no-store' });
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    notesIndex = await response.json();
+    notesIndexLoaded = true;
+    populateProjectFilter();
+    renderNotesIndex();
+  } catch (err) {
+    const generated = document.getElementById('notes-generated');
+    if (generated) {
+      generated.textContent = 'Notes index unavailable. Run node scripts/index-notes.js, then serve apps/time-planner locally.';
+    }
+  }
+}
+
+function populateProjectFilter() {
+  const select = document.getElementById('notes-project-filter');
+  if (!select) return;
+
+  const current = select.value;
+  const projects = [...new Set(notesIndex.notes.map(note => note.projectName).filter(Boolean))]
+    .sort((a, b) => a.localeCompare(b));
+
+  select.innerHTML = '<option value="">All projects and month notes</option>';
+  projects.forEach(project => {
+    const opt = document.createElement('option');
+    opt.value = project;
+    opt.textContent = project;
+    select.appendChild(opt);
+  });
+  select.value = projects.includes(current) ? current : '';
+}
+
+function renderNotesIndex() {
+  const notes = getVisibleNotes();
+  const generated = document.getElementById('notes-generated');
+  if (generated) {
+    generated.textContent = notesIndexLoaded
+      ? `Generated ${formatGeneratedAt(notesIndex.generatedAt)} from ${notesIndex.sourceRoot || 'content/notes-2026'}`
+      : 'Loading generated notes index...';
+  }
+
+  setText('notes-total-count', String(notes.length));
+  setText('notes-project-count', String(new Set(notes.map(note => note.projectName).filter(Boolean)).size));
+  setText('notes-dated-count', String(notes.filter(note => note.date).length));
+
+  renderNotesGroupList('notes-by-project', groupNotes(notes, note => note.projectName || 'Month and general notes'));
+  renderNotesGroupList('notes-by-month', groupNotes(notes, note => note.monthFolder || monthLabelFromDate(note.date) || 'No month'));
+  renderNotesGroupList('notes-by-date', groupNotes(notes.filter(note => note.date), note => note.date), { sortDescending: true });
+}
+
+function getVisibleNotes() {
+  const selectedProject = document.getElementById('notes-project-filter')?.value || '';
+  if (!selectedProject) return notesIndex.notes || [];
+  return (notesIndex.notes || []).filter(note => note.projectName === selectedProject);
+}
+
+function groupNotes(notes, getKey) {
+  return notes.reduce((groups, note) => {
+    const key = getKey(note);
+    if (!groups.has(key)) groups.set(key, []);
+    groups.get(key).push(note);
+    return groups;
+  }, new Map());
+}
+
+function renderNotesGroupList(id, groups, options = {}) {
+  const container = document.getElementById(id);
+  if (!container) return;
+
+  if (!groups.size) {
+    container.innerHTML = '<div class="notes-empty">No notes found.</div>';
+    return;
+  }
+
+  const keys = [...groups.keys()].sort((a, b) => {
+    return options.sortDescending ? b.localeCompare(a) : a.localeCompare(b);
+  });
+
+  container.innerHTML = keys.map(key => {
+    const notes = groups.get(key).slice().sort((a, b) => {
+      return (a.date || a.title).localeCompare(b.date || b.title);
+    });
+    return `
+      <div class="notes-group">
+        <div class="notes-group-title">
+          <span>${escapeHtml(formatGroupTitle(key))}</span>
+          <span class="notes-count">${notes.length}</span>
+        </div>
+        ${notes.map(renderNoteItem).join('')}
+      </div>`;
+  }).join('');
+}
+
+function renderNoteItem(note) {
+  const meta = [
+    note.date ? formatDate(note.date) : null,
+    note.projectName,
+    note.monthFolder,
+  ].filter(Boolean).join(' · ');
+
+  return `
+    <div class="note-link" title="${escapeHtml(note.sourcePath)}">
+      ${escapeHtml(note.title)}
+      <span class="note-meta">${escapeHtml(meta || note.sourcePath)}</span>
+    </div>`;
+}
+
+function monthLabelFromDate(dateStr) {
+  if (!dateStr) return null;
+  const d = new Date(`${dateStr}T00:00:00`);
+  return d.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+}
+
+function formatGroupTitle(value) {
+  if (/^\d{4}-\d{2}-\d{2}$/.test(value)) {
+    return formatDate(value);
+  }
+  return value;
+}
+
+function formatGeneratedAt(value) {
+  if (!value) return 'from the local index';
+  return new Date(value).toLocaleString('en-US', {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+  });
+}
+
+function setText(id, value) {
+  const el = document.getElementById(id);
+  if (el) el.textContent = value;
+}
+
+function escapeHtml(value) {
+  return String(value ?? '').replace(/[&<>"']/g, char => ({
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#039;',
+  }[char]));
+}
+
+// ═══════════════════════════════════════════════════════
+//  ROADMAP ORCHESTRATOR DATA
+// ═══════════════════════════════════════════════════════
+async function loadRoadmapItems() {
+  try {
+    const response = await fetch('data/roadmap-items.json', { cache: 'no-store' });
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    roadmapItems = await response.json();
+    roadmapItemsLoaded = true;
+    renderRoadmapOrchestrator();
+  } catch (err) {
+    const generated = document.getElementById('roadmap-generated');
+    if (generated) {
+      generated.textContent = 'Roadmap items unavailable. Run node scripts/generate-roadmap.js after indexing notes.';
+    }
+  }
+}
+
+function renderRoadmapOrchestrator() {
+  const projects = roadmapItems.entities?.project || [];
+  const notes = roadmapItems.entities?.note || [];
+  const prompts = roadmapItems.entities?.prompt || [];
+  const features = roadmapItems.entities?.feature || [];
+  const syncEvents = roadmapItems.entities?.syncEvent || [];
+  const priorities = roadmapItems.priorityList || [];
+
+  setText('roadmap-project-total', `${projects.length} projects`);
+  const generated = document.getElementById('roadmap-generated');
+  if (generated) {
+    generated.textContent = roadmapItemsLoaded
+      ? `Generated ${formatGeneratedAt(roadmapItems.generatedAt)} from ${roadmapItems.source?.notesIndexPath || 'data/notes-index.json'}`
+      : 'Loading generated roadmap items...';
+  }
+
+  renderProjectOrganogram(projects, notes);
+  renderPriorityList(priorities);
+  renderPromptAndChangePlaceholders(prompts, features, syncEvents);
+}
+
+function renderProjectOrganogram(projects, notes) {
+  const container = document.getElementById('roadmap-org-tree');
+  if (!container) return;
+
+  if (!projects.length) {
+    container.innerHTML = '<div class="notes-empty">No generated projects yet.</div>';
+    return;
+  }
+
+  const notesById = new Map(notes.map(note => [note.id, note]));
+  container.innerHTML = projects
+    .slice()
+    .sort((a, b) => (b.priorityScore || 0) - (a.priorityScore || 0))
+    .map(project => {
+      const childNotes = (project.noteIds || []).map(id => notesById.get(id)).filter(Boolean).slice(0, 4);
+      return `
+        <div class="org-project">
+          <div class="org-project-title">
+            <span>${escapeHtml(project.name || project.title)}</span>
+            <span class="notes-count">${Math.round(project.priorityScore || 0)}</span>
+          </div>
+          <div class="org-project-meta">${project.metadata?.noteCount || 0} notes · ${project.metadata?.datedNoteCount || 0} dated · ${escapeHtml(project.metadata?.latestDate || 'no date')}</div>
+          ${childNotes.map(note => `
+            <div class="org-note">${escapeHtml(note.title)}${note.date ? ` · ${escapeHtml(note.date)}` : ''}</div>
+          `).join('')}
+        </div>`;
+    }).join('');
+}
+
+function renderPriorityList(priorities) {
+  const container = document.getElementById('roadmap-priority-list');
+  if (!container) return;
+
+  if (!priorities.length) {
+    container.innerHTML = '<div class="notes-empty">No priority items generated.</div>';
+    return;
+  }
+
+  container.innerHTML = priorities.slice(0, 10).map(item => `
+    <div class="priority-item">
+      <div class="priority-score">${Math.round(item.score || 0)}</div>
+      <div>
+        <div class="priority-title">${escapeHtml(item.title)}</div>
+        <div class="priority-reason">${escapeHtml(item.entityType)} · ${escapeHtml(item.reason || 'generated score')}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderPromptAndChangePlaceholders(prompts, features, syncEvents) {
+  const container = document.getElementById('roadmap-placeholder-list');
+  if (!container) return;
+
+  const items = [
+    {
+      title: 'Prompt log placeholder',
+      meta: `${prompts.length} prompt-like notes detected. Firebase intake will populate structured prompt records later.`
+    },
+    {
+      title: 'Feature/change log placeholder',
+      meta: `${features.length} feature placeholders generated from project clusters.`
+    },
+    {
+      title: 'Sync event trail',
+      meta: `${syncEvents.length} local generation event recorded. GitHub/Firebase sync events will append here later.`
+    }
+  ];
+
+  container.innerHTML = items.map(item => `
+    <div class="placeholder-item">
+      <div class="placeholder-title">${escapeHtml(item.title)}</div>
+      <div>${escapeHtml(item.meta)}</div>
+    </div>
+  `).join('');
 }
 
 // ═══════════════════════════════════════════════════════
@@ -1172,6 +1671,8 @@ function renderRoadmap() {
 
     container.appendChild(laneEl);
   });
+
+  renderRoadmapOrchestrator();
 }
 
 function statusLabel(s) {
@@ -1509,6 +2010,8 @@ function formatDate(dateStr) {
 (function init() {
   initScheduleDate();
   renderCalendar();
+  loadNotesIndex();
+  loadRoadmapItems();
 })();
 </script>
 </body>

@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Roadmap Orchestrator Data",
+  "type": "object",
+  "required": ["generatedAt", "source", "entities", "priorityList"],
+  "properties": {
+    "generatedAt": { "type": "string", "format": "date-time" },
+    "source": {
+      "type": "object",
+      "required": ["notesIndexPath", "noteCount"],
+      "properties": {
+        "notesIndexPath": { "type": "string" },
+        "noteCount": { "type": "integer" }
+      }
+    },
+    "entities": {
+      "type": "object",
+      "required": ["project", "prompt", "note", "feature", "task", "milestone", "decision", "syncEvent"],
+      "properties": {
+        "project": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["id", "name", "noteIds", "priorityScore"],
+            "properties": {
+              "id": { "type": "string" },
+              "name": { "type": "string" },
+              "noteIds": { "type": "array", "items": { "type": "string" } },
+              "priorityScore": { "type": "number" }
+            }
+          }
+        },
+        "prompt": { "type": "array", "items": { "$ref": "#/$defs/entity" } },
+        "note": { "type": "array", "items": { "$ref": "#/$defs/entity" } },
+        "feature": { "type": "array", "items": { "$ref": "#/$defs/entity" } },
+        "task": { "type": "array", "items": { "$ref": "#/$defs/entity" } },
+        "milestone": { "type": "array", "items": { "$ref": "#/$defs/entity" } },
+        "decision": { "type": "array", "items": { "$ref": "#/$defs/entity" } },
+        "syncEvent": { "type": "array", "items": { "$ref": "#/$defs/entity" } }
+      }
+    },
+    "priorityList": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "entityType", "title", "score"],
+        "properties": {
+          "id": { "type": "string" },
+          "entityType": { "type": "string" },
+          "title": { "type": "string" },
+          "score": { "type": "number" },
+          "reason": { "type": "string" }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "entity": {
+      "type": "object",
+      "required": ["id", "title"],
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "projectId": { "type": ["string", "null"] },
+        "noteId": { "type": ["string", "null"] },
+        "sourcePath": { "type": ["string", "null"] },
+        "date": { "type": ["string", "null"] },
+        "status": { "type": ["string", "null"] },
+        "priorityScore": { "type": ["number", "null"] },
+        "metadata": { "type": "object" }
+      }
+    }
+  }
+}

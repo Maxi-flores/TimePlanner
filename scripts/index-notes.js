@@ -4,6 +4,7 @@ const path = require("node:path");
 const repoRoot = path.resolve(__dirname, "..");
 const notesRoot = path.join(repoRoot, "content", "notes-2026");
 const outputPath = path.join(repoRoot, "data", "notes-index.json");
+const appOutputPath = path.join(repoRoot, "apps", "time-planner", "data", "notes-index.json");
 
 const monthNames = new Set([
   "January",
@@ -125,7 +126,12 @@ function buildIndex() {
 }
 
 const index = buildIndex();
-fs.mkdirSync(path.dirname(outputPath), { recursive: true });
-fs.writeFileSync(outputPath, `${JSON.stringify(index, null, 2)}\n`, "utf8");
+const output = `${JSON.stringify(index, null, 2)}\n`;
+
+for (const targetPath of [outputPath, appOutputPath]) {
+  fs.mkdirSync(path.dirname(targetPath), { recursive: true });
+  fs.writeFileSync(targetPath, output, "utf8");
+}
 
 console.log(`Indexed ${index.noteCount} notes into ${toPosixPath(path.relative(repoRoot, outputPath))}`);
+console.log(`Copied app-readable index to ${toPosixPath(path.relative(repoRoot, appOutputPath))}`);
