@@ -608,6 +608,26 @@
       color: var(--text-muted);
       font-size: .82rem;
     }
+    .submit-note-panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+    .submit-note-panel h3 { font-size: .95rem; font-weight: 700; margin-bottom: 4px; }
+    .submit-note-panel p { color: var(--text-muted); font-size: .8rem; margin-bottom: 12px; }
+    .submit-note-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+    }
+    .intake-status { color: var(--text-muted); font-size: .78rem; }
+    .intake-status.ready { color: #86efac; }
+    .intake-status.error { color: #fca5a5; }
 
     /* ─── Print ──────────────────────────────────────────── */
     @media print {
@@ -743,6 +763,32 @@
       <div class="notes-stat">
         <div class="value" id="notes-dated-count">0</div>
         <div class="label">Dated notes</div>
+      </div>
+    </div>
+    <div class="submit-note-panel">
+      <h3>Submit Note Intake</h3>
+      <p id="firebase-intake-status" class="intake-status">Checking local Firebase config...</p>
+      <div class="form-row">
+        <div>
+          <label for="submit-note-title">Title</label>
+          <input type="text" id="submit-note-title" placeholder="Note title" />
+        </div>
+        <div>
+          <label for="submit-note-project">Project</label>
+          <input type="text" id="submit-note-project" placeholder="Optional project name" />
+        </div>
+        <div>
+          <label for="submit-note-date">Date</label>
+          <input type="date" id="submit-note-date" />
+        </div>
+      </div>
+      <div>
+        <label for="submit-note-body">Content</label>
+        <textarea id="submit-note-body" rows="4" placeholder="Capture a note for Firebase intake..."></textarea>
+      </div>
+      <div class="submit-note-footer">
+        <span class="intake-status" id="submit-note-result">No note submitted.</span>
+        <button class="btn btn-primary" id="submit-note-btn" onclick="submitFirebaseNote()" disabled>Submit Note</button>
       </div>
     </div>
     <div class="notes-layout">
@@ -1039,6 +1085,8 @@ let notesIndex = { notes: [], generatedAt: null, noteCount: 0 };
 let notesIndexLoaded = false;
 let roadmapItems = { entities: { project: [], prompt: [], note: [], feature: [], task: [], milestone: [], decision: [], syncEvent: [] }, priorityList: [] };
 let roadmapItemsLoaded = false;
+let firebaseIntake = null;
+let firebaseIntakeReady = false;
 
 // ═══════════════════════════════════════════════════════
 //  TAB SWITCHING
@@ -1072,6 +1120,96 @@ async function loadNotesIndex() {
     if (generated) {
       generated.textContent = 'Notes index unavailable. Run node scripts/index-notes.js, then serve apps/time-planner locally.';
     }
+  }
+}
+
+async function loadFirebaseIntake() {
+  const status = document.getElementById('firebase-intake-status');
+  const button = document.getElementById('submit-note-btn');
+
+  try {
+    const module = await import('./firebase.js');
+    if (typeof module.submitNoteIntake !== 'function') {
+      throw new Error('firebase.js must export submitNoteIntake(note)');
+    }
+
+    firebaseIntake = module;
+    firebaseIntakeReady = true;
+    if (button) button.disabled = false;
+    if (status) {
+      status.textContent = 'Firebase intake ready. Submissions create notes and syncQueue documents.';
+      status.className = 'intake-status ready';
+    }
+  } catch (err) {
+    firebaseIntake = null;
+    firebaseIntakeReady = false;
+    if (button) button.disabled = true;
+    if (status) {
+      status.textContent = 'Firebase intake unavailable. Copy firebase.example.js to firebase.js and add local config.';
+      status.className = 'intake-status error';
+    }
+  }
+}
+
+async function submitFirebaseNote() {
+  const result = document.getElementById('submit-note-result');
+  const button = document.getElementById('submit-note-btn');
+
+  if (!firebaseIntakeReady || !firebaseIntake?.submitNoteIntake) {
+    if (result) {
+      result.textContent = 'Firebase is not configured locally.';
+      result.className = 'intake-status error';
+    }
+    return;
+  }
+
+  const title = document.getElementById('submit-note-title').value.trim();
+  const content = document.getElementById('submit-note-body').value.trim();
+  const projectName = document.getElementById('submit-note-project').value.trim();
+  const noteDate = document.getElementById('submit-note-date').value;
+
+  if (!title || !content) {
+    if (result) {
+      result.textContent = 'Title and content are required.';
+      result.className = 'intake-status error';
+    }
+    return;
+  }
+
+  const payload = {
+    title,
+    content,
+    projectName: projectName || null,
+    date: noteDate || null,
+    tags: [],
+    sourcePath: null
+  };
+
+  try {
+    if (button) button.disabled = true;
+    if (result) {
+      result.textContent = 'Submitting to Firebase...';
+      result.className = 'intake-status';
+    }
+
+    const submitted = await firebaseIntake.submitNoteIntake(payload);
+    document.getElementById('submit-note-title').value = '';
+    document.getElementById('submit-note-body').value = '';
+    document.getElementById('submit-note-project').value = '';
+    document.getElementById('submit-note-date').value = '';
+
+    if (result) {
+      result.textContent = `Submitted note ${submitted.noteId}; queued sync ${submitted.syncQueueId}.`;
+      result.className = 'intake-status ready';
+    }
+  } catch (err) {
+    if (result) {
+      result.textContent = 'Submit failed. Check Firebase config, Firestore rules, and console details.';
+      result.className = 'intake-status error';
+    }
+    console.error(err);
+  } finally {
+    if (button) button.disabled = !firebaseIntakeReady;
   }
 }
 
@@ -2012,6 +2150,7 @@ function formatDate(dateStr) {
   renderCalendar();
   loadNotesIndex();
   loadRoadmapItems();
+  loadFirebaseIntake();
 })();
 </script>
 </body>
