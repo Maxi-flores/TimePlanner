@@ -108,6 +108,37 @@ function noteToMarkdown(note, queueId, noteId) {
   ].join("\n");
 }
 
+function actionToMarkdown(actionPayload, queueId, queueType) {
+  const title = actionPayload.title || "Untitled AI action";
+  const projectName = actionPayload.project || actionPayload.projectName || "General";
+  const date = dateString(actionPayload.createdAt || actionPayload.date);
+  const actionType = actionPayload.type || queueType.replace(".create", "");
+  const body = actionPayload.content || actionPayload.body || actionPayload.description || "";
+
+  return [
+    "---",
+    `title: ${frontmatterValue(title)}`,
+    `project: ${frontmatterValue(projectName)}`,
+    `date: ${frontmatterValue(date)}`,
+    `actionType: ${frontmatterValue(actionType)}`,
+    `targetTab: ${frontmatterValue(actionPayload.targetTab || null)}`,
+    `syncQueueId: ${frontmatterValue(queueId)}`,
+    `syncStatus: "local-written"`,
+    `source: ${frontmatterValue(actionPayload.source || "ai-suggestion")}`,
+    "---",
+    "",
+    `# ${title}`,
+    "",
+    `- Type: ${actionType}`,
+    `- Project: ${projectName}`,
+    `- Source: ${actionPayload.source || "ai-suggestion"}`,
+    actionPayload.targetTab ? `- Target tab: ${actionPayload.targetTab}` : null,
+    "",
+    body.trim() || "Accepted AI suggestion queued for project orchestration.",
+    "",
+  ].filter((line) => line !== null).join("\n");
+}
+
 function nextAvailablePath(basePath) {
   if (!fs.existsSync(basePath)) return basePath;
 
@@ -154,39 +185,39 @@ function runPostSyncProcessing() {
   const steps = [
     {
       label: "Regenerate notes index",
-      script: path.join(repoRoot, "scripts", "index-notes.js"),
+      script: path.join(repoRoot, "scripts", "index-notes.cjs"),
     },
     {
       label: "Regenerate roadmap items",
-      script: path.join(repoRoot, "scripts", "generate-roadmap.js"),
+      script: path.join(repoRoot, "scripts", "generate-roadmap.cjs"),
     },
     {
       label: "Regenerate roadmap levels",
-      script: path.join(repoRoot, "scripts", "generate-roadmap-levels.js"),
+      script: path.join(repoRoot, "scripts", "generate-roadmap-levels.cjs"),
     },
     {
       label: "Assign notes to levels",
-      script: path.join(repoRoot, "scripts", "assign-notes-to-levels.js"),
+      script: path.join(repoRoot, "scripts", "assign-notes-to-levels.cjs"),
     },
     {
       label: "Extract tasks from notes",
-      script: path.join(repoRoot, "scripts", "extract-tasks-from-notes.js"),
+      script: path.join(repoRoot, "scripts", "extract-tasks-from-notes.cjs"),
     },
     {
       label: "Generate project states",
-      script: path.join(repoRoot, "scripts", "generate-project-states.js"),
+      script: path.join(repoRoot, "scripts", "generate-project-states.cjs"),
     },
     {
       label: "Generate milestones",
-      script: path.join(repoRoot, "scripts", "generate-milestones.js"),
+      script: path.join(repoRoot, "scripts", "generate-milestones.cjs"),
     },
     {
       label: "Generate dashboard model",
-      script: path.join(repoRoot, "scripts", "generate-dashboard-model.js"),
+      script: path.join(repoRoot, "scripts", "generate-dashboard-model.cjs"),
     },
     {
       label: "Generate AI suggestions",
-      script: path.join(repoRoot, "scripts", "generate-ai-suggestions.js"),
+      script: path.join(repoRoot, "scripts", "generate-ai-suggestions.cjs"),
     },
   ];
 
@@ -273,12 +304,11 @@ async function main() {
   const snapshot = await db
     .collection("syncQueue")
     .where("status", "==", "pending")
-    .where("type", "==", "note.create")
     .limit(25)
     .get();
 
   if (snapshot.empty) {
-    console.log("No pending note.create syncQueue items found.");
+    console.log("No pending syncQueue items found.");
     return;
   }
 
@@ -288,6 +318,40 @@ async function main() {
   const createdFiles = [];
   for (const queueDoc of snapshot.docs) {
     const queue = queueDoc.data();
+    const queueType = queue.type || "note.create";
+
+    if (!["note.create", "task.create", "milestone.create"].includes(queueType)) {
+      console.log(`Skipping unsupported syncQueue type ${queueType} (${queueDoc.id}).`);
+      continue;
+    }
+
+    if (queueType === "task.create" || queueType === "milestone.create") {
+      const actionPayload = queue.payload || {};
+      const projectName = readableProject(actionPayload.project || actionPayload.projectName || queue.projectName);
+      const date = dateString(actionPayload.createdAt || queue.createdAt);
+      const title = actionPayload.title || queue.title || "Untitled AI action";
+      const projectDir = path.join(inboxRoot, slug(projectName, "General"));
+      const filename = `AI-${date}-${slug(title)}.md`;
+      const targetPath = nextAvailablePath(path.join(projectDir, filename));
+      const relativeTarget = path.relative(repoRoot, targetPath).split(path.sep).join("/");
+
+      fs.mkdirSync(projectDir, { recursive: true });
+      fs.writeFileSync(targetPath, actionToMarkdown(actionPayload, queueDoc.id, queueType), "utf8");
+
+      await queueDoc.ref.update({
+        status: "local-written",
+        localPath: relativeTarget,
+        fullySynced: false,
+        localWrittenAt: admin.firestore.FieldValue.serverTimestamp(),
+        updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+      });
+
+      writtenCount += 1;
+      createdFiles.push(targetPath);
+      console.log(`Wrote ${relativeTarget}`);
+      continue;
+    }
+
     const noteId = queue.noteId;
 
     if (!noteId) {
@@ -344,7 +408,7 @@ async function main() {
       .forEach((filePath) => console.log(`- ${filePath}`));
   }
 
-  console.log(`Local write complete. ${writtenCount} note(s) written.`);
+  console.log(`Local write complete. ${writtenCount} item(s) written.`);
   if (createdFiles.length === 0) {
     console.log("No files written; skipping post-sync index and roadmap regeneration.");
     return;
