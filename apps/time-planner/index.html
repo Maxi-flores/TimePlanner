@@ -4,9 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>2026 – Monthly Roadmap Planner</title>
-  <link rel="icon" href="img/favicon_io/favicon.ico" sizes="any" />
-  <link rel="icon" type="image/png" sizes="32x32" href="img/favicon_io/favicon-32x32.png" />
-  <link rel="apple-touch-icon" href="img/favicon_io/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" href="planner.png" />
+  <link rel="apple-touch-icon" href="planner.png" />
   <style>
     /* ─── Reset & Base ─────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -44,6 +43,17 @@
     body.theme-light {
       --bg:#edf4ff; --surface:#ffffff; --surface-glass:rgba(255,255,255,.72); --surface2:#e6edf8;
       --border:#c5d1e3; --text:#0f172a; --muted:#526174; --text-muted:#526174; --shadow-soft:0 24px 70px rgba(37,56,88,.18);
+    }
+    body.theme-light .card,
+    body.theme-light .app-menu,
+    body.theme-light .user-menu,
+    body.theme-light .day-panel,
+    body.theme-light .note-drawer,
+    body.theme-light .quick-tool-box,
+    body.theme-light .quick-slide-panel,
+    body.theme-light .logout-dialog {
+      color:#0f172a;
+      outline:1px solid rgba(15,23,42,.1);
     }
     body.theme-aurora { --gradient-1:#08111f; --gradient-2:#0f766e; --accent:#22d3ee; --accent-2:#a78bfa; --orb-color:#14b8a6; }
     body.theme-powerframe { --gradient-1:#050b1d; --gradient-2:#312e81; --accent:#38bdf8; --accent-2:#8b5cf6; --orb-color:#6366f1; }
@@ -311,8 +321,8 @@
       color:var(--text-muted);
     }
     .footer-logo {
-      width:58px;
-      height:58px;
+      width:72px;
+      height:72px;
       object-fit:contain;
       opacity:.78;
       filter: drop-shadow(0 0 12px color-mix(in srgb, var(--accent-2) 45%, transparent));
@@ -336,6 +346,25 @@
       flex-wrap:wrap;
     }
     .global-project-bar select { width:min(360px, 100%); }
+    .project-focus-shell { margin-bottom:16px; }
+    .project-focus-toggle {
+      width:100%;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      color:var(--text);
+      border:1px solid rgba(148,163,184,.22);
+      text-align:left;
+    }
+    .project-focus-toggle strong { display:block; font-size:.9rem; }
+    .project-focus-toggle span { pointer-events:none; }
+    .project-focus-panel {
+      display:none;
+      margin-top:10px;
+    }
+    .project-focus-panel.open { display:flex; }
+    .project-focus-mini { color:var(--text-muted); font-size:.78rem; }
     input, select, textarea {
       background: var(--surface2);
       border: 1px solid var(--border);
@@ -381,6 +410,14 @@
       min-height: 150px;
       cursor:pointer;
       transition: transform .16s ease, border-color .16s ease;
+    }
+    .dashboard-widget.is-fresh {
+      animation: widget-pulse 5s ease-in-out infinite;
+      border-color: color-mix(in srgb, var(--accent) 62%, var(--border));
+    }
+    @keyframes widget-pulse {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-3px); box-shadow:0 28px 80px color-mix(in srgb, var(--accent) 18%, rgba(0,0,0,.28)); }
     }
     .dashboard-widget:hover { transform: translateY(-2px); border-color: color-mix(in srgb, var(--accent) 70%, var(--border)); }
     .widget-value { font-size:2rem; font-weight:800; margin:8px 0 4px; }
@@ -431,6 +468,17 @@
       padding:10px;
       background:rgba(15,23,42,.32);
       margin-top:8px;
+    }
+    .deploy-project-list {
+      display:grid;
+      gap:8px;
+      margin-top:12px;
+    }
+    .deploy-project-card {
+      border:1px solid rgba(148,163,184,.18);
+      border-radius:14px;
+      padding:10px;
+      background:rgba(15,23,42,.24);
     }
     .ai-grid {
       display:grid;
@@ -500,6 +548,8 @@
       white-space:pre-wrap;
       font-size:.8rem;
       color:var(--text-muted);
+      max-height:260px;
+      overflow:auto;
     }
     .phase-status-strip {
       display:flex;
@@ -512,6 +562,24 @@
       display:grid;
       gap:8px;
     }
+    .apps-box {
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap:10px;
+      margin-bottom:14px;
+    }
+    .tool-check {
+      display:flex;
+      align-items:center;
+      gap:8px;
+      border:1px solid rgba(148,163,184,.18);
+      border-radius:14px;
+      padding:9px 10px;
+      background:rgba(15,23,42,.22);
+      color:var(--text);
+      font-size:.8rem;
+    }
+    .tool-check input { width:auto; }
     .phase-row {
       display:grid;
       grid-template-columns: auto 1fr 1fr 1fr;
@@ -605,6 +673,13 @@
       flex-direction: column;
       transform: translateX(100%);
       transition: transform .2s ease;
+    }
+    .day-panel.calendar-overlay-panel {
+      width:min(540px, 96vw);
+      background:var(--surface-glass);
+      backdrop-filter:blur(22px);
+      z-index:560;
+      box-shadow: -34px 0 90px rgba(2,6,23,.56);
     }
     .day-panel.open { transform: translateX(0); }
     .day-panel-header {
@@ -1095,6 +1170,19 @@
 
     /* ─── CALCULATOR ─────────────────────────────────────── */
     .calc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .schedule-tools-grid {
+      display:grid;
+      grid-template-columns: minmax(260px,.8fr) minmax(320px,1.2fr);
+      gap:14px;
+      margin-top:14px;
+    }
+    .reservation-grid {
+      display:grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap:8px;
+      margin-top:10px;
+    }
+    .reservation-btn { justify-content:center; min-height:42px; }
     @media (max-width: 700px) { .calc-grid { grid-template-columns: 1fr; } }
     .calc-result {
       background: var(--surface2);
@@ -1132,6 +1220,107 @@
       z-index: 190;
     }
     .overlay.open { display: block; }
+    #calendar-overlay-shade {
+      background: rgba(2,6,23,.72);
+      backdrop-filter: blur(10px);
+      z-index: 550;
+    }
+    .quick-tools-overlay {
+      display:none;
+      position:fixed;
+      inset:0;
+      z-index:520;
+      background:rgba(2,6,23,.76);
+      backdrop-filter:blur(14px);
+      padding:24px;
+      align-items:center;
+      justify-content:flex-end;
+    }
+    .quick-tools-overlay.open { display:flex; }
+    .quick-tool-box {
+      width:min(440px, 94vw);
+      background:rgba(15,23,42,.94);
+      border:1px solid rgba(148,163,184,.26);
+      border-radius:var(--radius-xl);
+      box-shadow:var(--shadow-soft);
+      padding:18px;
+    }
+    .quick-tool-grid {
+      display:grid;
+      grid-template-columns:repeat(2, minmax(0, 1fr));
+      gap:10px;
+      margin-top:14px;
+    }
+    .quick-tool-card {
+      text-align:left;
+      min-height:78px;
+      justify-content:flex-start;
+      align-items:flex-start;
+      flex-direction:column;
+      white-space:normal;
+    }
+    .quick-tool-card span {
+      display:block;
+      color:var(--text-muted);
+      font-size:.72rem;
+      margin-top:4px;
+      line-height:1.3;
+    }
+    .quick-slide-panel {
+      position:fixed;
+      top:0;
+      right:0;
+      bottom:0;
+      width:min(520px, 96vw);
+      z-index:570;
+      background:var(--surface-glass);
+      border-left:1px solid rgba(148,163,184,.26);
+      box-shadow:-34px 0 90px rgba(2,6,23,.56);
+      backdrop-filter:blur(22px);
+      transform:translateX(100%);
+      transition:transform .2s ease;
+      padding:20px;
+      overflow-y:auto;
+    }
+    .quick-slide-panel.open { transform:translateX(0); }
+    .quick-slide-header {
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:12px;
+      margin-bottom:16px;
+      border-bottom:1px solid rgba(148,163,184,.2);
+      padding-bottom:12px;
+    }
+    .ai-action-row {
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      align-items:center;
+      margin-top:10px;
+    }
+    .ai-action-row select { width:min(180px, 100%); }
+    .phase-tool-list {
+      display:grid;
+      gap:8px;
+      margin-top:12px;
+    }
+    .phase-tool-item {
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:8px;
+      background:rgba(15,23,42,.24);
+      border:1px solid rgba(148,163,184,.18);
+      border-radius:12px;
+      padding:8px 10px;
+    }
+    .phase-tool-edit {
+      display:flex;
+      gap:6px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
 
     /* ─── Modal ──────────────────────────────────────────── */
     .modal {
@@ -1149,6 +1338,42 @@
     .modal.open { display: block; }
     .modal h3 { font-size: 1rem; font-weight: 700; margin-bottom: 16px; }
     .modal-footer { display: flex; gap: 8px; justify-content: flex-end; margin-top: 16px; }
+    .logout-overlay {
+      display:none;
+      position:fixed;
+      inset:0;
+      background:rgba(2,6,23,.78);
+      backdrop-filter:blur(16px);
+      z-index:420;
+      place-items:center;
+      padding:20px;
+    }
+    .logout-overlay.open { display:grid; }
+    .logout-dialog {
+      width:min(520px, 94vw);
+      background:rgba(15,23,42,.92);
+      border:1px solid rgba(148,163,184,.26);
+      border-radius:var(--radius-xl);
+      box-shadow:var(--shadow-soft);
+      padding:22px;
+    }
+    .logout-dialog h3 { font-size:1.15rem; margin-bottom:8px; }
+    .logout-dialog p { color:var(--text-muted); font-size:.86rem; line-height:1.5; }
+    .logout-actions {
+      display:grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap:8px;
+      margin-top:18px;
+    }
+    .logout-message {
+      margin-top:12px;
+      padding:10px;
+      border:1px solid rgba(148,163,184,.18);
+      border-radius:12px;
+      color:var(--text-muted);
+      font-size:.8rem;
+      background:rgba(15,23,42,.34);
+    }
 
     /* ─── NOTES INDEX ───────────────────────────────────── */
     .notes-toolbar {
@@ -1355,35 +1580,40 @@
 
 <header>
   <div class="brand">
-    <img class="brand-logo" src="img/symbol_logo_small.png" alt="" />
+    <img class="brand-logo" src="planner.png" alt="" />
   </div>
   <div class="tabs">
     <button class="tab-btn active" onclick="switchTab('dashboard', this)">Dashboard</button>
     <button class="tab-btn" onclick="switchTab('calendar', this)">📅 Calendar</button>
     <button class="tab-btn" onclick="switchTab('schedule', this)">🕐 Daily Schedule</button>
     <button class="tab-btn" onclick="switchTab('roadmap', this)">🗺 Roadmap</button>
-    <button class="tab-btn" onclick="switchTab('phases', this)">Phases</button>
+    <button class="tab-btn" onclick="switchTab('phases', this)">Projects</button>
     <button class="tab-btn" onclick="switchTab('notes', this)">Notes</button>
     <button class="tab-btn" onclick="switchTab('goals', this)">🎯 Goals</button>
     <button class="tab-btn" onclick="switchTab('ai', this)">AI</button>
-    <button class="tab-btn" onclick="switchTab('calculator', this)">🧮 Calculator</button>
-    <button class="tab-btn" onclick="switchTab('deploy', this)">Deploy</button>
+    <button class="tab-btn" onclick="switchTab('deploy', this)">Deployment</button>
+    <button class="tab-btn" onclick="switchTab('user', this)">User</button>
   </div>
   <div class="header-right">
     <div class="header-actions">
     <div class="user-shell">
       <button class="user-chip" id="user-chip" onclick="toggleUserMenu()" type="button" aria-label="Open user settings">
-        <img class="user-avatar" id="user-avatar" src="img/symbol_logo_small.png" alt="" />
+        <img class="user-avatar" id="user-avatar" src="planner.png" alt="" />
         <strong id="user-chip-name">User</strong>
       </button>
       <div class="user-menu" id="user-menu">
         <div class="menu-panel settings-grid active">
           <p class="section-title">User account</p>
           <label><input type="checkbox" id="setting-display-user" onchange="saveSettingsFromUI()" style="width:auto;" /> Show profile name in header</label>
-          <div><label>Avatar image path or URL</label><input type="text" id="setting-user-avatar" placeholder="img/symbol_logo_small.png" onchange="saveSettingsFromUI()" /></div>
+          <div><label>Avatar image path or URL</label><input type="text" id="setting-user-avatar" placeholder="planner.png" onchange="saveSettingsFromUI()" /></div>
           <div><label>Name</label><input type="text" id="setting-user-name" placeholder="Your name" onchange="saveSettingsFromUI()" /></div>
           <div><label>Role / profile</label><input type="text" id="setting-user-profile" placeholder="Builder, planner, founder..." onchange="saveSettingsFromUI()" /></div>
+          <div><label>Primary language</label><select id="setting-user-language" onchange="saveSettingsFromUI()"></select></div>
+          <div><label>Secondary language</label><select id="setting-user-secondary-language" onchange="saveSettingsFromUI()"></select></div>
+          <div><label>Locale</label><select id="setting-user-locale" onchange="saveSettingsFromUI()"></select></div>
+          <div><label>Timezone</label><input type="text" id="setting-user-timezone" placeholder="Europe/London" onchange="saveSettingsFromUI()" /></div>
           <div><label>Profile note</label><textarea id="setting-user-note" rows="2" placeholder="Personal context for this board" onchange="saveSettingsFromUI()"></textarea></div>
+          <div class="logout-message">SSO status: Hub/Firebase SSO is prepared conceptually. This standalone module does not force auth redirects.</div>
           <button class="btn btn-ghost" onclick="logoutUser()" type="button">Logout local profile</button>
         </div>
       </div>
@@ -1402,12 +1632,12 @@
           <button class="btn btn-ghost menu-item" data-menu-tab="calendar" onclick="switchTab('calendar')">Calendar layers</button>
           <button class="btn btn-ghost menu-item" data-menu-tab="schedule" onclick="switchTab('schedule')">Daily schedule</button>
           <button class="btn btn-ghost menu-item" data-menu-tab="roadmap" onclick="switchTab('roadmap')">Roadmap map</button>
-          <button class="btn btn-ghost menu-item" data-menu-tab="phases" onclick="switchTab('phases')">Project phases</button>
+          <button class="btn btn-ghost menu-item" data-menu-tab="phases" onclick="switchTab('phases')">Projects</button>
           <button class="btn btn-ghost menu-item" data-menu-tab="notes" onclick="switchTab('notes')">Notes browser</button>
           <button class="btn btn-ghost menu-item" data-menu-tab="goals" onclick="switchTab('goals')">Goals and task deploys</button>
           <button class="btn btn-ghost menu-item" data-menu-tab="ai" onclick="switchTab('ai')">AI assistant</button>
-          <button class="btn btn-ghost menu-item" data-menu-tab="calculator" onclick="switchTab('calculator')">Calculator</button>
-          <button class="btn btn-ghost menu-item" data-menu-tab="deploy" onclick="switchTab('deploy')">Deployment result</button>
+          <button class="btn btn-ghost menu-item" data-menu-tab="deploy" onclick="switchTab('deploy')">Deployment</button>
+          <button class="btn btn-ghost menu-item" data-menu-tab="user" onclick="switchTab('user')">User account</button>
         </div>
       </div>
       <div class="menu-panel" id="menu-panel-theme">
@@ -1435,6 +1665,13 @@
         <label><input type="checkbox" id="setting-compact" onchange="saveSettingsFromUI()" style="width:auto;" /> Compact mode</label>
         <label><input type="checkbox" id="setting-motion" onchange="saveSettingsFromUI()" style="width:auto;" /> Reduced motion</label>
         </div>
+        <div class="menu-section settings-grid">
+          <p class="section-title">Per-page sync settings</p>
+          <label><input type="checkbox" checked disabled style="width:auto;" /> Dashboard follows selected project</label>
+          <label><input type="checkbox" checked disabled style="width:auto;" /> Schedule mirrors calendar reservations</label>
+          <label><input type="checkbox" checked disabled style="width:auto;" /> Goals deploy tasks into calendar/schedule</label>
+          <label><input type="checkbox" checked disabled style="width:auto;" /> Notes remain read-only from generated repo index</label>
+        </div>
       </div>
       <div class="menu-panel settings-grid" id="menu-panel-ai">
         <p class="section-title">AI orchestrator</p>
@@ -1452,14 +1689,23 @@
 </header>
 
 <main>
-  <div class="global-project-bar card">
-    <div>
-      <label for="global-project-select">Selected project</label>
-      <select id="global-project-select" onchange="setSelectedProject(this.value)">
-        <option value="">All projects</option>
-      </select>
+  <div class="project-focus-shell">
+    <button class="project-focus-toggle card" onclick="toggleProjectFocus()" type="button">
+      <span>
+        <span class="note-meta">Selected project</span>
+        <strong id="project-focus-title">All projects</strong>
+      </span>
+      <span class="project-focus-mini"><span id="global-project-status">Unified dashboard model</span> ▾</span>
+    </button>
+    <div class="global-project-bar card project-focus-panel" id="project-focus-panel">
+      <div>
+        <label for="global-project-select">Project focus</label>
+        <select id="global-project-select" onchange="setSelectedProject(this.value)">
+          <option value="">All projects</option>
+        </select>
+      </div>
+      <span class="badge badge-accent">Every tab follows this project filter</span>
     </div>
-    <span class="badge badge-accent" id="global-project-status">Unified dashboard model</span>
   </div>
   <div class="phase-status-strip card">
     <span class="badge badge-accent" id="project-phase-status">Phase: select a project</span>
@@ -1509,6 +1755,10 @@
         <p class="section-title">Timeline pulse</p>
         <div class="widget-list" id="dash-timeline-list"></div>
       </div>
+      <div class="card dashboard-widget widget-wide is-fresh" onclick="switchTab('schedule')">
+        <p class="section-title">New / last added</p>
+        <div class="widget-list" id="dash-recent-list"></div>
+      </div>
     </div>
   </div>
 
@@ -1553,13 +1803,38 @@
     <div class="card" style="padding:0;overflow:hidden;">
       <div class="schedule-grid" id="schedule-grid"></div>
     </div>
+    <div class="schedule-tools-grid">
+      <div class="card glow-edge">
+        <p class="section-title">4 x 4 hour reservations</p>
+        <div class="note-meta">Quick reserve available frames only. Night planning before 08:00 is intentionally excluded.</div>
+        <div class="reservation-grid" id="reservation-grid"></div>
+      </div>
+      <div class="card">
+        <p class="section-title">Time planner calculator</p>
+        <div class="calc-grid" style="grid-template-columns:1fr;">
+          <div>
+            <label>Start Time</label>
+            <input type="time" id="calc-start" value="09:00" oninput="calcDuration()" />
+          </div>
+          <div>
+            <label>End Time</label>
+            <input type="time" id="calc-end" value="17:30" oninput="calcDuration()" />
+          </div>
+          <div>
+            <label>Break (minutes)</label>
+            <input type="number" id="calc-break" value="60" min="0" oninput="calcDuration()" />
+          </div>
+        </div>
+        <div class="calc-result" id="calc-duration-result"></div>
+      </div>
+    </div>
   </div>
 
   <!-- ══════════════ ROADMAP VIEW ══════════════ -->
   <div id="view-roadmap" class="view">
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:10px;">
-      <h2 style="font-size:1.1rem;font-weight:700;">🗺 Roadmap &amp; Milestones</h2>
-      <button class="btn btn-primary" onclick="openAddMilestoneModal()">+ Milestone</button>
+      <h2 style="font-size:1.1rem;font-weight:700;">Roadmap</h2>
+      <span class="badge badge-accent">10 phase project path</span>
     </div>
     <div class="level-map-section">
       <div class="level-map-header">
@@ -1591,10 +1866,6 @@
         </div>
       </div>
     </div>
-    <div class="generated-milestones orchestrator-panel">
-      <h3>Auto Milestones</h3>
-      <div class="generated-milestone-list" id="generated-milestone-list"></div>
-    </div>
     <div class="roadmap-container" id="roadmap-container"></div>
     <div class="orchestrator-section">
       <div class="orchestrator-header">
@@ -1605,18 +1876,18 @@
         <span class="badge badge-accent" id="roadmap-project-total">0 projects</span>
       </div>
       <div class="orchestrator-grid">
-        <div class="orchestrator-panel">
-          <h3>Project Organogram</h3>
+        <details class="orchestrator-panel">
+          <summary><h3>Project Organogram</h3></summary>
           <div class="org-tree" id="roadmap-org-tree"></div>
-        </div>
-        <div class="orchestrator-panel">
-          <h3>Priority Engine</h3>
+        </details>
+        <details class="orchestrator-panel">
+          <summary><h3>Priority Engine</h3></summary>
           <div class="priority-list" id="roadmap-priority-list"></div>
-        </div>
-        <div class="orchestrator-panel">
-          <h3>Prompts &amp; Changes</h3>
+        </details>
+        <details class="orchestrator-panel">
+          <summary><h3>Prompts &amp; Changes</h3></summary>
           <div class="placeholder-list" id="roadmap-placeholder-list"></div>
-        </div>
+        </details>
       </div>
     </div>
   </div>
@@ -1626,11 +1897,13 @@
     <div class="card">
       <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:14px;">
         <div>
-          <h2 style="font-size:1.1rem;font-weight:700;">Project Phase Configuration</h2>
-          <p class="note-meta" id="phase-config-project">Select a project to check phase rows.</p>
+          <h2 style="font-size:1.1rem;font-weight:700;">Projects</h2>
+          <p class="note-meta" id="phase-config-project">Select one active phase and the tools used for this project.</p>
         </div>
         <button class="btn btn-ghost" onclick="clearProjectPhaseChecks()">Clear Checks</button>
       </div>
+      <p class="section-title">Apps box</p>
+      <div class="apps-box" id="phase-tools-box"></div>
       <div class="phase-table" id="phase-table"></div>
     </div>
   </div>
@@ -1658,30 +1931,15 @@
       </div>
     </div>
     <div class="submit-note-panel">
-      <h3>Submit Note Intake</h3>
-      <p id="firebase-intake-status" class="intake-status">Checking local Firebase config...</p>
-      <div class="form-row">
-        <div>
-          <label for="submit-note-title">Title</label>
-          <input type="text" id="submit-note-title" placeholder="Note title" />
-        </div>
-        <div>
-          <label for="submit-note-project">Project</label>
-          <input type="text" id="submit-note-project" placeholder="Optional project name" />
-        </div>
-        <div>
-          <label for="submit-note-date">Date</label>
-          <input type="date" id="submit-note-date" />
-        </div>
-      </div>
-      <div>
-        <label for="submit-note-body">Content</label>
-        <textarea id="submit-note-body" rows="4" placeholder="Capture a note for Firebase intake..."></textarea>
-      </div>
+      <h3>GitHub Notes Sync</h3>
+      <p class="intake-status ready">Notes are authored in the GitHub/Obsidian 2026 repo. This browser does not write note files.</p>
+      <div class="deploy-row"><span>Source</span><strong>content/notes-2026</strong></div>
+      <div class="deploy-row"><span>Refresh command</span><strong>npm run generate</strong></div>
       <div class="submit-note-footer">
-        <span class="intake-status" id="submit-note-result">No note submitted.</span>
-        <button class="btn btn-primary" id="submit-note-btn" onclick="submitFirebaseNote()" disabled>Submit Note</button>
+        <span class="intake-status" id="submit-note-result">Run the local pipeline after pulling note changes from GitHub.</span>
+        <button class="btn btn-primary" onclick="showGitHubSyncInstructions()">Sync notes from GitHub 2026 repo</button>
       </div>
+      <div class="phase-tool-list" id="notes-local-queue"></div>
     </div>
     <div class="note-browser-grid">
       <div class="note-browser-controls">
@@ -1698,7 +1956,7 @@
   <!-- ══════════════ GOALS VIEW ══════════════ -->
   <div id="view-goals" class="view">
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:10px;">
-      <h2 style="font-size:1.1rem;font-weight:700;">🎯 Monthly Goals</h2>
+      <h2 style="font-size:1.1rem;font-weight:700;">Goals</h2>
       <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
         <select id="goal-month-filter" style="width:160px;" onchange="renderGoals()">
           <option value="">All months</option>
@@ -1746,67 +2004,6 @@
     </div>
   </div>
 
-  <!-- ══════════════ CALCULATOR VIEW ══════════════ -->
-  <div id="view-calculator" class="view">
-    <h2 style="font-size:1.1rem;font-weight:700;margin-bottom:20px;">🧮 Time &amp; Progress Calculator</h2>
-    <div class="calc-grid">
-
-      <!-- Duration Calculator -->
-      <div class="card">
-        <p class="section-title">Duration Calculator</p>
-        <div class="form-row">
-          <div>
-            <label>Start Time</label>
-            <input type="time" id="calc-start" value="09:00" oninput="calcDuration()" />
-          </div>
-          <div>
-            <label>End Time</label>
-            <input type="time" id="calc-end" value="17:30" oninput="calcDuration()" />
-          </div>
-        </div>
-        <div>
-          <label>Break (minutes)</label>
-          <input type="number" id="calc-break" value="60" min="0" oninput="calcDuration()" />
-        </div>
-        <div class="calc-result" id="calc-duration-result"></div>
-      </div>
-
-      <!-- Weekly Hours -->
-      <div class="card">
-        <p class="section-title">Weekly Hours Tracker</p>
-        <div id="week-days-inputs"></div>
-        <div class="calc-result" id="calc-weekly-result"></div>
-      </div>
-
-      <!-- Date Difference -->
-      <div class="card">
-        <p class="section-title">Days Between Dates</p>
-        <div class="form-row">
-          <div>
-            <label>From</label>
-            <input type="date" id="calc-date-from" oninput="calcDateDiff()" />
-          </div>
-          <div>
-            <label>To</label>
-            <input type="date" id="calc-date-to" oninput="calcDateDiff()" />
-          </div>
-        </div>
-        <div class="calc-result" id="calc-date-result"></div>
-      </div>
-
-      <!-- Month Summary -->
-      <div class="card">
-        <p class="section-title">Month Summary</p>
-        <div>
-          <label>Select Month</label>
-          <input type="month" id="calc-month" oninput="calcMonthSummary()" />
-        </div>
-        <div class="calc-result" id="calc-month-result"></div>
-      </div>
-
-    </div>
-  </div>
-
   <!-- ══════════════ DEPLOYMENT RESULT VIEW ══════════════ -->
   <div id="view-deploy" class="view">
     <div class="deploy-grid">
@@ -1820,7 +2017,9 @@
           <div class="deploy-row"><span>Project phase</span><strong id="deploy-phase-status">No phase selected</strong></div>
           <div class="deploy-row"><span>Data model</span><strong id="deploy-model-status">Loading</strong></div>
           <div class="deploy-row"><span>Notes/tasks</span><strong id="deploy-data-counts">-</strong></div>
+          <div class="deploy-row"><span>Vercel versions</span><strong id="deploy-vercel-status">Local metadata only</strong></div>
         </div>
+        <div class="deploy-project-list" id="deploy-project-list"></div>
       </div>
       <div class="card">
         <p class="section-title">AI readiness checks</p>
@@ -1829,13 +2028,15 @@
         <div class="deploy-row"><span>AI enabled</span><strong id="deploy-ai-enabled">Off</strong></div>
         <div class="deploy-row"><span>Endpoint configured</span><strong id="deploy-ai-endpoint">Missing</strong></div>
         <div class="deploy-row"><span>Dashboard model</span><strong id="deploy-ai-model-ready">Missing</strong></div>
+        <div class="deploy-row"><span>AI suggestions</span><strong id="deploy-ai-suggestions-ready">Missing</strong></div>
         <div class="deploy-row"><span>Project context</span><strong id="deploy-ai-context">Select project</strong></div>
         <div class="deploy-row"><span>Connection</span><strong id="deploy-ai-connection">Not tested</strong></div>
         <div class="ai-actions">
           <button class="btn btn-primary" onclick="testAiConnection()">Test AI Connection</button>
-          <button class="btn btn-ghost" onclick="runAiAction('prompts')">Generate Prompt Ideas</button>
-          <button class="btn btn-ghost" onclick="runAiAction('tasks')">Generate Suggested Tasks</button>
-          <button class="btn btn-ghost" onclick="runAiAction('summary')">Summarize Selected Project</button>
+          <button class="btn btn-ghost" onclick="runAiAction('generate-prompt')">Generate suggestions</button>
+          <button class="btn btn-ghost" onclick="runAiAction('extract-tasks')">Generate Suggested Tasks</button>
+          <button class="btn btn-ghost" onclick="runAiAction('summarize')">Summarize Selected Project</button>
+          <button class="btn btn-ghost" onclick="setText('deploy-ai-output','Run locally: npm run generate\\nThis regenerates notes, roadmap, dashboard-model, and ai-suggestions JSON.')">Re-run pipeline</button>
         </div>
         <div class="ai-output" id="deploy-ai-output">Ready for local checks.</div>
         <div id="deploy-ai-suggestions"></div>
@@ -1843,9 +2044,42 @@
     </div>
   </div>
 
+  <!-- ══════════════ USER ACCOUNT VIEW ══════════════ -->
+  <div id="view-user" class="view">
+    <div class="card" style="max-width:820px;margin:0 auto;">
+      <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:16px;">
+        <img class="user-avatar" id="user-page-avatar" src="planner.png" alt="" style="width:64px;height:64px;" />
+        <div>
+          <h2 style="font-size:1.15rem;font-weight:700;">User Account</h2>
+          <p class="note-meta">Account sign-in is handled by the hub. This standalone dashboard keeps only local display preferences.</p>
+        </div>
+      </div>
+      <div class="deploy-status">
+        <div class="deploy-row"><span>Name</span><strong id="user-page-name">User</strong></div>
+        <div class="deploy-row"><span>Email</span><strong id="user-page-email">Not connected</strong></div>
+        <div class="deploy-row"><span>Firebase SSO</span><strong id="user-page-sso">Hub-managed</strong></div>
+        <div class="deploy-row"><span>Connection</span><strong id="user-page-connection">Standalone mode</strong></div>
+      </div>
+      <div class="settings-grid" style="margin-top:16px;">
+        <div><label>Name</label><input type="text" id="user-page-input-name" placeholder="Your name" onchange="saveUserPageSettings()" /></div>
+        <div><label>Email</label><input type="email" id="user-page-input-email" placeholder="you@example.com" onchange="saveUserPageSettings()" /></div>
+        <div><label>Profile / role</label><input type="text" id="user-page-input-profile" placeholder="Planner, builder, founder..." onchange="saveUserPageSettings()" /></div>
+        <div><label>Avatar image path or URL</label><input type="text" id="user-page-input-avatar" placeholder="planner.png" onchange="saveUserPageSettings()" /></div>
+        <label><input type="checkbox" id="user-page-display-name" onchange="saveUserPageSettings()" style="width:auto;" /> Show profile name in header</label>
+      </div>
+      <div class="ai-actions" style="margin-top:16px;">
+        <button class="btn btn-primary" type="button" onclick="showAccountHubMessage('sign-in')">Sign in</button>
+        <button class="btn btn-ghost" type="button" onclick="logoutUser()">Sign out</button>
+      </div>
+      <div class="logout-message" id="user-page-message">Account sign-in is handled by the hub. No login redirect is triggered here.</div>
+    </div>
+  </div>
+
 </main>
 
 <button class="ai-bot-button" onclick="toggleAiBot()" type="button" aria-label="Open AI assistant">AI</button>
+<button class="ai-bot-button" style="bottom:94px;" onclick="openCalendarOverlay()" type="button" aria-label="Open calendar quick planner">Cal</button>
+<button class="ai-bot-button" style="bottom:160px;" onclick="openQuickTools()" type="button" aria-label="Open quick tools">Tools</button>
 <div class="ai-bot-panel" id="ai-bot-panel">
   <div class="ai-bot-header">
     <div>
@@ -1857,18 +2091,78 @@
   <label>Assistant project</label>
   <select id="ai-bot-project" onchange="setAiBotProject(this.value)"><option value="">All projects</option></select>
   <div class="ai-actions">
-    <button class="btn btn-ghost" onclick="runAiAction('roadmap')">Roadmap next step</button>
-    <button class="btn btn-ghost" onclick="runAiAction('tasks')">Extract tasks</button>
-    <button class="btn btn-ghost" onclick="runAiAction('summary')">Summarize project</button>
-    <button class="btn btn-ghost" onclick="runAiAction('blockers')">Find blockers</button>
-    <button class="btn btn-ghost" onclick="runAiAction('obsidian')">Generate Obsidian note</button>
+    <button class="btn btn-ghost" onclick="runAiAction('next-step')">Next Step</button>
+    <button class="btn btn-ghost" onclick="runAiAction('extract-tasks')">Extract Tasks</button>
+    <button class="btn btn-ghost" onclick="runAiAction('summarize')">Summarize Project</button>
+    <button class="btn btn-ghost" onclick="runAiAction('find-blockers')">Find Blockers</button>
+    <button class="btn btn-ghost" onclick="runAiAction('generate-prompt')">Generate Prompt</button>
   </div>
   <div class="ai-panel-list" id="ai-bot-prompts"></div>
   <div class="ai-output" id="ai-bot-output">Choose an action.</div>
 </div>
 
+<div class="quick-tools-overlay" id="quick-tools-overlay" onclick="closeQuickTools(event)">
+  <div class="quick-tool-box" onclick="event.stopPropagation()">
+    <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;">
+      <div>
+        <p class="section-title">Quick tools</p>
+        <div class="note-meta">Open utilities above the current page without changing tabs.</div>
+      </div>
+      <button class="btn btn-ghost" onclick="closeQuickTools()" type="button">Close</button>
+    </div>
+    <div class="quick-tool-grid">
+      <button class="btn btn-ghost quick-tool-card" onclick="openQuickTool('calendar')" type="button">Calendar planner<span>Reserve a day or 4-hour block</span></button>
+      <button class="btn btn-ghost quick-tool-card" onclick="openQuickTool('ai')" type="button">AI assistant<span>Prompt and planning actions</span></button>
+      <button class="btn btn-ghost quick-tool-card" onclick="openQuickTool('calculator')" type="button">Calculator<span>Time planning utility</span></button>
+      <button class="btn btn-ghost quick-tool-card" onclick="openQuickTool('notes')" type="button">Notes sync<span>Repo refresh instructions</span></button>
+      <button class="btn btn-ghost quick-tool-card" onclick="openQuickTool('goal')" type="button">Goal/task add<span>Fast local goal intake</span></button>
+      <button class="btn btn-ghost quick-tool-card" onclick="openQuickTool('deploy')" type="button">Deployment<span>Local status snapshot</span></button>
+      <button class="btn btn-ghost quick-tool-card" onclick="openQuickTool('settings')" type="button">Settings<span>Theme and data sync prep</span></button>
+    </div>
+  </div>
+</div>
+
+<div class="quick-slide-panel" id="quick-slide-panel">
+  <div class="quick-slide-header">
+    <div>
+      <h3 id="quick-slide-title">Quick tool</h3>
+      <div class="note-meta" id="quick-slide-subtitle">Local utility</div>
+    </div>
+    <button class="btn btn-ghost" onclick="closeQuickSlide()" type="button">Close</button>
+  </div>
+  <div id="quick-slide-body"></div>
+</div>
+
+<div class="overlay" id="calendar-overlay-shade" onclick="closeCalendarOverlay()"></div>
+<div class="day-panel calendar-overlay-panel" id="calendar-overlay-panel">
+  <div class="day-panel-header">
+    <div>
+      <h3>Calendar quick planner</h3>
+      <div class="note-meta">Double-click a day to start planning or reserve a 4-hour block.</div>
+    </div>
+    <button class="btn btn-ghost" style="padding:4px 10px;" onclick="closeCalendarOverlay()">Close</button>
+  </div>
+  <div class="day-panel-body">
+    <div class="cal-nav">
+      <div class="btns">
+        <button class="btn btn-ghost" onclick="calNav(-1)">‹</button>
+        <button class="btn btn-ghost" onclick="calNav(0)">Today</button>
+        <button class="btn btn-ghost" onclick="calNav(1)">›</button>
+      </div>
+      <div class="month-label" id="cal-overlay-month-label"></div>
+    </div>
+    <div class="cal-grid" id="cal-overlay-grid"></div>
+    <div class="card" id="cal-overlay-planner" style="margin-top:14px;">
+      <p class="section-title">Quick reservation</p>
+      <div class="note-meta">Double-click a day to select it, then reserve one of the available 4-hour planning blocks.</div>
+      <div id="cal-overlay-selected" class="logout-message">No day selected.</div>
+      <div class="reservation-grid" id="cal-overlay-reservations"></div>
+    </div>
+  </div>
+</div>
+
 <footer class="footer">
-  <img class="footer-logo" src="img/symbol_logo_small.png" alt="" />
+  <img class="footer-logo" src="planner.png" alt="" />
   <div class="footer-links">
     <button class="footer-link" onclick="toggleAppMenu()">Menu</button>
     <button class="footer-link" onclick="openMenuPanel('theme')">Settings</button>
@@ -1876,6 +2170,19 @@
     <button class="footer-link" onclick="openInfoModal('faq')">FAQ</button>
   </div>
 </footer>
+
+<div class="logout-overlay" id="logout-overlay">
+  <div class="logout-dialog">
+    <h3>Leave TimePlanner?</h3>
+    <p>This standalone module will never force a sign-in redirect. Choose how you want to continue.</p>
+    <div class="logout-actions">
+      <button class="btn btn-ghost" onclick="leavePageSafely()">Leave page</button>
+      <button class="btn btn-primary" onclick="switchUserSafely()">Sign in as different user</button>
+      <button class="btn btn-ghost" onclick="closeLogoutOverlay()">Stay</button>
+    </div>
+    <div class="logout-message" id="logout-message">Hub/Firebase SSO can be connected later without redirect loops.</div>
+  </div>
+</div>
 
 <!-- ─── Day Detail Side Panel ────────────────────────── -->
 <div class="overlay" id="overlay" onclick="closeDayPanel()"></div>
@@ -2023,11 +2330,11 @@
   </div>
   <div class="form-row">
     <div>
-      <label>Month</label>
-      <input type="month" id="goal-month" />
+      <label>Project</label>
+      <select id="goal-project"></select>
     </div>
     <div>
-      <label>Category</label>
+      <label>Phase</label>
       <select id="goal-cat">
         <option value="phase-0-10">0-10%</option>
         <option value="phase-10-20">10-20%</option>
@@ -2042,12 +2349,44 @@
       </select>
     </div>
   </div>
+  <div class="form-row">
+    <div>
+      <label>Month</label>
+      <input type="month" id="goal-month" />
+    </div>
+    <div>
+      <label>Apps box tool</label>
+      <select id="goal-tool"></select>
+    </div>
+  </div>
+  <div class="form-row">
+    <div>
+      <label>Task time amount</label>
+      <select id="goal-task-duration">
+        <option value="4">4 hours</option>
+        <option value="8">8 hours</option>
+        <option value="12">12 hours</option>
+        <option value="16">16 hours</option>
+      </select>
+    </div>
+    <div>
+      <label>Default reservation</label>
+      <select id="goal-reservation-slot">
+        <option value="08:00-12:00">08:00-12:00</option>
+        <option value="12:00-16:00">12:00-16:00</option>
+        <option value="16:00-20:00">16:00-20:00</option>
+        <option value="20:00-24:00">20:00-24:00</option>
+      </select>
+    </div>
+  </div>
   <div style="margin-bottom:10px;">
     <label>Description</label>
     <textarea id="goal-desc" rows="2" placeholder="Describe your goal…"></textarea>
   </div>
   <div style="margin-bottom:10px;">
-    <label>Tasks (one per line)</label>
+    <label>Tasks</label>
+    <div id="goal-task-rows"></div>
+    <button class="btn btn-ghost" type="button" onclick="addGoalTaskRow()">+ Task row</button>
     <textarea id="goal-tasks" rows="4" placeholder="Task 1&#10;Task 2&#10;Task 3"></textarea>
   </div>
   <div class="modal-footer">
@@ -2124,6 +2463,7 @@
   </div>
 </div>
 
+<script src="js/ai-engine.js"></script>
 <script>
 // ═══════════════════════════════════════════════════════
 //  STATE  (persisted to localStorage)
@@ -2133,12 +2473,23 @@ const KEY = '2026-planner-v1';
 function loadState() {
   try {
     const raw = localStorage.getItem(KEY);
-    return raw ? JSON.parse(raw) : defaultState();
+    return raw ? { ...defaultState(), ...JSON.parse(raw) } : defaultState();
   } catch { return defaultState(); }
 }
 
 function defaultState() {
-  return { events: [], blocks: {}, milestones: [], goals: [] };
+  return {
+    events: [],
+    blocks: {},
+    milestones: [],
+    goals: [],
+    proposedNotes: [],
+    projectTools: {},
+    roadmapNotes: [],
+    projectPhaseItems: [],
+    deploymentNotes: [],
+    syncedNotesQueue: [],
+  };
 }
 
 function saveState() {
@@ -2158,14 +2509,26 @@ let autoLevelAssignments = { assignments: [] };
 let extractedTasks = { tasks: [] };
 let projectStates = { projects: [] };
 let aiSuggestions = { projects: [], global: { actionPrompts: [], nextActions: [] } };
+let aiSuggestionsLoaded = false;
 let aiConnectionStatus = "Not tested";
+let lastAiActionResult = null;
 let aiBotState = JSON.parse(localStorage.getItem('aiBotState') || '{"open":false,"project":""}');
+let acceptedAiSuggestions = loadJsonArray('acceptedAiSuggestions');
 let dashboardFilters = JSON.parse(localStorage.getItem('dashboardFilters') || '{}');
 let activeCategoryFilter = dashboardFilters.category || 'all';
 let activeLevelId = null;
 let firebaseIntake = null;
 let firebaseIntakeReady = false;
 let projectPhaseChecks = loadProjectPhaseChecks();
+
+function loadJsonArray(key) {
+  try {
+    const value = JSON.parse(localStorage.getItem(key) || '[]');
+    return Array.isArray(value) ? value : [];
+  } catch {
+    return [];
+  }
+}
 
 const GOAL_PHASES = {
   'phase-0-10': { range:'0-10%', label: 'Concept dev phase', action:'AI start project', tools:'ChatGPT/Claude/Gemini/Grok', color: '#38bdf8' },
@@ -2179,6 +2542,13 @@ const GOAL_PHASES = {
   'phase-80-90': { range:'80-90%', label: 'Deployment/connectors', action:'Local servers/Vercel deployment/3th party integrations', tools:'Vimexx/Appstore/Vercel/Github', color: '#e879f9' },
   'phase-90-100': { range:'90-100%', label: 'Tools and hosted functions', action:'Business production level', tools:'SQL database/Shipping/inventory management', color: '#fb7185' },
 };
+const PHASE_TOOL_OPTIONS = [...new Set(Object.values(GOAL_PHASES).flatMap(phase => phase.tools.split('/').map(tool => tool.trim()).filter(Boolean)))];
+const RESERVATION_SLOTS = [
+  { label: '08:00-12:00', start: '08:00', end: '12:00' },
+  { label: '12:00-16:00', start: '12:00', end: '16:00' },
+  { label: '16:00-20:00', start: '16:00', end: '20:00' },
+  { label: '20:00-24:00', start: '20:00', end: '24:00' },
+];
 
 function goalPhaseLabel(value) {
   const phase = GOAL_PHASES[value];
@@ -2219,7 +2589,11 @@ function loadDashboardSettings() {
     userName: '',
     userProfile: '',
     userNote: '',
-    userAvatar: 'img/symbol_logo_small.png',
+    userAvatar: 'planner.png',
+    userLanguage: 'en',
+    userSecondaryLanguage: '',
+    userLocale: 'en-GB',
+    userTimezone: 'Europe/London',
     displayUser: false,
     aiProvider: 'Ollama',
     aiModel: 'qwen',
@@ -2268,6 +2642,10 @@ function applyDashboardSettings() {
   const userProfile = document.getElementById('setting-user-profile');
   const userNote = document.getElementById('setting-user-note');
   const userAvatar = document.getElementById('setting-user-avatar');
+  const userLanguage = document.getElementById('setting-user-language');
+  const userSecondaryLanguage = document.getElementById('setting-user-secondary-language');
+  const userLocale = document.getElementById('setting-user-locale');
+  const userTimezone = document.getElementById('setting-user-timezone');
   const displayUser = document.getElementById('setting-display-user');
   const aiProvider = document.getElementById('setting-ai-provider');
   const aiModel = document.getElementById('setting-ai-model');
@@ -2288,14 +2666,18 @@ function applyDashboardSettings() {
   if (userName) userName.value = settings.userName || '';
   if (userProfile) userProfile.value = settings.userProfile || '';
   if (userNote) userNote.value = settings.userNote || '';
-  if (userAvatar) userAvatar.value = settings.userAvatar || 'img/symbol_logo_small.png';
+  if (userAvatar) userAvatar.value = settings.userAvatar || 'planner.png';
+  populateLanguageSelect(userLanguage, settings.userLanguage || 'en', true);
+  populateLanguageSelect(userSecondaryLanguage, settings.userSecondaryLanguage || '', false);
+  populateLocaleSelect(userLocale, settings.userLocale || 'en-GB');
+  if (userTimezone) userTimezone.value = settings.userTimezone || 'Europe/London';
   if (displayUser) displayUser.checked = !!settings.displayUser;
   const chip = document.getElementById('user-chip');
   const chipName = document.getElementById('user-chip-name');
   const avatar = document.getElementById('user-avatar');
   if (chip) chip.classList.toggle('profile-hidden', !settings.displayUser);
   if (chipName) chipName.textContent = settings.displayUser ? (settings.userName || 'User') : 'User';
-  if (avatar) avatar.src = settings.userAvatar || 'img/symbol_logo_small.png';
+  if (avatar) avatar.src = settings.userAvatar || 'planner.png';
   if (aiProvider) aiProvider.value = settings.aiProvider || 'Ollama';
   if (aiModel) aiModel.value = settings.aiModel || 'qwen';
   if (aiEndpoint) aiEndpoint.value = settings.aiEndpoint || 'http://localhost:11434';
@@ -2304,6 +2686,7 @@ function applyDashboardSettings() {
   renderDeploymentResult();
   renderAiAssistant();
   renderAiBot();
+  renderUserPage();
 }
 
 function saveSettingsFromUI() {
@@ -2325,7 +2708,11 @@ function saveSettingsFromUI() {
     userName: document.getElementById('setting-user-name').value.trim(),
     userProfile: document.getElementById('setting-user-profile').value.trim(),
     userNote: document.getElementById('setting-user-note').value.trim(),
-    userAvatar: document.getElementById('setting-user-avatar').value.trim() || 'img/symbol_logo_small.png',
+    userAvatar: document.getElementById('setting-user-avatar').value.trim() || 'planner.png',
+    userLanguage: document.getElementById('setting-user-language')?.value || 'en',
+    userSecondaryLanguage: document.getElementById('setting-user-secondary-language')?.value || '',
+    userLocale: document.getElementById('setting-user-locale')?.value || 'en-GB',
+    userTimezone: document.getElementById('setting-user-timezone')?.value.trim() || 'Europe/London',
     displayUser: document.getElementById('setting-display-user').checked,
     aiProvider: document.getElementById('setting-ai-provider').value.trim() || 'Ollama',
     aiModel: document.getElementById('setting-ai-model').value.trim() || 'qwen',
@@ -2334,6 +2721,95 @@ function saveSettingsFromUI() {
   };
   localStorage.setItem('dashboardSettings', JSON.stringify(settings));
   applyDashboardSettings();
+}
+
+function renderUserPage() {
+  const settings = loadDashboardSettings();
+  const avatar = settings.userAvatar || 'planner.png';
+  setText('user-page-name', settings.userName || 'User');
+  setText('user-page-email', settings.userEmail || 'Not connected');
+  setText('user-page-sso', 'Hub-managed');
+  setText('user-page-connection', settings.userEmail ? 'Local profile saved' : 'Standalone mode');
+  const img = document.getElementById('user-page-avatar');
+  if (img) img.src = avatar;
+  const nameInput = document.getElementById('user-page-input-name');
+  const emailInput = document.getElementById('user-page-input-email');
+  const profileInput = document.getElementById('user-page-input-profile');
+  const avatarInput = document.getElementById('user-page-input-avatar');
+  const displayInput = document.getElementById('user-page-display-name');
+  if (nameInput) nameInput.value = settings.userName || '';
+  if (emailInput) emailInput.value = settings.userEmail || '';
+  if (profileInput) profileInput.value = settings.userProfile || '';
+  if (avatarInput) avatarInput.value = avatar;
+  if (displayInput) displayInput.checked = !!settings.displayUser;
+}
+
+function saveUserPageSettings() {
+  const settings = loadDashboardSettings();
+  settings.userName = document.getElementById('user-page-input-name')?.value.trim() || '';
+  settings.userEmail = document.getElementById('user-page-input-email')?.value.trim() || '';
+  settings.userProfile = document.getElementById('user-page-input-profile')?.value.trim() || '';
+  settings.userAvatar = document.getElementById('user-page-input-avatar')?.value.trim() || 'planner.png';
+  settings.displayUser = !!document.getElementById('user-page-display-name')?.checked;
+  localStorage.setItem('dashboardSettings', JSON.stringify(settings));
+  const menuName = document.getElementById('setting-user-name');
+  const menuProfile = document.getElementById('setting-user-profile');
+  const menuAvatar = document.getElementById('setting-user-avatar');
+  const menuDisplay = document.getElementById('setting-display-user');
+  if (menuName) menuName.value = settings.userName;
+  if (menuProfile) menuProfile.value = settings.userProfile;
+  if (menuAvatar) menuAvatar.value = settings.userAvatar;
+  if (menuDisplay) menuDisplay.checked = settings.displayUser;
+  applyDashboardSettings();
+  setText('user-page-message', 'Local profile settings saved. Account sign-in remains hub-managed.');
+}
+
+function showAccountHubMessage(action) {
+  const verb = action === 'sign-in' ? 'sign-in' : 'account';
+  setText('user-page-message', `Account ${verb} is handled by the hub. No redirect is triggered from this standalone module.`);
+}
+
+function populateLanguageSelect(select, selectedValue, required) {
+  if (!select) return;
+  const languages = [
+    ['', 'None'],
+    ['en', 'English'],
+    ['nl', 'Dutch / Nederlands'],
+    ['es', 'Spanish / Español'],
+    ['de', 'German / Deutsch'],
+    ['fr', 'French / Français'],
+    ['pt', 'Portuguese / Português'],
+    ['it', 'Italian / Italiano'],
+    ['ja', 'Japanese / 日本語'],
+    ['ko', 'Korean / 한국어'],
+    ['zh', 'Chinese / 中文'],
+    ['ar', 'Arabic / العربية'],
+    ['hi', 'Hindi / हिन्दी'],
+  ].filter(([value]) => required || value);
+  select.innerHTML = languages.map(([value, label]) => `<option value="${value}">${label}</option>`).join('');
+  select.value = selectedValue || (required ? 'en' : '');
+}
+
+function populateLocaleSelect(select, selectedValue) {
+  if (!select) return;
+  const locales = [
+    ['en-GB', 'English (UK)'],
+    ['en-US', 'English (US)'],
+    ['nl-NL', 'Dutch (Netherlands)'],
+    ['es-ES', 'Spanish (Spain)'],
+    ['de-DE', 'German (Germany)'],
+    ['fr-FR', 'French (France)'],
+    ['pt-PT', 'Portuguese (Portugal)'],
+    ['pt-BR', 'Portuguese (Brazil)'],
+    ['it-IT', 'Italian (Italy)'],
+    ['ja-JP', 'Japanese (Japan)'],
+    ['ko-KR', 'Korean (Korea)'],
+    ['zh-CN', 'Chinese (Simplified)'],
+    ['ar-SA', 'Arabic (Saudi Arabia)'],
+    ['hi-IN', 'Hindi (India)'],
+  ];
+  select.innerHTML = locales.map(([value, label]) => `<option value="${value}">${label}</option>`).join('');
+  select.value = selectedValue || 'en-GB';
 }
 
 function toggleAppMenu() {
@@ -2360,17 +2836,53 @@ function switchMenuPanel(panel) {
 }
 
 function logoutUser() {
+  document.getElementById('user-menu')?.classList.remove('open');
+  document.getElementById('logout-overlay')?.classList.add('open');
+}
+
+function closeLogoutOverlay() {
+  document.getElementById('logout-overlay')?.classList.remove('open');
+  setText('logout-message', 'Hub/Firebase SSO can be connected later without redirect loops.');
+}
+
+function leavePageSafely() {
+  const hubUrl = loadDashboardSettings().hubUrl || localStorage.getItem('timeplannerHubUrl') || '';
+  if (hubUrl) {
+    try {
+      const target = new URL(hubUrl, window.location.href);
+      if (target.origin !== window.location.origin && target.protocol.startsWith('http')) {
+        setText('logout-message', `Hub URL configured: ${target.href}. Open it from the hub shell when ready.`);
+        return;
+      }
+    } catch {}
+  }
+  setText('logout-message', 'Safe standalone mode: close this tab or return to the hub manually. No redirect was triggered.');
+}
+
+function switchUserSafely() {
   const settings = {
     ...loadDashboardSettings(),
     userName: '',
+    userEmail: '',
     userProfile: '',
     userNote: '',
-    userAvatar: 'img/symbol_logo_small.png',
+    userAvatar: 'planner.png',
+    userLanguage: 'en',
+    userSecondaryLanguage: '',
+    userLocale: 'en-GB',
+    userTimezone: 'Europe/London',
     displayUser: false,
   };
   localStorage.setItem('dashboardSettings', JSON.stringify(settings));
-  document.getElementById('user-menu')?.classList.remove('open');
   applyDashboardSettings();
+  renderUserPage();
+  setText('logout-message', 'Local profile cleared. Firebase SSO is handled by the hub; this module will not redirect.');
+}
+
+function toggleProjectFocus(force) {
+  const panel = document.getElementById('project-focus-panel');
+  if (!panel) return;
+  panel.classList.toggle('open', typeof force === 'boolean' ? force : !panel.classList.contains('open'));
 }
 
 function setThemePreset(preset) {
@@ -2428,6 +2940,7 @@ function populateGlobalProjectSelect() {
   select.innerHTML = '<option value="">All projects</option>' + projects.map(project => `<option value="${escapeHtml(project)}">${escapeHtml(project)}</option>`).join('');
   select.value = dashboardFilters.project || '';
   setText('global-project-status', dashboardFilters.project ? `Focused: ${dashboardFilters.project}` : 'All projects');
+  setText('project-focus-title', dashboardFilters.project || 'All projects');
 }
 
 function syncFilterControls() {
@@ -2444,6 +2957,7 @@ function syncFilterControls() {
   if (date) date.value = dashboardFilters.date || '';
   if (search) search.value = dashboardFilters.search || '';
   setText('global-project-status', dashboardFilters.project ? `Focused: ${dashboardFilters.project}` : 'All projects');
+  setText('project-focus-title', dashboardFilters.project || 'All projects');
 }
 
 // ═══════════════════════════════════════════════════════
@@ -2466,8 +2980,8 @@ function switchTab(name, btn) {
   if (name === 'notes')      { renderNotesIndex(); renderNoteBrowser(); }
   if (name === 'goals')      renderGoals();
   if (name === 'ai')         renderAiAssistant();
-  if (name === 'calculator') initCalculator();
   if (name === 'deploy')     renderDeploymentResult();
+  if (name === 'user')       renderUserPage();
 }
 
 async function loadDashboardModel() {
@@ -2486,6 +3000,7 @@ async function loadAiSuggestions() {
     const response = await fetch('data/ai-suggestions.json', { cache: 'no-store' });
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
     aiSuggestions = await response.json();
+    aiSuggestionsLoaded = true;
     renderAiAssistant();
     renderAiBot();
     renderDeploymentResult();
@@ -2561,6 +3076,7 @@ function renderDashboard() {
   setHtml('dash-timeline-list', timeline.length
     ? timeline.map(item => `<div>${escapeHtml(item.date)} · ${escapeHtml(item.projectName)} · ${escapeHtml(item.title)}</div>`).join('')
     : `<div>${escapeHtml(settings.userName || 'Your board')} has no timeline entries in this focus.</div>`);
+  setHtml('dash-recent-list', recentDashboardItems().map(item => `<div><strong>${escapeHtml(item.type)}</strong> · ${escapeHtml(item.label)}</div>`).join('') || '<div>No recent local activity yet.</div>');
   setText('dash-deploy-status', 'Ready');
   setText('dash-deploy-version', dashboardModel.generatedAt ? `Model ${formatGeneratedAt(dashboardModel.generatedAt)}` : 'Local static version');
   setHtml('dash-deploy-list', [
@@ -2569,6 +3085,24 @@ function renderDashboard() {
   ].map(item => `<div>${escapeHtml(item)}</div>`).join(''));
   renderDeploymentResult();
   renderPhaseStatus();
+}
+
+function recentDashboardItems() {
+  const selectedProject = dashboardFilters.project || '';
+  const localGoals = (state.goals || [])
+    .filter(goal => !selectedProject || goal.projectName === selectedProject)
+    .slice(-3)
+    .map(goal => ({ type: 'Goal', label: `${goal.title} · ${goalPhaseLabel(goal.category)}` }));
+  const localEvents = (state.events || [])
+    .filter(event => !selectedProject || event.projectName === selectedProject || (event.notes || '').includes(selectedProject))
+    .slice(-3)
+    .map(event => ({ type: 'Calendar', label: `${event.date || 'no date'} · ${event.title}` }));
+  const notes = getVisibleNotes()
+    .slice()
+    .sort((a, b) => (b.date || '').localeCompare(a.date || ''))
+    .slice(0, 3)
+    .map(note => ({ type: 'Note', label: `${note.date || 'undated'} · ${note.title}` }));
+  return [...localGoals, ...localEvents, ...notes].slice(0, 6);
 }
 
 function projectScopedLevels() {
@@ -2591,17 +3125,39 @@ function renderDeploymentResult() {
   setText('deploy-selected-project', selectedProject || 'All projects');
   setText('deploy-model-status', dashboardModel.generatedAt ? 'Generated dashboard-model.json' : 'Waiting for model');
   setText('deploy-data-counts', `${notes.length} notes · ${tasks.length} active tasks`);
+  setText('deploy-vercel-status', 'Local vercel.json checked; live versions need Vercel integration');
+  setHtml('deploy-project-list', renderDeployProjectCards());
   setText('deploy-ai-provider', settings.aiProvider || 'Ollama');
   setText('deploy-ai-model', settings.aiModel || 'qwen');
   setStatusText('deploy-ai-enabled', checks.enabled ? 'On' : 'Off', checks.enabled);
   setStatusText('deploy-ai-endpoint', checks.endpoint ? 'Configured' : 'Missing', checks.endpoint);
   setStatusText('deploy-ai-model-ready', checks.model ? 'Loaded' : 'Missing', checks.model);
+  setStatusText('deploy-ai-suggestions-ready', checks.suggestions ? 'Loaded' : 'Missing', checks.suggestions);
   setStatusText('deploy-ai-context', checks.project ? selectedProject : 'Select project', checks.project);
   setText('deploy-ai-connection', aiConnectionStatus);
   setHtml('deploy-ai-suggestions', getAiPlanningSuggestions().slice(0, 4).map(item => `
     <div class="agent-suggestion">${escapeHtml(item)}</div>
   `).join(''));
   renderPhaseStatus();
+}
+
+function renderDeployProjectCards() {
+  const projects = (dashboardModel.projects || projectStates.projects || []).slice(0, 30);
+  if (!projects.length) return '<div class="notes-empty">No projects loaded from dashboard-model.json.</div>';
+  return projects.map(project => {
+    const name = project.projectName || project.name || 'Unnamed project';
+    const phase = projectPhaseState(name).current;
+    const projectNotes = (notesIndex.notes || []).filter(note => note.projectName === name).length;
+    const projectTasks = (extractedTasks.tasks || []).filter(task => task.projectName === name).length;
+    const localDeploymentNotes = (state.deploymentNotes || []).filter(note => note.projectName === name).slice(-2);
+    return `
+      <div class="deploy-project-card">
+        <strong>${escapeHtml(name)}</strong>
+        <div class="note-meta">${escapeHtml(phase ? goalPhaseLabel(phase) : 'No selected phase')} · ${projectNotes} notes · ${projectTasks} tasks</div>
+        <div class="note-meta">Health: local static ready · Vercel version: configure API or manual deploy metadata</div>
+        ${localDeploymentNotes.map(note => `<div class="unlock-note">${escapeHtml(note.title)}</div>`).join('')}
+      </div>`;
+  }).join('');
 }
 
 function getAiPlanningSuggestions() {
@@ -2621,6 +3177,7 @@ function aiReadinessChecks() {
     enabled: !!settings.aiEnabled,
     endpoint: !!String(settings.aiEndpoint || '').trim(),
     model: !!dashboardModel.generatedAt,
+    suggestions: !!aiSuggestionsLoaded,
     project: !!(dashboardFilters.project || aiBotState.project),
   };
 }
@@ -2643,16 +3200,38 @@ function renderAiAssistant() {
   setText('ai-endpoint-status', settings.aiEndpoint || 'Not configured');
   setText('ai-mode-status', checks.enabled ? 'Local Ollama ready on click' : 'Deterministic fallback');
   setText('ai-selected-project', selectedProject || 'All projects');
-  setHtml('ai-prompt-ideas', renderAiList(suggestion?.actionPrompts || aiSuggestions.global?.actionPrompts || [], 'Prompt'));
-  setHtml('ai-task-suggestions', renderAiList(suggestion?.nextActions || [], 'Next action'));
-  setHtml('ai-decision-panel', renderAiList([suggestion?.decisionPrompt].filter(Boolean), 'Decision prompt'));
-  setHtml('ai-summary-panel', renderAiList([suggestion?.summaryPrompt, suggestion?.obsidianNotePrompt].filter(Boolean), 'Summary'));
+  setHtml('ai-prompt-ideas', renderAiList(suggestion?.actionPrompts || aiSuggestions.global?.actionPrompts || [], 'Prompt', 'notes'));
+  setHtml('ai-task-suggestions', renderAiList(suggestion?.nextActions || [], 'Next action', 'goals'));
+  setHtml('ai-decision-panel', renderAiList([suggestion?.decisionPrompt].filter(Boolean), 'Decision prompt', 'roadmap'));
+  setHtml('ai-summary-panel', renderAiList([suggestion?.summaryPrompt, suggestion?.obsidianNotePrompt].filter(Boolean), 'Summary', 'notes'));
 }
 
-function renderAiList(items, label) {
-  return items.length
-    ? items.map((item, index) => `<div class="ai-cardlet"><strong>${escapeHtml(label)} ${index + 1}</strong>${escapeHtml(item)}</div>`).join('')
+const AI_TARGET_TABS = ['calendar', 'schedule', 'roadmap', 'projects', 'notes', 'goals', 'deployment'];
+
+function renderAiList(items, label, defaultTarget = 'goals') {
+  const projectOptions = aiProjectOptions();
+  const visibleItems = items.filter(item => !acceptedAiSuggestions.includes(String(item)));
+  return visibleItems.length
+    ? visibleItems.map((item, index) => {
+        const idBase = `ai-${label.replace(/[^a-z0-9]+/gi, '-').toLowerCase()}-${index}`;
+        return `<div class="ai-cardlet">
+          <strong>${escapeHtml(label)} ${index + 1}</strong>${escapeHtml(item)}
+          <div class="ai-action-row">
+            <select id="${idBase}-project">${projectOptions}</select>
+            <select id="${idBase}-target">${AI_TARGET_TABS.map(tab => `<option value="${tab}" ${tab === defaultTarget ? 'selected' : ''}>${tab}</option>`).join('')}</select>
+            <button class="btn btn-primary" type="button" onclick="acceptAiSuggestion('${jsString(item)}','${jsString(defaultTarget)}', document.getElementById('${idBase}-project')?.value)">Accept suggestion</button>
+            <button class="btn btn-ghost" type="button" onclick="acceptAiSuggestion('${jsString(item)}', document.getElementById('${idBase}-target')?.value, document.getElementById('${idBase}-project')?.value)">Assign</button>
+            <button class="btn btn-ghost" type="button" onclick="acceptAiSuggestion('${jsString(item)}', document.getElementById('${idBase}-target')?.value, document.getElementById('${idBase}-project')?.value, true)">Add to page</button>
+          </div>
+        </div>`;
+      }).join('')
     : '<div class="notes-empty">No suggestions generated for this focus yet.</div>';
+}
+
+function aiProjectOptions() {
+  const selected = dashboardFilters.project || aiBotState.project || '';
+  const projects = dashboardModel.projects?.map(project => project.projectName).filter(Boolean).sort() || [];
+  return '<option value="">All projects</option>' + projects.map(project => `<option value="${escapeHtml(project)}" ${project === selected ? 'selected' : ''}>${escapeHtml(project)}</option>`).join('');
 }
 
 function populateAiBotProjectSelect() {
@@ -2668,7 +3247,7 @@ function renderAiBot() {
   if (panel) panel.classList.toggle('open', !!aiBotState.open);
   populateAiBotProjectSelect();
   const suggestion = currentAiSuggestion(aiBotState.project || dashboardFilters.project || '');
-  setHtml('ai-bot-prompts', renderAiList((suggestion?.actionPrompts || []).slice(0, 3), 'Idea'));
+  setHtml('ai-bot-prompts', renderAiList((suggestion?.actionPrompts || []).slice(0, 3), 'Idea', 'goals'));
 }
 
 function saveAiBotState() {
@@ -2705,7 +3284,6 @@ function setAiBotProject(projectName) {
 
 async function testAiConnection() {
   const settings = loadDashboardSettings();
-  const endpoint = String(settings.aiEndpoint || '').replace(/\/$/, '');
   if (!settings.aiEnabled) {
     aiConnectionStatus = 'Disabled in settings';
     setText('deploy-ai-output', 'Enable local AI suggestions in Menu > AI before testing Ollama.');
@@ -2714,48 +3292,206 @@ async function testAiConnection() {
     renderAiAssistant();
     return false;
   }
-  if (!endpoint) {
+  if (!String(settings.aiEndpoint || '').trim()) {
     aiConnectionStatus = 'Missing endpoint';
     renderDeploymentResult();
     renderAiAssistant();
     return false;
   }
-  try {
-    const response = await fetch(`${endpoint}/api/tags`, { method: 'GET' });
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
-    aiConnectionStatus = 'Connected';
-    setText('deploy-ai-output', `Connected to ${endpoint}.`);
-    setText('ai-action-output', `Connected to ${endpoint}.`);
-    renderDeploymentResult();
-    renderAiAssistant();
-    return true;
-  } catch (err) {
-    aiConnectionStatus = 'Fallback active';
-    const message = `Ollama unavailable: ${err.message}. Using deterministic suggestions.`;
-    setText('deploy-ai-output', message);
-    setText('ai-action-output', message);
-    renderDeploymentResult();
-    renderAiAssistant();
-    return false;
+  const payload = {
+    action: 'connection-preview',
+    provider: settings.aiProvider || 'Ollama',
+    model: settings.aiModel || 'qwen',
+    endpoint: settings.aiEndpoint || 'http://localhost:11434',
+    selectedProject: dashboardFilters.project || aiBotState.project || '',
+  };
+  const preview = window.TimePlannerAI?.callLocalAI
+    ? window.TimePlannerAI.callLocalAI(payload)
+    : { status: 'disabled', payloadPreview: payload };
+  aiConnectionStatus = preview.status === 'prepared' ? 'Payload prepared' : 'Disabled';
+  const message = `No network call made.\n${JSON.stringify(preview, null, 2)}`;
+  setText('deploy-ai-output', message);
+  setText('ai-action-output', message);
+  renderDeploymentResult();
+  renderAiAssistant();
+  return preview.status === 'prepared';
+}
+
+async function runAiAction(action) {
+  const project = aiBotState.project || dashboardFilters.project || '';
+  const engine = window.TimePlannerAI;
+  const result = engine
+    ? await engine.runAction(action, project)
+    : {
+        type: action,
+        projectName: project,
+        status: 'deterministic-fallback',
+        output: getAiPlanningSuggestions(),
+        proposedTasks: [],
+        proposedNotes: [],
+      };
+  lastAiActionResult = result;
+  const output = formatAiActionResult(result);
+  setHtml('deploy-ai-output', output);
+  setHtml('ai-action-output', output);
+  setHtml('ai-bot-output', output);
+  renderAiAssistant();
+  renderAiBot();
+}
+
+function formatAiActionResult(result) {
+  const lines = [
+    `<strong>${escapeHtml(result.type)} · ${escapeHtml(result.status)}</strong>`,
+    result.projectName ? `Project: ${escapeHtml(result.projectName)}` : 'Project: all projects',
+    '',
+    ...(Array.isArray(result.output) ? result.output : [result.output]).map(item => `- ${escapeHtml(item)}`),
+  ];
+  const canWrite = (result.proposedTasks || []).length || (result.proposedNotes || []).length;
+  const firstSuggestion = (Array.isArray(result.output) ? result.output[0] : result.output) || result.type;
+  return `${lines.join('\n')}
+
+<div class="ai-action-row">
+  <select id="ai-result-project">${aiProjectOptions()}</select>
+  <select id="ai-result-target">${AI_TARGET_TABS.map(tab => `<option value="${tab}" ${tab === 'goals' ? 'selected' : ''}>${tab}</option>`).join('')}</select>
+  <button class="btn btn-primary" onclick="acceptAiSuggestion('${jsString(firstSuggestion)}', document.getElementById('ai-result-target')?.value, document.getElementById('ai-result-project')?.value)">Accept suggestion</button>
+  ${canWrite ? `<button class="btn btn-ghost" onclick="confirmAiWriteBack()">Confirm local write-back</button>` : ''}
+</div>`;
+}
+
+async function acceptAiSuggestion(text, target = 'goals', projectName = '', navigate = false) {
+  const project = projectName || dashboardFilters.project || aiBotState.project || 'General';
+  const result = applyAiSuggestionToTarget(text, target, project);
+  const actionPayload = buildAcceptedActionPayload(text, target, project);
+  const queueResult = window.TimePlannerAI?.acceptAction
+    ? await window.TimePlannerAI.acceptAction(actionPayload)
+    : queueAcceptedActionLocally(actionPayload);
+  acceptedAiSuggestions = [...new Set([...acceptedAiSuggestions, String(text)])];
+  localStorage.setItem('acceptedAiSuggestions', JSON.stringify(acceptedAiSuggestions));
+  saveState();
+  renderAfterSuggestionTarget(target);
+  const message = `Accepted to ${result.label} for ${project}. Sync status: ${queueResult.status}.`;
+  setText('ai-action-output', message);
+  setText('ai-bot-output', message);
+  setText('deploy-ai-output', message);
+  if (navigate) {
+    const tab = target === 'projects' ? 'phases' : target === 'deployment' ? 'deploy' : target;
+    switchTab(tab);
   }
 }
 
-function runAiAction(action) {
-  const suggestion = currentAiSuggestion(aiBotState.project || dashboardFilters.project || '');
-  const fallback = {
-    roadmap: suggestion?.nextActions?.[0] || 'Select a project and choose the next roadmap level to unlock.',
-    prompts: (suggestion?.actionPrompts || []).join('\n\n') || 'No prompt ideas generated yet.',
-    tasks: (suggestion?.nextActions || []).join('\n') || 'No suggested tasks generated yet.',
-    summary: suggestion?.summaryPrompt || 'Select a project to summarize.',
-    blockers: (suggestion?.blockers || []).join('\n') || 'No blockers detected.',
-    obsidian: suggestion?.obsidianNotePrompt || 'Select a project to generate an Obsidian note prompt.',
-  }[action] || 'Choose an assistant action.';
-  const output = `Deterministic ${action} suggestion:\n${fallback}`;
-  setText('deploy-ai-output', output);
-  setText('ai-action-output', output);
-  setText('ai-bot-output', output);
+function buildAcceptedActionPayload(text, target, project) {
+  const actionType = target === 'roadmap' ? 'milestone' : 'task';
+  return {
+    type: actionType,
+    project,
+    title: String(text || 'AI suggestion').trim(),
+    targetTab: target,
+    source: 'ai-suggestion',
+    createdAt: new Date().toISOString(),
+  };
+}
+
+function queueAcceptedActionLocally(actionPayload) {
+  let pending = [];
+  try { pending = JSON.parse(localStorage.getItem('pendingSyncActions') || '[]'); } catch {}
+  const item = {
+    id: uid(),
+    type: `${actionPayload.type || 'task'}.create`,
+    payload: actionPayload,
+    status: 'pending',
+    createdAt: actionPayload.createdAt || new Date().toISOString(),
+  };
+  pending.push(item);
+  localStorage.setItem('pendingSyncActions', JSON.stringify(pending));
+  return { status: 'queued-local', localId: item.id, payload: actionPayload };
+}
+
+function applyAiSuggestionToTarget(text, target, projectName) {
+  const todayStr = isoDate(today.getFullYear(), today.getMonth() + 1, today.getDate());
+  const title = String(text || 'AI suggestion').trim();
+  const phase = projectPhaseState(projectName).current || 'phase-0-10';
+  if (target === 'calendar') {
+    state.events.push({ id: uid(), date: todayStr, category: 'goal', title, notes: `AI suggestion for ${projectName}` });
+    return { label: 'Calendar' };
+  }
+  if (target === 'schedule') {
+    if (!state.blocks[todayStr]) state.blocks[todayStr] = [];
+    state.blocks[todayStr].push({ id: uid(), title, start: '08:00', end: '12:00', category: 'goal', projectName, source: 'ai-suggestion' });
+    return { label: 'Daily Schedule' };
+  }
+  if (target === 'roadmap') {
+    if (!state.roadmapNotes) state.roadmapNotes = [];
+    state.roadmapNotes.push({ id: uid(), title, projectName, phase, createdAt: new Date().toISOString(), status: 'proposed' });
+    return { label: 'Roadmap' };
+  }
+  if (target === 'projects') {
+    if (!state.projectPhaseItems) state.projectPhaseItems = [];
+    state.projectPhaseItems.push({ id: uid(), title, projectName, phase, createdAt: new Date().toISOString(), status: 'proposed' });
+    return { label: 'Projects' };
+  }
+  if (target === 'notes') {
+    if (!state.syncedNotesQueue) state.syncedNotesQueue = [];
+    state.syncedNotesQueue.push({ id: uid(), title, projectName, status: 'repo-note-placeholder', createdAt: new Date().toISOString() });
+    if (!state.proposedNotes) state.proposedNotes = [];
+    state.proposedNotes.push({ id: uid(), title, projectName, status: 'proposed', createdAt: new Date().toISOString(), source: 'ai-suggestion' });
+    return { label: 'Notes queue' };
+  }
+  if (target === 'deployment') {
+    if (!state.deploymentNotes) state.deploymentNotes = [];
+    state.deploymentNotes.push({ id: uid(), title, projectName, status: 'checklist-note', createdAt: new Date().toISOString() });
+    return { label: 'Deployment' };
+  }
+  let goal = (state.goals || []).find(item => item.id === `ai-${projectName.replace(/[^a-z0-9]+/gi, '-').toLowerCase()}`);
+  if (!goal) {
+    goal = { id: `ai-${projectName.replace(/[^a-z0-9]+/gi, '-').toLowerCase()}`, title: `AI actions: ${projectName}`, projectName, month: todayStr.slice(0, 7), category: phase, desc: 'Accepted AI suggestions', tasks: [] };
+    state.goals.push(goal);
+  }
+  goal.tasks.push({ id: uid(), text: title, done: false, priority: true, proposedBy: 'ai-assistant' });
+  return { label: 'Goals' };
+}
+
+function renderAfterSuggestionTarget(target) {
+  renderDashboard();
+  if (target === 'calendar') renderCalendar();
+  if (target === 'schedule') renderSchedule();
+  if (target === 'roadmap') { renderRoadmap(); renderRoadmapOrchestrator(); }
+  if (target === 'projects') renderPhaseTable();
+  if (target === 'notes') renderNotesIndex();
+  if (target === 'goals') renderGoals();
+  if (target === 'deployment') renderDeploymentResult();
   renderAiAssistant();
   renderAiBot();
+}
+
+function confirmAiWriteBack() {
+  if (!lastAiActionResult) return;
+  const projectName = lastAiActionResult.projectName || dashboardFilters.project || 'General';
+  const proposedTasks = lastAiActionResult.proposedTasks || [];
+  const proposedNotes = lastAiActionResult.proposedNotes || [];
+  if (proposedTasks.length) {
+    const goalId = `ai-${projectName.replace(/[^a-z0-9]+/gi, '-').toLowerCase()}`;
+    let goal = (state.goals || []).find(item => item.id === goalId);
+    if (!goal) {
+      goal = { id: goalId, title: `AI proposed tasks: ${projectName}`, projectName, month: new Date().toISOString().slice(0, 7), category: 'phase-50-60', desc: 'Local AI assistant proposals', tasks: [] };
+      state.goals.push(goal);
+    }
+    proposedTasks.forEach(task => {
+      if (!goal.tasks.some(existing => existing.text === task.title)) {
+        goal.tasks.push({ id: uid(), text: task.title, done: false, priority: true, proposedBy: 'ai-assistant' });
+      }
+    });
+  }
+  if (proposedNotes.length) {
+    if (!state.proposedNotes) state.proposedNotes = [];
+    proposedNotes.forEach(note => state.proposedNotes.push({ id: uid(), createdAt: new Date().toISOString(), status: 'proposed', ...note }));
+  }
+  saveState();
+  const message = `Local write-back complete: ${proposedTasks.length} task(s), ${proposedNotes.length} proposed note(s). Source notes were not modified.`;
+  setText('deploy-ai-output', message);
+  setText('ai-action-output', message);
+  setText('ai-bot-output', message);
+  renderGoals();
+  renderDashboard();
 }
 
 function selectedProjectName() {
@@ -2795,6 +3531,7 @@ function renderPhaseTable() {
   const table = document.getElementById('phase-table');
   if (!table) return;
   setText('phase-config-project', project ? `Checking phase rows for ${project}` : 'Select a project to store phase checks for a specific project.');
+  renderProjectToolsBox(project);
   const checks = project ? (projectPhaseChecks[project] || {}) : {};
   table.innerHTML = Object.entries(GOAL_PHASES).map(([key, phase]) => `
     <label class="phase-row">
@@ -2813,12 +3550,104 @@ function toggleProjectPhase(phaseKey, checked) {
   const project = selectedProjectName();
   if (!project) return;
   if (!projectPhaseChecks[project]) projectPhaseChecks[project] = {};
-  projectPhaseChecks[project][phaseKey] = checked;
+  projectPhaseChecks[project] = checked ? { [phaseKey]: true } : {};
   saveProjectPhaseChecks();
   renderPhaseStatus();
   renderPhaseTable();
   renderDashboard();
   renderDeploymentResult();
+}
+
+function renderProjectToolsBox(project) {
+  const box = document.getElementById('phase-tools-box');
+  if (!box) return;
+  if (!project) {
+    box.innerHTML = '<div class="notes-empty">Select one project first. Tools are stored per selected phase.</div>';
+    return;
+  }
+  const phase = activeProjectPhase(project);
+  if (!phase) {
+    box.innerHTML = '<div class="notes-empty">Choose one active phase below before adding tools/apps.</div>';
+    return;
+  }
+  const phaseInfo = GOAL_PHASES[phase];
+  const chosen = getProjectPhaseTools(project, phase);
+  const chosenSet = new Set(chosen);
+  const phaseItems = (state.projectPhaseItems || []).filter(item => item.projectName === project && item.phase === phase).slice(-5);
+  const recommended = phaseInfo?.tools?.split('/').map(tool => tool.trim()).filter(Boolean) || [];
+  const available = [...new Set([...recommended, ...PHASE_TOOL_OPTIONS])];
+  box.innerHTML = `
+    <div class="note-meta">Active phase: <strong>${escapeHtml(goalPhaseLabel(phase))}</strong>. Add tools only to this phase.</div>
+    <div class="apps-box" style="margin-top:10px;">
+      ${available.map(tool => `
+        <button class="btn ${chosenSet.has(tool) ? 'btn-primary' : 'btn-ghost'} tool-check" type="button" onclick="toggleProjectTool('${jsString(tool)}', ${chosenSet.has(tool) ? 'false' : 'true'})">
+          ${escapeHtml(chosenSet.has(tool) ? 'Added' : 'Add')} · ${escapeHtml(tool)}
+        </button>
+      `).join('')}
+    </div>
+    <div class="phase-tool-list">
+      ${chosen.length ? chosen.map(tool => `
+        <div class="phase-tool-item">
+          <span>${escapeHtml(tool)}</span>
+          <span class="phase-tool-edit">
+            <button class="btn btn-ghost" type="button" onclick="editProjectTool('${jsString(tool)}')">Edit</button>
+            <button class="btn btn-ghost" type="button" onclick="toggleProjectTool('${jsString(tool)}', false)">Remove</button>
+          </span>
+        </div>
+      `).join('') : '<div class="notes-empty">No tools added to this phase yet.</div>'}
+    </div>
+    <div class="phase-tool-list">
+      <div class="note-meta">Accepted project/phase items</div>
+      ${phaseItems.length ? phaseItems.map(item => `<div class="phase-tool-item"><span>${escapeHtml(item.title)}</span><span class="note-meta">${escapeHtml(item.status || 'proposed')}</span></div>`).join('') : '<div class="notes-empty">No local items accepted for this phase.</div>'}
+    </div>
+  `;
+}
+
+function toggleProjectTool(tool, checked) {
+  const project = selectedProjectName();
+  if (!project) return;
+  const phase = activeProjectPhase(project);
+  if (!phase) return;
+  if (!state.projectTools) state.projectTools = {};
+  if (Array.isArray(state.projectTools[project])) {
+    state.projectTools[project] = { [phase]: state.projectTools[project] };
+  }
+  if (!state.projectTools[project]) state.projectTools[project] = {};
+  const tools = new Set(state.projectTools[project][phase] || []);
+  if (checked) tools.add(tool);
+  else tools.delete(tool);
+  state.projectTools[project][phase] = [...tools].sort();
+  saveState();
+  renderPhaseTable();
+  renderGoals();
+}
+
+function editProjectTool(tool) {
+  const project = selectedProjectName();
+  const phase = activeProjectPhase(project);
+  if (!project || !phase) return;
+  const updated = prompt('Edit tool/app name', tool);
+  if (!updated || updated.trim() === tool) return;
+  const tools = new Set(getProjectPhaseTools(project, phase));
+  tools.delete(tool);
+  tools.add(updated.trim());
+  if (!state.projectTools) state.projectTools = {};
+  if (!state.projectTools[project] || Array.isArray(state.projectTools[project])) state.projectTools[project] = {};
+  state.projectTools[project][phase] = [...tools].sort();
+  saveState();
+  renderPhaseTable();
+  renderGoals();
+}
+
+function activeProjectPhase(project = selectedProjectName()) {
+  return projectPhaseState(project).current;
+}
+
+function getProjectPhaseTools(project, phase = activeProjectPhase(project)) {
+  const raw = state.projectTools?.[project];
+  if (!raw || !phase) return [];
+  if (Array.isArray(raw)) return raw;
+  return raw[phase] || [];
 }
 
 function clearProjectPhaseChecks() {
@@ -2839,6 +3668,103 @@ function openInfoModal(type) {
   setText('info-modal-title', title);
   setHtml('info-modal-body', `<p>${escapeHtml(body)}</p>`);
   openModal('modal-info');
+}
+
+function openQuickTools() {
+  document.getElementById('quick-tools-overlay')?.classList.add('open');
+}
+
+function closeQuickTools(event) {
+  if (event && event.target?.id !== 'quick-tools-overlay') return;
+  document.getElementById('quick-tools-overlay')?.classList.remove('open');
+}
+
+function closeQuickSlide() {
+  document.getElementById('quick-slide-panel')?.classList.remove('open');
+}
+
+function openQuickSlide(title, subtitle, bodyHtml) {
+  closeQuickTools();
+  setText('quick-slide-title', title);
+  setText('quick-slide-subtitle', subtitle);
+  setHtml('quick-slide-body', bodyHtml);
+  document.getElementById('quick-slide-panel')?.classList.add('open');
+  if (title === 'Time calculator') calcDuration();
+}
+
+function openQuickTool(tool) {
+  if (tool === 'calendar') {
+    openCalendarOverlay();
+    return;
+  }
+  if (tool === 'ai') {
+    closeQuickTools();
+    openAiBot();
+    return;
+  }
+  if (tool === 'goal') {
+    closeQuickTools();
+    openAddGoalModal();
+    return;
+  }
+  if (tool === 'calculator') {
+    openQuickSlide('Time calculator', 'Plan a daily block without leaving the current tab.', `
+      <div class="calc-grid" style="grid-template-columns:1fr;">
+        <div><label>Start Time</label><input type="time" id="quick-calc-start" value="09:00" oninput="quickCalcDuration()" /></div>
+        <div><label>End Time</label><input type="time" id="quick-calc-end" value="17:30" oninput="quickCalcDuration()" /></div>
+        <div><label>Break (minutes)</label><input type="number" id="quick-calc-break" value="60" min="0" oninput="quickCalcDuration()" /></div>
+      </div>
+      <div class="calc-result" id="quick-calc-result"></div>
+    `);
+    quickCalcDuration();
+    return;
+  }
+  if (tool === 'notes') {
+    openQuickSlide('Notes sync', 'Safe GitHub 2026 repo refresh instructions.', `
+      <div class="deploy-status">
+        <div class="deploy-row"><span>Source</span><strong>content/notes-2026</strong></div>
+        <div class="deploy-row"><span>Refresh</span><strong>npm run generate</strong></div>
+        <div class="deploy-row"><span>Browser write</span><strong>Disabled</strong></div>
+      </div>
+      <button class="btn btn-primary" type="button" onclick="showGitHubSyncInstructions()">Sync notes from GitHub 2026 repo</button>
+      <div class="logout-message" id="quick-notes-status">No fake GitHub data is created here.</div>
+    `);
+    return;
+  }
+  if (tool === 'deploy') {
+    renderDeploymentResult();
+    openQuickSlide('Deployment status', 'Local status snapshot for the selected project.', `
+      <div class="deploy-status">
+        <div class="deploy-row"><span>Selected project</span><strong>${escapeHtml(dashboardFilters.project || 'All projects')}</strong></div>
+        <div class="deploy-row"><span>Build mode</span><strong>Static local app</strong></div>
+        <div class="deploy-row"><span>Version date</span><strong>${escapeHtml(new Date().toISOString().slice(0, 10))}</strong></div>
+        <div class="deploy-row"><span>Vercel</span><strong>Placeholder until API integration</strong></div>
+      </div>
+      <div class="phase-tool-list">${(state.deploymentNotes || []).slice(-5).map(note => `<div class="phase-tool-item"><span>${escapeHtml(note.title)}</span><span class="note-meta">${escapeHtml(note.projectName || 'General')}</span></div>`).join('') || '<div class="notes-empty">No local deployment notes yet.</div>'}</div>
+    `);
+    return;
+  }
+  if (tool === 'settings') {
+    openQuickSlide('Settings', 'Theme and sync preparation shortcuts.', `
+      <div class="theme-preset-grid">
+        <button class="theme-preset" onclick="setThemePreset('powerframe')">Powerframe<span>Dark navy, cyan and violet</span></button>
+        <button class="theme-preset" onclick="setThemePreset('light')">Light<span>Bright workspace mode</span></button>
+        <button class="theme-preset" onclick="setThemePreset('aurora')">Aurora<span>Teal and violet glass</span></button>
+        <button class="theme-preset" onclick="setThemePreset('mono')">Mono<span>Neutral graphite</span></button>
+      </div>
+      <div class="logout-message">Open the main Menu for full AI/provider and per-page sync settings.</div>
+    `);
+  }
+}
+
+function quickCalcDuration() {
+  const start = document.getElementById('quick-calc-start')?.value || '09:00';
+  const end = document.getElementById('quick-calc-end')?.value || '17:30';
+  const breakMinutes = Number(document.getElementById('quick-calc-break')?.value || 0);
+  const [sh, sm] = start.split(':').map(Number);
+  const [eh, em] = end.split(':').map(Number);
+  const total = Math.max(0, (eh * 60 + em) - (sh * 60 + sm) - breakMinutes);
+  setHtml('quick-calc-result', `<div class="calc-result-value">${(total / 60).toFixed(2)}h</div><div class="calc-result-label">${total} available minutes</div>`);
 }
 
 // ═══════════════════════════════════════════════════════
@@ -2950,6 +3876,16 @@ async function submitFirebaseNote() {
   }
 }
 
+function showGitHubSyncInstructions() {
+  const result = document.getElementById('submit-note-result');
+  const message = 'Safe stub: pull/update the 2026 notes repo locally, then run npm run generate. Browser sync does not edit note files.';
+  if (result) {
+    result.textContent = message;
+    result.className = 'intake-status ready';
+  }
+  setText('quick-notes-status', message);
+}
+
 function populateProjectFilter() {
   const select = document.getElementById('notes-project-filter');
   if (!select) return;
@@ -2984,6 +3920,12 @@ function renderNotesIndex() {
   renderNotesGroupList('notes-by-project', groupNotes(notes, note => note.projectName || 'Month and general notes'));
   renderNotesGroupList('notes-by-month', groupNotes(notes, note => note.monthFolder || monthLabelFromDate(note.date) || 'No month'));
   renderNotesGroupList('notes-by-date', groupNotes(notes.filter(note => note.date), note => note.date), { sortDescending: true });
+  const localQueue = [...(state.syncedNotesQueue || []), ...(state.proposedNotes || [])]
+    .filter(note => !dashboardFilters.project || note.projectName === dashboardFilters.project)
+    .slice(-6);
+  setHtml('notes-local-queue', localQueue.length
+    ? localQueue.map(note => `<div class="phase-tool-item"><span>${escapeHtml(note.title || 'Proposed note')}</span><span class="note-meta">${escapeHtml(note.status || 'proposed')}</span></div>`).join('')
+    : '<div class="notes-empty">No local proposed note queue items.</div>');
 }
 
 function getVisibleNotes() {
@@ -3420,12 +4362,7 @@ function renderRoadmapLevelMap() {
   if (!map) return;
 
   const selectedProject = dashboardFilters.project || '';
-  const levels = (roadmapLevels.levels || []).filter(level => {
-    if (!selectedProject) return true;
-    const merged = mergedLevel(level);
-    return (merged.projectIds || []).some(id => levelItemLabel('projectIds', id) === selectedProject) ||
-      (merged.notePaths || []).some(path => (notesIndex.notes || []).find(note => note.sourcePath === path)?.projectName === selectedProject);
-  });
+  const levels = phaseRoadmapLevels(selectedProject);
   setText('level-map-count', `${levels.length} levels`);
   const generated = document.getElementById('level-map-generated');
   if (generated) {
@@ -3481,6 +4418,32 @@ function renderLevelNode(level) {
     <div class="level-label" style="left:${pos.x}%;top:${pos.y}%;">${escapeHtml(level.title)}<div class="unlock-note">${escapeHtml(action)}</div></div>`;
 }
 
+function phaseRoadmapLevels(selectedProject = '') {
+  const current = projectPhaseState(selectedProject).current;
+  const keys = Object.keys(GOAL_PHASES);
+  const currentIndex = current ? keys.indexOf(current) : -1;
+  return keys.map((key, index) => {
+    const phase = GOAL_PHASES[key];
+    const status = currentIndex < 0
+      ? (index === 0 ? 'active' : 'locked')
+      : (index < currentIndex ? 'completed' : index === currentIndex ? 'active' : 'locked');
+    return {
+      id: `roadmap-${key}`,
+      title: `${phase.range} ${phase.label}`,
+      tier: index + 1,
+      status,
+      projectIds: selectedProject ? [selectedProject] : [],
+      notePaths: [],
+      promptIds: [],
+      featureIds: [],
+      taskIds: [],
+      tags: [],
+      description: `${phase.action} · ${phase.tools}`,
+      position: { x: index % 2 === 0 ? 38 : 62, y: 7 + index * 9.4 },
+    };
+  });
+}
+
 function openRoadmapLevel(levelId) {
   activeLevelId = levelId;
   const level = getActiveLevel();
@@ -3496,7 +4459,7 @@ function openRoadmapLevel(levelId) {
 
 function getActiveLevel() {
   const level = (roadmapLevels.levels || []).find(item => item.id === activeLevelId);
-  return level ? mergedLevel(level) : null;
+  return level ? mergedLevel(level) : phaseRoadmapLevels(dashboardFilters.project || '').find(item => item.id === activeLevelId) || null;
 }
 
 function populateLevelAssignmentOptions() {
@@ -3705,6 +4668,7 @@ function renderCalendar() {
     });
 
     cell.onclick = () => openDayPanel(dateStr);
+    cell.ondblclick = () => openQuickPlanningForDate(dateStr, true);
     grid.appendChild(cell);
   }
 
@@ -3718,6 +4682,108 @@ function renderCalendar() {
     cell.innerHTML = `<div class="day-num">${d}</div>`;
     grid.appendChild(cell);
   }
+  renderCalendarOverlayGrid();
+}
+
+function renderCalendarOverlayGrid() {
+  const grid = document.getElementById('cal-overlay-grid');
+  if (!grid) return;
+  const label = document.getElementById('cal-overlay-month-label');
+  const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  const DAYS = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  if (label) label.textContent = `${MONTHS[calMonth]} ${calYear}`;
+  grid.innerHTML = '';
+  DAYS.forEach(day => {
+    const el = document.createElement('div');
+    el.className = 'cal-day-name';
+    el.textContent = day;
+    grid.appendChild(el);
+  });
+  const firstDay = new Date(calYear, calMonth, 1).getDay();
+  const daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
+  for (let i = 0; i < firstDay; i++) {
+    const empty = document.createElement('div');
+    empty.className = 'cal-cell other-month';
+    grid.appendChild(empty);
+  }
+  for (let d = 1; d <= daysInMonth; d++) {
+    const dateStr = isoDate(calYear, calMonth + 1, d);
+    const cell = document.createElement('div');
+    cell.className = 'cal-cell';
+    cell.innerHTML = `<div class="day-num">${d}</div>`;
+    state.events.filter(event => event.date === dateStr).slice(0, 2).forEach(event => {
+      const pill = document.createElement('span');
+      pill.className = `cal-event-pill ${event.category}`;
+      pill.textContent = event.title;
+      cell.appendChild(pill);
+    });
+    cell.onclick = () => openQuickPlanningForDate(dateStr, false);
+    cell.ondblclick = () => openQuickPlanningForDate(dateStr, false);
+    grid.appendChild(cell);
+  }
+  renderCalendarOverlayPlanner();
+}
+
+function openCalendarOverlay() {
+  renderCalendar();
+  closeQuickTools();
+  document.getElementById('calendar-overlay-panel')?.classList.add('open');
+  document.getElementById('calendar-overlay-shade')?.classList.add('open');
+}
+
+function closeCalendarOverlay() {
+  document.getElementById('calendar-overlay-panel')?.classList.remove('open');
+  document.getElementById('calendar-overlay-shade')?.classList.remove('open');
+}
+
+function openQuickPlanningForDate(dateStr, ensureOverlay = false) {
+  const sched = document.getElementById('sched-date');
+  if (sched) sched.value = dateStr;
+  currentPanelDate = dateStr;
+  if (ensureOverlay || !document.getElementById('calendar-overlay-panel')?.classList.contains('open')) {
+    openCalendarOverlay();
+  }
+  renderCalendarOverlayPlanner(dateStr);
+  renderSchedule();
+}
+
+function renderCalendarOverlayPlanner(dateStr = currentPanelDate) {
+  const selected = document.getElementById('cal-overlay-selected');
+  const grid = document.getElementById('cal-overlay-reservations');
+  if (!grid) return;
+  if (!dateStr) {
+    if (selected) selected.textContent = 'No day selected.';
+    grid.innerHTML = '';
+    return;
+  }
+  if (selected) selected.textContent = `Selected day: ${formatDate(dateStr)} · choose a reservation block.`;
+  const blocks = state.blocks[dateStr] || [];
+  grid.innerHTML = RESERVATION_SLOTS.map(slot => {
+    const occupied = blocks.some(block => block.start === slot.start && block.end === slot.end);
+    return `<button class="btn ${occupied ? 'btn-ghost' : 'btn-primary'} reservation-btn" type="button" ${occupied ? 'disabled' : ''} onclick="reserveOverlayTimeFrame('${jsString(dateStr)}','${slot.start}','${slot.end}')">${slot.label}${occupied ? ' · booked' : ''}</button>`;
+  }).join('');
+}
+
+function reserveOverlayTimeFrame(dateStr, start, end) {
+  const sched = document.getElementById('sched-date');
+  if (sched) sched.value = dateStr;
+  if (!state.blocks[dateStr]) state.blocks[dateStr] = [];
+  if (!state.blocks[dateStr].some(block => block.start === start && block.end === end)) {
+    state.blocks[dateStr].push({
+      id: uid(),
+      title: `${selectedProjectName() || 'Project'} quick planning`,
+      start,
+      end,
+      category: 'goal',
+      projectName: selectedProjectName(),
+      notes: 'Created from Calendar quick planner overlay',
+    });
+    saveState();
+  }
+  renderCalendarOverlayPlanner(dateStr);
+  renderSchedule();
+  renderCalendar();
+  renderDashboard();
 }
 
 function isoDate(y, m, d) {
@@ -3876,7 +4942,7 @@ function renderSchedule() {
   const grid = document.getElementById('schedule-grid');
   grid.innerHTML = '';
 
-  for (let h = 5; h < 24; h++) {
+  for (let h = 8; h < 24; h++) {
     const label = document.createElement('div');
     label.className = 'sched-hour-label';
     label.textContent = `${String(h).padStart(2,'0')}:00`;
@@ -3911,6 +4977,36 @@ function renderSchedule() {
 
     grid.appendChild(slot);
   }
+  renderReservationGrid(dateStr);
+  calcDuration();
+}
+
+function renderReservationGrid(dateStr) {
+  const grid = document.getElementById('reservation-grid');
+  if (!grid) return;
+  const blocks = state.blocks[dateStr] || [];
+  grid.innerHTML = RESERVATION_SLOTS.map(slot => {
+    const occupied = blocks.some(block => block.start === slot.start && block.end === slot.end);
+    return `<button class="btn ${occupied ? 'btn-success' : 'btn-ghost'} reservation-btn" onclick="reserveTimeFrame('${slot.start}','${slot.end}')">${escapeHtml(slot.label)}${occupied ? ' reserved' : ''}</button>`;
+  }).join('');
+}
+
+function reserveTimeFrame(start, end) {
+  const dateStr = document.getElementById('sched-date').value;
+  if (!state.blocks[dateStr]) state.blocks[dateStr] = [];
+  if (!state.blocks[dateStr].some(block => block.start === start && block.end === end)) {
+    state.blocks[dateStr].push({
+      id: uid(),
+      title: `${selectedProjectName() || 'Project'} reservation`,
+      start,
+      end,
+      color: '#312e81',
+      sourceId: `reservation-${dateStr}-${start}`,
+    });
+    saveState();
+  }
+  renderSchedule();
+  renderDashboard();
 }
 
 function openAddBlockModal() {
@@ -3950,61 +5046,58 @@ function deleteBlock(dateStr, id) {
 function renderRoadmap() {
   renderPhaseStatus();
   const container = document.getElementById('roadmap-container');
-  container.innerHTML = '';
-
-  // Group by lane
-  const lanes = {};
-  state.milestones.forEach(ms => {
-    const lane = ms.lane || 'General';
-    if (!lanes[lane]) lanes[lane] = [];
-    lanes[lane].push(ms);
-  });
-
-  if (state.milestones.length === 0) {
-    container.innerHTML = `<p style="color:var(--text-muted);font-size:.85rem;">No milestones yet. Click "+ Milestone" to add one.</p>`;
-    return;
-  }
-
-  // Sort each lane by date
-  Object.entries(lanes).forEach(([laneName, milestones]) => {
-    milestones.sort((a, b) => (a.date || '') < (b.date || '') ? -1 : 1);
-
-    const laneEl = document.createElement('div');
-    laneEl.className = 'roadmap-lane';
-
-    laneEl.innerHTML = `
+  const stats = roadmapMeaningStats();
+  const localRoadmapNotes = (state.roadmapNotes || [])
+    .filter(note => !selectedProjectName() || note.projectName === selectedProjectName())
+    .slice(-6);
+  container.innerHTML = `
+    <div class="roadmap-lane">
       <div class="roadmap-lane-header">
-        <div class="lane-title">${laneName}</div>
-        <span class="badge badge-accent">${milestones.length}</span>
-      </div>`;
-
-    milestones.forEach(ms => {
-      const card = document.createElement('div');
-      card.className = `milestone-card ${ms.status === 'done' ? 'done' : ms.status === 'in-progress' ? 'in-progress' : ''}`;
-
-      const priorityBadge = {
-        high:   `<span class="badge badge-danger">High</span>`,
-        medium: `<span class="badge badge-warn">Medium</span>`,
-        low:    `<span class="badge badge-success">Low</span>`,
-      }[ms.priority] || '';
-
-      card.innerHTML = `
-        <div class="ms-actions">
-          <button class="ms-btn" onclick="toggleMilestoneStatus('${ms.id}')">
-            ${ms.status === 'done' ? '↩ Undo' : ms.status === 'in-progress' ? '✓ Done' : '▶ Start'}
-          </button>
-          <button class="ms-btn" onclick="deleteMilestone('${ms.id}')" style="color:var(--danger);">✕</button>
+        <div class="lane-title">Process flow stats</div>
+        <span class="badge badge-accent">${stats.total} linked signals</span>
+      </div>
+      ${stats.items.map(item => `
+        <div class="milestone-card">
+          <div class="ms-title">${escapeHtml(item.label)}</div>
+          <div class="progress-bar"><div class="progress-bar-fill" style="width:${item.percent}%;background:${item.color};"></div></div>
+          <div class="ms-date">${item.count} meaningful tag${item.count === 1 ? '' : 's'} from notes/tasks/goals</div>
         </div>
-        <div class="ms-title">${ms.title} ${priorityBadge}</div>
-        <div class="ms-date">${ms.date ? '📅 ' + formatDate(ms.date) : ''}  ${statusLabel(ms.status)}</div>
-        ${ms.notes ? `<div class="ms-notes">${ms.notes}</div>` : ''}`;
-      laneEl.appendChild(card);
-    });
-
-    container.appendChild(laneEl);
-  });
+      `).join('')}
+    </div>
+    <div class="roadmap-lane">
+      <div class="roadmap-lane-header">
+        <div class="lane-title">Accepted roadmap suggestions</div>
+        <span class="badge badge-accent">${localRoadmapNotes.length} local</span>
+      </div>
+      ${localRoadmapNotes.length ? localRoadmapNotes.map(note => `
+        <div class="milestone-card">
+          <div class="ms-title">${escapeHtml(note.title)}</div>
+          <div class="ms-date">${escapeHtml(goalPhaseLabel(note.phase))} · ${escapeHtml(note.projectName || 'General')}</div>
+        </div>
+      `).join('') : '<div class="notes-empty">No accepted roadmap suggestions yet.</div>'}
+    </div>`;
 
   renderRoadmapOrchestrator();
+}
+
+function roadmapMeaningStats() {
+  const project = selectedProjectName();
+  const tasks = filteredTasks();
+  const goals = selectedProjectGoals();
+  const notes = getVisibleNotes();
+  const buckets = Object.entries(GOAL_PHASES).map(([key, phase]) => {
+    const count = goals.filter(goal => goal.category === key).length +
+      tasks.filter(task => (task.title || '').toLowerCase().includes(phase.label.split(' ')[0].toLowerCase())).length +
+      notes.filter(note => (note.title || '').toLowerCase().includes(phase.label.split(' ')[0].toLowerCase())).length;
+    return { label: `${phase.range} ${phase.label}`, count, color: phase.color };
+  }).filter(item => item.count > 0);
+  const total = buckets.reduce((sum, item) => sum + item.count, 0);
+  return {
+    total,
+    items: buckets.length ? buckets.map(item => ({ ...item, percent: total ? Math.max(8, Math.round((item.count / total) * 100)) : 8 })) : [
+      { label: project ? `${project} has no phase signals yet` : 'Select a project for phase signals', count: 0, color: '#38bdf8', percent: 8 }
+    ],
+  };
 }
 
 function statusLabel(s) {
@@ -4090,7 +5183,7 @@ function renderGoals() {
         <span style="border-left:3px solid ${color};padding-left:8px;">${goal.title}</span>
         <button class="task-delete" onclick="deleteGoal('${goal.id}')">✕</button>
       </div>
-      <div style="font-size:.72rem;color:var(--text-muted);margin-bottom:6px;">${goal.month ? `📅 ${goal.month} · ` : ''}${escapeHtml(goal.projectName || 'No project')} · ${escapeHtml(phaseLabel)}</div>
+      <div style="font-size:.72rem;color:var(--text-muted);margin-bottom:6px;">${goal.month ? `📅 ${goal.month} · ` : ''}${escapeHtml(goal.projectName || 'No project')} · ${escapeHtml(phaseLabel)}${goal.tool ? ` · ${escapeHtml(goal.tool)}` : ''}${goal.taskDuration ? ` · ${escapeHtml(goal.taskDuration)}h tasks` : ''}</div>
       ${goal.desc  ? `<div class="goal-desc">${goal.desc}</div>` : ''}
       <div class="progress-bar"><div class="progress-bar-fill" style="width:${pct}%;background:${color};"></div></div>
       <div class="progress-label">${done}/${total} tasks · ${pct}%</div>
@@ -4140,19 +5233,59 @@ function openAddGoalModal() {
   document.getElementById('goal-tasks').value = '';
   const d = new Date();
   document.getElementById('goal-month').value = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`;
+  populateGoalProjectAndToolSelects();
+  const rows = document.getElementById('goal-task-rows');
+  if (rows) {
+    rows.innerHTML = '';
+    addGoalTaskRow();
+  }
   openModal('modal-goal');
+}
+
+function populateGoalProjectAndToolSelects() {
+  const projectSelect = document.getElementById('goal-project');
+  const toolSelect = document.getElementById('goal-tool');
+  const projects = dashboardModel.projects?.map(project => project.projectName).filter(Boolean).sort() || [];
+  if (projectSelect) {
+    projectSelect.innerHTML = '<option value="">No project</option>' + projects.map(project => `<option value="${escapeHtml(project)}">${escapeHtml(project)}</option>`).join('');
+    projectSelect.value = dashboardFilters.project || '';
+  }
+  if (toolSelect) {
+    const project = dashboardFilters.project || '';
+    const tools = project && getProjectPhaseTools(project).length ? getProjectPhaseTools(project) : PHASE_TOOL_OPTIONS;
+    toolSelect.innerHTML = '<option value="">No tool</option>' + tools.map(tool => `<option value="${escapeHtml(tool)}">${escapeHtml(tool)}</option>`).join('');
+  }
+}
+
+function addGoalTaskRow(value = '') {
+  const rows = document.getElementById('goal-task-rows');
+  if (!rows) return;
+  const id = uid();
+  const wrap = document.createElement('div');
+  wrap.className = 'form-row';
+  wrap.innerHTML = `
+    <input type="text" id="goal-task-row-${id}" placeholder="Task..." value="${escapeHtml(value)}" />
+    <button class="btn btn-ghost" type="button" onclick="this.closest('.form-row').remove()">Remove</button>`;
+  rows.appendChild(wrap);
 }
 
 function saveGoal() {
   const title = document.getElementById('goal-title').value.trim();
   if (!title) { alert('Please enter a goal title.'); return; }
-  const rawTasks = document.getElementById('goal-tasks').value.split('\n').filter(t => t.trim());
+  const rowTasks = [...document.querySelectorAll('#goal-task-rows input')].map(input => input.value.trim()).filter(Boolean);
+  const rawTasks = [
+    ...rowTasks,
+    ...document.getElementById('goal-tasks').value.split('\n').filter(t => t.trim())
+  ];
   const goal = {
     id:       uid(),
     title,
     month:    document.getElementById('goal-month').value,
     category: document.getElementById('goal-cat').value,
-    projectName: dashboardFilters.project || '',
+    projectName: document.getElementById('goal-project').value || dashboardFilters.project || '',
+    tool: document.getElementById('goal-tool').value,
+    taskDuration: Number(document.getElementById('goal-task-duration').value || 4),
+    reservationSlot: document.getElementById('goal-reservation-slot').value,
     desc:     document.getElementById('goal-desc').value.trim(),
     tasks:    rawTasks.map(t => {
       const text = t.trim();
@@ -4162,7 +5295,7 @@ function saveGoal() {
   };
   state.goals.push(goal);
   connectGoalToCalendar(goal);
-  connectGoalToMilestone(goal);
+  connectGoalTasksToSchedule(goal);
   saveState();
   closeModal('modal-goal');
   renderGoals();
@@ -4199,6 +5332,7 @@ function addTask(goalId) {
   const task = { id: uid(), text: priority ? text.slice(1).trim() : text, done: false, priority };
   goal.tasks.push(task);
   connectTaskDeploymentToCalendar(goal, task);
+  connectGoalTasksToSchedule({ ...goal, tasks: [task] });
   saveState();
   renderGoals();
   renderCalendar();
@@ -4262,15 +5396,34 @@ function connectGoalToMilestone(goal) {
 function connectTaskDeploymentToCalendar(goal, task) {
   const sourceId = `task-${task.id}`;
   if (state.events.some(event => event.sourceId === sourceId)) return;
+  const [start, end] = (goal.reservationSlot || '').split('-');
   state.events.push({
     id: uid(),
     date: firstDayOfGoalMonth(goal),
     title: `Task deployed: ${task.text}`,
     category: goal.category || 'goal',
-    start: '',
-    end: '',
-    notes: `Auto-linked from goal: ${goal.title}`,
+    start: start || '',
+    end: end || '',
+    notes: `Auto-linked from goal: ${goal.title}${goal.tool ? ` · ${goal.tool}` : ''}`,
     sourceId,
+  });
+}
+
+function connectGoalTasksToSchedule(goal) {
+  const dateStr = firstDayOfGoalMonth(goal);
+  const [start, end] = (goal.reservationSlot || '08:00-12:00').split('-');
+  if (!state.blocks[dateStr]) state.blocks[dateStr] = [];
+  goal.tasks.forEach(task => {
+    const sourceId = `goal-task-block-${task.id}`;
+    if (state.blocks[dateStr].some(block => block.sourceId === sourceId)) return;
+    state.blocks[dateStr].push({
+      id: uid(),
+      title: `${task.text}${goal.tool ? ` · ${goal.tool}` : ''}`,
+      start,
+      end,
+      color: goalPhaseColor(goal.category),
+      sourceId,
+    });
   });
 }
 
@@ -4437,6 +5590,17 @@ function formatDate(dateStr) {
   const d = new Date(dateStr + 'T00:00:00');
   return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
 }
+
+document.addEventListener('keydown', event => {
+  if (event.key !== 'Escape') return;
+  closeCalendarOverlay();
+  closeQuickSlide();
+  closeQuickTools();
+  closeAiBot();
+  closeLogoutOverlay();
+  document.getElementById('overlay')?.classList.remove('open');
+  document.getElementById('day-panel')?.classList.remove('open');
+});
 
 // ═══════════════════════════════════════════════════════
 //  INIT

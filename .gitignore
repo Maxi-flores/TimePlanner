@@ -7,3 +7,11 @@ build
 apps/time-planner/firebase.js
 firebase-service-account*.json
 service-account*.json
+
+# Firebase / Google secrets
+*serviceAccount*.json
+*firebase-adminsdk*.json
+*.credentials.json
+.env
+.env.local
+.env.production

@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-05-04T20:59:35.317Z",
-  "taskCount": 195,
+  "generatedAt": "2026-05-06T13:34:09.478Z",
+  "taskCount": 191,
   "tasks": [
     {
       "id": "task-content-notes-2026-april-alfadenga-14",
@@ -2096,50 +2096,6 @@
       "id": "task-content-notes-2026-profound-projects-therockettree-app-26-4-17-162",
       "title": "first",
       "sourcePath": "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.17",
-      "projectName": "TheRocketTree-App",
-      "category": "development",
-      "status": "proposed",
-      "confidence": 0.73,
-      "createdFrom": "note",
-      "decisionContext": null
-    },
-    {
-      "id": "task-content-notes-2026-profound-projects-therockettree-app-26-4-9-1",
-      "title": ". You have moved from a 5-point plan to a production-grade monorepo in record time. Having the Zod schemas in packages/contracts and the server-only guard in packages/core already in place means your \"Integration Level\" is starting with high security and type safety.",
-      "sourcePath": "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.9",
-      "projectName": "TheRocketTree-App",
-      "category": "development",
-      "status": "proposed",
-      "confidence": 0.73,
-      "createdFrom": "note",
-      "decisionContext": null
-    },
-    {
-      "id": "task-content-notes-2026-profound-projects-therockettree-app-26-4-9-13",
-      "title": "these to Vercel Settings > Environment Variables for each project:",
-      "sourcePath": "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.9",
-      "projectName": "TheRocketTree-App",
-      "category": "setup",
-      "status": "proposed",
-      "confidence": 0.73,
-      "createdFrom": "note",
-      "decisionContext": null
-    },
-    {
-      "id": "task-content-notes-2026-profound-projects-therockettree-app-26-4-9-19",
-      "title": "a new utility to packages/core, remember to run pnpm install at the root to update the symlinks so apps/trt can see the changes instantly.",
-      "sourcePath": "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.9",
-      "projectName": "TheRocketTree-App",
-      "category": "setup",
-      "status": "proposed",
-      "confidence": 0.73,
-      "createdFrom": "note",
-      "decisionContext": null
-    },
-    {
-      "id": "task-content-notes-2026-profound-projects-therockettree-app-26-4-9-22",
-      "title": "a simple app/api/status/route.ts in apps/trt.",
-      "sourcePath": "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.9",
       "projectName": "TheRocketTree-App",
       "category": "development",
       "status": "proposed",

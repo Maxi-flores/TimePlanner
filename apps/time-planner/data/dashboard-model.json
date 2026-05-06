@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-04T20:59:35.623Z",
+  "generatedAt": "2026-05-06T13:34:09.795Z",
   "sourceFiles": {
     "notes": "data/notes-index.json",
     "roadmap": "data/roadmap-items.json",
@@ -234,7 +234,7 @@
     },
     {
       "projectName": "TheRocketTree-App",
-      "summary": "TheRocketTree-App has 8 indexed notes, 70 proposed tasks, and appears in 1 roadmap level(s).",
+      "summary": "TheRocketTree-App has 7 indexed notes, 66 proposed tasks, and appears in 1 roadmap level(s).",
       "currentStatus": "task discovery",
       "lastActivity": "2026-04-25",
       "activeCategories": [
@@ -251,8 +251,8 @@
         "VERCEL_TOKEN: Vercel Dashboard → Account Settings → Tokens → Create",
         "Firebase Keys to Vercel (for each of the 3 projects)"
       ],
-      "noteCount": 8,
-      "taskCount": 70
+      "noteCount": 7,
+      "taskCount": 66
     }
   ],
   "notes": [
@@ -589,13 +589,6 @@
       "sourcePath": "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.25 @",
       "title": "26.4.25 @",
       "date": "2026-04-25",
-      "monthFolder": null,
-      "projectName": "TheRocketTree-App"
-    },
-    {
-      "sourcePath": "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.9",
-      "title": "26.4.9",
-      "date": "2026-04-09",
       "monthFolder": null,
       "projectName": "TheRocketTree-App"
     },
@@ -2708,50 +2701,6 @@
       "confidence": 0.73,
       "createdFrom": "note",
       "decisionContext": null
-    },
-    {
-      "id": "task-content-notes-2026-profound-projects-therockettree-app-26-4-9-1",
-      "title": ". You have moved from a 5-point plan to a production-grade monorepo in record time. Having the Zod schemas in packages/contracts and the server-only guard in packages/core already in place means your \"Integration Level\" is starting with high security and type safety.",
-      "sourcePath": "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.9",
-      "projectName": "TheRocketTree-App",
-      "category": "development",
-      "status": "proposed",
-      "confidence": 0.73,
-      "createdFrom": "note",
-      "decisionContext": null
-    },
-    {
-      "id": "task-content-notes-2026-profound-projects-therockettree-app-26-4-9-13",
-      "title": "these to Vercel Settings > Environment Variables for each project:",
-      "sourcePath": "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.9",
-      "projectName": "TheRocketTree-App",
-      "category": "setup",
-      "status": "proposed",
-      "confidence": 0.73,
-      "createdFrom": "note",
-      "decisionContext": null
-    },
-    {
-      "id": "task-content-notes-2026-profound-projects-therockettree-app-26-4-9-19",
-      "title": "a new utility to packages/core, remember to run pnpm install at the root to update the symlinks so apps/trt can see the changes instantly.",
-      "sourcePath": "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.9",
-      "projectName": "TheRocketTree-App",
-      "category": "setup",
-      "status": "proposed",
-      "confidence": 0.73,
-      "createdFrom": "note",
-      "decisionContext": null
-    },
-    {
-      "id": "task-content-notes-2026-profound-projects-therockettree-app-26-4-9-22",
-      "title": "a simple app/api/status/route.ts in apps/trt.",
-      "sourcePath": "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.9",
-      "projectName": "TheRocketTree-App",
-      "category": "development",
-      "status": "proposed",
-      "confidence": 0.73,
-      "createdFrom": "note",
-      "decisionContext": null
     }
   ],
   "milestones": [
@@ -3086,7 +3035,7 @@
       "sourceFolder": "content/notes-2026/Profound Projects/TheRocketTree-App",
       "status": "active",
       "dateRange": {
-        "start": "2026-04-09",
+        "start": "2026-04-10",
         "end": "2026-04-25"
       },
       "linkedNotes": [
@@ -3096,8 +3045,7 @@
         "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.13",
         "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.14",
         "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.17",
-        "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.25 @",
-        "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.9"
+        "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.25 @"
       ],
       "linkedTasks": [
         "task-content-notes-2026-profound-projects-therockettree-app-26-4-10-1",
@@ -3139,7 +3087,7 @@
         "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.14",
         "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.17",
         "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.25 @",
-        "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.9"
+        "content/notes-2026/Profound Projects/PF-PROJECT/ BMS-KB"
       ],
       "promptIds": [
         "prompt-content-notes-2026-profound-projects-cshop-26-4-25",
@@ -3430,8 +3378,7 @@
         "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.13",
         "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.14",
         "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.17",
-        "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.25 @",
-        "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.9"
+        "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.25 @"
       ],
       "promptIds": [
         "prompt-content-notes-2026-profound-projects-cshop-26-4-25",
@@ -3457,7 +3404,7 @@
       "reasons": [
         {
           "sourcePath": "content/notes-2026/Profound Projects/PF-PROJECT/ BMS-KB",
-          "score": 62,
+          "score": 122,
           "reason": "matched project PF-PROJECT"
         },
         {
@@ -3512,11 +3459,6 @@
         },
         {
           "sourcePath": "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.25 @",
-          "score": 127,
-          "reason": "matched project TheRocketTree-App"
-        },
-        {
-          "sourcePath": "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.9",
           "score": 127,
           "reason": "matched project TheRocketTree-App"
         }
@@ -3726,8 +3668,7 @@
         "task-review-therockettree-app-26-4-13",
         "task-review-therockettree-app-26-4-14",
         "task-review-therockettree-app-26-4-17",
-        "task-review-therockettree-app-26-4-25",
-        "task-review-therockettree-app-26-4-9"
+        "task-review-therockettree-app-26-4-25"
       ],
       "tags": [
         "tier-5",
@@ -4038,13 +3979,6 @@
       "sourcePath": "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.10"
     },
     {
-      "date": "2026-04-09",
-      "projectName": "TheRocketTree-App",
-      "title": "26.4.9",
-      "type": "note",
-      "sourcePath": "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.9"
-    },
-    {
       "date": "2026-04-01",
       "projectName": "Fullstack dev",
       "title": "26.4.1",
@@ -4064,140 +3998,140 @@
       "id": "project-therockettree-app",
       "entityType": "project",
       "title": "TheRocketTree-App",
-      "score": 104,
-      "reason": "8 notes, 8 dated"
+      "score": 92,
+      "reason": "7 notes, 7 dated"
     },
     {
       "id": "project-pf-project",
       "entityType": "project",
       "title": "PF-PROJECT",
-      "score": 70,
+      "score": 68,
       "reason": "5 notes, 3 dated"
     },
     {
       "id": "project-powerstarter-azure",
       "entityType": "project",
       "title": "Powerstarter Azure",
-      "score": 54,
+      "score": 52,
       "reason": "3 notes, 3 dated"
     },
     {
       "id": "project-cshop",
       "entityType": "project",
       "title": "CSHOP",
-      "score": 44,
+      "score": 42,
       "reason": "2 notes, 2 dated"
     },
     {
       "id": "project-examp-developer-portfolio",
       "entityType": "project",
       "title": "Examp. Developer Portfolio",
-      "score": 44,
+      "score": 42,
       "reason": "2 notes, 2 dated"
     },
     {
       "id": "project-powerframe",
       "entityType": "project",
       "title": "Powerframe",
-      "score": 44,
+      "score": 42,
       "reason": "2 notes, 2 dated"
     },
     {
       "id": "project-sapient",
       "entityType": "project",
       "title": "Sapient",
-      "score": 44,
+      "score": 42,
       "reason": "2 notes, 2 dated"
     },
     {
       "id": "task-review-pf-project-26-5-3",
       "entityType": "task",
       "title": "Review PF-PROJECT note 26.5.3 @",
-      "score": 38,
+      "score": 36,
       "reason": "dated 2026-05-03"
     },
     {
       "id": "project-flink3d",
       "entityType": "project",
       "title": "Flink3D",
-      "score": 34,
+      "score": 32,
       "reason": "1 notes, 1 dated"
     },
     {
       "id": "project-mucho3d",
       "entityType": "project",
       "title": "Mucho3D",
-      "score": 34,
+      "score": 32,
       "reason": "1 notes, 1 dated"
     },
     {
       "id": "project-fullstack-dev",
       "entityType": "project",
       "title": "Fullstack dev",
-      "score": 32,
+      "score": 30,
       "reason": "3 notes, 2 dated"
     },
     {
       "id": "task-review-pf-project-26-5-2",
       "entityType": "task",
       "title": "Review PF-PROJECT note 26.5.2",
-      "score": 32,
+      "score": 30,
       "reason": "dated 2026-05-02"
     },
     {
       "id": "project-bikerinstinct",
       "entityType": "project",
       "title": "Bikerinstinct",
-      "score": 31,
+      "score": 29,
       "reason": "1 notes, 1 dated"
     },
     {
       "id": "project-dealinstinct",
       "entityType": "project",
       "title": "Dealinstinct",
-      "score": 31,
+      "score": 29,
       "reason": "1 notes, 1 dated"
     },
     {
       "id": "task-review-cshop-26-4-25",
       "entityType": "task",
       "title": "Review CSHOP note 26.4.25 @",
-      "score": 30,
+      "score": 28,
       "reason": "dated 2026-04-25"
     },
     {
       "id": "task-review-examp-developer-portfolio-26-4-25",
       "entityType": "task",
       "title": "Review Examp. Developer Portfolio note 26.4.25 @",
-      "score": 30,
+      "score": 28,
       "reason": "dated 2026-04-25"
     },
     {
       "id": "task-review-flink3d-26-4-25",
       "entityType": "task",
       "title": "Review Flink3D note 26.4.25 @",
-      "score": 30,
+      "score": 28,
       "reason": "dated 2026-04-25"
     },
     {
       "id": "task-review-mucho3d-26-4-25",
       "entityType": "task",
       "title": "Review Mucho3D note 26.4.25 @",
-      "score": 30,
+      "score": 28,
       "reason": "dated 2026-04-25"
     },
     {
       "id": "task-review-powerframe-26-4-25",
       "entityType": "task",
       "title": "Review Powerframe note 26.4.25 @",
-      "score": 30,
+      "score": 28,
       "reason": "dated 2026-04-25"
     },
     {
       "id": "task-review-powerstarter-azure-26-4-25",
       "entityType": "task",
       "title": "Review Powerstarter Azure note 26.4.25 @",
-      "score": 30,
+      "score": 28,
       "reason": "dated 2026-04-25"
     }
   ],

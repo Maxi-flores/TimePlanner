@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-04T20:59:35.204Z",
+  "generatedAt": "2026-05-06T13:34:09.351Z",
   "source": {
     "notesIndexPath": "data/notes-index.json",
     "roadmapItemsPath": "data/roadmap-items.json",
@@ -24,8 +24,7 @@
         "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.13",
         "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.14",
         "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.17",
-        "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.25 @",
-        "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.9"
+        "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.25 @"
       ],
       "promptIds": [
         "prompt-content-notes-2026-profound-projects-cshop-26-4-25",
@@ -51,7 +50,7 @@
       "reasons": [
         {
           "sourcePath": "content/notes-2026/Profound Projects/PF-PROJECT/ BMS-KB",
-          "score": 62,
+          "score": 122,
           "reason": "matched project PF-PROJECT"
         },
         {
@@ -106,11 +105,6 @@
         },
         {
           "sourcePath": "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.25 @",
-          "score": 127,
-          "reason": "matched project TheRocketTree-App"
-        },
-        {
-          "sourcePath": "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.9",
           "score": 127,
           "reason": "matched project TheRocketTree-App"
         }
@@ -320,8 +314,7 @@
         "task-review-therockettree-app-26-4-13",
         "task-review-therockettree-app-26-4-14",
         "task-review-therockettree-app-26-4-17",
-        "task-review-therockettree-app-26-4-25",
-        "task-review-therockettree-app-26-4-9"
+        "task-review-therockettree-app-26-4-25"
       ],
       "tags": [
         "tier-5",

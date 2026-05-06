@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-05-04T20:59:35.716Z",
+  "generatedAt": "2026-05-06T13:34:09.891Z",
   "source": "data/dashboard-model.json",
   "mode": "deterministic-local",
   "projects": [
     {
       "projectName": "BV",
-      "generatedAt": "2026-05-04T20:59:35.714Z",
+      "generatedAt": "2026-05-06T13:34:09.889Z",
       "status": "task discovery",
       "context": {
         "noteCount": 2,
@@ -35,11 +35,30 @@
       ],
       "summaryPrompt": "Summarize BV using 2 notes, 5 tasks, 1 milestones, and current status \"task discovery\". Return project state, next three actions, and blockers.",
       "obsidianNotePrompt": "Create an Obsidian-ready project note for BV with sections: Status, Decisions, Next Actions, Blockers, Linked Notes, and Calendar Deployment.",
-      "decisionPrompt": "Extract explicit and implied decisions for BV. Output each as a proposed task first, never edit source notes directly."
+      "decisionPrompt": "Extract explicit and implied decisions for BV. Output each as a proposed task first, never edit source notes directly.",
+      "milestoneSuggestions": [
+        "Review milestone \"BV roadmap checkpoint\" and confirm next deployable task."
+      ],
+      "dependencyHints": [
+        "Notes index is available for context.",
+        "Extracted tasks are available for prioritization.",
+        "Milestones can be used as planning checkpoints."
+      ],
+      "priorityRecalculationInput": {
+        "noteCount": 2,
+        "taskCount": 5,
+        "milestoneCount": 1,
+        "riskCount": 1,
+        "recentActivity": null,
+        "categories": [
+          "content",
+          "development"
+        ]
+      }
     },
     {
       "projectName": "Bikerinstinct",
-      "generatedAt": "2026-05-04T20:59:35.715Z",
+      "generatedAt": "2026-05-06T13:34:09.890Z",
       "status": "indexed",
       "context": {
         "noteCount": 1,
@@ -66,11 +85,27 @@
       ],
       "summaryPrompt": "Summarize Bikerinstinct using 1 notes, 0 tasks, 1 milestones, and current status \"indexed\". Return project state, next three actions, and blockers.",
       "obsidianNotePrompt": "Create an Obsidian-ready project note for Bikerinstinct with sections: Status, Decisions, Next Actions, Blockers, Linked Notes, and Calendar Deployment.",
-      "decisionPrompt": "Extract explicit and implied decisions for Bikerinstinct. Output each as a proposed task first, never edit source notes directly."
+      "decisionPrompt": "Extract explicit and implied decisions for Bikerinstinct. Output each as a proposed task first, never edit source notes directly.",
+      "milestoneSuggestions": [
+        "Review milestone \"Bikerinstinct roadmap checkpoint\" and confirm next deployable task."
+      ],
+      "dependencyHints": [
+        "Notes index is available for context.",
+        "Needs task extraction before sequencing.",
+        "Milestones can be used as planning checkpoints."
+      ],
+      "priorityRecalculationInput": {
+        "noteCount": 1,
+        "taskCount": 0,
+        "milestoneCount": 1,
+        "riskCount": 0,
+        "recentActivity": "2026-04-25",
+        "categories": []
+      }
     },
     {
       "projectName": "CM4",
-      "generatedAt": "2026-05-04T20:59:35.715Z",
+      "generatedAt": "2026-05-06T13:34:09.890Z",
       "status": "indexed",
       "context": {
         "noteCount": 1,
@@ -96,11 +131,27 @@
       ],
       "summaryPrompt": "Summarize CM4 using 1 notes, 0 tasks, 1 milestones, and current status \"indexed\". Return project state, next three actions, and blockers.",
       "obsidianNotePrompt": "Create an Obsidian-ready project note for CM4 with sections: Status, Decisions, Next Actions, Blockers, Linked Notes, and Calendar Deployment.",
-      "decisionPrompt": "Extract explicit and implied decisions for CM4. Output each as a proposed task first, never edit source notes directly."
+      "decisionPrompt": "Extract explicit and implied decisions for CM4. Output each as a proposed task first, never edit source notes directly.",
+      "milestoneSuggestions": [
+        "Review milestone \"CM4 roadmap checkpoint\" and confirm next deployable task."
+      ],
+      "dependencyHints": [
+        "Notes index is available for context.",
+        "Needs task extraction before sequencing.",
+        "Milestones can be used as planning checkpoints."
+      ],
+      "priorityRecalculationInput": {
+        "noteCount": 1,
+        "taskCount": 0,
+        "milestoneCount": 1,
+        "riskCount": 1,
+        "recentActivity": null,
+        "categories": []
+      }
     },
     {
       "projectName": "CSHOP",
-      "generatedAt": "2026-05-04T20:59:35.715Z",
+      "generatedAt": "2026-05-06T13:34:09.890Z",
       "status": "active classification",
       "context": {
         "noteCount": 2,
@@ -131,11 +182,30 @@
       ],
       "summaryPrompt": "Summarize CSHOP using 2 notes, 4 tasks, 1 milestones, and current status \"active classification\". Return project state, next three actions, and blockers.",
       "obsidianNotePrompt": "Create an Obsidian-ready project note for CSHOP with sections: Status, Decisions, Next Actions, Blockers, Linked Notes, and Calendar Deployment.",
-      "decisionPrompt": "Extract explicit and implied decisions for CSHOP. Output each as a proposed task first, never edit source notes directly."
+      "decisionPrompt": "Extract explicit and implied decisions for CSHOP. Output each as a proposed task first, never edit source notes directly.",
+      "milestoneSuggestions": [
+        "Review milestone \"CSHOP roadmap checkpoint\" and confirm next deployable task."
+      ],
+      "dependencyHints": [
+        "Notes index is available for context.",
+        "Extracted tasks are available for prioritization.",
+        "Milestones can be used as planning checkpoints."
+      ],
+      "priorityRecalculationInput": {
+        "noteCount": 2,
+        "taskCount": 4,
+        "milestoneCount": 1,
+        "riskCount": 0,
+        "recentActivity": "2026-04-25",
+        "categories": [
+          "content",
+          "development"
+        ]
+      }
     },
     {
       "projectName": "Dealinstinct",
-      "generatedAt": "2026-05-04T20:59:35.715Z",
+      "generatedAt": "2026-05-06T13:34:09.890Z",
       "status": "indexed",
       "context": {
         "noteCount": 1,
@@ -162,11 +232,27 @@
       ],
       "summaryPrompt": "Summarize Dealinstinct using 1 notes, 0 tasks, 1 milestones, and current status \"indexed\". Return project state, next three actions, and blockers.",
       "obsidianNotePrompt": "Create an Obsidian-ready project note for Dealinstinct with sections: Status, Decisions, Next Actions, Blockers, Linked Notes, and Calendar Deployment.",
-      "decisionPrompt": "Extract explicit and implied decisions for Dealinstinct. Output each as a proposed task first, never edit source notes directly."
+      "decisionPrompt": "Extract explicit and implied decisions for Dealinstinct. Output each as a proposed task first, never edit source notes directly.",
+      "milestoneSuggestions": [
+        "Review milestone \"Dealinstinct roadmap checkpoint\" and confirm next deployable task."
+      ],
+      "dependencyHints": [
+        "Notes index is available for context.",
+        "Needs task extraction before sequencing.",
+        "Milestones can be used as planning checkpoints."
+      ],
+      "priorityRecalculationInput": {
+        "noteCount": 1,
+        "taskCount": 0,
+        "milestoneCount": 1,
+        "riskCount": 0,
+        "recentActivity": "2026-04-25",
+        "categories": []
+      }
     },
     {
       "projectName": "Examp. Developer Portfolio",
-      "generatedAt": "2026-05-04T20:59:35.715Z",
+      "generatedAt": "2026-05-06T13:34:09.890Z",
       "status": "active classification",
       "context": {
         "noteCount": 2,
@@ -193,11 +279,29 @@
       ],
       "summaryPrompt": "Summarize Examp. Developer Portfolio using 2 notes, 1 tasks, 1 milestones, and current status \"active classification\". Return project state, next three actions, and blockers.",
       "obsidianNotePrompt": "Create an Obsidian-ready project note for Examp. Developer Portfolio with sections: Status, Decisions, Next Actions, Blockers, Linked Notes, and Calendar Deployment.",
-      "decisionPrompt": "Extract explicit and implied decisions for Examp. Developer Portfolio. Output each as a proposed task first, never edit source notes directly."
+      "decisionPrompt": "Extract explicit and implied decisions for Examp. Developer Portfolio. Output each as a proposed task first, never edit source notes directly.",
+      "milestoneSuggestions": [
+        "Review milestone \"Examp. Developer Portfolio roadmap checkpoint\" and confirm next deployable task."
+      ],
+      "dependencyHints": [
+        "Notes index is available for context.",
+        "Extracted tasks are available for prioritization.",
+        "Milestones can be used as planning checkpoints."
+      ],
+      "priorityRecalculationInput": {
+        "noteCount": 2,
+        "taskCount": 1,
+        "milestoneCount": 1,
+        "riskCount": 0,
+        "recentActivity": "2026-04-25",
+        "categories": [
+          "setup"
+        ]
+      }
     },
     {
       "projectName": "Flink3D",
-      "generatedAt": "2026-05-04T20:59:35.715Z",
+      "generatedAt": "2026-05-06T13:34:09.890Z",
       "status": "indexed",
       "context": {
         "noteCount": 1,
@@ -224,11 +328,27 @@
       ],
       "summaryPrompt": "Summarize Flink3D using 1 notes, 0 tasks, 1 milestones, and current status \"indexed\". Return project state, next three actions, and blockers.",
       "obsidianNotePrompt": "Create an Obsidian-ready project note for Flink3D with sections: Status, Decisions, Next Actions, Blockers, Linked Notes, and Calendar Deployment.",
-      "decisionPrompt": "Extract explicit and implied decisions for Flink3D. Output each as a proposed task first, never edit source notes directly."
+      "decisionPrompt": "Extract explicit and implied decisions for Flink3D. Output each as a proposed task first, never edit source notes directly.",
+      "milestoneSuggestions": [
+        "Review milestone \"Flink3D roadmap checkpoint\" and confirm next deployable task."
+      ],
+      "dependencyHints": [
+        "Notes index is available for context.",
+        "Needs task extraction before sequencing.",
+        "Milestones can be used as planning checkpoints."
+      ],
+      "priorityRecalculationInput": {
+        "noteCount": 1,
+        "taskCount": 0,
+        "milestoneCount": 1,
+        "riskCount": 0,
+        "recentActivity": "2026-04-25",
+        "categories": []
+      }
     },
     {
       "projectName": "Fullstack dev",
-      "generatedAt": "2026-05-04T20:59:35.715Z",
+      "generatedAt": "2026-05-06T13:34:09.890Z",
       "status": "indexed",
       "context": {
         "noteCount": 3,
@@ -255,11 +375,27 @@
       ],
       "summaryPrompt": "Summarize Fullstack dev using 3 notes, 0 tasks, 1 milestones, and current status \"indexed\". Return project state, next three actions, and blockers.",
       "obsidianNotePrompt": "Create an Obsidian-ready project note for Fullstack dev with sections: Status, Decisions, Next Actions, Blockers, Linked Notes, and Calendar Deployment.",
-      "decisionPrompt": "Extract explicit and implied decisions for Fullstack dev. Output each as a proposed task first, never edit source notes directly."
+      "decisionPrompt": "Extract explicit and implied decisions for Fullstack dev. Output each as a proposed task first, never edit source notes directly.",
+      "milestoneSuggestions": [
+        "Review milestone \"Fullstack dev roadmap checkpoint\" and confirm next deployable task."
+      ],
+      "dependencyHints": [
+        "Notes index is available for context.",
+        "Needs task extraction before sequencing.",
+        "Milestones can be used as planning checkpoints."
+      ],
+      "priorityRecalculationInput": {
+        "noteCount": 3,
+        "taskCount": 0,
+        "milestoneCount": 1,
+        "riskCount": 0,
+        "recentActivity": "2026-04-12",
+        "categories": []
+      }
     },
     {
       "projectName": "Mucho3D",
-      "generatedAt": "2026-05-04T20:59:35.715Z",
+      "generatedAt": "2026-05-06T13:34:09.890Z",
       "status": "task discovery",
       "context": {
         "noteCount": 1,
@@ -291,11 +427,31 @@
       ],
       "summaryPrompt": "Summarize Mucho3D using 1 notes, 5 tasks, 1 milestones, and current status \"task discovery\". Return project state, next three actions, and blockers.",
       "obsidianNotePrompt": "Create an Obsidian-ready project note for Mucho3D with sections: Status, Decisions, Next Actions, Blockers, Linked Notes, and Calendar Deployment.",
-      "decisionPrompt": "Extract explicit and implied decisions for Mucho3D. Output each as a proposed task first, never edit source notes directly."
+      "decisionPrompt": "Extract explicit and implied decisions for Mucho3D. Output each as a proposed task first, never edit source notes directly.",
+      "milestoneSuggestions": [
+        "Review milestone \"Mucho3D roadmap checkpoint\" and confirm next deployable task."
+      ],
+      "dependencyHints": [
+        "Notes index is available for context.",
+        "Extracted tasks are available for prioritization.",
+        "Milestones can be used as planning checkpoints."
+      ],
+      "priorityRecalculationInput": {
+        "noteCount": 1,
+        "taskCount": 5,
+        "milestoneCount": 1,
+        "riskCount": 0,
+        "recentActivity": "2026-04-25",
+        "categories": [
+          "content",
+          "development",
+          "setup"
+        ]
+      }
     },
     {
       "projectName": "PF-PROJECT",
-      "generatedAt": "2026-05-04T20:59:35.715Z",
+      "generatedAt": "2026-05-06T13:34:09.890Z",
       "status": "task discovery",
       "context": {
         "noteCount": 5,
@@ -328,11 +484,33 @@
       ],
       "summaryPrompt": "Summarize PF-PROJECT using 5 notes, 23 tasks, 1 milestones, and current status \"task discovery\". Return project state, next three actions, and blockers.",
       "obsidianNotePrompt": "Create an Obsidian-ready project note for PF-PROJECT with sections: Status, Decisions, Next Actions, Blockers, Linked Notes, and Calendar Deployment.",
-      "decisionPrompt": "Extract explicit and implied decisions for PF-PROJECT. Output each as a proposed task first, never edit source notes directly."
+      "decisionPrompt": "Extract explicit and implied decisions for PF-PROJECT. Output each as a proposed task first, never edit source notes directly.",
+      "milestoneSuggestions": [
+        "Review milestone \"PF-PROJECT roadmap checkpoint\" and confirm next deployable task."
+      ],
+      "dependencyHints": [
+        "Notes index is available for context.",
+        "Extracted tasks are available for prioritization.",
+        "Milestones can be used as planning checkpoints."
+      ],
+      "priorityRecalculationInput": {
+        "noteCount": 5,
+        "taskCount": 23,
+        "milestoneCount": 1,
+        "riskCount": 1,
+        "recentActivity": "2026-05-03",
+        "categories": [
+          "3D",
+          "content",
+          "design",
+          "development",
+          "setup"
+        ]
+      }
     },
     {
       "projectName": "Powerframe",
-      "generatedAt": "2026-05-04T20:59:35.715Z",
+      "generatedAt": "2026-05-06T13:34:09.891Z",
       "status": "active classification",
       "context": {
         "noteCount": 2,
@@ -365,11 +543,33 @@
       ],
       "summaryPrompt": "Summarize Powerframe using 2 notes, 24 tasks, 1 milestones, and current status \"active classification\". Return project state, next three actions, and blockers.",
       "obsidianNotePrompt": "Create an Obsidian-ready project note for Powerframe with sections: Status, Decisions, Next Actions, Blockers, Linked Notes, and Calendar Deployment.",
-      "decisionPrompt": "Extract explicit and implied decisions for Powerframe. Output each as a proposed task first, never edit source notes directly."
+      "decisionPrompt": "Extract explicit and implied decisions for Powerframe. Output each as a proposed task first, never edit source notes directly.",
+      "milestoneSuggestions": [
+        "Review milestone \"Powerframe roadmap checkpoint\" and confirm next deployable task."
+      ],
+      "dependencyHints": [
+        "Notes index is available for context.",
+        "Extracted tasks are available for prioritization.",
+        "Milestones can be used as planning checkpoints."
+      ],
+      "priorityRecalculationInput": {
+        "noteCount": 2,
+        "taskCount": 24,
+        "milestoneCount": 1,
+        "riskCount": 1,
+        "recentActivity": "2026-04-25",
+        "categories": [
+          "3D",
+          "content",
+          "design",
+          "development",
+          "setup"
+        ]
+      }
     },
     {
       "projectName": "Powerstarter Azure",
-      "generatedAt": "2026-05-04T20:59:35.715Z",
+      "generatedAt": "2026-05-06T13:34:09.891Z",
       "status": "active classification",
       "context": {
         "noteCount": 3,
@@ -401,11 +601,32 @@
       ],
       "summaryPrompt": "Summarize Powerstarter Azure using 3 notes, 14 tasks, 1 milestones, and current status \"active classification\". Return project state, next three actions, and blockers.",
       "obsidianNotePrompt": "Create an Obsidian-ready project note for Powerstarter Azure with sections: Status, Decisions, Next Actions, Blockers, Linked Notes, and Calendar Deployment.",
-      "decisionPrompt": "Extract explicit and implied decisions for Powerstarter Azure. Output each as a proposed task first, never edit source notes directly."
+      "decisionPrompt": "Extract explicit and implied decisions for Powerstarter Azure. Output each as a proposed task first, never edit source notes directly.",
+      "milestoneSuggestions": [
+        "Review milestone \"Powerstarter Azure roadmap checkpoint\" and confirm next deployable task."
+      ],
+      "dependencyHints": [
+        "Notes index is available for context.",
+        "Extracted tasks are available for prioritization.",
+        "Milestones can be used as planning checkpoints."
+      ],
+      "priorityRecalculationInput": {
+        "noteCount": 3,
+        "taskCount": 14,
+        "milestoneCount": 1,
+        "riskCount": 1,
+        "recentActivity": "2026-04-25",
+        "categories": [
+          "content",
+          "design",
+          "development",
+          "setup"
+        ]
+      }
     },
     {
       "projectName": "Sapient",
-      "generatedAt": "2026-05-04T20:59:35.715Z",
+      "generatedAt": "2026-05-06T13:34:09.891Z",
       "status": "task discovery",
       "context": {
         "noteCount": 2,
@@ -436,15 +657,34 @@
       ],
       "summaryPrompt": "Summarize Sapient using 2 notes, 7 tasks, 1 milestones, and current status \"task discovery\". Return project state, next three actions, and blockers.",
       "obsidianNotePrompt": "Create an Obsidian-ready project note for Sapient with sections: Status, Decisions, Next Actions, Blockers, Linked Notes, and Calendar Deployment.",
-      "decisionPrompt": "Extract explicit and implied decisions for Sapient. Output each as a proposed task first, never edit source notes directly."
+      "decisionPrompt": "Extract explicit and implied decisions for Sapient. Output each as a proposed task first, never edit source notes directly.",
+      "milestoneSuggestions": [
+        "Review milestone \"Sapient roadmap checkpoint\" and confirm next deployable task."
+      ],
+      "dependencyHints": [
+        "Notes index is available for context.",
+        "Extracted tasks are available for prioritization.",
+        "Milestones can be used as planning checkpoints."
+      ],
+      "priorityRecalculationInput": {
+        "noteCount": 2,
+        "taskCount": 7,
+        "milestoneCount": 1,
+        "riskCount": 0,
+        "recentActivity": "2026-04-25",
+        "categories": [
+          "content",
+          "development"
+        ]
+      }
     },
     {
       "projectName": "TheRocketTree-App",
-      "generatedAt": "2026-05-04T20:59:35.716Z",
+      "generatedAt": "2026-05-06T13:34:09.891Z",
       "status": "task discovery",
       "context": {
-        "noteCount": 8,
-        "taskCount": 70,
+        "noteCount": 7,
+        "taskCount": 66,
         "milestoneCount": 1,
         "levelCount": 1,
         "categories": [
@@ -469,13 +709,33 @@
       "blockers": [
         "High task volume"
       ],
-      "summaryPrompt": "Summarize TheRocketTree-App using 8 notes, 70 tasks, 1 milestones, and current status \"task discovery\". Return project state, next three actions, and blockers.",
+      "summaryPrompt": "Summarize TheRocketTree-App using 7 notes, 66 tasks, 1 milestones, and current status \"task discovery\". Return project state, next three actions, and blockers.",
       "obsidianNotePrompt": "Create an Obsidian-ready project note for TheRocketTree-App with sections: Status, Decisions, Next Actions, Blockers, Linked Notes, and Calendar Deployment.",
-      "decisionPrompt": "Extract explicit and implied decisions for TheRocketTree-App. Output each as a proposed task first, never edit source notes directly."
+      "decisionPrompt": "Extract explicit and implied decisions for TheRocketTree-App. Output each as a proposed task first, never edit source notes directly.",
+      "milestoneSuggestions": [
+        "Review milestone \"TheRocketTree-App roadmap checkpoint\" and confirm next deployable task."
+      ],
+      "dependencyHints": [
+        "Notes index is available for context.",
+        "Extracted tasks are available for prioritization.",
+        "Milestones can be used as planning checkpoints."
+      ],
+      "priorityRecalculationInput": {
+        "noteCount": 7,
+        "taskCount": 66,
+        "milestoneCount": 1,
+        "riskCount": 1,
+        "recentActivity": "2026-04-25",
+        "categories": [
+          "design",
+          "development",
+          "setup"
+        ]
+      }
     },
     {
       "projectName": "General",
-      "generatedAt": "2026-05-04T20:59:35.716Z",
+      "generatedAt": "2026-05-06T13:34:09.891Z",
       "status": "needs review",
       "context": {
         "noteCount": 16,
@@ -507,7 +767,29 @@
       ],
       "summaryPrompt": "Summarize General using 16 notes, 42 tasks, 0 milestones, and current status \"unknown\". Return project state, next three actions, and blockers.",
       "obsidianNotePrompt": "Create an Obsidian-ready project note for General with sections: Status, Decisions, Next Actions, Blockers, Linked Notes, and Calendar Deployment.",
-      "decisionPrompt": "Extract explicit and implied decisions for General. Output each as a proposed task first, never edit source notes directly."
+      "decisionPrompt": "Extract explicit and implied decisions for General. Output each as a proposed task first, never edit source notes directly.",
+      "milestoneSuggestions": [
+        "Create first milestone for General from the newest notes.",
+        "Link General milestone to one visible task and one calendar deployment."
+      ],
+      "dependencyHints": [
+        "Notes index is available for context.",
+        "Extracted tasks are available for prioritization.",
+        "Needs generated milestones."
+      ],
+      "priorityRecalculationInput": {
+        "noteCount": 16,
+        "taskCount": 42,
+        "milestoneCount": 0,
+        "riskCount": 0,
+        "recentActivity": null,
+        "categories": [
+          "content",
+          "development",
+          "setup",
+          "design"
+        ]
+      }
     }
   ],
   "global": {

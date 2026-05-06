@@ -44,4 +44,19 @@ export async function submitNoteIntake(note) {
   };
 }
 
+export async function submitSyncQueueAction(actionPayload) {
+  const now = serverTimestamp();
+  const syncRef = await addDoc(collection(db, "syncQueue"), {
+    type: `${actionPayload.type || "task"}.create`,
+    payload: actionPayload,
+    status: "pending",
+    createdAt: now,
+    updatedAt: now
+  });
+
+  return {
+    syncQueueId: syncRef.id
+  };
+}
+
 export { db };
