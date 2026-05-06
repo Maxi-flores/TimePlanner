@@ -32,6 +32,25 @@ function projectSuggestions(project, model) {
     .sort((a, b) => String(b.date || "").localeCompare(String(a.date || "")))
     .slice(0, 3);
   const risks = project.riskFlags || [];
+  const milestoneSuggestions = milestones.length
+    ? milestones.slice(0, 3).map(milestone => `Review milestone "${milestone.title}" and confirm next deployable task.`)
+    : [
+        `Create first milestone for ${projectName} from the newest notes.`,
+        `Link ${projectName} milestone to one visible task and one calendar deployment.`,
+      ];
+  const dependencyHints = [
+    notes.length ? "Notes index is available for context." : "Needs indexed notes before deep planning.",
+    tasks.length ? "Extracted tasks are available for prioritization." : "Needs task extraction before sequencing.",
+    milestones.length ? "Milestones can be used as planning checkpoints." : "Needs generated milestones.",
+  ];
+  const priorityRecalculationInput = {
+    noteCount: notes.length,
+    taskCount: tasks.length,
+    milestoneCount: milestones.length,
+    riskCount: risks.length,
+    recentActivity: project.lastActivity || null,
+    categories,
+  };
 
   return {
     projectName,
@@ -69,6 +88,9 @@ function projectSuggestions(project, model) {
     summaryPrompt: `Summarize ${projectName} using ${notes.length} notes, ${tasks.length} tasks, ${milestones.length} milestones, and current status "${project.currentStatus || "unknown"}". Return project state, next three actions, and blockers.`,
     obsidianNotePrompt: `Create an Obsidian-ready project note for ${projectName} with sections: Status, Decisions, Next Actions, Blockers, Linked Notes, and Calendar Deployment.`,
     decisionPrompt: `Extract explicit and implied decisions for ${projectName}. Output each as a proposed task first, never edit source notes directly.`,
+    milestoneSuggestions,
+    dependencyHints,
+    priorityRecalculationInput,
   };
 }
 

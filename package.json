@@ -7,17 +7,27 @@
     "doc": "docs"
   },
   "scripts": {
-    "generate": "node scripts/index-notes.js && node scripts/generate-roadmap.js && node scripts/generate-roadmap-levels.js && node scripts/assign-notes-to-levels.js && node scripts/extract-tasks-from-notes.js && node scripts/generate-project-states.js && node scripts/generate-milestones.js && node scripts/generate-dashboard-model.js && node scripts/generate-ai-suggestions.js",
-    "validate": "node scripts/validate-config.js",
-    "sync": "node scripts/sync-firestore-notes.js",
-    "sync:commit": "node scripts/sync-firestore-notes.js --commit",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "generate": "node scripts/index-notes.cjs && node scripts/generate-roadmap.cjs && node scripts/generate-roadmap-levels.cjs && node scripts/assign-notes-to-levels.cjs && node scripts/extract-tasks-from-notes.cjs && node scripts/generate-project-states.cjs && node scripts/generate-milestones.cjs && node scripts/generate-dashboard-model.cjs && node scripts/generate-ai-suggestions.cjs",
+    "validate": "node scripts/validate-config.cjs",
+    "sync": "node scripts/sync-firestore-notes.cjs",
+    "sync:commit": "node scripts/sync-firestore-notes.cjs --commit",
     "serve": "cd apps/time-planner && python -m http.server 4173"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
   "dependencies": {
-    "firebase-admin": "^13.8.0"
+    "firebase": "^12.12.1",
+    "firebase-admin": "^13.8.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.20.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.2.1",
+    "vite": "^5.0.8"
   }
 }
