@@ -12,6 +12,7 @@ import {
   doc,
   getDoc,
   getFirestore,
+  onSnapshot,
   serverTimestamp,
   setDoc
 } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
@@ -146,6 +147,20 @@ export async function savePlannerState(uid, payload) {
     ref,
     { ...payload, updatedAt: serverTimestamp() },
     { merge: true }
+  );
+}
+
+// ─── Real-time planner state subscription ─────────────────────────────
+// Calls callback(data, null) on every update, callback(null, err) on error.
+// Returns an unsubscribe function.
+export function subscribePlannerState(uid, callback) {
+  if (!db) throw new Error("Firebase not configured.");
+  if (!uid) throw new Error("subscribePlannerState requires a uid.");
+  const ref = doc(db, ...PLANNER_STATE_PATH(uid));
+  return onSnapshot(
+    ref,
+    (snap) => callback(snap.exists() ? snap.data() : null, null),
+    (err) => callback(null, err)
   );
 }
 

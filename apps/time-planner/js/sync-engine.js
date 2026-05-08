@@ -10,6 +10,7 @@
   const PENDING_KEY = "pendingSyncActions";
   const LAST_SYNCED_KEY = "plannerLastSyncedAt";
   const LOCAL_UPDATED_AT_KEY = "plannerLocalUpdatedAt";
+  const MIGRATION_DONE_KEY = "plannerMigratedToCloud";
   const FIREBASE_MODULE_URL = "./firebase.js";
 
   const DEBOUNCE_MS = 1500;
@@ -27,6 +28,7 @@
   let firebaseModule = null;
   let firebaseLoadAttempted = false;
   let unsubscribeAuth = null;
+  let unsubscribeSnapshot = null;
   let debounceTimer = null;
 
   function readJson(key, fallback) {
@@ -291,14 +293,74 @@
     await pushNow("retry");
   }
 
+  // ─── One-time localStorage → Firestore migration ──────────────────────
+  // Runs only when the user's cloud document does not yet exist (first sign-in).
+  // Sets MIGRATION_DONE_KEY so it never runs again on this device.
+  async function migrateLocalToCloud(uid) {
+    if (localStorage.getItem(MIGRATION_DONE_KEY) === "1") return;
+    const payload = buildPayload();
+    const hasData =
+      (payload.goals && payload.goals.length > 0) ||
+      (payload.events && payload.events.length > 0) ||
+      (payload.milestones && payload.milestones.length > 0);
+    if (!hasData) {
+      localStorage.setItem(MIGRATION_DONE_KEY, "1");
+      return;
+    }
+    try {
+      await firebaseModule.savePlannerState(uid, payload);
+      localStorage.setItem(MIGRATION_DONE_KEY, "1");
+      console.log("PlannerSync: local data migrated to cloud.");
+    } catch (err) {
+      console.warn("PlannerSync: migration failed, will retry next session.", err);
+    }
+  }
+
   // ─── Auth lifecycle ───────────────────────────────────────────────────
   async function handleAuthChange(user) {
     state.user = user;
     state.error = null;
+
+    // Tear down any existing real-time listener before switching users.
+    if (unsubscribeSnapshot) {
+      unsubscribeSnapshot();
+      unsubscribeSnapshot = null;
+    }
+
     if (user) {
       state.mode = "cloud";
       emitStatus();
-      await pullNow();
+
+      // Pull once to detect an empty cloud doc (triggers one-time migration).
+      const pullResult = await pullNow();
+      if (pullResult?.ok && !pullResult.hadDoc) {
+        await migrateLocalToCloud(user.uid);
+      }
+
+      // Subscribe to real-time updates via onSnapshot.
+      if (typeof firebaseModule.subscribePlannerState === "function") {
+        unsubscribeSnapshot = firebaseModule.subscribePlannerState(
+          user.uid,
+          (cloud, err) => {
+            if (err) {
+              console.warn("PlannerSync snapshot error", err);
+              state.error = err?.message || String(err);
+              emitStatus();
+              return;
+            }
+            // cloud may be null when the document does not yet exist.
+            if (cloud) {
+              applyCloudPayloadToLocal(cloud);
+              broadcastReload("snapshot");
+              state.lastSyncedAt = Date.now();
+              localStorage.setItem(LAST_SYNCED_KEY, String(state.lastSyncedAt));
+            }
+            state.error = null;
+            emitStatus();
+          }
+        );
+      }
+
       await flushPendingIfAny();
     } else {
       state.mode = firebaseModule?.firebaseReady ? "cloud" : "local-only";
@@ -353,6 +415,20 @@
     notifyChange("restore");
   }
 
+  // ─── syncState (manual force-sync from Firestore) ─────────────────────
+  // Checks authentication, fetches the latest cloud document, applies it to
+  // localStorage, and broadcasts a reload. Falls back gracefully when offline
+  // or when Firebase is not configured.
+  async function syncState() {
+    if (!firebaseModule?.firebaseReady) {
+      return { ok: false, mode: "local-only", reason: "Firebase not configured" };
+    }
+    if (!state.user?.uid) {
+      return { ok: false, mode: state.mode, reason: "not authenticated" };
+    }
+    return await pullNow();
+  }
+
   // ─── Sign-in helpers (UI-facing wrappers) ─────────────────────────────
   async function signInWithGoogle() {
     await loadFirebase();
@@ -398,6 +474,7 @@
     notifyChange,
     pushNow,
     pullNow,
+    syncState,
     getStatus,
     exportLocal,
     restoreLocal,
