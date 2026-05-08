@@ -112,10 +112,30 @@ No model calls happen in the browser yet. Current suggestions are deterministic 
 
 Firebase browser intake remains local-only:
 
-- `firebase.example.js` is safe to commit.
+- `firebase.example.js` is safe to commit (placeholders only).
 - `firebase.js` is ignored and must contain local credentials only.
 
 The sync worker writes Firestore notes into `content/notes-2026/Inbox`, regenerates the static JSON pipeline, and can optionally create one local git commit with `--commit`. It does not push automatically.
+
+### Auth And Cloud Planner State
+
+The browser app now supports authenticated cross-device sync of user-editable planner state:
+
+- Firebase Auth: Google sign-in with anonymous fallback. Auth subscriptions live in `js/sync-engine.js`.
+- Firestore document: `users/{uid}/plannerState/main` holds:
+  - `goals`, `tasks` (flat from goals), `milestones`, `events`, `blocks`, `proposedNotes`
+  - `roadmapProgress` ({ levelAssignments, projectPhaseChecks })
+  - `acceptedAIActions`
+  - `settings` (reserved; device-local for now)
+  - `updatedAt` (server timestamp)
+- localStorage remains the running-session source of truth and an offline cache. The sync engine pulls on auth and pushes a debounced merged payload (~1.5 s). Pending writes accumulate in `pendingSyncActions` and drain on `online` / next auth.
+- The account menu (header chip + User page) shows sign-in state, sync status, last-synced time, and exposes "Sync now", "Export local backup", and "Restore backup". Theme/profile preferences (`dashboardSettings`) stay device-local.
+
+Generated content (`data/*.json`, `content/notes-2026/`) is never written to the planner-state document — it is read-only at runtime.
+
+Firestore rules template lives in `apps/time-planner/firestore.rules`. Owner-only access to `users/{uid}/plannerState/**`; default-deny everywhere else.
+
+Goals reference: roadmap level (`roadmapLevelId`), source note path (`noteSource`), and accepted AI action id (`aiTaskSource`) when applicable. The unified `unifiedDashboardModel()` helper merges generated tasks, user goals, and accepted AI actions for goal/roadmap rendering without mutating the generated source.
 
 ## Deployment
 
@@ -137,4 +157,4 @@ Then open `http://127.0.0.1:4173`.
 - AI integration is local-first and disabled until explicitly enabled.
 - Generated data can be regenerated from scripts.
 
-**Last updated:** 2026-05-04
+**Last updated:** 2026-05-08

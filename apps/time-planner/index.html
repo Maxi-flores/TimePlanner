@@ -1603,7 +1603,31 @@
       </button>
       <div class="user-menu" id="user-menu">
         <div class="menu-panel settings-grid active">
-          <p class="section-title">User account</p>
+          <p class="section-title">Account &amp; sync</p>
+          <div class="account-identity" id="account-identity">
+            <img id="account-identity-avatar" src="planner.png" alt="" style="width:36px;height:36px;border-radius:50%;" />
+            <div>
+              <div id="account-identity-name" style="font-weight:600;">Not signed in</div>
+              <div class="note-meta" id="account-identity-meta">Local-only mode</div>
+            </div>
+          </div>
+          <div class="deploy-row"><span>Sync status</span><strong id="account-sync-status">Local-only</strong></div>
+          <div class="deploy-row"><span>Last synced</span><strong id="account-last-synced">Never</strong></div>
+          <div class="deploy-row"><span>Device</span><strong id="account-device-state">Online</strong></div>
+          <div class="ai-actions" id="account-auth-actions">
+            <button class="btn btn-primary" type="button" onclick="signInGoogleFromMenu()">Sign in with Google</button>
+            <button class="btn btn-ghost" type="button" onclick="signInAnonFromMenu()">Continue as guest</button>
+            <button class="btn btn-ghost" type="button" onclick="signOutFromMenu()" id="account-sign-out-btn" style="display:none;">Sign out</button>
+          </div>
+          <div class="ai-actions">
+            <button class="btn btn-ghost" type="button" onclick="syncNowFromMenu()">Sync now</button>
+            <button class="btn btn-ghost" type="button" onclick="exportLocalBackupFromMenu()">Export local backup</button>
+            <button class="btn btn-ghost" type="button" onclick="document.getElementById('account-restore-input').click()">Restore backup</button>
+            <input type="file" id="account-restore-input" accept="application/json" style="display:none;" onchange="restoreBackupFromMenu(event)" />
+          </div>
+          <div class="logout-message" id="account-sync-message">Planner state syncs to your account when signed in. Local data is kept on this device.</div>
+          <hr style="border:none;border-top:1px solid var(--surface-glass);margin:8px 0;" />
+          <p class="section-title">Local profile</p>
           <label><input type="checkbox" id="setting-display-user" onchange="saveSettingsFromUI()" style="width:auto;" /> Show profile name in header</label>
           <div><label>Avatar image path or URL</label><input type="text" id="setting-user-avatar" placeholder="planner.png" onchange="saveSettingsFromUI()" /></div>
           <div><label>Name</label><input type="text" id="setting-user-name" placeholder="Your name" onchange="saveSettingsFromUI()" /></div>
@@ -1613,8 +1637,7 @@
           <div><label>Locale</label><select id="setting-user-locale" onchange="saveSettingsFromUI()"></select></div>
           <div><label>Timezone</label><input type="text" id="setting-user-timezone" placeholder="Europe/London" onchange="saveSettingsFromUI()" /></div>
           <div><label>Profile note</label><textarea id="setting-user-note" rows="2" placeholder="Personal context for this board" onchange="saveSettingsFromUI()"></textarea></div>
-          <div class="logout-message">SSO status: Hub/Firebase SSO is prepared conceptually. This standalone module does not force auth redirects.</div>
-          <button class="btn btn-ghost" onclick="logoutUser()" type="button">Logout local profile</button>
+          <button class="btn btn-ghost" onclick="logoutUser()" type="button">Reset local profile</button>
         </div>
       </div>
     </div>
@@ -2057,8 +2080,11 @@
       <div class="deploy-status">
         <div class="deploy-row"><span>Name</span><strong id="user-page-name">User</strong></div>
         <div class="deploy-row"><span>Email</span><strong id="user-page-email">Not connected</strong></div>
-        <div class="deploy-row"><span>Firebase SSO</span><strong id="user-page-sso">Hub-managed</strong></div>
+        <div class="deploy-row"><span>Firebase SSO</span><strong id="user-page-sso">Local-only</strong></div>
         <div class="deploy-row"><span>Connection</span><strong id="user-page-connection">Standalone mode</strong></div>
+        <div class="deploy-row"><span>Sync status</span><strong id="user-page-sync-status">Local-only</strong></div>
+        <div class="deploy-row"><span>Last synced</span><strong id="user-page-last-synced">Never</strong></div>
+        <div class="deploy-row"><span>Device</span><strong id="user-page-device-state">Online</strong></div>
       </div>
       <div class="settings-grid" style="margin-top:16px;">
         <div><label>Name</label><input type="text" id="user-page-input-name" placeholder="Your name" onchange="saveUserPageSettings()" /></div>
@@ -2068,10 +2094,15 @@
         <label><input type="checkbox" id="user-page-display-name" onchange="saveUserPageSettings()" style="width:auto;" /> Show profile name in header</label>
       </div>
       <div class="ai-actions" style="margin-top:16px;">
-        <button class="btn btn-primary" type="button" onclick="showAccountHubMessage('sign-in')">Sign in</button>
-        <button class="btn btn-ghost" type="button" onclick="logoutUser()">Sign out</button>
+        <button class="btn btn-primary" type="button" onclick="signInGoogleFromMenu()" id="user-page-google-btn">Sign in with Google</button>
+        <button class="btn btn-ghost" type="button" onclick="signInAnonFromMenu()" id="user-page-anon-btn">Continue as guest</button>
+        <button class="btn btn-ghost" type="button" onclick="signOutFromMenu()" id="user-page-signout-btn" style="display:none;">Sign out</button>
+        <button class="btn btn-ghost" type="button" onclick="syncNowFromMenu()">Sync now</button>
+        <button class="btn btn-ghost" type="button" onclick="exportLocalBackupFromMenu()">Export local backup</button>
+        <button class="btn btn-ghost" type="button" onclick="document.getElementById('user-page-restore-input').click()">Restore backup</button>
+        <input type="file" id="user-page-restore-input" accept="application/json" style="display:none;" onchange="restoreBackupFromMenu(event)" />
       </div>
-      <div class="logout-message" id="user-page-message">Account sign-in is handled by the hub. No login redirect is triggered here.</div>
+      <div class="logout-message" id="user-page-message">Sign in to sync your goals, milestones, and roadmap progress across devices. Local data is preserved when signed out.</div>
     </div>
   </div>
 
@@ -2379,6 +2410,18 @@
       </select>
     </div>
   </div>
+  <div class="form-row">
+    <div>
+      <label>Roadmap level (optional)</label>
+      <select id="goal-roadmap-level"><option value="">No level</option></select>
+    </div>
+    <div>
+      <label>Source</label>
+      <div id="goal-source-info" class="note-meta">No source attached</div>
+      <input type="hidden" id="goal-note-source" />
+      <input type="hidden" id="goal-ai-task-source" />
+    </div>
+  </div>
   <div style="margin-bottom:10px;">
     <label>Description</label>
     <textarea id="goal-desc" rows="2" placeholder="Describe your goal…"></textarea>
@@ -2464,6 +2507,7 @@
 </div>
 
 <script src="js/ai-engine.js"></script>
+<script src="js/sync-engine.js"></script>
 <script>
 // ═══════════════════════════════════════════════════════
 //  STATE  (persisted to localStorage)
@@ -2494,6 +2538,7 @@ function defaultState() {
 
 function saveState() {
   localStorage.setItem(KEY, JSON.stringify(state));
+  window.PlannerSync?.notifyChange?.('state');
 }
 
 let state = loadState();
@@ -2569,6 +2614,7 @@ function loadProjectPhaseChecks() {
 
 function saveProjectPhaseChecks() {
   localStorage.setItem('projectPhaseChecks', JSON.stringify(projectPhaseChecks));
+  window.PlannerSync?.notifyChange?.('projectPhaseChecks');
 }
 
 function loadDashboardSettings() {
@@ -3030,6 +3076,50 @@ function applyDashboardModel() {
   renderAiBot();
 }
 
+// Unified read-only view: generated dashboard model + user planner state +
+// accepted AI actions, merged for goal/roadmap rendering. Generated source
+// data is never mutated here.
+function unifiedDashboardModel() {
+  const generatedTasks = (dashboardModel.tasks || []).map(task => ({ ...task, source: task.source || 'generated' }));
+  const userGoalTasks = (state.goals || []).flatMap(goal =>
+    (goal.tasks || []).map(task => ({
+      id: `goal-task-${goal.id}-${task.id}`,
+      title: task.text,
+      projectName: goal.projectName || '',
+      done: !!task.done,
+      priority: !!task.priority,
+      goalId: goal.id,
+      roadmapLevelId: goal.roadmapLevelId || '',
+      noteSource: goal.noteSource || '',
+      aiTaskSource: goal.aiTaskSource || '',
+      source: 'user-goal'
+    }))
+  );
+  const accepted = (acceptedAiSuggestions || []).map((entry, idx) => {
+    const text = typeof entry === 'string' ? entry : (entry?.title || JSON.stringify(entry));
+    return {
+      id: `accepted-ai-${idx}`,
+      title: text,
+      projectName: typeof entry === 'object' ? (entry?.projectName || '') : '',
+      source: 'ai-accepted'
+    };
+  });
+  const tasks = [...generatedTasks, ...userGoalTasks, ...accepted];
+
+  const baseLevels = (dashboardModel.levels?.length ? dashboardModel.levels : (roadmapLevels.levels || []));
+  const levels = baseLevels.map(level => {
+    const linkedGoals = (state.goals || []).filter(goal => goal.roadmapLevelId === level.id);
+    const linkedAccepted = accepted.filter(item => (level.taskIds || []).includes(item.id));
+    return {
+      ...level,
+      goals: linkedGoals,
+      acceptedAIActions: linkedAccepted
+    };
+  });
+
+  return { ...dashboardModel, tasks, levels };
+}
+
 function renderDashboard() {
   const settings = loadDashboardSettings();
   const scopedNotes = getVisibleNotes();
@@ -3367,6 +3457,7 @@ async function acceptAiSuggestion(text, target = 'goals', projectName = '', navi
     : queueAcceptedActionLocally(actionPayload);
   acceptedAiSuggestions = [...new Set([...acceptedAiSuggestions, String(text)])];
   localStorage.setItem('acceptedAiSuggestions', JSON.stringify(acceptedAiSuggestions));
+  window.PlannerSync?.notifyChange?.('acceptedAiSuggestions');
   saveState();
   renderAfterSuggestionTarget(target);
   const message = `Accepted to ${result.label} for ${project}. Sync status: ${queueResult.status}.`;
@@ -4289,6 +4380,7 @@ function loadLevelAssignments() {
 
 function saveLevelAssignments(assignments) {
   localStorage.setItem('roadmapLevelAssignments', JSON.stringify(assignments));
+  window.PlannerSync?.notifyChange?.('roadmapLevelAssignments');
 }
 
 function mergedLevel(level) {
@@ -4406,6 +4498,8 @@ function renderLevelNode(level) {
   }[level.status] || String(level.tier);
   const badges = levelCategories(level).slice(0, 4).map(cat => `<span class="node-badge ${escapeHtml(cat)}"></span>`).join('');
   const action = level.status === 'locked' ? unlockText(level) : suggestedAction(level);
+  const linkedGoals = (state.goals || []).filter(goal => goal.roadmapLevelId === level.id);
+  const goalSuffix = linkedGoals.length ? ` · ${linkedGoals.length} goal${linkedGoals.length === 1 ? '' : 's'}` : '';
 
   return `
     <button class="level-node ${escapeHtml(level.status)}" style="left:${pos.x}%;top:${pos.y}%;" onclick="openRoadmapLevel('${escapeHtml(level.id)}')">
@@ -4415,7 +4509,7 @@ function renderLevelNode(level) {
         <span class="node-badges">${badges}</span>
       </span>
     </button>
-    <div class="level-label" style="left:${pos.x}%;top:${pos.y}%;">${escapeHtml(level.title)}<div class="unlock-note">${escapeHtml(action)}</div></div>`;
+    <div class="level-label" style="left:${pos.x}%;top:${pos.y}%;">${escapeHtml(level.title)}<div class="unlock-note">${escapeHtml(action)}${escapeHtml(goalSuffix)}</div></div>`;
 }
 
 function phaseRoadmapLevels(selectedProject = '') {
@@ -5178,12 +5272,21 @@ function renderGoals() {
     const color = goalPhaseColor(goal.category);
     const phaseLabel = goalPhaseLabel(goal.category);
 
+    const sourceChips = [];
+    if (goal.roadmapLevelId) {
+      const level = phaseRoadmapLevels(goal.projectName || '').find(l => l.id === goal.roadmapLevelId);
+      sourceChips.push(`<span class="badge badge-accent">Level: ${escapeHtml(level ? `Tier ${level.tier}` : goal.roadmapLevelId)}</span>`);
+    }
+    if (goal.noteSource) sourceChips.push(`<span class="badge">Note: ${escapeHtml(goal.noteSource.split('/').pop())}</span>`);
+    if (goal.aiTaskSource) sourceChips.push('<span class="badge">From AI</span>');
+
     card.innerHTML = `
       <div class="goal-title">
         <span style="border-left:3px solid ${color};padding-left:8px;">${goal.title}</span>
         <button class="task-delete" onclick="deleteGoal('${goal.id}')">✕</button>
       </div>
       <div style="font-size:.72rem;color:var(--text-muted);margin-bottom:6px;">${goal.month ? `📅 ${goal.month} · ` : ''}${escapeHtml(goal.projectName || 'No project')} · ${escapeHtml(phaseLabel)}${goal.tool ? ` · ${escapeHtml(goal.tool)}` : ''}${goal.taskDuration ? ` · ${escapeHtml(goal.taskDuration)}h tasks` : ''}</div>
+      ${sourceChips.length ? `<div style="display:flex;gap:4px;flex-wrap:wrap;margin-bottom:6px;">${sourceChips.join('')}</div>` : ''}
       ${goal.desc  ? `<div class="goal-desc">${goal.desc}</div>` : ''}
       <div class="progress-bar"><div class="progress-bar-fill" style="width:${pct}%;background:${color};"></div></div>
       <div class="progress-label">${done}/${total} tasks · ${pct}%</div>
@@ -5234,12 +5337,28 @@ function openAddGoalModal() {
   const d = new Date();
   document.getElementById('goal-month').value = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`;
   populateGoalProjectAndToolSelects();
+  populateGoalRoadmapLevelSelect();
+  const noteSrc = document.getElementById('goal-note-source');
+  const aiSrc = document.getElementById('goal-ai-task-source');
+  const info = document.getElementById('goal-source-info');
+  if (noteSrc) noteSrc.value = '';
+  if (aiSrc) aiSrc.value = '';
+  if (info) info.textContent = 'No source attached';
   const rows = document.getElementById('goal-task-rows');
   if (rows) {
     rows.innerHTML = '';
     addGoalTaskRow();
   }
   openModal('modal-goal');
+}
+
+function populateGoalRoadmapLevelSelect() {
+  const select = document.getElementById('goal-roadmap-level');
+  if (!select) return;
+  const project = document.getElementById('goal-project')?.value || dashboardFilters.project || '';
+  const levels = phaseRoadmapLevels(project);
+  select.innerHTML = '<option value="">No level</option>' +
+    levels.map(level => `<option value="${escapeHtml(level.id)}">Tier ${level.tier} · ${escapeHtml(level.title)}</option>`).join('');
 }
 
 function populateGoalProjectAndToolSelects() {
@@ -5286,6 +5405,9 @@ function saveGoal() {
     tool: document.getElementById('goal-tool').value,
     taskDuration: Number(document.getElementById('goal-task-duration').value || 4),
     reservationSlot: document.getElementById('goal-reservation-slot').value,
+    roadmapLevelId: document.getElementById('goal-roadmap-level')?.value || '',
+    noteSource: document.getElementById('goal-note-source')?.value || '',
+    aiTaskSource: document.getElementById('goal-ai-task-source')?.value || '',
     desc:     document.getElementById('goal-desc').value.trim(),
     tasks:    rawTasks.map(t => {
       const text = t.trim();
@@ -5603,6 +5725,177 @@ document.addEventListener('keydown', event => {
 });
 
 // ═══════════════════════════════════════════════════════
+//  AUTH + SYNC UI
+// ═══════════════════════════════════════════════════════
+function formatRelativeTime(ts) {
+  if (!ts) return 'Never';
+  const diff = Date.now() - Number(ts);
+  if (!Number.isFinite(diff) || diff < 0) return new Date(Number(ts)).toLocaleString();
+  if (diff < 60_000) return 'Just now';
+  if (diff < 3_600_000) return `${Math.floor(diff / 60_000)} min ago`;
+  if (diff < 86_400_000) return `${Math.floor(diff / 3_600_000)} h ago`;
+  return new Date(Number(ts)).toLocaleString();
+}
+
+function applySyncStatus(status) {
+  if (!status) status = window.PlannerSync?.getStatus?.() || {};
+  const user = status.user;
+  const signedIn = !!user;
+  const statusLabel = !status.firebaseReady
+    ? 'Local-only (no Firebase config)'
+    : !signedIn
+      ? 'Not signed in'
+      : !status.online
+        ? `Offline · ${status.pendingWrites || 0} pending`
+        : status.pendingWrites
+          ? `Syncing · ${status.pendingWrites} pending`
+          : status.error
+            ? `Error · ${status.error}`
+            : 'Synced';
+  const lastSyncedLabel = formatRelativeTime(status.lastSyncedAt);
+  const deviceLabel = status.online ? 'Online' : 'Offline';
+
+  setText('account-sync-status', statusLabel);
+  setText('account-last-synced', lastSyncedLabel);
+  setText('account-device-state', deviceLabel);
+  setText('user-page-sync-status', statusLabel);
+  setText('user-page-last-synced', lastSyncedLabel);
+  setText('user-page-device-state', deviceLabel);
+
+  const identityName = document.getElementById('account-identity-name');
+  const identityMeta = document.getElementById('account-identity-meta');
+  const identityAvatar = document.getElementById('account-identity-avatar');
+  if (identityName) identityName.textContent = signedIn ? (user.displayName || (user.isAnonymous ? 'Guest' : 'User')) : 'Not signed in';
+  if (identityMeta) identityMeta.textContent = signedIn ? (user.isAnonymous ? `Anonymous · uid ${user.uid.slice(0,8)}` : (user.email || `uid ${user.uid.slice(0,8)}`)) : (status.firebaseReady ? 'Sign in to sync' : 'Local-only mode');
+  if (identityAvatar) identityAvatar.src = (signedIn && user.photoURL) ? user.photoURL : (loadDashboardSettings().userAvatar || 'planner.png');
+
+  const signOutBtn = document.getElementById('account-sign-out-btn');
+  const userPageGoogleBtn = document.getElementById('user-page-google-btn');
+  const userPageAnonBtn = document.getElementById('user-page-anon-btn');
+  const userPageSignOutBtn = document.getElementById('user-page-signout-btn');
+  if (signOutBtn) signOutBtn.style.display = signedIn ? '' : 'none';
+  if (userPageSignOutBtn) userPageSignOutBtn.style.display = signedIn ? '' : 'none';
+  if (userPageGoogleBtn) userPageGoogleBtn.style.display = signedIn && !user.isAnonymous ? 'none' : '';
+  if (userPageAnonBtn) userPageAnonBtn.style.display = signedIn ? 'none' : '';
+
+  setText('user-page-sso', status.firebaseReady ? (signedIn ? (user.isAnonymous ? 'Anonymous' : 'Google') : 'Signed out') : 'Local-only');
+  setText('user-page-connection', status.firebaseReady ? (status.online ? 'Cloud connected' : 'Offline') : 'Standalone mode');
+  if (signedIn) {
+    setText('user-page-name', user.displayName || (user.isAnonymous ? 'Guest' : 'User'));
+    setText('user-page-email', user.email || (user.isAnonymous ? 'No email (anonymous)' : 'Hidden'));
+  }
+
+  const chip = document.getElementById('user-chip');
+  const chipName = document.getElementById('user-chip-name');
+  const headerAvatar = document.getElementById('user-avatar');
+  if (chip && chipName && headerAvatar) {
+    if (signedIn) {
+      chipName.textContent = user.displayName || (user.isAnonymous ? 'Guest' : 'User');
+      chip.classList.remove('profile-hidden');
+      if (user.photoURL) headerAvatar.src = user.photoURL;
+    }
+  }
+}
+
+async function signInGoogleFromMenu() {
+  try {
+    setText('account-sync-message', 'Signing in with Google…');
+    await window.PlannerSync.signInWithGoogle();
+    setText('account-sync-message', 'Signed in. Syncing your planner state…');
+  } catch (err) {
+    console.warn('Google sign-in failed', err);
+    setText('account-sync-message', `Sign-in failed: ${err?.message || err}`);
+  }
+}
+
+async function signInAnonFromMenu() {
+  try {
+    setText('account-sync-message', 'Continuing as guest…');
+    await window.PlannerSync.signInAnonymous();
+    setText('account-sync-message', 'Guest session active. Sync runs under an anonymous uid.');
+  } catch (err) {
+    console.warn('Anonymous sign-in failed', err);
+    setText('account-sync-message', `Sign-in failed: ${err?.message || err}`);
+  }
+}
+
+async function signOutFromMenu() {
+  try {
+    await window.PlannerSync.signOutUser();
+    setText('account-sync-message', 'Signed out. Local data is kept on this device.');
+  } catch (err) {
+    console.warn('Sign-out failed', err);
+    setText('account-sync-message', `Sign-out failed: ${err?.message || err}`);
+  }
+}
+
+async function syncNowFromMenu() {
+  setText('account-sync-message', 'Pushing local changes…');
+  const result = await window.PlannerSync.pushNow('manual');
+  if (result?.ok) {
+    setText('account-sync-message', 'Synced just now.');
+  } else if (!window.PlannerSync.getStatus().firebaseReady) {
+    setText('account-sync-message', 'Local-only mode — Firebase config missing.');
+  } else if (!window.PlannerSync.getStatus().user) {
+    setText('account-sync-message', 'Sign in to enable cloud sync.');
+  } else {
+    setText('account-sync-message', `Sync queued. ${result?.error || 'Will retry when online.'}`);
+  }
+}
+
+function exportLocalBackupFromMenu() {
+  try {
+    window.PlannerSync.exportLocal();
+    setText('account-sync-message', 'Local backup downloaded.');
+  } catch (err) {
+    setText('account-sync-message', `Backup failed: ${err?.message || err}`);
+  }
+}
+
+function restoreBackupFromMenu(event) {
+  const input = event?.target;
+  const file = input?.files?.[0];
+  if (!file) return;
+  if (!confirm('Restore backup? This replaces your local goals, roadmap progress, and accepted AI actions on this device.')) {
+    input.value = '';
+    return;
+  }
+  const reader = new FileReader();
+  reader.onload = () => {
+    try {
+      const parsed = JSON.parse(String(reader.result));
+      window.PlannerSync.restoreLocal(parsed);
+      state = loadState();
+      acceptedAiSuggestions = loadJsonArray('acceptedAiSuggestions');
+      projectPhaseChecks = loadProjectPhaseChecks();
+      renderDashboard();
+      renderGoals();
+      renderRoadmap();
+      renderCalendar();
+      setText('account-sync-message', 'Backup restored. Local data updated.');
+    } catch (err) {
+      setText('account-sync-message', `Restore failed: ${err?.message || err}`);
+    } finally {
+      input.value = '';
+    }
+  };
+  reader.readAsText(file);
+}
+
+function handlePlannerStateReloaded() {
+  state = loadState();
+  acceptedAiSuggestions = loadJsonArray('acceptedAiSuggestions');
+  projectPhaseChecks = loadProjectPhaseChecks();
+  renderDashboard();
+  renderGoals();
+  renderRoadmap();
+  renderCalendar();
+}
+
+window.addEventListener('planner-sync-status', evt => applySyncStatus(evt.detail));
+window.addEventListener('planner-state-reloaded', handlePlannerStateReloaded);
+
+// ═══════════════════════════════════════════════════════
 //  INIT
 // ═══════════════════════════════════════════════════════
 (function init() {
@@ -5618,6 +5911,8 @@ document.addEventListener('keydown', event => {
   loadRoadmapLevels();
   loadProjectBoardData();
   loadFirebaseIntake();
+  window.PlannerSync?.init?.();
+  applySyncStatus();
 })();
 </script>
 </body>
