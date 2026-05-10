@@ -94,7 +94,8 @@ class PlannerSyncEngine {
         await this.pushToCloud();
       } else {
         if (cloudData && typeof window !== "undefined" && window.PlannerSync) {
-          const applyCloudPayloadToLocal = (window.PlannerSync as any).applyCloudPayloadToLocal;
+          const plannerSync = window.PlannerSync;
+          const applyCloudPayloadToLocal = plannerSync.applyCloudPayloadToLocal;
           if (typeof applyCloudPayloadToLocal === "function") {
             applyCloudPayloadToLocal(cloudData);
           }
@@ -135,7 +136,8 @@ class PlannerSyncEngine {
 
   hasLocalData() {
     if (typeof window === "undefined" || !window.PlannerSync) return false;
-    const buildPayload = (window.PlannerSync as any).buildPayload;
+    const plannerSync = window.PlannerSync;
+    const buildPayload = plannerSync.buildPayload;
     if (typeof buildPayload !== "function") return false;
     const payload = buildPayload();
     return (
@@ -180,7 +182,8 @@ class PlannerSyncEngine {
         clientUpdatedAt: Date.now()
       };
     } else if (typeof window !== "undefined" && window.PlannerSync) {
-      const buildPayload = (window.PlannerSync as any).buildPayload;
+      const plannerSync = window.PlannerSync;
+      const buildPayload = plannerSync.buildPayload;
       if (typeof buildPayload === "function") {
         payload = buildPayload();
       } else {

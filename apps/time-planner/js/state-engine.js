@@ -63,6 +63,10 @@ class StateEngine {
       return;
     }
 
+    if (!this.userState.goals) {
+      this.userState.goals = [];
+    }
+
     const idx = this.userState.goals.findIndex(g => g.id === goal.id);
     if (idx >= 0) {
       this.userState.goals[idx] = goal;
@@ -77,6 +81,10 @@ class StateEngine {
     if (!this.userState) {
       console.warn('StateEngine: cannot delete goal, not initialized');
       return;
+    }
+
+    if (!this.userState.goals) {
+      this.userState.goals = [];
     }
 
     this.userState.goals = this.userState.goals.filter(g => g.id !== goalId);
