@@ -26,6 +26,8 @@ The script reads note-like text files from `content/notes-2026` and writes `data
 
 For the static planner, the same generated index is copied to `apps/time-planner/data/notes-index.json`, where `apps/time-planner/index.html` can load it with a relative `data/notes-index.json` request.
 
+The deployed static app can also refresh these generated JSON exports from a remote base URL (for example `raw.githubusercontent.com/.../apps/time-planner/data/`) via the Notes tab. The fetched exports are cached in `localStorage` so the planner can fall back when local `data/*.json` files are missing.
+
 Generate the roadmap orchestration data after regenerating the notes index:
 
 ```bash

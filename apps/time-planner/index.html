@@ -1955,9 +1955,16 @@
     </div>
     <div class="submit-note-panel">
       <h3>GitHub Notes Sync</h3>
-      <p class="intake-status ready">Notes are authored in the GitHub/Obsidian 2026 repo. This browser does not write note files.</p>
+      <p class="intake-status ready">Notes are authored in the GitHub/Obsidian 2026 repo. This browser refreshes read-only JSON exports; it does not write note files.</p>
       <div class="deploy-row"><span>Source</span><strong>content/notes-2026</strong></div>
       <div class="deploy-row"><span>Refresh command</span><strong>npm run generate</strong></div>
+      <div style="display:grid;gap:8px;margin-top:10px;">
+        <div>
+          <label for="github-notes-base-url">Cloud data base URL</label>
+          <input id="github-notes-base-url" type="url" spellcheck="false" placeholder="https://raw.githubusercontent.com/&lt;owner&gt;/&lt;repo&gt;/&lt;ref&gt;/apps/time-planner/data/" />
+        </div>
+        <div class="note-meta">Tip: point at a folder that contains `notes-index.json` and `dashboard-model.json`.</div>
+      </div>
       <div class="submit-note-footer">
         <span class="intake-status" id="submit-note-result">Run the local pipeline after pulling note changes from GitHub.</span>
         <button class="btn btn-primary" onclick="showGitHubSyncInstructions()">Sync notes from GitHub 2026 repo</button>
@@ -2508,6 +2515,7 @@
 
 <script src="js/ai-engine.js"></script>
 <script src="js/sync-engine.js"></script>
+<script src="js/notes-cloud-sync.js"></script>
 <script>
 // ═══════════════════════════════════════════════════════
 //  STATE  (persisted to localStorage)
@@ -3037,6 +3045,12 @@ async function loadDashboardModel() {
     dashboardModel = await response.json();
     applyDashboardModel();
   } catch (err) {
+    const cached = window.NotesCloudSync?.getCachedDashboardModel?.();
+    if (cached?.value) {
+      dashboardModel = cached.value;
+      applyDashboardModel();
+      return;
+    }
     console.warn('Dashboard model unavailable', err);
   }
 }
@@ -3870,6 +3884,15 @@ async function loadNotesIndex() {
     populateProjectFilter();
     renderNotesIndex();
   } catch (err) {
+    const cached = window.NotesCloudSync?.getCachedNotesIndex?.();
+    if (cached?.value) {
+      notesIndex = cached.value;
+      notesIndexLoaded = true;
+      populateProjectFilter();
+      renderNotesIndex();
+      renderNoteBrowser();
+      return;
+    }
     const generated = document.getElementById('notes-generated');
     if (generated) {
       generated.textContent = 'Notes index unavailable. Run node scripts/index-notes.js, then serve apps/time-planner locally.';
@@ -3967,14 +3990,62 @@ async function submitFirebaseNote() {
   }
 }
 
-function showGitHubSyncInstructions() {
+async function showGitHubSyncInstructions() {
   const result = document.getElementById('submit-note-result');
-  const message = 'Safe stub: pull/update the 2026 notes repo locally, then run npm run generate. Browser sync does not edit note files.';
-  if (result) {
-    result.textContent = message;
-    result.className = 'intake-status ready';
+  const input = document.getElementById('github-notes-base-url');
+  const baseUrl = input?.value?.trim() || '';
+
+  if (!window.NotesCloudSync?.sync) {
+    const message = 'Cloud notes sync unavailable (missing js/notes-cloud-sync.js). Pull/update the 2026 notes repo locally, then run npm run generate.';
+    if (result) {
+      result.textContent = message;
+      result.className = 'intake-status error';
+    }
+    setText('quick-notes-status', message);
+    return;
   }
-  setText('quick-notes-status', message);
+
+  try {
+    if (result) {
+      result.textContent = 'Syncing cloud exports…';
+      result.className = 'intake-status';
+    }
+
+    if (baseUrl) window.NotesCloudSync.setConfig({ baseUrl });
+    const synced = await window.NotesCloudSync.sync(baseUrl ? { baseUrl } : {});
+
+    if (input && synced.baseUrl) input.value = synced.baseUrl;
+    if (synced.notesIndex) {
+      notesIndex = synced.notesIndex;
+      notesIndexLoaded = true;
+    }
+
+    if (synced.dashboardModel) {
+      dashboardModel = synced.dashboardModel;
+      applyDashboardModel();
+    } else {
+      populateProjectFilter();
+      populateNoteBrowserFilters();
+      renderNotesIndex();
+      renderNoteBrowser();
+    }
+
+    const message = synced.dashboardModel
+      ? 'Cloud refresh complete: notes-index.json + dashboard-model.json updated.'
+      : 'Cloud refresh complete: notes-index.json updated (dashboard-model.json unavailable).';
+    if (result) {
+      result.textContent = message;
+      result.className = 'intake-status ready';
+    }
+    setText('quick-notes-status', message);
+  } catch (err) {
+    const message = `Cloud refresh failed: ${err?.message || err}`;
+    if (result) {
+      result.textContent = message;
+      result.className = 'intake-status error';
+    }
+    setText('quick-notes-status', message);
+  }
 }
 
 function populateProjectFilter() {
@@ -5904,6 +5975,9 @@ window.addEventListener('planner-state-reloaded', handlePlannerStateReloaded);
   renderCalendar();
   renderPhaseStatus();
   renderPhaseTable();
+  const cloudInput = document.getElementById('github-notes-base-url');
+  const cloudConfig = window.NotesCloudSync?.getConfig?.();
+  if (cloudInput && cloudConfig?.baseUrl) cloudInput.value = cloudConfig.baseUrl;
   loadDashboardModel();
   loadAiSuggestions();
   loadNotesIndex();
