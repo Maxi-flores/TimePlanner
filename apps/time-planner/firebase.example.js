@@ -22,7 +22,10 @@ import {
   onAuthStateChanged,
   signInAnonymously,
   signInWithPopup,
-  signOut
+  signOut,
+  setPersistence,
+  browserLocalPersistence,
+  linkWithCredential
 } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
 
 const firebaseConfig = {
