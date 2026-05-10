@@ -3,14 +3,27 @@ import { StateEngine } from './state-engine.js';
 import { GoalsView } from './views/goals.js';
 
 async function initializeModernSync() {
-  const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_PROJECT.firebaseapp.com",
-    projectId: "YOUR_PROJECT_ID",
-    storageBucket: "YOUR_PROJECT.appspot.com",
-    messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-    appId: "YOUR_APP_ID"
-  };
+  let firebaseConfig;
+  
+  try {
+    const firebaseModule = await import('../firebase.js');
+    if (firebaseModule.firebaseReady) {
+      firebaseConfig = null;
+    } else {
+      console.warn('Firebase not configured. Modern sync disabled.');
+      return;
+    }
+  } catch (err) {
+    console.warn('Firebase module not found. Using placeholder config.');
+    firebaseConfig = {
+      apiKey: "YOUR_API_KEY",
+      authDomain: "YOUR_PROJECT.firebaseapp.com",
+      projectId: "YOUR_PROJECT_ID",
+      storageBucket: "YOUR_PROJECT.appspot.com",
+      messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+      appId: "YOUR_APP_ID"
+    };
+  }
 
   const stateEngine = new StateEngine();
   

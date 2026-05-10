@@ -75,19 +75,7 @@ class PlannerSyncEngine {
         const localState = this.stateEngine.userState;
 
         if (cloudData) {
-          const mergedState = {
-            goals: this.mergeLists(localState.goals || [], cloudData.goals || []),
-            events: this.mergeLists(localState.events || [], cloudData.events || []),
-            blocks: this.mergeBlocks(localState.blocks || {}, cloudData.blocks || {}),
-            milestones: this.mergeLists(localState.milestones || [], cloudData.milestones || []),
-            proposedNotes: this.mergeLists(localState.proposedNotes || [], cloudData.proposedNotes || []),
-            projectTools: { ...(cloudData.projectTools || {}), ...(localState.projectTools || {}) },
-            roadmapNotes: this.mergeLists(localState.roadmapNotes || [], cloudData.roadmapNotes || []),
-            projectPhaseItems: this.mergeLists(localState.projectPhaseItems || [], cloudData.projectPhaseItems || []),
-            deploymentNotes: this.mergeLists(localState.deploymentNotes || [], cloudData.deploymentNotes || []),
-            syncedNotesQueue: this.mergeLists(localState.syncedNotesQueue || [], cloudData.syncedNotesQueue || [])
-          };
-
+          const mergedState = this.mergeState(localState, cloudData);
           this.stateEngine.userState = mergedState;
         }
 
@@ -106,6 +94,30 @@ class PlannerSyncEngine {
         }
       }
     });
+  }
+
+  mergeState(localState, cloudData) {
+    const mergeFields = [
+      'goals',
+      'events',
+      'milestones',
+      'proposedNotes',
+      'roadmapNotes',
+      'projectPhaseItems',
+      'deploymentNotes',
+      'syncedNotesQueue'
+    ];
+
+    const merged = {};
+    
+    mergeFields.forEach(field => {
+      merged[field] = this.mergeLists(localState[field] || [], cloudData[field] || []);
+    });
+
+    merged.blocks = this.mergeBlocks(localState.blocks || {}, cloudData.blocks || {});
+    merged.projectTools = { ...(cloudData.projectTools || {}), ...(localState.projectTools || {}) };
+
+    return merged;
   }
 
   mergeLists(localList, cloudList) {

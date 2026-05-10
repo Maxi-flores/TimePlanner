@@ -43,10 +43,12 @@ class GoalsView {
 
     const sourceChips = this.buildSourceChips(goal, unifiedData);
 
+    const safeGoalId = this.escapeHtml(goal.id);
+
     card.innerHTML = `
       <div class="goal-title">
         <span style="border-left:3px solid ${color};padding-left:8px;">${this.escapeHtml(goal.title)}</span>
-        <button class="task-delete" onclick="window.goalsView?.deleteGoal('${goal.id}')">✕</button>
+        <button class="task-delete" data-goal-id="${safeGoalId}">✕</button>
       </div>
       <div style="font-size:.72rem;color:var(--text-muted);margin-bottom:6px;">
         ${goal.month ? `📅 ${goal.month} · ` : ''}${this.escapeHtml(goal.projectName || 'No project')} · ${this.escapeHtml(phaseLabel)}${goal.tool ? ` · ${this.escapeHtml(goal.tool)}` : ''}${goal.taskDuration ? ` · ${this.escapeHtml(goal.taskDuration)}h tasks` : ''}
@@ -55,13 +57,20 @@ class GoalsView {
       ${goal.desc ? `<div class="goal-desc">${this.escapeHtml(goal.desc)}</div>` : ''}
       <div class="progress-bar"><div class="progress-bar-fill" style="width:${pct}%;background:${color};"></div></div>
       <div class="progress-label">${done}/${total} tasks · ${pct}%</div>
-      <div class="task-list" id="tasks-${goal.id}"></div>
+      <div class="task-list" id="tasks-${safeGoalId}"></div>
       <div style="display:flex;gap:6px;margin-top:10px;">
-        <input type="text" placeholder="New task…" id="new-task-${goal.id}" style="flex:1;font-size:.78rem;" onkeydown="if(event.key==='Enter')window.goalsView?.addTask('${goal.id}')" />
-        <button class="btn btn-primary" style="padding:5px 10px;font-size:.75rem;" onclick="window.goalsView?.addTask('${goal.id}')">+</button>
+        <input type="text" placeholder="New task…" id="new-task-${safeGoalId}" style="flex:1;font-size:.78rem;" data-goal-id="${safeGoalId}" />
+        <button class="btn btn-primary" style="padding:5px 10px;font-size:.75rem;" data-goal-id="${safeGoalId}" data-action="add-task">+</button>
       </div>`;
 
     container.appendChild(card);
+
+    card.querySelector('[data-goal-id][data-action="add-task"]')?.addEventListener('click', () => this.addTask(goal.id));
+    card.querySelector(`#new-task-${safeGoalId}`)?.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') this.addTask(goal.id);
+    });
+    card.querySelector('.task-delete')?.addEventListener('click', () => this.deleteGoal(goal.id));
+
     this.renderTaskList(goal);
   }
 
@@ -96,7 +105,8 @@ class GoalsView {
   }
 
   renderTaskList(goal) {
-    const container = document.getElementById('tasks-' + goal.id);
+    const safeGoalId = this.escapeHtml(goal.id);
+    const container = document.getElementById('tasks-' + safeGoalId);
     if (!container) return;
     container.innerHTML = '';
     
@@ -105,11 +115,30 @@ class GoalsView {
     tasks.forEach(task => {
       const item = document.createElement('div');
       item.className = 'task-item' + (task.done ? ' done' : '') + (task.priority ? ' priority-task' : '');
-      item.innerHTML = `
-        <input type="checkbox" ${task.done ? 'checked' : ''} onchange="window.goalsView?.toggleTask('${goal.id}','${task.id}',this.checked)" />
-        <button class="task-delete" title="Toggle priority" onclick="window.goalsView?.toggleTaskPriority('${goal.id}','${task.id}')">${task.priority ? '★' : '☆'}</button>
-        <span>${this.escapeHtml(task.text)}</span>
-        <button class="task-delete" onclick="window.goalsView?.deleteTask('${goal.id}','${task.id}')">✕</button>`;
+      
+      const checkbox = document.createElement('input');
+      checkbox.type = 'checkbox';
+      checkbox.checked = task.done;
+      checkbox.addEventListener('change', () => this.toggleTask(goal.id, task.id, checkbox.checked));
+
+      const priorityBtn = document.createElement('button');
+      priorityBtn.className = 'task-delete';
+      priorityBtn.title = 'Toggle priority';
+      priorityBtn.textContent = task.priority ? '★' : '☆';
+      priorityBtn.addEventListener('click', () => this.toggleTaskPriority(goal.id, task.id));
+
+      const span = document.createElement('span');
+      span.textContent = task.text;
+
+      const deleteBtn = document.createElement('button');
+      deleteBtn.className = 'task-delete';
+      deleteBtn.textContent = '✕';
+      deleteBtn.addEventListener('click', () => this.deleteTask(goal.id, task.id));
+
+      item.appendChild(checkbox);
+      item.appendChild(priorityBtn);
+      item.appendChild(span);
+      item.appendChild(deleteBtn);
       container.appendChild(item);
     });
   }

@@ -39,12 +39,13 @@ bindAuthChanges() {
 ```
 
 **Data Merging:**
-Local and cloud data are merged using unique IDs to prevent data loss:
+Local and cloud data are merged using unique IDs to prevent data loss. The merge strategy always prefers local data when IDs match (last-write-wins), ensuring local changes take precedence:
 ```javascript
 mergeLists(localList, cloudList) {
-  // Deduplicates by .id or .roadmapLevelId
-  // Preserves both local and cloud entries
-  // Returns unified list
+  // 1. Cloud items added to map first
+  // 2. Local items added to map (overwriting cloud items with same ID)
+  // Result: Local changes always win when IDs conflict
+  // Returns unified list with no duplicates
 }
 ```
 
@@ -223,7 +224,12 @@ window.stateEngine.saveGoal({ id: 'test', title: 'Test Goal', tasks: [] });
 
 Test account linking:
 ```javascript
-const credential = GoogleAuthProvider.credential(idToken);
+// First sign in with Google to get credential
+const provider = new GoogleAuthProvider();
+const result = await signInWithPopup(auth, provider);
+const credential = GoogleAuthProvider.credentialFromResult(result);
+
+// Then link to anonymous account
 await window.modernSync.upgradeAnonymousAccount(credential);
 // Anonymous data preserved under new permanent account
 ```

@@ -24,10 +24,10 @@ class StateEngine {
       };
     }
 
-    const generatedTasks = (this.dashboardModel.tasks || []).map(task => ({
-      ...task,
-      source: task.source || 'generated'
-    }));
+    const generatedTasks = (this.dashboardModel.tasks || []).map(task => {
+      const taskSource = task.source || 'generated';
+      return { ...task, source: taskSource };
+    });
 
     const userGoalTasks = (this.userState.goals || []).flatMap(goal =>
       (goal.tasks || []).map(task => ({
