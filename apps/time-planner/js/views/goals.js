@@ -180,8 +180,13 @@ class GoalsView {
     if (!goal) return;
 
     if (!goal.tasks) goal.tasks = [];
+    
+    const taskId = typeof crypto !== 'undefined' && crypto.randomUUID 
+      ? crypto.randomUUID()
+      : `task-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 11)}`;
+
     goal.tasks.push({
-      id: `task-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}`,
+      id: taskId,
       text: input.value.trim(),
       done: false,
       priority: false

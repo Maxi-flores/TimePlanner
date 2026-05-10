@@ -119,7 +119,7 @@ await initializeModernSync();
 
 ## Firebase Configuration
 
-Copy `firebase.example.js` to `firebase.js` and add your Firebase project credentials:
+Copy `apps/time-planner/firebase.example.js` to `apps/time-planner/firebase.js` and add your Firebase project credentials:
 
 ```javascript
 const firebaseConfig = {
