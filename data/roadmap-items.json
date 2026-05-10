@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-06T13:34:09.190Z",
+  "generatedAt": "2026-05-10T19:10:54.686Z",
   "source": {
     "notesIndexPath": "data/notes-index.json",
     "noteCount": 49
@@ -13,7 +13,7 @@
         "noteIds": [
           "note-content-notes-2026-profound-projects-bikerinstinct-26-4-25-15"
         ],
-        "priorityScore": 29,
+        "priorityScore": 25,
         "status": "active",
         "metadata": {
           "noteCount": 1,
@@ -60,7 +60,7 @@
           "note-content-notes-2026-profound-projects-cshop-26-4-12-19",
           "note-content-notes-2026-profound-projects-cshop-26-4-25-20"
         ],
-        "priorityScore": 42,
+        "priorityScore": 38,
         "status": "active",
         "metadata": {
           "noteCount": 2,
@@ -75,7 +75,7 @@
         "noteIds": [
           "note-content-notes-2026-profound-projects-dealinstinct-26-4-25-21"
         ],
-        "priorityScore": 29,
+        "priorityScore": 25,
         "status": "active",
         "metadata": {
           "noteCount": 1,
@@ -84,14 +84,14 @@
         }
       },
       {
-        "id": "project-examp-developer-portfolio",
-        "name": "Examp. Developer Portfolio",
-        "title": "Examp. Developer Portfolio",
+        "id": "project-examp-developer-portfolio-wom",
+        "name": "Examp. Developer Portfolio/WOM",
+        "title": "Examp. Developer Portfolio/WOM",
         "noteIds": [
           "note-content-notes-2026-profound-projects-examp-developer-portfolio-wom-26-4-11-22",
           "note-content-notes-2026-profound-projects-examp-developer-portfolio-wom-26-4-25-23"
         ],
-        "priorityScore": 42,
+        "priorityScore": 38,
         "status": "active",
         "metadata": {
           "noteCount": 2,
@@ -106,7 +106,7 @@
         "noteIds": [
           "note-content-notes-2026-profound-projects-flink3d-26-4-25-24"
         ],
-        "priorityScore": 32,
+        "priorityScore": 28,
         "status": "active",
         "metadata": {
           "noteCount": 1,
@@ -123,7 +123,7 @@
           "note-content-notes-2026-profound-projects-fullstack-dev-26-4-12-26",
           "note-content-notes-2026-profound-projects-fullstack-dev-temp-27"
         ],
-        "priorityScore": 30,
+        "priorityScore": 26,
         "status": "active",
         "metadata": {
           "noteCount": 3,
@@ -138,7 +138,7 @@
         "noteIds": [
           "note-content-notes-2026-profound-projects-mucho3d-26-4-25-28"
         ],
-        "priorityScore": 32,
+        "priorityScore": 28,
         "status": "active",
         "metadata": {
           "noteCount": 1,
@@ -157,7 +157,7 @@
           "note-content-notes-2026-profound-projects-pf-project-26-5-3-33",
           "note-content-notes-2026-profound-projects-pf-project-gh100-powerfull-planning-tracking-34"
         ],
-        "priorityScore": 68,
+        "priorityScore": 64,
         "status": "active",
         "metadata": {
           "noteCount": 5,
@@ -173,7 +173,7 @@
           "note-content-notes-2026-profound-projects-powerframe-26-4-11-35",
           "note-content-notes-2026-profound-projects-powerframe-26-4-25-36"
         ],
-        "priorityScore": 42,
+        "priorityScore": 38,
         "status": "active",
         "metadata": {
           "noteCount": 2,
@@ -190,7 +190,7 @@
           "note-content-notes-2026-profound-projects-powerstarter-azure-26-4-11-38",
           "note-content-notes-2026-profound-projects-powerstarter-azure-26-4-25-39"
         ],
-        "priorityScore": 52,
+        "priorityScore": 48,
         "status": "active",
         "metadata": {
           "noteCount": 3,
@@ -206,7 +206,7 @@
           "note-content-notes-2026-profound-projects-sapient-26-4-16-40",
           "note-content-notes-2026-profound-projects-sapient-26-4-25-41"
         ],
-        "priorityScore": 42,
+        "priorityScore": 38,
         "status": "active",
         "metadata": {
           "noteCount": 2,
@@ -227,7 +227,7 @@
           "note-content-notes-2026-profound-projects-therockettree-app-26-4-17-47",
           "note-content-notes-2026-profound-projects-therockettree-app-26-4-25-48"
         ],
-        "priorityScore": 92,
+        "priorityScore": 88,
         "status": "active",
         "metadata": {
           "noteCount": 7,
@@ -253,7 +253,7 @@
       {
         "id": "prompt-content-notes-2026-profound-projects-examp-developer-portfolio-wom-26-4-25",
         "title": "Prompt session 26.4.25 @",
-        "projectId": "project-examp-developer-portfolio",
+        "projectId": "project-examp-developer-portfolio-wom",
         "noteId": "note-content-notes-2026-profound-projects-examp-developer-portfolio-wom-26-4-25-23",
         "sourcePath": "content/notes-2026/Profound Projects/Examp. Developer Portfolio/WOM/26.4.25 @",
         "date": "2026-04-25",
@@ -611,25 +611,25 @@
       {
         "id": "note-content-notes-2026-profound-projects-examp-developer-portfolio-wom-26-4-11-22",
         "title": "26.4.11",
-        "projectId": "project-examp-developer-portfolio",
+        "projectId": "project-examp-developer-portfolio-wom",
         "sourcePath": "content/notes-2026/Profound Projects/Examp. Developer Portfolio/WOM/26.4.11",
         "date": "2026-04-11",
         "status": "indexed",
         "metadata": {
           "monthFolder": null,
-          "projectName": "Examp. Developer Portfolio"
+          "projectName": "Examp. Developer Portfolio/WOM"
         }
       },
       {
         "id": "note-content-notes-2026-profound-projects-examp-developer-portfolio-wom-26-4-25-23",
         "title": "26.4.25 @",
-        "projectId": "project-examp-developer-portfolio",
+        "projectId": "project-examp-developer-portfolio-wom",
         "sourcePath": "content/notes-2026/Profound Projects/Examp. Developer Portfolio/WOM/26.4.25 @",
         "date": "2026-04-25",
         "status": "indexed",
         "metadata": {
           "monthFolder": null,
-          "projectName": "Examp. Developer Portfolio"
+          "projectName": "Examp. Developer Portfolio/WOM"
         }
       },
       {
@@ -954,7 +954,7 @@
         "sourcePath": null,
         "date": "2026-04-25",
         "status": "placeholder",
-        "priorityScore": 15,
+        "priorityScore": 13,
         "metadata": {
           "derivedFrom": "project note cluster"
         }
@@ -993,7 +993,7 @@
         "sourcePath": null,
         "date": "2026-04-25",
         "status": "placeholder",
-        "priorityScore": 21,
+        "priorityScore": 19,
         "metadata": {
           "derivedFrom": "project note cluster"
         }
@@ -1006,20 +1006,20 @@
         "sourcePath": null,
         "date": "2026-04-25",
         "status": "placeholder",
-        "priorityScore": 15,
+        "priorityScore": 13,
         "metadata": {
           "derivedFrom": "project note cluster"
         }
       },
       {
-        "id": "feature-examp-developer-portfolio-roadmap-intake",
-        "title": "Examp. Developer Portfolio roadmap intake",
-        "projectId": "project-examp-developer-portfolio",
+        "id": "feature-examp-developer-portfolio-wom-roadmap-intake",
+        "title": "Examp. Developer Portfolio/WOM roadmap intake",
+        "projectId": "project-examp-developer-portfolio-wom",
         "noteId": null,
         "sourcePath": null,
         "date": "2026-04-25",
         "status": "placeholder",
-        "priorityScore": 21,
+        "priorityScore": 19,
         "metadata": {
           "derivedFrom": "project note cluster"
         }
@@ -1032,7 +1032,7 @@
         "sourcePath": null,
         "date": "2026-04-25",
         "status": "placeholder",
-        "priorityScore": 16,
+        "priorityScore": 14,
         "metadata": {
           "derivedFrom": "project note cluster"
         }
@@ -1045,7 +1045,7 @@
         "sourcePath": null,
         "date": "2026-04-12",
         "status": "placeholder",
-        "priorityScore": 15,
+        "priorityScore": 13,
         "metadata": {
           "derivedFrom": "project note cluster"
         }
@@ -1060,7 +1060,7 @@
         "sourcePath": "content/notes-2026/Profound Projects/Bikerinstinct/26.4.25",
         "date": "2026-04-25",
         "status": "candidate",
-        "priorityScore": 23,
+        "priorityScore": 20,
         "metadata": {
           "derivedFrom": "dated project note"
         }
@@ -1086,7 +1086,7 @@
         "sourcePath": "content/notes-2026/Profound Projects/CSHOP/26.4.25 @",
         "date": "2026-04-25",
         "status": "candidate",
-        "priorityScore": 28,
+        "priorityScore": 25,
         "metadata": {
           "derivedFrom": "dated project note"
         }
@@ -1099,15 +1099,15 @@
         "sourcePath": "content/notes-2026/Profound Projects/Dealinstinct/26.4.25",
         "date": "2026-04-25",
         "status": "candidate",
-        "priorityScore": 23,
+        "priorityScore": 20,
         "metadata": {
           "derivedFrom": "dated project note"
         }
       },
       {
-        "id": "task-review-examp-developer-portfolio-26-4-11",
-        "title": "Review Examp. Developer Portfolio note 26.4.11",
-        "projectId": "project-examp-developer-portfolio",
+        "id": "task-review-examp-developer-portfolio-wom-26-4-11",
+        "title": "Review Examp. Developer Portfolio/WOM note 26.4.11",
+        "projectId": "project-examp-developer-portfolio-wom",
         "noteId": "note-content-notes-2026-profound-projects-examp-developer-portfolio-wom-26-4-11-22",
         "sourcePath": "content/notes-2026/Profound Projects/Examp. Developer Portfolio/WOM/26.4.11",
         "date": "2026-04-11",
@@ -1118,14 +1118,14 @@
         }
       },
       {
-        "id": "task-review-examp-developer-portfolio-26-4-25",
-        "title": "Review Examp. Developer Portfolio note 26.4.25 @",
-        "projectId": "project-examp-developer-portfolio",
+        "id": "task-review-examp-developer-portfolio-wom-26-4-25",
+        "title": "Review Examp. Developer Portfolio/WOM note 26.4.25 @",
+        "projectId": "project-examp-developer-portfolio-wom",
         "noteId": "note-content-notes-2026-profound-projects-examp-developer-portfolio-wom-26-4-25-23",
         "sourcePath": "content/notes-2026/Profound Projects/Examp. Developer Portfolio/WOM/26.4.25 @",
         "date": "2026-04-25",
         "status": "candidate",
-        "priorityScore": 28,
+        "priorityScore": 25,
         "metadata": {
           "derivedFrom": "dated project note"
         }
@@ -1138,7 +1138,7 @@
         "sourcePath": "content/notes-2026/Profound Projects/Flink3D/26.4.25 @",
         "date": "2026-04-25",
         "status": "candidate",
-        "priorityScore": 28,
+        "priorityScore": 25,
         "metadata": {
           "derivedFrom": "dated project note"
         }
@@ -1177,7 +1177,7 @@
         "sourcePath": "content/notes-2026/Profound Projects/Mucho3D/26.4.25 @",
         "date": "2026-04-25",
         "status": "candidate",
-        "priorityScore": 28,
+        "priorityScore": 25,
         "metadata": {
           "derivedFrom": "dated project note"
         }
@@ -1190,7 +1190,7 @@
         "sourcePath": "content/notes-2026/Profound Projects/PF-PROJECT/26.4.28",
         "date": "2026-04-28",
         "status": "candidate",
-        "priorityScore": 26,
+        "priorityScore": 22,
         "metadata": {
           "derivedFrom": "dated project note"
         }
@@ -1203,7 +1203,7 @@
         "sourcePath": "content/notes-2026/Profound Projects/PF-PROJECT/26.5.2",
         "date": "2026-05-02",
         "status": "candidate",
-        "priorityScore": 30,
+        "priorityScore": 26,
         "metadata": {
           "derivedFrom": "dated project note"
         }
@@ -1216,7 +1216,7 @@
         "sourcePath": "content/notes-2026/Profound Projects/PF-PROJECT/26.5.3 @",
         "date": "2026-05-03",
         "status": "candidate",
-        "priorityScore": 36,
+        "priorityScore": 32,
         "metadata": {
           "derivedFrom": "dated project note"
         }
@@ -1242,7 +1242,7 @@
         "sourcePath": "content/notes-2026/Profound Projects/Powerframe/26.4.25 @",
         "date": "2026-04-25",
         "status": "candidate",
-        "priorityScore": 28,
+        "priorityScore": 25,
         "metadata": {
           "derivedFrom": "dated project note"
         }
@@ -1281,7 +1281,7 @@
         "sourcePath": "content/notes-2026/Profound Projects/Powerstarter Azure/26.4.25 @",
         "date": "2026-04-25",
         "status": "candidate",
-        "priorityScore": 28,
+        "priorityScore": 25,
         "metadata": {
           "derivedFrom": "dated project note"
         }
@@ -1307,7 +1307,7 @@
         "sourcePath": "content/notes-2026/Profound Projects/Sapient/26.4.25 @",
         "date": "2026-04-25",
         "status": "candidate",
-        "priorityScore": 28,
+        "priorityScore": 25,
         "metadata": {
           "derivedFrom": "dated project note"
         }
@@ -1398,7 +1398,7 @@
         "sourcePath": "content/notes-2026/Profound Projects/TheRocketTree-App/26.4.25 @",
         "date": "2026-04-25",
         "status": "candidate",
-        "priorityScore": 28,
+        "priorityScore": 25,
         "metadata": {
           "derivedFrom": "dated project note"
         }
@@ -1413,7 +1413,7 @@
         "sourcePath": null,
         "date": "2026-04-25",
         "status": "indexed",
-        "priorityScore": 19,
+        "priorityScore": 17,
         "metadata": {
           "derivedFrom": "latest dated project note"
         }
@@ -1426,7 +1426,7 @@
         "sourcePath": null,
         "date": "2026-04-25",
         "status": "indexed",
-        "priorityScore": 28,
+        "priorityScore": 25,
         "metadata": {
           "derivedFrom": "latest dated project note"
         }
@@ -1439,20 +1439,20 @@
         "sourcePath": null,
         "date": "2026-04-25",
         "status": "indexed",
-        "priorityScore": 19,
+        "priorityScore": 17,
         "metadata": {
           "derivedFrom": "latest dated project note"
         }
       },
       {
-        "id": "milestone-examp-developer-portfolio-2026-04-25",
-        "title": "Examp. Developer Portfolio latest dated checkpoint",
-        "projectId": "project-examp-developer-portfolio",
+        "id": "milestone-examp-developer-portfolio-wom-2026-04-25",
+        "title": "Examp. Developer Portfolio/WOM latest dated checkpoint",
+        "projectId": "project-examp-developer-portfolio-wom",
         "noteId": null,
         "sourcePath": null,
         "date": "2026-04-25",
         "status": "indexed",
-        "priorityScore": 28,
+        "priorityScore": 25,
         "metadata": {
           "derivedFrom": "latest dated project note"
         }
@@ -1465,7 +1465,7 @@
         "sourcePath": null,
         "date": "2026-04-25",
         "status": "indexed",
-        "priorityScore": 21,
+        "priorityScore": 19,
         "metadata": {
           "derivedFrom": "latest dated project note"
         }
@@ -1478,7 +1478,7 @@
         "sourcePath": null,
         "date": "2026-04-12",
         "status": "indexed",
-        "priorityScore": 20,
+        "priorityScore": 17,
         "metadata": {
           "derivedFrom": "latest dated project note"
         }
@@ -1491,7 +1491,7 @@
         "sourcePath": null,
         "date": "2026-04-25",
         "status": "indexed",
-        "priorityScore": 21,
+        "priorityScore": 19,
         "metadata": {
           "derivedFrom": "latest dated project note"
         }
@@ -1504,7 +1504,7 @@
         "sourcePath": null,
         "date": "2026-05-03",
         "status": "indexed",
-        "priorityScore": 45,
+        "priorityScore": 43,
         "metadata": {
           "derivedFrom": "latest dated project note"
         }
@@ -1517,7 +1517,7 @@
         "sourcePath": null,
         "date": "2026-04-25",
         "status": "indexed",
-        "priorityScore": 28,
+        "priorityScore": 25,
         "metadata": {
           "derivedFrom": "latest dated project note"
         }
@@ -1530,7 +1530,7 @@
         "sourcePath": null,
         "date": "2026-04-25",
         "status": "indexed",
-        "priorityScore": 35,
+        "priorityScore": 32,
         "metadata": {
           "derivedFrom": "latest dated project note"
         }
@@ -1543,7 +1543,7 @@
         "sourcePath": null,
         "date": "2026-04-25",
         "status": "indexed",
-        "priorityScore": 28,
+        "priorityScore": 25,
         "metadata": {
           "derivedFrom": "latest dated project note"
         }
@@ -1556,7 +1556,7 @@
         "sourcePath": null,
         "date": "2026-04-25",
         "status": "indexed",
-        "priorityScore": 61,
+        "priorityScore": 59,
         "metadata": {
           "derivedFrom": "latest dated project note"
         }
@@ -1579,12 +1579,12 @@
     ],
     "syncEvent": [
       {
-        "id": "sync-2026-05-06",
+        "id": "sync-2026-05-10",
         "title": "Generated roadmap items from notes index",
         "projectId": null,
         "noteId": null,
         "sourcePath": "data/notes-index.json",
-        "date": "2026-05-06",
+        "date": "2026-05-10",
         "status": "generated",
         "priorityScore": 0,
         "metadata": {
@@ -1599,140 +1599,140 @@
       "id": "project-therockettree-app",
       "entityType": "project",
       "title": "TheRocketTree-App",
-      "score": 92,
+      "score": 88,
       "reason": "7 notes, 7 dated"
     },
     {
       "id": "project-pf-project",
       "entityType": "project",
       "title": "PF-PROJECT",
-      "score": 68,
+      "score": 64,
       "reason": "5 notes, 3 dated"
     },
     {
       "id": "project-powerstarter-azure",
       "entityType": "project",
       "title": "Powerstarter Azure",
-      "score": 52,
+      "score": 48,
       "reason": "3 notes, 3 dated"
     },
     {
       "id": "project-cshop",
       "entityType": "project",
       "title": "CSHOP",
-      "score": 42,
+      "score": 38,
       "reason": "2 notes, 2 dated"
     },
     {
-      "id": "project-examp-developer-portfolio",
+      "id": "project-examp-developer-portfolio-wom",
       "entityType": "project",
-      "title": "Examp. Developer Portfolio",
-      "score": 42,
+      "title": "Examp. Developer Portfolio/WOM",
+      "score": 38,
       "reason": "2 notes, 2 dated"
     },
     {
       "id": "project-powerframe",
       "entityType": "project",
       "title": "Powerframe",
-      "score": 42,
+      "score": 38,
       "reason": "2 notes, 2 dated"
     },
     {
       "id": "project-sapient",
       "entityType": "project",
       "title": "Sapient",
-      "score": 42,
+      "score": 38,
       "reason": "2 notes, 2 dated"
     },
     {
       "id": "task-review-pf-project-26-5-3",
       "entityType": "task",
       "title": "Review PF-PROJECT note 26.5.3 @",
-      "score": 36,
+      "score": 32,
       "reason": "dated 2026-05-03"
     },
     {
       "id": "project-flink3d",
       "entityType": "project",
       "title": "Flink3D",
-      "score": 32,
+      "score": 28,
       "reason": "1 notes, 1 dated"
     },
     {
       "id": "project-mucho3d",
       "entityType": "project",
       "title": "Mucho3D",
-      "score": 32,
+      "score": 28,
       "reason": "1 notes, 1 dated"
     },
     {
       "id": "project-fullstack-dev",
       "entityType": "project",
       "title": "Fullstack dev",
-      "score": 30,
+      "score": 26,
       "reason": "3 notes, 2 dated"
     },
     {
       "id": "task-review-pf-project-26-5-2",
       "entityType": "task",
       "title": "Review PF-PROJECT note 26.5.2",
-      "score": 30,
+      "score": 26,
       "reason": "dated 2026-05-02"
     },
     {
       "id": "project-bikerinstinct",
       "entityType": "project",
       "title": "Bikerinstinct",
-      "score": 29,
+      "score": 25,
       "reason": "1 notes, 1 dated"
     },
     {
       "id": "project-dealinstinct",
       "entityType": "project",
       "title": "Dealinstinct",
-      "score": 29,
+      "score": 25,
       "reason": "1 notes, 1 dated"
     },
     {
       "id": "task-review-cshop-26-4-25",
       "entityType": "task",
       "title": "Review CSHOP note 26.4.25 @",
-      "score": 28,
+      "score": 25,
       "reason": "dated 2026-04-25"
     },
     {
-      "id": "task-review-examp-developer-portfolio-26-4-25",
+      "id": "task-review-examp-developer-portfolio-wom-26-4-25",
       "entityType": "task",
-      "title": "Review Examp. Developer Portfolio note 26.4.25 @",
-      "score": 28,
+      "title": "Review Examp. Developer Portfolio/WOM note 26.4.25 @",
+      "score": 25,
       "reason": "dated 2026-04-25"
     },
     {
       "id": "task-review-flink3d-26-4-25",
       "entityType": "task",
       "title": "Review Flink3D note 26.4.25 @",
-      "score": 28,
+      "score": 25,
       "reason": "dated 2026-04-25"
     },
     {
       "id": "task-review-mucho3d-26-4-25",
       "entityType": "task",
       "title": "Review Mucho3D note 26.4.25 @",
-      "score": 28,
+      "score": 25,
       "reason": "dated 2026-04-25"
     },
     {
       "id": "task-review-powerframe-26-4-25",
       "entityType": "task",
       "title": "Review Powerframe note 26.4.25 @",
-      "score": 28,
+      "score": 25,
       "reason": "dated 2026-04-25"
     },
     {
       "id": "task-review-powerstarter-azure-26-4-25",
       "entityType": "task",
       "title": "Review Powerstarter Azure note 26.4.25 @",
-      "score": 28,
+      "score": 25,
       "reason": "dated 2026-04-25"
     }
   ]

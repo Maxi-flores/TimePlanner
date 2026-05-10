@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-06T13:34:09.699Z",
+  "generatedAt": "2026-05-10T19:10:54.864Z",
   "milestoneCount": 14,
   "milestones": [
     {
@@ -106,25 +106,18 @@
       "suggestedNextActions": []
     },
     {
-      "id": "milestone-examp-developer-portfolio-2026-04-25",
+      "id": "milestone-examp-developer-portfolio-undated",
       "title": "Examp. Developer Portfolio roadmap checkpoint",
       "projectName": "Examp. Developer Portfolio",
       "sourceFolder": "content/notes-2026/Profound Projects/Examp. Developer Portfolio",
-      "status": "active",
+      "status": "needs-date",
       "dateRange": {
-        "start": "2026-04-11",
-        "end": "2026-04-25"
+        "start": null,
+        "end": null
       },
-      "linkedNotes": [
-        "content/notes-2026/Profound Projects/Examp. Developer Portfolio/WOM/26.4.11",
-        "content/notes-2026/Profound Projects/Examp. Developer Portfolio/WOM/26.4.25 @"
-      ],
-      "linkedTasks": [
-        "task-content-notes-2026-profound-projects-examp-developer-portfolio-wom-26-4-25-1"
-      ],
-      "suggestedNextActions": [
-        "for the setup"
-      ]
+      "linkedNotes": [],
+      "linkedTasks": [],
+      "suggestedNextActions": []
     },
     {
       "id": "milestone-flink3d-2026-04-25",

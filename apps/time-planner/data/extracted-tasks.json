@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-06T13:34:09.478Z",
+  "generatedAt": "2026-05-10T19:10:54.786Z",
   "taskCount": 191,
   "tasks": [
     {
@@ -567,7 +567,7 @@
       "id": "task-content-notes-2026-profound-projects-examp-developer-portfolio-wom-26-4-25-1",
       "title": "for the setup",
       "sourcePath": "content/notes-2026/Profound Projects/Examp. Developer Portfolio/WOM/26.4.25 @",
-      "projectName": "Examp. Developer Portfolio",
+      "projectName": "Examp. Developer Portfolio/WOM",
       "category": "setup",
       "status": "proposed",
       "confidence": 0.78,
