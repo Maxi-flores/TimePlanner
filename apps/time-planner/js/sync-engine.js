@@ -142,15 +142,47 @@
   }
 
   // ─── Merge cloud → local ───────────────────────────────────────────────
+  function parseLastModified(value) {
+    if (!value) return 0;
+    if (typeof value === "number" && Number.isFinite(value)) return value;
+    const asNumber = Number(value);
+    if (Number.isFinite(asNumber) && asNumber > 0) return asNumber;
+    const parsed = Date.parse(String(value));
+    return Number.isFinite(parsed) ? parsed : 0;
+  }
+
+  function modifiedAt(item) {
+    if (!item || typeof item !== "object") return 0;
+    return parseLastModified(item.lastModified ?? item.clientUpdatedAt ?? item.updatedAt ?? item.createdAt);
+  }
+
   function mergeArrayById(localArr, cloudArr) {
     const localList = Array.isArray(localArr) ? localArr : [];
     const cloudList = Array.isArray(cloudArr) ? cloudArr : [];
     const byId = new Map();
+
+    const keyFor = (item) => item?.id ?? item?.roadmapLevelId ?? null;
+
     cloudList.forEach(item => {
-      if (item && item.id != null) byId.set(item.id, item);
+      const key = keyFor(item);
+      if (key != null) byId.set(key, item);
     });
     localList.forEach(item => {
-      if (item && item.id != null) byId.set(item.id, item);
+      const key = keyFor(item);
+      if (key == null) return;
+      const existing = byId.get(key);
+      if (!existing) {
+        byId.set(key, item);
+        return;
+      }
+      const existingModified = modifiedAt(existing);
+      const nextModified = modifiedAt(item);
+      if (nextModified > existingModified) {
+        byId.set(key, item);
+      } else if (nextModified === existingModified) {
+        // Deterministic: local wins on ties (cloud loaded first).
+        byId.set(key, item);
+      }
     });
     return Array.from(byId.values());
   }
@@ -166,13 +198,10 @@
   function applyCloudPayloadToLocal(cloud) {
     if (!cloud || typeof cloud !== "object") return;
     const localState = readJson(STATE_KEY, {}) || {};
-    const cloudUpdated = (cloud.clientUpdatedAt && Number(cloud.clientUpdatedAt)) || 0;
-    const localUpdated = Number(localStorage.getItem(LOCAL_UPDATED_AT_KEY) || 0);
-    const cloudIsNewer = cloudUpdated > localUpdated;
 
     const merged = {
       ...localState,
-      goals: mergeArrayById(cloudIsNewer ? cloud.goals : localState.goals, cloudIsNewer ? localState.goals : cloud.goals),
+      goals: mergeArrayById(localState.goals, cloud.goals),
       events: mergeArrayById(localState.events, cloud.events),
       blocks: mergeBlocks(localState.blocks, cloud.blocks),
       milestones: mergeArrayById(localState.milestones, cloud.milestones),
