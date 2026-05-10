@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-05-06T13:34:09.891Z",
+  "generatedAt": "2026-05-10T19:10:54.945Z",
   "source": "data/dashboard-model.json",
   "mode": "deterministic-local",
   "projects": [
     {
       "projectName": "BV",
-      "generatedAt": "2026-05-06T13:34:09.889Z",
+      "generatedAt": "2026-05-10T19:10:54.945Z",
       "status": "task discovery",
       "context": {
         "noteCount": 2,
@@ -58,7 +58,7 @@
     },
     {
       "projectName": "Bikerinstinct",
-      "generatedAt": "2026-05-06T13:34:09.890Z",
+      "generatedAt": "2026-05-10T19:10:54.945Z",
       "status": "indexed",
       "context": {
         "noteCount": 1,
@@ -105,7 +105,7 @@
     },
     {
       "projectName": "CM4",
-      "generatedAt": "2026-05-06T13:34:09.890Z",
+      "generatedAt": "2026-05-10T19:10:54.945Z",
       "status": "indexed",
       "context": {
         "noteCount": 1,
@@ -151,7 +151,7 @@
     },
     {
       "projectName": "CSHOP",
-      "generatedAt": "2026-05-06T13:34:09.890Z",
+      "generatedAt": "2026-05-10T19:10:54.945Z",
       "status": "active classification",
       "context": {
         "noteCount": 2,
@@ -205,7 +205,7 @@
     },
     {
       "projectName": "Dealinstinct",
-      "generatedAt": "2026-05-06T13:34:09.890Z",
+      "generatedAt": "2026-05-10T19:10:54.945Z",
       "status": "indexed",
       "context": {
         "noteCount": 1,
@@ -251,13 +251,13 @@
       }
     },
     {
-      "projectName": "Examp. Developer Portfolio",
-      "generatedAt": "2026-05-06T13:34:09.890Z",
+      "projectName": "Examp. Developer Portfolio/WOM",
+      "generatedAt": "2026-05-10T19:10:54.945Z",
       "status": "active classification",
       "context": {
         "noteCount": 2,
         "taskCount": 1,
-        "milestoneCount": 1,
+        "milestoneCount": 0,
         "levelCount": 0,
         "categories": [
           "setup"
@@ -265,10 +265,10 @@
         "lastActivity": "2026-04-25"
       },
       "actionPrompts": [
-        "Review Examp. Developer Portfolio and turn the latest notes into a now/next/later execution plan.",
-        "Compare Examp. Developer Portfolio milestones against active tasks and suggest the next deployable slice.",
-        "Identify decisions in Examp. Developer Portfolio notes that should become tracked tasks before scheduling.",
-        "Use recent notes (26.4.25 @; 26.4.11) as the planning context for Examp. Developer Portfolio."
+        "Review Examp. Developer Portfolio/WOM and turn the latest notes into a now/next/later execution plan.",
+        "Compare Examp. Developer Portfolio/WOM milestones against active tasks and suggest the next deployable slice.",
+        "Identify decisions in Examp. Developer Portfolio/WOM notes that should become tracked tasks before scheduling.",
+        "Use recent notes (26.4.25 @; 26.4.11) as the planning context for Examp. Developer Portfolio/WOM."
       ],
       "nextActions": [
         "for the setup"
@@ -277,21 +277,22 @@
         "Source notes need classification into decisions, tasks, and milestones.",
         "Tasks are proposed and need owner/status confirmation."
       ],
-      "summaryPrompt": "Summarize Examp. Developer Portfolio using 2 notes, 1 tasks, 1 milestones, and current status \"active classification\". Return project state, next three actions, and blockers.",
-      "obsidianNotePrompt": "Create an Obsidian-ready project note for Examp. Developer Portfolio with sections: Status, Decisions, Next Actions, Blockers, Linked Notes, and Calendar Deployment.",
-      "decisionPrompt": "Extract explicit and implied decisions for Examp. Developer Portfolio. Output each as a proposed task first, never edit source notes directly.",
+      "summaryPrompt": "Summarize Examp. Developer Portfolio/WOM using 2 notes, 1 tasks, 0 milestones, and current status \"active classification\". Return project state, next three actions, and blockers.",
+      "obsidianNotePrompt": "Create an Obsidian-ready project note for Examp. Developer Portfolio/WOM with sections: Status, Decisions, Next Actions, Blockers, Linked Notes, and Calendar Deployment.",
+      "decisionPrompt": "Extract explicit and implied decisions for Examp. Developer Portfolio/WOM. Output each as a proposed task first, never edit source notes directly.",
       "milestoneSuggestions": [
-        "Review milestone \"Examp. Developer Portfolio roadmap checkpoint\" and confirm next deployable task."
+        "Create first milestone for Examp. Developer Portfolio/WOM from the newest notes.",
+        "Link Examp. Developer Portfolio/WOM milestone to one visible task and one calendar deployment."
       ],
       "dependencyHints": [
         "Notes index is available for context.",
         "Extracted tasks are available for prioritization.",
-        "Milestones can be used as planning checkpoints."
+        "Needs generated milestones."
       ],
       "priorityRecalculationInput": {
         "noteCount": 2,
         "taskCount": 1,
-        "milestoneCount": 1,
+        "milestoneCount": 0,
         "riskCount": 0,
         "recentActivity": "2026-04-25",
         "categories": [
@@ -301,7 +302,7 @@
     },
     {
       "projectName": "Flink3D",
-      "generatedAt": "2026-05-06T13:34:09.890Z",
+      "generatedAt": "2026-05-10T19:10:54.945Z",
       "status": "indexed",
       "context": {
         "noteCount": 1,
@@ -348,7 +349,7 @@
     },
     {
       "projectName": "Fullstack dev",
-      "generatedAt": "2026-05-06T13:34:09.890Z",
+      "generatedAt": "2026-05-10T19:10:54.945Z",
       "status": "indexed",
       "context": {
         "noteCount": 3,
@@ -395,7 +396,7 @@
     },
     {
       "projectName": "Mucho3D",
-      "generatedAt": "2026-05-06T13:34:09.890Z",
+      "generatedAt": "2026-05-10T19:10:54.945Z",
       "status": "task discovery",
       "context": {
         "noteCount": 1,
@@ -451,7 +452,7 @@
     },
     {
       "projectName": "PF-PROJECT",
-      "generatedAt": "2026-05-06T13:34:09.890Z",
+      "generatedAt": "2026-05-10T19:10:54.945Z",
       "status": "task discovery",
       "context": {
         "noteCount": 5,
@@ -510,7 +511,7 @@
     },
     {
       "projectName": "Powerframe",
-      "generatedAt": "2026-05-06T13:34:09.891Z",
+      "generatedAt": "2026-05-10T19:10:54.945Z",
       "status": "active classification",
       "context": {
         "noteCount": 2,
@@ -569,7 +570,7 @@
     },
     {
       "projectName": "Powerstarter Azure",
-      "generatedAt": "2026-05-06T13:34:09.891Z",
+      "generatedAt": "2026-05-10T19:10:54.945Z",
       "status": "active classification",
       "context": {
         "noteCount": 3,
@@ -626,7 +627,7 @@
     },
     {
       "projectName": "Sapient",
-      "generatedAt": "2026-05-06T13:34:09.891Z",
+      "generatedAt": "2026-05-10T19:10:54.945Z",
       "status": "task discovery",
       "context": {
         "noteCount": 2,
@@ -680,7 +681,7 @@
     },
     {
       "projectName": "TheRocketTree-App",
-      "generatedAt": "2026-05-06T13:34:09.891Z",
+      "generatedAt": "2026-05-10T19:10:54.945Z",
       "status": "task discovery",
       "context": {
         "noteCount": 7,
@@ -735,7 +736,7 @@
     },
     {
       "projectName": "General",
-      "generatedAt": "2026-05-06T13:34:09.891Z",
+      "generatedAt": "2026-05-10T19:10:54.945Z",
       "status": "needs review",
       "context": {
         "noteCount": 16,

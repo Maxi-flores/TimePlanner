@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-06T13:34:09.262Z",
+  "generatedAt": "2026-05-10T19:10:54.717Z",
   "source": {
     "roadmapItemsPath": "data/roadmap-items.json"
   },
@@ -75,8 +75,8 @@
       ],
       "taskIds": [
         "task-review-dealinstinct-26-4-25",
-        "task-review-examp-developer-portfolio-26-4-11",
-        "task-review-examp-developer-portfolio-26-4-25",
+        "task-review-examp-developer-portfolio-wom-26-4-11",
+        "task-review-examp-developer-portfolio-wom-26-4-25",
         "task-review-flink3d-26-4-25"
       ],
       "tags": [
@@ -97,7 +97,7 @@
       "tier": 3,
       "status": "unlocked",
       "projectIds": [
-        "project-examp-developer-portfolio",
+        "project-examp-developer-portfolio-wom",
         "project-powerframe"
       ],
       "notePaths": [
@@ -123,7 +123,7 @@
       "tags": [
         "tier-3",
         "unlocked",
-        "examp-developer-portfolio",
+        "examp-developer-portfolio-wom",
         "powerframe"
       ],
       "description": "Connect prompt sessions to projects, notes, and requested changes.",
@@ -193,7 +193,7 @@
       ],
       "featureIds": [
         "feature-dealinstinct-roadmap-intake",
-        "feature-examp-developer-portfolio-roadmap-intake"
+        "feature-examp-developer-portfolio-wom-roadmap-intake"
       ],
       "taskIds": [
         "task-review-pf-project-26-5-3",
@@ -231,7 +231,7 @@
         "prompt-content-notes-2026-profound-projects-powerstarter-azure-26-4-25"
       ],
       "featureIds": [
-        "feature-examp-developer-portfolio-roadmap-intake",
+        "feature-examp-developer-portfolio-wom-roadmap-intake",
         "feature-flink3d-roadmap-intake"
       ],
       "taskIds": [

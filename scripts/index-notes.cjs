@@ -106,13 +106,15 @@ function buildIndex() {
       const fileName = parts[parts.length - 1];
       const topLevelFolder = parts.length > 1 ? parts[0] : null;
       const isProjectNote = topLevelFolder === "Profound Projects" && parts.length > 2;
+      const projectPathParts = isProjectNote ? parts.slice(1, -1) : [];
+      const projectName = projectPathParts.length ? projectPathParts.join("/") : null;
 
       return {
         sourcePath: toPosixPath(path.relative(repoRoot, filePath)),
         title: titleFromFileName(fileName),
         date: dateFromFileName(fileName),
         monthFolder: topLevelFolder && monthNames.has(topLevelFolder) ? topLevelFolder : null,
-        projectName: isProjectNote ? parts[1] : null,
+        projectName,
       };
     })
     .sort((a, b) => a.sourcePath.localeCompare(b.sourcePath));

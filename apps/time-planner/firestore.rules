@@ -1,0 +1,45 @@
+// Firestore security rules for TimePlanner.
+// Deploy with `firebase deploy --only firestore:rules` from a checkout that
+// has firebase-tools configured.
+//
+// Principles:
+//   - Each user's planner state is isolated under users/{uid}/plannerState/**
+//     and is readable/writable only by that uid.
+//   - Note intake (existing) writes to top-level `notes` and `syncQueue`
+//     collections — clients can create entries but not read or modify others'.
+//   - Generated content (dashboard-model.json, notes-index.json, etc.) is
+//     served as static assets, not from Firestore.
+
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Authenticated planner state — owner-only.
+    match /users/{uid}/plannerState/{doc=**} {
+      allow read, write: if request.auth != null && request.auth.uid == uid;
+    }
+
+    // Per-user nested collections (future expansion). Owner-only.
+    match /users/{uid}/{collection=**} {
+      allow read, write: if request.auth != null && request.auth.uid == uid;
+    }
+
+    // Note intake: clients may create, but not read or update others' notes.
+    match /notes/{noteId} {
+      allow create: if request.auth != null;
+      allow read, update, delete: if false;
+    }
+
+    // Sync queue: clients may enqueue, server-side worker drains.
+    match /syncQueue/{actionId} {
+      allow create: if request.auth != null;
+      allow read, update, delete: if false;
+    }
+
+    // Default deny everything else.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
