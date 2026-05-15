@@ -70,6 +70,6 @@ export class GmsInputManager {
     const varianceRatio = Math.abs(averageFrequency - targetHz) / targetHz;
     const rating = Math.max(0, Math.min(100, (1 - varianceRatio) * 100));
 
-    return Number(rating.toFixed(2));
+    return Math.round(rating * 100) / 100;
   }
 }
