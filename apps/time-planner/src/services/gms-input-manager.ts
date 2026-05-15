@@ -8,12 +8,12 @@ type StepEmission = Readonly<{
 }>;
 
 const DEFAULT_TARGET_HZ = 60;
-const configuredCapacity = Number(
-  bridgeConfig?.ingress_contracts?.StepEmissions?.ring_buffer?.max_samples
-);
-const DEFAULT_CAPACITY = Number.isFinite(configuredCapacity)
-  ? Math.max(1, Math.floor(configuredCapacity))
-  : 500;
+const stepEmissionConfig = bridgeConfig.ingress_contracts?.StepEmissions;
+const configuredCapacity = stepEmissionConfig?.ring_buffer?.max_samples;
+const DEFAULT_CAPACITY =
+  typeof configuredCapacity === 'number' && Number.isFinite(configuredCapacity)
+    ? Math.max(1, Math.floor(configuredCapacity))
+    : 500;
 
 export class GmsInputManager {
   private readonly capacity: number;
@@ -37,18 +37,18 @@ export class GmsInputManager {
   }
 
   getLinearSamples(): ReadonlyArray<StepEmission> {
-    const output: StepEmission[] = new Array(this.size);
     if (this.size === 0) {
-      return output;
+      return [];
     }
 
+    const output: StepEmission[] = [];
     const startIndex =
       (this.writeIndex - this.size + this.capacity) % this.capacity;
     for (let i = 0; i < this.size; i += 1) {
       const index = (startIndex + i) % this.capacity;
       const sample = this.ringBuffer[index];
       if (sample) {
-        output[i] = sample;
+        output.push(sample);
       }
     }
 
