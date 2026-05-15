@@ -1,0 +1,42 @@
+{
+  "event": {
+    "eventId": "tpr-milestone-pf-project-2026-05-03-completed",
+    "toolId": "tpr",
+    "eventName": "milestone.completed",
+    "summary": {
+      "summaryId": "tpr-summary-milestone-pf-project-2026-05-03",
+      "toolId": "tpr",
+      "title": "PF-PROJECT roadmap checkpoint",
+      "meaning": "TPR generated an active planning checkpoint for PF-PROJECT with dated source notes and linked tasks. This is a structured planning event only; semantic interpretation belongs to TheRocketTree-App.",
+      "occurredAt": "2026-05-03T00:00:00.000Z",
+      "sourceRef": "content/notes-2026/Profound Projects/PF-PROJECT",
+      "labels": [
+        "tpr",
+        "milestone",
+        "milestone.completed",
+        "project:pf-project",
+        "status:active",
+        "state:task-discovery",
+        "risk:high-task-volume"
+      ]
+    },
+    "occurredAt": "2026-05-03T00:00:00.000Z",
+    "details": {
+      "systemState": {
+        "primaryValue": 5,
+        "secondaryValue": 12,
+        "systemLoad": 0.23,
+        "progress": 1,
+        "iteration": 3,
+        "timestamp": 1777766400000
+      }
+    }
+  },
+  "featureGate": {
+    "gateId": "tpr-unity-recognition-feedback-pf-project-2026-05-03",
+    "featureKey": "unity.recognition.feedback",
+    "state": "unlocked",
+    "checkedAt": "2026-05-03T00:00:00.000Z"
+  },
+  "fixture": "none"
+}

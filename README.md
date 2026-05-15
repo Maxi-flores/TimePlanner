@@ -45,6 +45,8 @@ node scripts/validate-config.js
 
 The generators read `data/notes-index.json` and produce roadmap items, level-map assignments, extracted tasks, project states, milestones, the unified dashboard model, and deterministic AI suggestions used by the dedicated AI assistant tab.
 
+Bridge adapter planning for TheRocketTree-App lives in [`docs/bridge/TPR_BRIDGE_ADAPTER_PLAN.md`](docs/bridge/TPR_BRIDGE_ADAPTER_PLAN.md). The current bridge work is documentation and local fixture generation only; TPR emits structured planning events and TheRocketTree-App owns semantic processing.
+
 You can also run the full generation command with:
 
 ```bash
