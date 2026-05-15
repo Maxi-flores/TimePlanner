@@ -46,10 +46,7 @@ export class GmsInputManager {
       (this.writeIndex - this.size + this.capacity) % this.capacity;
     for (let i = 0; i < this.size; i += 1) {
       const index = (startIndex + i) % this.capacity;
-      const sample = this.ringBuffer[index];
-      if (sample) {
-        output.push(sample);
-      }
+      output.push(this.ringBuffer[index] as StepEmission);
     }
 
     return output;
