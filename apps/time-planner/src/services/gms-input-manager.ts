@@ -46,7 +46,10 @@ export class GmsInputManager {
       (this.writeIndex - this.size + this.capacity) % this.capacity;
     for (let i = 0; i < this.size; i += 1) {
       const index = (startIndex + i) % this.capacity;
-      output.push(this.ringBuffer[index] as StepEmission);
+      const sample = this.ringBuffer[index];
+      if (sample) {
+        output.push(sample);
+      }
     }
 
     return output;
@@ -54,7 +57,7 @@ export class GmsInputManager {
 
   calculateCadenceStability(targetHz: number = DEFAULT_TARGET_HZ): number {
     const samples = this.getLinearSamples();
-    if (samples.length === 0 || targetHz <= 0) {
+    if (samples.length === 0 || !Number.isFinite(targetHz) || targetHz <= 0) {
       return 0;
     }
 
