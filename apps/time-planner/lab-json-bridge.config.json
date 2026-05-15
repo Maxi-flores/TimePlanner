@@ -1,0 +1,92 @@
+{
+  "meta": {
+    "schema_version": "1.0.0",
+    "scope": "TPR scheduling workspace",
+    "tracked_fields": [
+      "tick_index",
+      "phase_label",
+      "step_frequency_hz"
+    ]
+  },
+  "ingress_contracts": {
+    "StepEmissions": {
+      "description": "Unity/GMS frame-step telemetry",
+      "fields": {
+        "timestamp": "number",
+        "tick_index": "number",
+        "phase_label": "string",
+        "step_frequency_hz": "number"
+      },
+      "ring_buffer": {
+        "allocation": "fixed",
+        "max_samples": 500,
+        "ordering": "chronological"
+      }
+    },
+    "ComputationalLoads": {
+      "description": "CPU/GPU load and jitter telemetry",
+      "fields": {
+        "cpu_load_pct": "number",
+        "gpu_load_pct": "number",
+        "jitter_ms": "number"
+      },
+      "batch_interval_ms": 33
+    },
+    "MilestoneProgress": {
+      "description": "Release gate progress snapshot",
+      "fields": {
+        "release_gate": "string",
+        "progress_pct": "number",
+        "dependency_map": "record<string, string[]>"
+      }
+    }
+  },
+  "egress_contracts": {
+    "TimelineOverride": {
+      "description": "Scheduling override intent",
+      "fields": {
+        "target_phase": "string",
+        "pacing_multiplier": "number",
+        "safety_lease_seconds": "number"
+      },
+      "safety_lease_seconds_max": 3600,
+      "signature_required": true
+    },
+    "PauseEngineLoop": {
+      "description": "Explicit pause intent",
+      "fields": {
+        "reason": "string",
+        "confirmation_required": "boolean",
+        "auto_resume_timeout_ms": "number"
+      },
+      "auto_resume_timeout_ms_max": 30000,
+      "signature_required": true
+    }
+  },
+  "powerframe_hub_sync": {
+    "data_residency_layers": {
+      "durable_storage": {
+        "medium": "persisted",
+        "retention": "long",
+        "encryption": "required"
+      },
+      "semi_persistent_cache": {
+        "medium": "memory-mapped",
+        "retention": "session",
+        "eviction_policy": "lru"
+      },
+      "volatile_buffers": {
+        "medium": "memory",
+        "retention": "transient",
+        "eviction_policy": "ring"
+      }
+    },
+    "glassmorphic_ui_tokens": {
+      "surface_opacity": 0.55,
+      "blur_px": 18,
+      "border_rgba": "rgba(255, 255, 255, 0.32)",
+      "shadow_rgba": "rgba(10, 24, 45, 0.35)",
+      "accent_gradient": "linear-gradient(135deg, rgba(56, 189, 248, 0.45), rgba(99, 102, 241, 0.35))"
+    }
+  }
+}
